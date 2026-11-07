@@ -1,3 +1,5 @@
 
 :root{--md-text-font:"Microsoft YaHei","PingFang SC",sans-serif;--md-code-font:Consolas,monospace}.md-typeset{line-height:1.85}.md-nav__link{line-height:1.6}.zh-notice{font-size:.7rem;line-height:1.8;padding:12px 16px;border-left:3px solid #607d8b;background:#f1f5f8;margin-bottom:22px;color:#455a64}.md-search-result__list a{display:block;padding:12px 18px;border-bottom:1px solid #ddd;color:#263238;font-size:.8rem}.md-search-result__list small{display:block;color:#607d8b;margin-top:5px;font-size:.68rem}.md-search__scrollwrap{max-height:65vh;overflow:auto}.md-typeset pre{overflow:auto}.md-typeset table:not([class]){font-size:.72rem}.md-content{min-width:0}html{scroll-behavior:smooth}
 .zh-github-link{flex:0 0 auto}.zh-github-link svg{display:block;width:1.2rem;height:1.2rem;fill:currentColor}
+
+@media screen and (min-width:76.25em){.md-sidebar--primary .md-sidebar__scrollwrap{max-height:calc(100vh - 6.5rem);overflow-y:auto}}
