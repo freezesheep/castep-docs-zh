@@ -8,5 +8,3 @@
 - 翻译说明：[`translation-notes.html`](translation-notes.html)
 
 本项目为非官方中文译稿，与 CASTEP 项目及其维护者无隶属关系。原文、图片、文献及作者署名归原权利人所有。本译稿采用本地语言模型翻译并经术语统一、重点抽查和修订；未经逐句人工审校，技术细节请对照英文原文。
-
-GitHub Pages 可直接从 `main` 分支根目录发布。
