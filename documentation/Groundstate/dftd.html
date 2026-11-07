@@ -1,0 +1,1590 @@
+
+<!DOCTYPE html>
+
+<html class="js" lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="intro.html" rel="prev"/>
+<link href="soc.html" rel="next"/>
+<link href="../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.0" name="generator"/>
+<title>长程色散修正 — CASTEP 中文文档</title>
+<link href="../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../stylesheets/extra.css" rel="stylesheet"/>
+
+<link href="../../assets/zh-site.css" rel="stylesheet"/></head>
+<body dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="dftd.html#long-range-dispersion-corrections"> 跳转到正文 </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="页眉" class="md-header__inner md-grid">
+<a aria-label="CASTEP 中文文档" class="md-header__button md-logo" data-md-component="logo" href="../../index.html" title="CASTEP 中文文档">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis"> CASTEP 中文文档 </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis"> 色散修正 </span>
+</div>
+</div>
+</div>
+
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="搜索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="搜索" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="搜索" class="md-search__options">
+<button aria-label="清除" class="md-search__icon md-icon" tabindex="-1" title="清除" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta"> 搜索中文或英文导航标题 </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="导航" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="CASTEP 中文文档" class="md-nav__button md-logo" data-md-component="logo" href="../../index.html" title="CASTEP 中文文档">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a> CASTEP 中文文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../index.html">
+<span class="md-ellipsis"> 首页 </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis"> 使用文档 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span> 使用文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+<span class="md-ellipsis"> 入门指南 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_1">
+<span class="md-nav__icon md-icon"></span> 入门指南 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Getting_Started/intro.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Getting_Started/built_in_help.html">
+<span class="md-ellipsis"> 命令行帮助 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Getting_Started/running_castep.html">
+<span class="md-ellipsis"> 运行 CASTEP </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Getting_Started/basic_cell_file.html">
+<span class="md-ellipsis"> 晶胞文件（.cell） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Getting_Started/basic_param_file.html">
+<span class="md-ellipsis"> 参数文件（.param） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Getting_Started/restarting.html">
+<span class="md-ellipsis"> 检查点与续算 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+<span class="md-ellipsis"> 基态 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_2_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_2">
+<span class="md-nav__icon md-icon"></span> 基态 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="intro.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis"> 色散修正 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="dftd.html">
+<span class="md-ellipsis"> 色散修正 </span>
+</a>
+<nav aria-label="本页目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span> 本页目录 </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#background">
+<span class="md-ellipsis"> 背景 </span>
+</a>
+<nav aria-label="背景" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#why-and-when-are-long-range-dispersion-methods-needed">
+<span class="md-ellipsis"> 为何以及在什么情况下需要使用长程色散方法？ </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#types-of-correction-schemes">
+<span class="md-ellipsis"> 修正方案类型 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#general-recommendations">
+<span class="md-ellipsis"> 通用建议 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#using-dispersion-corrections-in-castep">
+<span class="md-ellipsis"> 在 CASTEP 中使用色散修正 </span>
+</a>
+<nav aria-label="在 CASTEP 中使用色散修正" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#param-file-keywords">
+<span class="md-ellipsis"> .param 文件 关键字 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#cell-file-keywords">
+<span class="md-ellipsis"> .cell 文件关键字 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#method-details-and-customisation">
+<span class="md-ellipsis"> 方法细节与自定义设置 </span>
+</a>
+<nav aria-label="方法细节与自定义设置" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#tkatchenkoscheffler-schemes">
+<span class="md-ellipsis"> Tkatchenko−Scheffler 方案 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#many-body-dispersion">
+<span class="md-ellipsis"> 多体色散 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#grimme-d-corrections">
+<span class="md-ellipsis"> Grimme D 修正项 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#exchange-dipole-moment-xdm-method">
+<span class="md-ellipsis"> 交换-偶极矩（XDM）方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#other-schemes">
+<span class="md-ellipsis"> 其他方案 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="soc.html">
+<span class="md-ellipsis"> 自旋–轨道耦合 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="spin_constraints.html">
+<span class="md-ellipsis"> 自旋约束 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="population_analysis.html">
+<span class="md-ellipsis"> 布居分析 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="ELF.html">
+<span class="md-ellipsis"> 电子局域函数（ELF） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+<span class="md-ellipsis"> 几何结构优化 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_3">
+<span class="md-nav__icon md-icon"></span> 几何结构优化 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Geometry_Optimisation/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Geometry_Optimisation/keywords.html">
+<span class="md-ellipsis"> 关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Geometry_Optimisation/constraints.html">
+<span class="md-ellipsis"> 约束条件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Geometry_Optimisation/files.html">
+<span class="md-ellipsis"> 文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Geometry_Optimisation/tools.html">
+<span class="md-ellipsis"> 工具 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+<span class="md-ellipsis"> 分子动力学 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_4">
+<span class="md-nav__icon md-icon"></span> 分子动力学 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Molecular_Dynamics/overview.html">
+<span class="md-ellipsis"> 分子动力学概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Molecular_Dynamics/basics.html">
+<span class="md-ellipsis"> 分子动力学基础 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Molecular_Dynamics/restarts.html">
+<span class="md-ellipsis"> 分子动力学续算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Molecular_Dynamics/files.html">
+<span class="md-ellipsis"> 分子动力学文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Molecular_Dynamics/keywords.html">
+<span class="md-ellipsis"> 分子动力学关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Molecular_Dynamics/tools.html">
+<span class="md-ellipsis"> 分子动力学工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Molecular_Dynamics/pimd.html">
+<span class="md-ellipsis"> 路径积分分子动力学（PIMD） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Molecular_Dynamics/hugoniostat.html">
+<span class="md-ellipsis"> Hugoniostat 冲击波模拟方法 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+<span class="md-ellipsis"> 过渡态搜索 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_5">
+<span class="md-nav__icon md-icon"></span> 过渡态搜索 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Transition_State_Search/neb.html">
+<span class="md-ellipsis"> 微扰弹性带法（NEB） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+<span class="md-ellipsis"> 交换–关联（XC） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_6">
+<span class="md-nav__icon md-icon"></span> 交换–关联（XC） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../XC/XCoverview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../XC/XC.html">
+<span class="md-ellipsis"> 交换–关联设置 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../XC/libXC.html">
+<span class="md-ellipsis">
+    
+  
+    libXC
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+<span class="md-ellipsis"> 电子谱性质 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_7">
+<span class="md-nav__icon md-icon"></span> 电子谱性质 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Spectral/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Spectral/keywords.html">
+<span class="md-ellipsis"> 关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Spectral/restarts.html">
+<span class="md-ellipsis"> 续算 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+<span class="md-ellipsis"> 声子 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_8">
+<span class="md-nav__icon md-icon"></span> 声子 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Introduction.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Running-phonon-calculations.html">
+<span class="md-ellipsis"> 运行声子计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Dielectric-properties.html">
+<span class="md-ellipsis"> 介电性质 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Thermodynamic-properties.html">
+<span class="md-ellipsis"> 热力学性质 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Plotting-and-analysis-tools.html">
+<span class="md-ellipsis"> 绘图与分析工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Running-Large-Calculations.html">
+<span class="md-ellipsis"> 运行大规模计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Advanced-Topics.html">
+<span class="md-ellipsis"> 进阶主题 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Keyword-Reference.html">
+<span class="md-ellipsis"> 关键词参考 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Bibliography.html">
+<span class="md-ellipsis"> 参考文献 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+<span class="md-ellipsis"> 核磁共振（NMR） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_9">
+<span class="md-nav__icon md-icon"></span> 核磁共振（NMR） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../NMR/NMR_overview.html">
+<span class="md-ellipsis"> 核磁共振概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_10" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+<span class="md-ellipsis"> 电子顺磁共振（EPR） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_10_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_10">
+<span class="md-nav__icon md-icon"></span> 电子顺磁共振（EPR） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../EPR/overview.html">
+<span class="md-ellipsis"> 电子顺磁共振概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../XRD/overview.html">
+<span class="md-ellipsis"> X 射线衍射（XRD） </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_12" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_12" id="__nav_2_12_label" tabindex="0">
+<span class="md-ellipsis"> 含时密度泛函理论（TDDFT） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_12_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_12">
+<span class="md-nav__icon md-icon"></span> 含时密度泛函理论（TDDFT） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../TDDFT/overview.html">
+<span class="md-ellipsis"> 含时密度泛函理论概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_13" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_13" id="__nav_2_13_label" tabindex="0">
+<span class="md-ellipsis"> ΔSCF 方法 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_13_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_13">
+<span class="md-nav__icon md-icon"></span> ΔSCF 方法 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/overview.html">
+<span class="md-ellipsis"> ΔSCF 方法概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/simple_delta_scf.html">
+<span class="md-ellipsis"> 简单 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/lin_ex_delta_scf.html">
+<span class="md-ellipsis"> 线性展开 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/mo_delta_scf.html">
+<span class="md-ellipsis"> 分子轨道 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/molpdos.html">
+<span class="md-ellipsis"> 分子投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_14" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_14" id="__nav_2_14_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    DFT+U
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_14_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_14">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    DFT+U
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../DFT+U/dftu-theory.html">
+<span class="md-ellipsis"> DFT+U：理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../DFT+U/dftu-input.html">
+<span class="md-ellipsis"> DFT+U：输入 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../DFT+U/koopmans-theory.html">
+<span class="md-ellipsis"> 线性响应法计算 U：理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../DFT+U/koopmans-input.html">
+<span class="md-ellipsis"> 线性响应法计算 U：输入 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../DFT+U/koopmans-output.html">
+<span class="md-ellipsis"> 线性响应法计算 U：输出 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../DFT+U/koopmans-warnings-errors.html">
+<span class="md-ellipsis"> 线性响应法计算 U：警告与错误 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_15" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_15" id="__nav_2_15_label" tabindex="0">
+<span class="md-ellipsis"> 赝势 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_15_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_15">
+<span class="md-nav__icon md-icon"></span> 赝势 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Pseudopotentials/theory.html">
+<span class="md-ellipsis"> 理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Pseudopotentials/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Pseudopotentials/reading_headers.html">
+<span class="md-ellipsis"> 头部信息 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Pseudopotentials/otfg_string.html">
+<span class="md-ellipsis"> 即时生成赝势（OTFG）字符串 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_16" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_16" id="__nav_2_16_label" tabindex="0">
+<span class="md-ellipsis"> 输入文件 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_16_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_16">
+<span class="md-nav__icon md-icon"></span> 输入文件 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Input_Files/cell_file.html">
+<span class="md-ellipsis"> 晶胞文件（.cell） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Input_Files/param_file.html">
+<span class="md-ellipsis"> 参数文件（.param） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Input_Files/cell_keywords.html">
+<span class="md-ellipsis"> 晶胞文件关键词 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_17" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_17" id="__nav_2_17_label" tabindex="0">
+<span class="md-ellipsis"> 输出文件 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_17_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_17">
+<span class="md-nav__icon md-icon"></span> 输出文件 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Output_Files/output_files.html">
+<span class="md-ellipsis"> 输出文件 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_18" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_18" id="__nav_2_18_label" tabindex="0">
+<span class="md-ellipsis"> 其他程序与工具 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_18_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_18">
+<span class="md-nav__icon md-icon"></span> 其他程序与工具 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Tools/tools.html">
+<span class="md-ellipsis"> 其他程序与工具 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_19" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_19" id="__nav_2_19_label" tabindex="0">
+<span class="md-ellipsis"> 故障排查 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_19_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_19">
+<span class="md-nav__icon md-icon"></span> 故障排查 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Troubleshooting/troubleshooting.html">
+<span class="md-ellipsis"> 常见错误 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Troubleshooting/linux_path.html">
+<span class="md-ellipsis"> Linux 帮助 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis"> 教程 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span> 教程 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+<span class="md-ellipsis"> 成键与电荷 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_1">
+<span class="md-nav__icon md-icon"></span> 成键与电荷 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bonding_and_Charge/charge_density.html">
+<span class="md-ellipsis"> 绘制电荷密度 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bonding_and_Charge/mulliken_population.html">
+<span class="md-ellipsis"> 布居分析 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bonding_and_Charge/ELF.html">
+<span class="md-ellipsis"> 电子局域函数（ELF） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+<span class="md-ellipsis"> 能带与态密度 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_2">
+<span class="md-nav__icon md-icon"></span> 能带与态密度 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+<span class="md-ellipsis"> 绘图 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_1_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_2_1">
+<span class="md-nav__icon md-icon"></span> 绘图 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bands_and_DOS/Plotting/plotting_perl.html">
+<span class="md-ellipsis"> 绘图：CASTEP 工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bands_and_DOS/Plotting/plotting_sumo.html">
+<span class="md-ellipsis"> 绘图：SUMO </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bands_and_DOS/Plotting/Optados/DOS.html">
+<span class="md-ellipsis"> OptaDOS：态密度 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bands_and_DOS/Plotting/Optados/pDOS.html">
+<span class="md-ellipsis"> OptaDOS：投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bands_and_DOS/semiconductors.html">
+<span class="md-ellipsis"> 半导体 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bands_and_DOS/metals.html">
+<span class="md-ellipsis"> 金属 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bands_and_DOS/magnetic.html">
+<span class="md-ellipsis"> 磁性材料 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+<span class="md-ellipsis"> 光学 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_3">
+<span class="md-nav__icon md-icon"></span> 光学 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Optics/Optics.html">
+<span class="md-ellipsis"> 光学 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Optics/Optics_aluminium.html">
+<span class="md-ellipsis"> 光学：铝 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Optics/Optics_ani.html">
+<span class="md-ellipsis"> 光学各向异性 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+<span class="md-ellipsis"> 芯能级能量损失谱 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_4">
+<span class="md-nav__icon md-icon"></span> 芯能级能量损失谱 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Coreloss/Coreloss.html">
+<span class="md-ellipsis"> 芯能级能量损失谱 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Optics/JDOS.html">
+<span class="md-ellipsis"> 联合态密度（JDOS） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/dispersion_corrections/castep-ase-dispersion-tutorial.html">
+<span class="md-ellipsis"> 色散修正 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/NEB/neb_tutorial.html">
+<span class="md-ellipsis"> 微扰弹性带法（NEB） </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+<span class="md-ellipsis"> 核磁共振屏蔽 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_7">
+<span class="md-nav__icon md-icon"></span> 核磁共振屏蔽 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/NMR/Example_1_-Ethanol.html">
+<span class="md-ellipsis"> 示例 1：乙醇 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/NMR/Example_2_-Diamond.html">
+<span class="md-ellipsis"> 示例 2：金刚石 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/NMR/Examples_3_-Alanine_and_Silicates.html">
+<span class="md-ellipsis"> 示例 3：丙氨酸与硅酸盐 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+<span class="md-ellipsis"> ΔSCF 方法 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_8">
+<span class="md-nav__icon md-icon"></span> ΔSCF 方法 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Delta_SCF/simple_delta_scf.html">
+<span class="md-ellipsis"> 简单 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Delta_SCF/lin_ex_delta_scf.html">
+<span class="md-ellipsis"> 线性展开 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Delta_SCF/molpdos.html">
+<span class="md-ellipsis"> 分子投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+<span class="md-ellipsis"> 遗传算法（GA） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_9">
+<span class="md-nav__icon md-icon"></span> 遗传算法（GA） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/GA/Silicon.html">
+<span class="md-ellipsis"> 硅 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/GA/Introduction.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_10" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+<span class="md-ellipsis"> 工具 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_10_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_10">
+<span class="md-nav__icon md-icon"></span> 工具 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Tools/elastic_constants.html">
+<span class="md-ellipsis"> 弹性常数 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+<span class="md-ellipsis"> 开发者文档 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span> 开发者文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/using_devel_codes.html">
+<span class="md-ellipsis"> 使用开发控制代码（Devel Codes） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/using_trace.html">
+<span class="md-ellipsis"> 使用 trace </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/adding_pair_pots.html">
+<span class="md-ellipsis"> 添加经验势 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/build-system.html">
+<span class="md-ellipsis"> 构建系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/style_guide.html">
+<span class="md-ellipsis"> 代码风格指南 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/test_suite.html">
+<span class="md-ellipsis"> 测试 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/CI.html">
+<span class="md-ellipsis"> 持续集成系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/git_workflow.html">
+<span class="md-ellipsis"> Git 工作流程 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/release_procedure.html">
+<span class="md-ellipsis"> 版本发布流程 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="本页目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span> 本页目录 </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#background">
+<span class="md-ellipsis"> 背景 </span>
+</a>
+<nav aria-label="背景" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#why-and-when-are-long-range-dispersion-methods-needed">
+<span class="md-ellipsis"> 为何以及在什么情况下需要使用长程色散方法？ </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#types-of-correction-schemes">
+<span class="md-ellipsis"> 修正方案类型 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#general-recommendations">
+<span class="md-ellipsis"> 通用建议 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#using-dispersion-corrections-in-castep">
+<span class="md-ellipsis"> 在 CASTEP 中使用色散修正 </span>
+</a>
+<nav aria-label="在 CASTEP 中使用色散修正" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#param-file-keywords">
+<span class="md-ellipsis"> .param 文件 关键字 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#cell-file-keywords">
+<span class="md-ellipsis"> .cell 文件关键字 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#method-details-and-customisation">
+<span class="md-ellipsis"> 方法细节与自定义设置 </span>
+</a>
+<nav aria-label="方法细节与自定义设置" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#tkatchenkoscheffler-schemes">
+<span class="md-ellipsis"> Tkatchenko−Scheffler 方案 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#many-body-dispersion">
+<span class="md-ellipsis"> 多体色散 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#grimme-d-corrections">
+<span class="md-ellipsis"> Grimme D 修正项 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#exchange-dipole-moment-xdm-method">
+<span class="md-ellipsis"> 交换-偶极矩（XDM）方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="dftd.html#other-schemes">
+<span class="md-ellipsis"> 其他方案 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="long-range-dispersion-corrections">长程色散修正</h1><div class="zh-notice">中文译文 · 由本地英文文档翻译，已统一术语并进行重点抽查。 <a href="../../https://castep-docs.github.io/castep-docs/documentation/Groundstate/dftd.html">英文原文对照</a> · <a href="../../translation-notes.html">翻译说明</a></div>
+<!--
+`TODOS`
+
+ * do the TSSURF and TSSCS schemes work/do anything?
+ * are the aperiodic versions of TSSCS and MBD still a thing?
+ * What elements are supported for D3?
+ * General recommendations for types of systems -- are these ok? Add others?
+-->
+<h2 id="background">背景</h2>
+<h3 id="why-and-when-are-long-range-dispersion-methods-needed">为何以及在什么情况下需要使用长程色散方法？</h3>
+<p>范德华（vdW）相互作用在自然界中普遍存在，但标准的局域和半局域密度泛函近似（即LDA或GGAs）并未考虑这些相互作用。特别是，系统组分之间范德华相互作用的长程吸引力部分（伦敦色散相互作用）无法被捕捉。包含此类色散效应对于准确描述某些体系至关重要，尤其是那些不以离子键或共价键结合的体系，例如气体分子。</p>
+<p>当预期分子间相互作用起关键作用时（例如在分子晶体、堆叠的二维材料以及一般弱结合体系中），强烈推荐使用色散方法。</p>
+<h3 id="types-of-correction-schemes">修正方案类型</h3>
+<p>存在多种散射方法家族。关于这些方法的一个良好总结可以在Grimme于2016年发表的综述中找到。 <em>等</em>.<sup id="fnref:refGrimme2016"><a class="footnote-ref" href="dftd.html#fn:refGrimme2016">1</a></sup> 我们将在这里总结这些类别，并针对已在CASTEP中实现的部分，链接到相应的关键词。</p>
+<p><strong>半经验/半经典处理方法</strong></p>
+<p>此处色散能是按原子（通常为成对）计算，并加到基础泛函的密度泛函理论能量上。需要注意的是，通常会使用特定的阻尼参数（和函数）来将某一基础泛函（例如 PBE）与色散修正（例如 D3）相结合。这意味着，例如 PBE 泛函上的 D3 修正可能与 HSE 泛函上的 D等修正不同。</p>
+<p>方法包括：</p>
+<ul>
+<li>Tkatchenko−Scheffler 方案（<a href="dftd.html#TS">TS</a>)</li>
+<li>基于TS的多体色散方案（<a href="dftd.html#MBD">MBD</a>)</li>
+<li>格里姆梅的 <a href="dftd.html#G06">D2</a> 并且 <a href="dftd.html#D3">D3</a> 方法</li>
+<li>交换-偶极矩模型（<a href="dftd.html#XDM">XDM</a>)</li>
+</ul>
+<p><strong>基于非局域密度的处理方法（在CASTEP中未实现）</strong></p>
+<p>此处构建了电子密度的非局域泛函。方法包括范德华泛函（例如 <code>vdW-DF2</code><sup id="fnref:refvdW-DF2"><a class="footnote-ref" href="dftd.html#fn:refvdW-DF2">2</a></sup> 并且 <code>vdW-DF-cx</code><sup id="fnref:refvdW-DF-cx"><a class="footnote-ref" href="dftd.html#fn:refvdW-DF-cx">3</a></sup>) 以及 Vydrov 和 Van Voorhis 的泛函<sup id="fnref:refVV10"><a class="footnote-ref" href="dftd.html#fn:refVV10">4</a></sup>.</p>
+<p><strong>有效的一电子势（在CASTEP中未实现）</strong></p>
+<p>最后，电子的多体相关运动在一定程度上可以通过使用有效的一体势来经验性地捕捉。这些例子包括：半局域泛函，例如明尼苏达泛函（例如）。 <code>M06</code><sup id="fnref:refZhao2008"><a class="footnote-ref" href="dftd.html#fn:refZhao2008">5</a></sup>) 以及外部势场，如基于原子中心的色散校正势场（例如 van Santen 和 DiLabio，2015）<sup id="fnref:refvanSanten2015"><a class="footnote-ref" href="dftd.html#fn:refvanSanten2015">6</a></sup>).</p>
+<h2 id="general-recommendations">通用建议</h2>
+<!-- TODO -- check these -->
+<p>每个应用都会有其自身的一组重要特征，因此无法确定哪种密度泛函近似最为合适。尽管如此，以下是一些针对不同类型材料的建议：</p>
+<ul>
+<li>分子晶体：D3-BJ/XDM/MBD 与 GGA 或杂化泛函结合（Dolgonos） <em>等</em>., 2019<sup id="fnref:refDolgonos2019"><a class="footnote-ref" href="dftd.html#fn:refDolgonos2019">7</a></sup>).</li>
+<li>金属：为固态材料设计的vdW-DFs（范德华-密度泛函）（Klimeš） <em>等</em>., 2011<sup id="fnref:refKlimes2011"><a class="footnote-ref" href="dftd.html#fn:refKlimes2011">8</a></sup>). <!-- TODO: what about methods available in CASTEP? --></li>
+<li>分子与金属表面之间的相互作用：包含屏蔽的范德华-DFs或色散方法，例如TSSCS。</li>
+<li>MOFs：包含散射修正（例如 TS、D3 等）的广义梯度近似（GGAs）</li>
+<li>层状范德华材料：超越成对方法，例如D3-BJ*或MBD。 <!-- * TODO: others? -->
+</li>
+</ul>
+<p><span class="arithmatex"><span class="MathJax_Preview">^*</span><script type="math/tex">^*</script></span> 见下方注释了解如何在 CASTEP 的 D3 修正中包含三体项。</p>
+<p>再次，请自行进行测试，并查阅相关综述和基准论文。</p>
+<p>对于TS、MBD和XDM方法，如果您的晶胞较小（即晶格常数与范德华半径相当），可能会收到警告信息。这一问题已在学术版CASTEP v24.1中针对TS和MBD方法得到修复，在v25版本中针对XDM方法进行了修复。如果您使用的是较旧版本的CASTEP，则应尝试增大晶胞尺寸，直到色散修正收敛为止。</p>
+<p>并非所有 <code>XC_FUNCTIONAL</code> 所有方案均支持这些值——如有疑问，请使用PBE。XDM的主要‘XC_FUNCTIONAL’为B86BPBE。</p>
+<p>每个方案都为一组元素定义了默认参数（见 <a href="dftd.html#table">表格</a> 下方）。对于其他元素，你需要使用以下方法定义自定义参数。 <code>SEDC_CUSTOM_PARAMS</code> 关键词在.cell 文件中。</p>
+<h2 id="using-dispersion-corrections-in-castep">在 CASTEP 中使用色散修正</h2>
+<h3 id="param-file-keywords">.param 文件 关键字</h3>
+<p>在 <code>.param</code> 文件，设置：</p>
+<p><strong><code>SEDC_APPLY</code></strong><code>: true</code> 开启色散修正。 <strong><code>SEDC_SCHEME</code></strong>：使用的半经验色散/范德华校正方案。默认是 <code>NONE</code>，表下方列出了其他可能的值。</p>
+<table>
+<thead>
+<tr>
+<th>SEDC_SCHEME<a id="table" name="table"></a></th>
+<th>可在 CASTEP 版本中获取</th>
+<th>兼容的XC泛函</th>
+<th>支持的元素</th>
+<th>应力</th>
+<th>声子<a href="dftd.html#tab-foot"><span class="arithmatex"><span class="MathJax_Preview">^*</span><script type="math/tex">^*</script></span></a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="dftd.html#TS">TS</a> <sup id="fnref:refTkatchenko2009"><a class="footnote-ref" href="dftd.html#fn:refTkatchenko2009">9</a></sup></td>
+<td>早于2012年</td>
+<td>PBE，PBE0，PBE1PBE，BLYP，B3LYP，AM0，RPB，PBESOL，PW91</td>
+<td>最多到 Z=54，包含第一行镧系元素</td>
+<td>解析的</td>
+<td>DFPT &amp; FD</td>
+</tr>
+<tr>
+<td><a href="dftd.html#TSSURF">TSSURF</a> <sup id="fnref:refRuiz2012"><a class="footnote-ref" href="dftd.html#fn:refRuiz2012">10</a></sup></td>
+<td>不确定是否在运行</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a href="dftd.html#TSSCS">TSSCS</a> <sup id="fnref:refTkatchenko2012"><a class="footnote-ref" href="dftd.html#fn:refTkatchenko2012">11</a></sup></td>
+<td>不确定是否在运行</td>
+<td></td>
+<td>最多到 Z=54，包含第一行镧系元素</td>
+<td>解析的</td>
+<td></td>
+</tr>
+<tr>
+<td><a href="dftd.html#MBD">MBD</a> （别名：MBD*） <sup id="fnref2:refTkatchenko2012"><a class="footnote-ref" href="dftd.html#fn:refTkatchenko2012">11</a></sup><sup id="fnref:refAmbrosetti2014"><a class="footnote-ref" href="dftd.html#fn:refAmbrosetti2014">12</a></sup></td>
+<td>2015？重写（并修复）以适配 CASTEP 18</td>
+<td>PBE、PBE0、PBE1PBE、HSE03、HSE06、RSCAN</td>
+<td>最多到 Z=54，包含第一行镧系元素</td>
+<td>数值</td>
+<td>FD</td>
+</tr>
+<tr>
+<td><a href="dftd.html#G06">G06</a> (= D2)  <sup id="fnref:refGrimmeD2"><a class="footnote-ref" href="dftd.html#fn:refGrimmeD2">13</a></sup></td>
+<td>早于2012年</td>
+<td>PBE、BLYP、BP86、B3LYP、TPSS</td>
+<td>最多到 Z=54</td>
+<td>解析的</td>
+<td>DFPT &amp; FD</td>
+</tr>
+<tr>
+<td><a href="dftd.html#D3">D3</a> <sup id="fnref:refGrimmeD3"><a class="footnote-ref" href="dftd.html#fn:refGrimmeD3">14</a></sup></td>
+<td>CASTEP 20（<a href="dftd.html#D3compilation">编译说明</a>)</td>
+<td>PBE、PBE0、HF</td>
+<td></td>
+<td>解析的</td>
+<td>FD</td>
+</tr>
+<tr>
+<td><a href="dftd.html#D3-BJ">D3-BJ</a> <sup id="fnref:refGrimmeD3-BJ"><a class="footnote-ref" href="dftd.html#fn:refGrimmeD3-BJ">15</a></sup></td>
+<td>CASTEP 20（<a href="dftd.html#D3compilation">编译说明</a>)</td>
+<td>PBE、PBE0、HF</td>
+<td></td>
+<td>解析的</td>
+<td>FD</td>
+</tr>
+<tr>
+<td><a href="dftd.html#D4">D4</a> <sup id="fnref:refGrimmeD4-1"><a class="footnote-ref" href="dftd.html#fn:refGrimmeD4-1">16</a></sup><sup id="fnref:refGrimmeD4-2"><a class="footnote-ref" href="dftd.html#fn:refGrimmeD4-2">17</a></sup><sup id="fnref:refGrimmeD4-3"><a class="footnote-ref" href="dftd.html#fn:refGrimmeD4-3">18</a></sup></td>
+<td>CASTEP 24.1</td>
+<td>PBE、RPBE、PBESOL、BLYP、PW91、RSCAN</td>
+<td></td>
+<td>解析的</td>
+<td>FD</td>
+</tr>
+<tr>
+<td><a href="dftd.html#OBS">OBS</a> <sup id="fnref:refOrtmann2006"><a class="footnote-ref" href="dftd.html#fn:refOrtmann2006">19</a></sup></td>
+<td>早于2012年</td>
+<td>LDA，PW91</td>
+<td>最多到 Z=57</td>
+<td>解析的</td>
+<td>DFPT &amp; FD</td>
+</tr>
+<tr>
+<td><a href="dftd.html#JCHS">JCHS</a> <sup id="fnref:refJurecka2007"><a class="footnote-ref" href="dftd.html#fn:refJurecka2007">20</a></sup></td>
+<td>早于2012年</td>
+<td>PBE、BLYP、B3LYP、TPSS</td>
+<td>H, C, N, O, F, Cl, Br</td>
+<td>解析的</td>
+<td>DFPT &amp; FD</td>
+</tr>
+<tr>
+<td><a href="dftd.html#XDM">XDM</a> <sup id="fnref:refBecke2007"><a class="footnote-ref" href="dftd.html#fn:refBecke2007">21</a></sup></td>
+<td>CASTEP 20</td>
+<td>B86BPBE，PBE，BLYP，PBESOL，PW91，RPBE，WC，RSCAN</td>
+<td>最多到 Z=102</td>
+<td>解析的</td>
+<td>FD</td>
+</tr>
+</tbody>
+</table>
+<p><span class="arithmatex"><span class="MathJax_Preview">^*</span><script type="math/tex">^*</script></span> <a id="tab-foot" name="tab-foot"></a>DFPT：密度泛函微扰理论；FD：有限位移。</p>
+<p>以上所有方法均支持解析力。</p>
+<h3 id="cell-file-keywords">.cell 文件关键字</h3>
+<p>在 <code>.cell</code> 文件你可以 <em>可选地</em> 为每种元素设置自定义参数：</p>
+<ul>
+<li><code>C6</code> (eV Å)<span class="arithmatex"><span class="MathJax_Preview">^6</span><script type="math/tex">^6</script></span>)：适用于 TS、MBD* 和 Grimme 方案。</li>
+<li><code>R0</code> （埃）：适用于TS、MBD*和Grimme方案。</li>
+<li><code>alpha</code> (Å<span class="arithmatex"><span class="MathJax_Preview">^3</span><script type="math/tex">^3</script></span>)：适用于 TS、MBD* 和 OBS 方案。</li>
+<li><code>I</code> (eV)：适用于OBS方案。</li>
+<li><code>Rvdw</code> （埃）：适用于OBS方案。</li>
+</ul>
+<p>你这样设置它们：</p>
+<div class="highlight"><pre><span></span><code><a href="dftd.html#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>%BLOCK SEDC_CUSTOM_PARAMS
+<a href="dftd.html#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>      ! example values for test purposes only - don't use these... !
+<a href="dftd.html#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>      He      C6:1.00      R0:2.00
+<a href="dftd.html#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>      Ne      C6:10.00     R0:4.00
+<a href="dftd.html#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>%ENDBLOCK SEDC_CUSTOM_PARAMS
+</code></pre></div>
+<h2 id="method-details-and-customisation">方法细节与自定义设置</h2>
+<h4 id="tkatchenkoscheffler-schemes">Tkatchenko−Scheffler 方案</h4>
+<p>一种依赖密度的原子对散射修正方案。</p>
+<p><strong><code>SEDC_SCHEME : TS</code></strong><a id="TS" name="TS"></a></p>
+<p>限制条件：</p>
+<ul>
+<li>只能与以下交换关联泛函配合使用：PBE、PBE0、PBE1PBE、BLYP、B3LYP、AM0、RPB、PBESOL、PW91</li>
+<li>支持原子序数 Z≤54（Xe）以及第一列镧系元素。</li>
+</ul>
+<p><strong><code>SEDC_SCHEME : TSSCS</code></strong> <a id="TSSCS" name="TSSCS"></a></p>
+<ul>
+<li>TS 采用自洽筛选</li>
+</ul>
+<p><strong><code>SEDC_SCHEME : TSSURF</code></strong><a id="TSSURF" name="TSSURF"></a></p>
+<details class="keyword">
+<summary>所有TS方案的自定义关键词</summary>
+<p><strong>.param 文件</strong></p>
+<p><code>SEDC_SR_TS</code> 类型：实数（浮点型） 等级：专家级别 描述：在TS半经验色散/范德华校正方案中，可自定义阻尼函数的SR值。 可修改：续算和实时调整 默认值由以下内容确定 <code>XC_FUNCTIONAL</code>.</p>
+<p><code>SEDC_D_TS</code> 类型：实数（浮点型） 等级：专家级别 描述：在TS半经验色散/范德华校正方案中，可自定义阻尼函数的d值。 可修改：续算和实时调整 默认值由以下内容确定 <code>XC_FUNCTIONAL</code>.</p>
+<p><strong>.细胞 文件</strong></p>
+<p><code>SEDC_CUSTOM_PARAMS</code> 类型：块；级别：基础；描述：用于半经验色散修正的自定义参数。用于计算范德华力。每种元素的默认值由所选的半经验修正方案确定。对于TS方法， <code>C6</code> (eV Å)<span class="arithmatex"><span class="MathJax_Preview">^6</span><script type="math/tex">^6</script></span>), <code>R0</code> （埃）和 <code>alpha</code> (Å<span class="arithmatex"><span class="MathJax_Preview">^3</span><script type="math/tex">^3</script></span>) 可以进行定制。</p>
+</details>
+<h4 id="many-body-dispersion">多体色散 <a id="MBD" name="MBD"></a></h4>
+<p>在简单的二体色散方法所能涵盖的范围之外，MBD引入了：（1）多体能量（Axilrod-Teller及更高阶项）和（2）长程库仑响应（屏蔽效应），用于修正相互作用物种的极化率。</p>
+<p><strong><code>SEDC_SCHEME : MBD</code></strong></p>
+<ul>
+<li>（别名： <code>MBD*</code>)</li>
+</ul>
+<p>请注意，两个别名MBD和MBD*均指代采用极化率自洽筛选（SCS）范围分离（rs）以及长程相关能计算的修订版MBD方法，即MBD@rs-SCS方法。</p>
+<!-- TODO: in older versions of CASTEP was this the case? From what version can be rely on that info? -->
+<p>限制条件：</p>
+<ul>
+<li>只能与以下交换关联泛函配合使用：PBE、PBE0、PBE1PBE、HSE03、HSE06、RSCAN</li>
+<li>支持原子序数 Z≤54（Xe）以及第一列镧系元素。</li>
+<li>请注意，在当前实现中，仅提供数值应力。</li>
+</ul>
+<details class="keyword">
+<summary>MBD方案的自定义关键词</summary>
+<p><strong>.param 文件</strong></p>
+<p><code>SEDC_SR_TS</code> 类型：实数（浮点型） 等级：专家级别 描述：TS和MBD修正方案中阻尼函数的可定制SR值。可修改：续算和实时调整 默认值由以下内容确定 <code>XC_FUNCTIONAL</code>.</p>
+<p><code>SEDC_D_TS</code> 类型：实数（浮点型） 等级：专家级别 描述：TS和MBD修正方案中阻尼函数的可定制d值。可修改：续算和实时调整 默认值由以下内容确定 <code>XC_FUNCTIONAL</code>.</p>
+<p><strong>.细胞 文件</strong></p>
+<p><code>SEDC_CUSTOM_PARAMS</code> 类型：块级；层级：基础；描述：用于半经验色散修正的自定义参数。用于计算范德华力。每种元素的默认值由所选的半经验修正方案确定。对于MBD方法， <code>C6</code> (eV Å)<span class="arithmatex"><span class="MathJax_Preview">^6</span><script type="math/tex">^6</script></span>), <code>R0</code> （埃）和 <code>alpha</code> (Å<span class="arithmatex"><span class="MathJax_Preview">^3</span><script type="math/tex">^3</script></span>) 可以进行定制。</p>
+</details>
+<h4 id="grimme-d-corrections">Grimme D 修正项</h4>
+<p><strong>D2</strong></p>
+<p>请注意，仅针对 PBE、BLYP、BP86、B3LYP、TPSS 函数时，默认的 D2 参数可用。您还可以使用以下关键字自定义校正参数：</p>
+<p><strong><code>SEDC_SCHEME : G06</code></strong> <a id="G06" name="G06"></a></p>
+<div class="admonition note">
+<p class="admonition-title">说明</p>
+<p>这是 CASTEP 对 Grimme D2 修正的名称</p>
+</div>
+<details class="keyword">
+<summary>自定义关键词 G06</summary>
+<p><strong>.param 文件</strong></p>
+<p><code>SEDC_S6_G06</code> 类型：实数（浮点型） 等级：专家级别 描述：G06半经验色散/范德华校正方案中阻尼函数的可定制 S6 参数值。 可修改：续算和实时调整 默认值由 <code>XC_FUNCTIONAL</code>.</p>
+<p><code>SEDC_D_G06</code> 类型：实数（浮点型） 等级：专家级别 描述：G06半经验色散/范德华校正方案中阻尼函数的可定制d值。 可修改：续算和实时调整 默认值由以下内容确定 <code>XC_FUNCTIONAL</code>.</p>
+<p><strong>.细胞 文件</strong></p>
+<p><code>SEDC_CUSTOM_PARAMS</code> 类型：块级；级别：基础；描述：用于半经验色散修正的自定义参数。用于计算范德华力。每种元素的默认值由所选的半经验修正方案决定。对于Grimme的D2方法， <code>C6</code> (eV Å)<span class="arithmatex"><span class="MathJax_Preview">^6</span><script type="math/tex">^6</script></span>) 和 <code>R0</code> (Å) 可以自定义。</p>
+</details>
+<p><strong>D3</strong></p>
+<p>Grimme 的 DFT-D3 方法。采用 Becke-Johnson 抑制的 D3 方案（D3-BJ）通常更为准确。<sup id="fnref:refSmith2016"><a class="footnote-ref" href="dftd.html#fn:refSmith2016">22</a></sup> 优于“零阻尼”方法（D3）。需要注意的是，大多数已发表的“D3”结果实际上指的是“D3-BJ”，而原始版本的D3现在已经很少使用。</p>
+<p>限制条件：</p>
+<ul>
+<li>
+<p>PBE、PBE0 和 HF 函数的默认 D3 参数可用。 <!-- * `TODO: what elements are supported?` --></p>
+</li>
+<li>
+<p>默认情况下， <strong>未包含三体项</strong>。要包含它，请设置 <code>d3_threebody: True</code> 在……内 <code>devel_code</code> 块位于.param文件中。开启 <code>IPRINT &gt; 1</code> 以获取关于D3修正项中包含内容的更多信息。</p>
+</li>
+<li>在当前实现中，用户无法为该修正方案提供自定义参数。</li>
+</ul>
+<p><strong><code>SEDC_SCHEME : D3</code></strong> <a id="D3" name="D3"></a></p>
+<p><strong><code>SEDC_SCHEME : D3-BJ</code></strong> <a id="D3-BJ" name="D3-BJ"></a></p>
+<p>这是Grimme D3方案，带有Becke-Johnson阻尼。</p>
+<div class="admonition note">
+<p class="admonition-title">说明</p>
+<p>当运行带有 D3-BJ 计算时 <code>IPRINT &gt; 1</code>，你可能会看到 <code>Dispersion version: D4</code> 在.castep输出文件中。令人困惑的是，这部分内容 <strong>不是</strong> 意味着使用了Grimme的D4方法，这只是该修正方案在CASTEP内部版本中的标签。</p>
+</div>
+<!-- TODO is this note still valid for castep 24.1 ? -->
+<details class="warning">
+<summary>编译标志：为了实现D3修正，CASTEP必须进行如下编译 <code>GRIMMED3 := compile</code><a id="D3compilation" name="D3compilation"></a></summary>
+<p>请注意，为了使 D3 修正项生效，CASTEP 必须在编译时包含以下标志： <div class="highlight"><pre><span></span><code><a href="dftd.html#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a># Grimme D3 library support. Options are none or compile
+<a href="dftd.html#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>GRIMMED3 := compile
+</code></pre></div> 在 <code>Makefile</code></p>
+<p>对于 CASTEP 20，D3 库已包含在发行版中，设置上述标志应已足够。</p>
+</details>
+<p><strong>D4</strong> 一种普遍适用的、依赖原子电荷的伦敦色散修正，称为 DFT+D4。自 CASTEP 24.1 版本起，可通过设置实现。</p>
+<p><strong><code>SEDC_SCHEME : D4</code></strong><a id="D4" name="D4"></a></p>
+<p>请注意，D4 是通过使用外部方式提供的。 <a href="https://github.com/dftd4/dftd4">DFTD4</a> 库。该库包含在 CASTEP 24.1 发布版本中，当你构建 CASTEP 时应默认进行编译。</p>
+<p>限制条件：</p>
+<ul>
+<li>PBE、RPBE、PBESOL、BLYP、PW91 和 RSCAN 函数的默认 D4 参数可用。</li>
+</ul>
+<!-- Is this list exhaustive? -->
+<h4 id="exchange-dipole-moment-xdm-method">交换-偶极矩（XDM）方法 <a id="XDM" name="XDM"></a></h4>
+<p>一种统一的密度泛函处理动力学、非动力学和色散相关性的方法。</p>
+<p>限制条件：</p>
+<ul>
+<li>以下XC泛函的默认XDM参数可用：B86BPBE、PBE、BLYP、PBESOL、PW91、RPBE、WC、RSCAN</li>
+</ul>
+<p><strong><code>SEDC_SCHEME : XDM</code></strong></p>
+<p>对于本列表中未包含的功能化方法，你需要指定以下额外参数：</p>
+<details class="keyword">
+<summary>自定义关键词</summary>
+<p><strong>.param 文件</strong></p>
+<p><code>SEDC_A1_XDM</code> 类型：实数（浮点型） 等级：专家级别 描述：XDM半经验色散/范德华校正方案中阻尼函数的可定制A1值。可修改方式：续算和实时调整 默认值：1.0</p>
+<p><code>SEDC_A2_XDM</code> 类型：物理（浮点数）级别：专家描述：XDM半经验色散/范德华校正方案中阻尼函数的可定制A2值。可修改：续算和实时默认值由确定 <code>XC_FUNCTIONAL</code>.</p>
+<p><code>SEDC_SC_XDM</code> 类型：实数（浮点）级别：专家描述：XDM半经验色散/范德华校正方案中阻尼函数的可定制SC值。可修改：续算和实时默认值由确定 <code>XC_FUNCTIONAL</code>.</p>
+<p><code>SEDC_C9_XDM</code> 类型：逻辑值  层级：基础  描述：指定是否在XDM半经验色散/范德华校正方案中计算三体色散系数。  可修改：续算 和 实时计算  允许值： <code>TRUE</code> 或者 <code>FALSE</code> 默认值是 <code>FALSE</code></p>
+</details>
+<p>请注意，如果您希望尝试这些值，例如测试一种新的泛函，则需要进行更仔细的进一步验证。</p>
+<h4 id="other-schemes">其他方案</h4>
+<p><strong><code>SEDC_SCHEME : OBS</code></strong> <a id="OBS" name="OBS"></a></p>
+<p>奥尔曼、贝克施泰特和施密特</p>
+<p>用于固体和分子结构密度泛函描述的半经验范德华校正</p>
+<details class="keyword">
+<summary>自定义关键词</summary>
+<p><strong>.param 文件</strong></p>
+<p>"<code>SEDC_LAMBDA_OBS</code>“类型：实数（浮点型）级别：专家描述：在OBS半经验色散/范德华校正方案中，可自定义阻尼函数的lambda值。可修改：续算和实时调整默认值由” <code>XC_FUNCTIONAL</code>.</p>
+<p>"<code>SEDC_N_OBS</code>“类型：实数（浮点数）级别：专家描述：在OBS半经验色散/范德华校正方案中，可自定义阻尼函数的n值。可修改：续算和实时调整默认值由” <code>XC_FUNCTIONAL</code>.</p>
+</details>
+<p><strong><code>SEDC_SCHEME : JCHS</code></strong> <a id="JCHS" name="JCHS"></a></p>
+<p>朱雷奇卡、切尔尼、霍博扎和萨拉胡布</p>
+<details class="keyword">
+<summary>自定义关键词</summary>
+<p><strong>.param 文件</strong></p>
+<p><code>SEDC_SR_JCHS</code> 类型：实数（浮点型） 等级：专家级别 描述：JCHS半经验色散/范德华校正方案中阻尼函数的可定制SR值。可修改：续算和实时调整 默认值由以下内容确定 <code>XC_FUNCTIONAL</code>.</p>
+<p><code>SEDC_S6_JCHS</code> 类型：实数（浮点型） 等级：专家级别 描述：JCHS半经验色散/范德华校正方案中阻尼函数的可定制 S6 参数值。 可修改：续算和实时调整 默认值由 <code>XC_FUNCTIONAL</code>.</p>
+<p><code>SEDC_D_JCHS</code> 类型：实数（浮点型） 等级：专家级别 描述：在JCHS半经验色散/范德华校正方案中，可自定义阻尼函数的d值。 可修改：续算和实时调整 默认值由以下内容确定 <code>XC_FUNCTIONAL</code>.</p>
+</details>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="fn:refGrimme2016">
+<p>Stefan Grimme, Andreas Hansen, Jan Gerit Brandenburg, and Christoph Bannwarth. Dispersion-corrected mean-field electronic structure methods. <em>Chemical Reviews</em>, 116(9):5105–5154, 2016. PMID: 27077966. <a href="https://doi.org/10.1021/acs.chemrev.5b00533">doi:10.1021/acs.chemrev.5b00533</a>. <a class="footnote-backref" href="dftd.html#fnref:refGrimme2016" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:refvdW-DF2">
+<p>Kyuho Lee, Éamonn D. Murray, Lingzhu Kong, Bengt I. Lundqvist, and David C. Langreth. Higher-accuracy van der Waals density functional. <em>Phys. Rev. B</em>, 82:081101, Aug 2010. <a href="https://doi.org/10.1103/PhysRevB.82.081101">doi:10.1103/PhysRevB.82.081101</a>. <a class="footnote-backref" href="dftd.html#fnref:refvdW-DF2" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+<li id="fn:refvdW-DF-cx">
+<p>Kristian Berland and Per Hyldgaard. Exchange functional that tests the robustness of the plasmon description of the van der Waals density functional. <em>Phys. Rev. B</em>, 89:035412, Jan 2014. <a href="https://doi.org/10.1103/PhysRevB.89.035412">doi:10.1103/PhysRevB.89.035412</a>. <a class="footnote-backref" href="dftd.html#fnref:refvdW-DF-cx" title="Jump back to footnote 3 in the text">↩</a></p>
+</li>
+<li id="fn:refVV10">
+<p>Oleg A. Vydrov and Troy Van Voorhis. Nonlocal van der Waals density functional: The simpler the better. <em>The Journal of Chemical Physics</em>, 133(24):244103, 12 2010. <a href="https://doi.org/10.1063/1.3521275">doi:10.1063/1.3521275</a>. <a class="footnote-backref" href="dftd.html#fnref:refVV10" title="Jump back to footnote 4 in the text">↩</a></p>
+</li>
+<li id="fn:refZhao2008">
+<p>Yan Zhao and Donald G. Truhlar. The M06 suite of density functionals for main group thermochemistry, thermochemical kinetics, noncovalent interactions, excited states, and transition elements: two new functionals and systematic testing of four M06-class functionals and 12 other functionals. <em>Theoretical Chemistry Accounts</em>, 120(1):215–241, May 2008. <a href="https://doi.org/10.1007/s00214-007-0310-x">doi:10.1007/s00214-007-0310-x</a>. <a class="footnote-backref" href="dftd.html#fnref:refZhao2008" title="Jump back to footnote 5 in the text">↩</a></p>
+</li>
+<li id="fn:refvanSanten2015">
+<p>Jeffrey A. van Santen and Gino A. DiLabio. Dispersion corrections improve the accuracy of both noncovalent and covalent interactions energies predicted by a density-functional theory approximation. <em>The Journal of Physical Chemistry A</em>, 119(25):6703–6713, 2015. PMID: 26030132. <a href="https://doi.org/10.1021/acs.jpca.5b02809">doi:10.1021/acs.jpca.5b02809</a>. <a class="footnote-backref" href="dftd.html#fnref:refvanSanten2015" title="Jump back to footnote 6 in the text">↩</a></p>
+</li>
+<li id="fn:refDolgonos2019">
+<p>Grygoriy A. Dolgonos, Johannes Hoja, and A. Daniel Boese. Revised values for the x23 benchmark set of molecular crystals. <em>Phys. Chem. Chem. Phys.</em>, 21:24333–24344, 2019. <a href="https://doi.org/10.1039/C9CP04488D">doi:10.1039/C9CP04488D</a>. <a class="footnote-backref" href="dftd.html#fnref:refDolgonos2019" title="Jump back to footnote 7 in the text">↩</a></p>
+</li>
+<li id="fn:refKlimes2011">
+<p>Jiří Klimeš, David R. Bowler, and Angelos Michaelides. Van der Waals density functionals applied to solids. <em>Phys. Rev. B</em>, 83:195131, May 2011. <a href="https://doi.org/10.1103/PhysRevB.83.195131">doi:10.1103/PhysRevB.83.195131</a>. <a class="footnote-backref" href="dftd.html#fnref:refKlimes2011" title="Jump back to footnote 8 in the text">↩</a></p>
+</li>
+<li id="fn:refTkatchenko2009">
+<p>Alexandre Tkatchenko and Matthias Scheffler. Accurate molecular van der Waals interactions from ground-state electron density and free-atom reference data. <em>Phys. Rev. Lett.</em>, 102:073005, Feb 2009. <a href="https://doi.org/10.1103/PhysRevLett.102.073005">doi:10.1103/PhysRevLett.102.073005</a>. <a class="footnote-backref" href="dftd.html#fnref:refTkatchenko2009" title="Jump back to footnote 9 in the text">↩</a></p>
+</li>
+<li id="fn:refRuiz2012">
+<p>Victor G. Ruiz, Wei Liu, Egbert Zojer, Matthias Scheffler, and Alexandre Tkatchenko. Density-functional theory with screened van der Waals interactions for the modeling of hybrid inorganic-organic systems. <em>Phys. Rev. Lett.</em>, 108:146103, Apr 2012. <a href="https://doi.org/10.1103/PhysRevLett.108.146103">doi:10.1103/PhysRevLett.108.146103</a>. <a class="footnote-backref" href="dftd.html#fnref:refRuiz2012" title="Jump back to footnote 10 in the text">↩</a></p>
+</li>
+<li id="fn:refTkatchenko2012">
+<p>Alexandre Tkatchenko, Robert A. DiStasio, Roberto Car, and Matthias Scheffler. Accurate and efficient method for many-body van der Waals interactions. <em>Phys. Rev. Lett.</em>, 108:236402, Jun 2012. <a href="https://doi.org/10.1103/PhysRevLett.108.236402">doi:10.1103/PhysRevLett.108.236402</a>. <a class="footnote-backref" href="dftd.html#fnref:refTkatchenko2012" title="Jump back to footnote 11 in the text">↩</a><a class="footnote-backref" href="dftd.html#fnref2:refTkatchenko2012" title="Jump back to footnote 11 in the text">↩</a></p>
+</li>
+<li id="fn:refAmbrosetti2014">
+<p>Alberto Ambrosetti, Anthony M. Reilly, Robert A. DiStasio, Jr., and Alexandre Tkatchenko. Long-range correlation energy calculated from coupled atomic response functions. <em>The Journal of Chemical Physics</em>, 140(18):18A508, 02 2014. <a href="https://doi.org/10.1063/1.4865104">doi:10.1063/1.4865104</a>. <a class="footnote-backref" href="dftd.html#fnref:refAmbrosetti2014" title="Jump back to footnote 12 in the text">↩</a></p>
+</li>
+<li id="fn:refGrimmeD2">
+<p>Stefan Grimme. Semiempirical GGA-type density functional constructed with a long-range dispersion correction. <em>Journal of Computational Chemistry</em>, 27(15):1787–1799, 2006. <a href="https://doi.org/https://doi.org/10.1002/jcc.20495">doi:https://doi.org/10.1002/jcc.20495</a>. <a class="footnote-backref" href="dftd.html#fnref:refGrimmeD2" title="Jump back to footnote 13 in the text">↩</a></p>
+</li>
+<li id="fn:refGrimmeD3">
+<p>Stefan Grimme, Jens Antony, Stephan Ehrlich, and Helge Krieg. A consistent and accurate ab initio parametrization of density functional dispersion correction (DFT-D) for the 94 elements H-Pu. <em>The Journal of Chemical Physics</em>, 132(15):154104, 04 2010. <a href="https://doi.org/10.1063/1.3382344">doi:10.1063/1.3382344</a>. <a class="footnote-backref" href="dftd.html#fnref:refGrimmeD3" title="Jump back to footnote 14 in the text">↩</a></p>
+</li>
+<li id="fn:refGrimmeD3-BJ">
+<p>Stefan Grimme, Stephan Ehrlich, and Lars Goerigk. Effect of the damping function in dispersion corrected density functional theory. <em>Journal of Computational Chemistry</em>, 32(7):1456–1465, 2011. <a href="https://arxiv.org/abs/https://onlinelibrary.wiley.com/doi/pdf/10.1002/jcc.21759">arXiv:https://onlinelibrary.wiley.com/doi/pdf/10.1002/jcc.21759</a>, <a href="https://doi.org/https://doi.org/10.1002/jcc.21759">doi:https://doi.org/10.1002/jcc.21759</a>. <a class="footnote-backref" href="dftd.html#fnref:refGrimmeD3-BJ" title="Jump back to footnote 15 in the text">↩</a></p>
+</li>
+<li id="fn:refGrimmeD4-1">
+<p>Eike Caldeweyher, Christoph Bannwarth, and Stefan Grimme. Extension of the d3 dispersion coefficient model. <em>The Journal of Chemical Physics</em>, July 2017. URL: <a href="http://dx.doi.org/10.1063/1.4993215">http://dx.doi.org/10.1063/1.4993215</a>, <a href="https://doi.org/10.1063/1.4993215">doi:10.1063/1.4993215</a>. <a class="footnote-backref" href="dftd.html#fnref:refGrimmeD4-1" title="Jump back to footnote 16 in the text">↩</a></p>
+</li>
+<li id="fn:refGrimmeD4-2">
+<p>Eike Caldeweyher, Sebastian Ehlert, Andreas Hansen, Hagen Neugebauer, Sebastian Spicher, Christoph Bannwarth, and Stefan Grimme. A generally applicable atomic-charge dependent london dispersion correction. <em>The Journal of Chemical Physics</em>, April 2019. URL: <a href="http://dx.doi.org/10.1063/1.5090222">http://dx.doi.org/10.1063/1.5090222</a>, <a href="https://doi.org/10.1063/1.5090222">doi:10.1063/1.5090222</a>. <a class="footnote-backref" href="dftd.html#fnref:refGrimmeD4-2" title="Jump back to footnote 17 in the text">↩</a></p>
+</li>
+<li id="fn:refGrimmeD4-3">
+<p>Eike Caldeweyher, Jan-Michael Mewes, Sebastian Ehlert, and Stefan Grimme. Extension and evaluation of the d4 london-dispersion model for periodic systems. <em>Physical Chemistry Chemical Physics</em>, 22(16):8499–8512, 2020. URL: <a href="http://dx.doi.org/10.1039/D0CP00502A">http://dx.doi.org/10.1039/D0CP00502A</a>, <a href="https://doi.org/10.1039/d0cp00502a">doi:10.1039/d0cp00502a</a>. <a class="footnote-backref" href="dftd.html#fnref:refGrimmeD4-3" title="Jump back to footnote 18 in the text">↩</a></p>
+</li>
+<li id="fn:refOrtmann2006">
+<p>F. Ortmann, F. Bechstedt, and W. G. Schmidt. Semiempirical van der Waals correction to the density functional description of solids and molecular structures. <em>Phys. Rev. B</em>, 73:205101, May 2006. <a href="https://doi.org/10.1103/PhysRevB.73.205101">doi:10.1103/PhysRevB.73.205101</a>. <a class="footnote-backref" href="dftd.html#fnref:refOrtmann2006" title="Jump back to footnote 19 in the text">↩</a></p>
+</li>
+<li id="fn:refJurecka2007">
+<p>Petr Jurečka, Jiří Černý, Pavel Hobza, and Dennis R. Salahub. Density functional theory augmented with an empirical dispersion term. Interaction energies and geometries of 80 noncovalent complexes compared with ab initio quantum mechanics calculations. <em>Journal of Computational Chemistry</em>, 28(2):555–569, 2007. <a href="https://doi.org/10.1002/jcc.20570">doi:10.1002/jcc.20570</a>. <a class="footnote-backref" href="dftd.html#fnref:refJurecka2007" title="Jump back to footnote 20 in the text">↩</a></p>
+</li>
+<li id="fn:refBecke2007">
+<p>Axel D. Becke and Erin R. Johnson. A unified density-functional treatment of dynamical, nondynamical, and dispersion correlations. <em>The Journal of Chemical Physics</em>, 127(12):124108, 09 2007. <a href="https://doi.org/10.1063/1.2768530">doi:10.1063/1.2768530</a>. <a class="footnote-backref" href="dftd.html#fnref:refBecke2007" title="Jump back to footnote 21 in the text">↩</a></p>
+</li>
+<li id="fn:refSmith2016">
+<p>Daniel G. A. Smith, Lori A. Burns, Konrad Patkowski, and C. David Sherrill. Revised damping parameters for the d3 dispersion correction to density functional theory. <em>The Journal of Physical Chemistry Letters</em>, 7(12):2197–2203, 2016. PMID: 27203625. <a href="https://doi.org/10.1021/acs.jpclett.6b00780">doi:10.1021/acs.jpclett.6b00780</a>. <a class="footnote-backref" href="dftd.html#fnref:refSmith2016" title="Jump back to footnote 22 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+</article>
+</div>
+
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright"> 原版采用 <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+
+
+
+<script src="../../assets/zh-search-data.js"></script><script data-root="../../" src="../../assets/zh-site.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:true},showMathMenu:false,messageStyle:"none"});</script><script src="../../assets/mathjax/MathJax.js?config=TeX-MML-AM_CHTML"></script></body>
+</html>

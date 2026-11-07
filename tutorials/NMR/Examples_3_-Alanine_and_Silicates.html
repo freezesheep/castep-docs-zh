@@ -1,0 +1,1349 @@
+
+<!DOCTYPE html>
+
+<html class="js" lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="Example_2_-Diamond.html" rel="prev"/>
+<link href="../Delta_SCF/simple_delta_scf.html" rel="next"/>
+<link href="../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.0" name="generator"/>
+<title>示例 3：丙氨酸与硅酸盐 — CASTEP 中文文档</title>
+<link href="../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../stylesheets/extra.css" rel="stylesheet"/>
+
+<link href="../../assets/zh-site.css" rel="stylesheet"/></head>
+<body dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="Examples_3_-Alanine_and_Silicates.html#examples-3-alanine-and-silicates"> 跳转到正文 </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="页眉" class="md-header__inner md-grid">
+<a aria-label="CASTEP 中文文档" class="md-header__button md-logo" data-md-component="logo" href="../../index.html" title="CASTEP 中文文档">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis"> CASTEP 中文文档 </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis"> 示例 3：丙氨酸与硅酸盐 </span>
+</div>
+</div>
+</div>
+
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="搜索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="搜索" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="搜索" class="md-search__options">
+<button aria-label="清除" class="md-search__icon md-icon" tabindex="-1" title="清除" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta"> 搜索中文或英文导航标题 </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="导航" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="CASTEP 中文文档" class="md-nav__button md-logo" data-md-component="logo" href="../../index.html" title="CASTEP 中文文档">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a> CASTEP 中文文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../index.html">
+<span class="md-ellipsis"> 首页 </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis"> 使用文档 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span> 使用文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+<span class="md-ellipsis"> 入门指南 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_1">
+<span class="md-nav__icon md-icon"></span> 入门指南 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Getting_Started/intro.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Getting_Started/built_in_help.html">
+<span class="md-ellipsis"> 命令行帮助 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Getting_Started/running_castep.html">
+<span class="md-ellipsis"> 运行 CASTEP </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Getting_Started/basic_cell_file.html">
+<span class="md-ellipsis"> 晶胞文件（.cell） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Getting_Started/basic_param_file.html">
+<span class="md-ellipsis"> 参数文件（.param） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Getting_Started/restarting.html">
+<span class="md-ellipsis"> 检查点与续算 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+<span class="md-ellipsis"> 基态 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_2">
+<span class="md-nav__icon md-icon"></span> 基态 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Groundstate/intro.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Groundstate/dftd.html">
+<span class="md-ellipsis"> 色散修正 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Groundstate/soc.html">
+<span class="md-ellipsis"> 自旋–轨道耦合 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Groundstate/spin_constraints.html">
+<span class="md-ellipsis"> 自旋约束 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Groundstate/population_analysis.html">
+<span class="md-ellipsis"> 布居分析 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Groundstate/ELF.html">
+<span class="md-ellipsis"> 电子局域函数（ELF） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+<span class="md-ellipsis"> 几何结构优化 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_3">
+<span class="md-nav__icon md-icon"></span> 几何结构优化 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Geometry_Optimisation/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Geometry_Optimisation/keywords.html">
+<span class="md-ellipsis"> 关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Geometry_Optimisation/constraints.html">
+<span class="md-ellipsis"> 约束条件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Geometry_Optimisation/files.html">
+<span class="md-ellipsis"> 文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Geometry_Optimisation/tools.html">
+<span class="md-ellipsis"> 工具 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+<span class="md-ellipsis"> 分子动力学 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_4">
+<span class="md-nav__icon md-icon"></span> 分子动力学 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/overview.html">
+<span class="md-ellipsis"> 分子动力学概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/basics.html">
+<span class="md-ellipsis"> 分子动力学基础 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/restarts.html">
+<span class="md-ellipsis"> 分子动力学续算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/files.html">
+<span class="md-ellipsis"> 分子动力学文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/keywords.html">
+<span class="md-ellipsis"> 分子动力学关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/tools.html">
+<span class="md-ellipsis"> 分子动力学工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/pimd.html">
+<span class="md-ellipsis"> 路径积分分子动力学（PIMD） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/hugoniostat.html">
+<span class="md-ellipsis"> Hugoniostat 冲击波模拟方法 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+<span class="md-ellipsis"> 过渡态搜索 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_5">
+<span class="md-nav__icon md-icon"></span> 过渡态搜索 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Transition_State_Search/neb.html">
+<span class="md-ellipsis"> 微扰弹性带法（NEB） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+<span class="md-ellipsis"> 交换–关联（XC） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_6">
+<span class="md-nav__icon md-icon"></span> 交换–关联（XC） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/XC/XCoverview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/XC/XC.html">
+<span class="md-ellipsis"> 交换–关联设置 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/XC/libXC.html">
+<span class="md-ellipsis">
+    
+  
+    libXC
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+<span class="md-ellipsis"> 电子谱性质 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_7">
+<span class="md-nav__icon md-icon"></span> 电子谱性质 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Spectral/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Spectral/keywords.html">
+<span class="md-ellipsis"> 关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Spectral/restarts.html">
+<span class="md-ellipsis"> 续算 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+<span class="md-ellipsis"> 声子 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_8">
+<span class="md-nav__icon md-icon"></span> 声子 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Introduction.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Running-phonon-calculations.html">
+<span class="md-ellipsis"> 运行声子计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Dielectric-properties.html">
+<span class="md-ellipsis"> 介电性质 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Thermodynamic-properties.html">
+<span class="md-ellipsis"> 热力学性质 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Plotting-and-analysis-tools.html">
+<span class="md-ellipsis"> 绘图与分析工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Running-Large-Calculations.html">
+<span class="md-ellipsis"> 运行大规模计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Advanced-Topics.html">
+<span class="md-ellipsis"> 进阶主题 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Keyword-Reference.html">
+<span class="md-ellipsis"> 关键词参考 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Bibliography.html">
+<span class="md-ellipsis"> 参考文献 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+<span class="md-ellipsis"> 核磁共振（NMR） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_9">
+<span class="md-nav__icon md-icon"></span> 核磁共振（NMR） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/NMR/NMR_overview.html">
+<span class="md-ellipsis"> 核磁共振概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_10" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+<span class="md-ellipsis"> 电子顺磁共振（EPR） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_10_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_10">
+<span class="md-nav__icon md-icon"></span> 电子顺磁共振（EPR） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/EPR/overview.html">
+<span class="md-ellipsis"> 电子顺磁共振概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/XRD/overview.html">
+<span class="md-ellipsis"> X 射线衍射（XRD） </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_12" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_12" id="__nav_2_12_label" tabindex="0">
+<span class="md-ellipsis"> 含时密度泛函理论（TDDFT） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_12_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_12">
+<span class="md-nav__icon md-icon"></span> 含时密度泛函理论（TDDFT） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/TDDFT/overview.html">
+<span class="md-ellipsis"> 含时密度泛函理论概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_13" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_13" id="__nav_2_13_label" tabindex="0">
+<span class="md-ellipsis"> ΔSCF 方法 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_13_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_13">
+<span class="md-nav__icon md-icon"></span> ΔSCF 方法 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Delta_SCF/overview.html">
+<span class="md-ellipsis"> ΔSCF 方法概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Delta_SCF/simple_delta_scf.html">
+<span class="md-ellipsis"> 简单 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Delta_SCF/lin_ex_delta_scf.html">
+<span class="md-ellipsis"> 线性展开 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Delta_SCF/mo_delta_scf.html">
+<span class="md-ellipsis"> 分子轨道 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Delta_SCF/molpdos.html">
+<span class="md-ellipsis"> 分子投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_14" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_14" id="__nav_2_14_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    DFT+U
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_14_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_14">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    DFT+U
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/DFT+U/dftu-theory.html">
+<span class="md-ellipsis"> DFT+U：理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/DFT+U/dftu-input.html">
+<span class="md-ellipsis"> DFT+U：输入 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/DFT+U/koopmans-theory.html">
+<span class="md-ellipsis"> 线性响应法计算 U：理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/DFT+U/koopmans-input.html">
+<span class="md-ellipsis"> 线性响应法计算 U：输入 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/DFT+U/koopmans-output.html">
+<span class="md-ellipsis"> 线性响应法计算 U：输出 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/DFT+U/koopmans-warnings-errors.html">
+<span class="md-ellipsis"> 线性响应法计算 U：警告与错误 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_15" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_15" id="__nav_2_15_label" tabindex="0">
+<span class="md-ellipsis"> 赝势 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_15_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_15">
+<span class="md-nav__icon md-icon"></span> 赝势 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Pseudopotentials/theory.html">
+<span class="md-ellipsis"> 理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Pseudopotentials/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Pseudopotentials/reading_headers.html">
+<span class="md-ellipsis"> 头部信息 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Pseudopotentials/otfg_string.html">
+<span class="md-ellipsis"> 即时生成赝势（OTFG）字符串 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_16" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_16" id="__nav_2_16_label" tabindex="0">
+<span class="md-ellipsis"> 输入文件 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_16_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_16">
+<span class="md-nav__icon md-icon"></span> 输入文件 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Input_Files/cell_file.html">
+<span class="md-ellipsis"> 晶胞文件（.cell） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Input_Files/param_file.html">
+<span class="md-ellipsis"> 参数文件（.param） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Input_Files/cell_keywords.html">
+<span class="md-ellipsis"> 晶胞文件关键词 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_17" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_17" id="__nav_2_17_label" tabindex="0">
+<span class="md-ellipsis"> 输出文件 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_17_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_17">
+<span class="md-nav__icon md-icon"></span> 输出文件 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Output_Files/output_files.html">
+<span class="md-ellipsis"> 输出文件 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_18" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_18" id="__nav_2_18_label" tabindex="0">
+<span class="md-ellipsis"> 其他程序与工具 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_18_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_18">
+<span class="md-nav__icon md-icon"></span> 其他程序与工具 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Tools/tools.html">
+<span class="md-ellipsis"> 其他程序与工具 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_19" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_19" id="__nav_2_19_label" tabindex="0">
+<span class="md-ellipsis"> 故障排查 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_19_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_19">
+<span class="md-nav__icon md-icon"></span> 故障排查 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Troubleshooting/troubleshooting.html">
+<span class="md-ellipsis"> 常见错误 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Troubleshooting/linux_path.html">
+<span class="md-ellipsis"> Linux 帮助 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis"> 教程 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span> 教程 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+<span class="md-ellipsis"> 成键与电荷 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_1">
+<span class="md-nav__icon md-icon"></span> 成键与电荷 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bonding_and_Charge/charge_density.html">
+<span class="md-ellipsis"> 绘制电荷密度 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bonding_and_Charge/mulliken_population.html">
+<span class="md-ellipsis"> 布居分析 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bonding_and_Charge/ELF.html">
+<span class="md-ellipsis"> 电子局域函数（ELF） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+<span class="md-ellipsis"> 能带与态密度 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_2">
+<span class="md-nav__icon md-icon"></span> 能带与态密度 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+<span class="md-ellipsis"> 绘图 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_1_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_2_1">
+<span class="md-nav__icon md-icon"></span> 绘图 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bands_and_DOS/Plotting/plotting_perl.html">
+<span class="md-ellipsis"> 绘图：CASTEP 工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bands_and_DOS/Plotting/plotting_sumo.html">
+<span class="md-ellipsis"> 绘图：SUMO </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bands_and_DOS/Plotting/Optados/DOS.html">
+<span class="md-ellipsis"> OptaDOS：态密度 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bands_and_DOS/Plotting/Optados/pDOS.html">
+<span class="md-ellipsis"> OptaDOS：投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bands_and_DOS/semiconductors.html">
+<span class="md-ellipsis"> 半导体 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bands_and_DOS/metals.html">
+<span class="md-ellipsis"> 金属 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bands_and_DOS/magnetic.html">
+<span class="md-ellipsis"> 磁性材料 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+<span class="md-ellipsis"> 光学 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_3">
+<span class="md-nav__icon md-icon"></span> 光学 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Optics/Optics.html">
+<span class="md-ellipsis"> 光学 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Optics/Optics_aluminium.html">
+<span class="md-ellipsis"> 光学：铝 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Optics/Optics_ani.html">
+<span class="md-ellipsis"> 光学各向异性 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+<span class="md-ellipsis"> 芯能级能量损失谱 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_4">
+<span class="md-nav__icon md-icon"></span> 芯能级能量损失谱 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Coreloss/Coreloss.html">
+<span class="md-ellipsis"> 芯能级能量损失谱 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Optics/JDOS.html">
+<span class="md-ellipsis"> 联合态密度（JDOS） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../dispersion_corrections/castep-ase-dispersion-tutorial.html">
+<span class="md-ellipsis"> 色散修正 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../NEB/neb_tutorial.html">
+<span class="md-ellipsis"> 微扰弹性带法（NEB） </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+<span class="md-ellipsis"> 核磁共振屏蔽 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_3_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_7">
+<span class="md-nav__icon md-icon"></span> 核磁共振屏蔽 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Example_1_-Ethanol.html">
+<span class="md-ellipsis"> 示例 1：乙醇 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Example_2_-Diamond.html">
+<span class="md-ellipsis"> 示例 2：金刚石 </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis"> 示例 3：丙氨酸与硅酸盐 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="Examples_3_-Alanine_and_Silicates.html">
+<span class="md-ellipsis"> 示例 3：丙氨酸与硅酸盐 </span>
+</a>
+<nav aria-label="本页目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span> 本页目录 </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Examples_3_-Alanine_and_Silicates.html#oxygen-17-nmr">
+<span class="md-ellipsis"> 氧-17 核磁共振 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Examples_3_-Alanine_and_Silicates.html#alanine">
+<span class="md-ellipsis"> 丙氨酸 </span>
+</a>
+<nav aria-label="丙氨酸" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Examples_3_-Alanine_and_Silicates.html#examining-input-and-output">
+<span class="md-ellipsis"> 检查输入和输出 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Examples_3_-Alanine_and_Silicates.html#analysing-and-comparing-to-experiment">
+<span class="md-ellipsis"> 分析并对比实验结果 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Examples_3_-Alanine_and_Silicates.html#silicates-quartz-and-cristoballite">
+<span class="md-ellipsis"> 硅酸盐——石英与 cristoballite </span>
+</a>
+<nav aria-label="硅酸盐——石英与 cristoballite" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Examples_3_-Alanine_and_Silicates.html#input-and-output-files">
+<span class="md-ellipsis"> 输入和输出文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Examples_3_-Alanine_and_Silicates.html#analysing-and-comparing-to-experiment_1">
+<span class="md-ellipsis"> 分析并对比实验结果 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+<span class="md-ellipsis"> ΔSCF 方法 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_8">
+<span class="md-nav__icon md-icon"></span> ΔSCF 方法 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/simple_delta_scf.html">
+<span class="md-ellipsis"> 简单 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/lin_ex_delta_scf.html">
+<span class="md-ellipsis"> 线性展开 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/molpdos.html">
+<span class="md-ellipsis"> 分子投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+<span class="md-ellipsis"> 遗传算法（GA） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_9">
+<span class="md-nav__icon md-icon"></span> 遗传算法（GA） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../GA/Silicon.html">
+<span class="md-ellipsis"> 硅 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../GA/Introduction.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_10" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+<span class="md-ellipsis"> 工具 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_10_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_10">
+<span class="md-nav__icon md-icon"></span> 工具 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Tools/elastic_constants.html">
+<span class="md-ellipsis"> 弹性常数 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+<span class="md-ellipsis"> 开发者文档 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span> 开发者文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/using_devel_codes.html">
+<span class="md-ellipsis"> 使用开发控制代码（Devel Codes） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/using_trace.html">
+<span class="md-ellipsis"> 使用 trace </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/adding_pair_pots.html">
+<span class="md-ellipsis"> 添加经验势 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/build-system.html">
+<span class="md-ellipsis"> 构建系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/style_guide.html">
+<span class="md-ellipsis"> 代码风格指南 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/test_suite.html">
+<span class="md-ellipsis"> 测试 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/CI.html">
+<span class="md-ellipsis"> 持续集成系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/git_workflow.html">
+<span class="md-ellipsis"> Git 工作流程 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/release_procedure.html">
+<span class="md-ellipsis"> 版本发布流程 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="本页目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span> 本页目录 </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Examples_3_-Alanine_and_Silicates.html#oxygen-17-nmr">
+<span class="md-ellipsis"> 氧-17 核磁共振 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Examples_3_-Alanine_and_Silicates.html#alanine">
+<span class="md-ellipsis"> 丙氨酸 </span>
+</a>
+<nav aria-label="丙氨酸" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Examples_3_-Alanine_and_Silicates.html#examining-input-and-output">
+<span class="md-ellipsis"> 检查输入和输出 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Examples_3_-Alanine_and_Silicates.html#analysing-and-comparing-to-experiment">
+<span class="md-ellipsis"> 分析并对比实验结果 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Examples_3_-Alanine_and_Silicates.html#silicates-quartz-and-cristoballite">
+<span class="md-ellipsis"> 硅酸盐——石英与 cristoballite </span>
+</a>
+<nav aria-label="硅酸盐——石英与 cristoballite" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Examples_3_-Alanine_and_Silicates.html#input-and-output-files">
+<span class="md-ellipsis"> 输入和输出文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Examples_3_-Alanine_and_Silicates.html#analysing-and-comparing-to-experiment_1">
+<span class="md-ellipsis"> 分析并对比实验结果 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="examples-3-alanine-and-silicates">示例 3：丙氨酸与硅酸盐</h1><div class="zh-notice">中文译文 · 由本地英文文档翻译，已统一术语并进行重点抽查。 <a href="../../https://castep-docs.github.io/castep-docs/tutorials/NMR/Examples_3_-Alanine_and_Silicates.html">英文原文对照</a> · <a href="../../translation-notes.html">翻译说明</a></div>
+<p>我们现在来看一些更现实且复杂的结构——氨基酸丙氨酸以及两种不同的硅酸盐：结晶石英和石英。这些晶体相对较大，为了在较短时间内完成计算，我们将它们在集群上运行。 <strong>使用以下数量的CPU：</strong></p>
+<ul>
+<li>对氨基苯甲酸 - 4</li>
+<li>结晶石英-6</li>
+<li>石英 - 13</li>
+</ul>
+<p>（这些数值被选择以实现高效的k点缩放）</p>
+<p>我们还将对上述结构进行EFG计算，并检查相应的数据。</p>
+<h3 id="oxygen-17-nmr">氧-17 核磁共振</h3>
+<p>氧是许多地质材料的组成部分。由于氧常常参与氢键，因此它也是有机和生物分子中的重要元素。固态 <sup>17</sup>核磁共振（NMR）应是一种独特而有价值的探针，因为其化学位移范围为 <sup>17</sup>O 的含量在有机分子中几乎达到1000 ppm。此外 <sup>17</sup>O 的自旋 I = 5/2，因此具有净四极矩。由于这一特性，固体状态核磁共振谱受到原子核处电场梯度的显著影响。</p>
+<p>因为同位素丰度为 <sup>17</sup>O 的含量非常低（0.037%），由于电场梯度引起的核磁共振线宽相对较大，目前可获得的固体状态核磁共振数据十分有限。这一点在有机材料中尤为明显。已有第一性原理计算结果表明： <sup>17</sup>¹H NMR 参数在分配实验谱图以及建立 NMR 参数与局部原子结构之间的经验规则方面发挥了至关重要的作用。</p>
+<h2 id="alanine">丙氨酸</h2>
+<h3 id="examining-input-and-output">检查输入和输出</h3>
+<p>我们将使用单元格文件</p>
+<p><a href="alanine/alanine.cell">丙氨酸.cell</a></p>
+<div class="admonition note">
+<p class="admonition-title">说明</p>
+<p>不必担心它有多长或多复杂——它和其他任何内容都没有区别。 <a href="../../documentation/Input_Files/cell_file.html">单元格文件</a> - 它只是简单地定义了一个大单元格</p>
+</div>
+<p>以及参数文件 <code>alanine.param</code></p>
+<p><div class="highlight"><pre><span></span><code><a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>fix_occupancy = true
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>opt_strategy : speed
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>task        = magres
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>magres_task = nmr
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>cut_off_energy = 35 ry
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>xc_functional : PBE
+</code></pre></div> 请注意，与之唯一不同的是 <a href="Example_1_-Ethanol.html#ethanol.param">之前的</a> <a href="Example_2_-Diamond.html#diamond.param">文件</a> 是这条线</p>
+<div class="highlight"><pre><span></span><code><a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>magres_task = nmr
+</code></pre></div>
+<p>这导致进行EFG计算。</p>
+<p>alanine.param](alanine/alanine.param)</p>
+<p>您可能还希望查看该文件</p>
+<p><a href="alanine/alanine.pdb">alanine.pdb</a></p>
+<p>在 Materials Studio 或其他软件中——这有助于更细致地观察诸如氢键等特征。这是从以下下载的原始文件： <a href="https://www.ccdc.cam.ac.uk/">剑桥晶体学数据库</a> （并被用于获得） <code>alanine.cell</code> 文件）。晶胞结构通过中子衍射实验获得。</p>
+<p>我们现在将运行castep。The <code>alanine.castep</code> 输出文件应包含的 <a href="alanine_table.txt">表格</a></p>
+<p>这与我们的情况非常相似。 <a href="Example_1_-Ethanol.html#ethanol_result">之前的</a> <a href="Example_2_-Diamond.html#diamond_result">结果</a>，除了现在多了两列外—— <span class="arithmatex"><span class="MathJax_Preview">C_Q</span><script type="math/tex">C_Q</script></span> 并且 <span class="arithmatex"><span class="MathJax_Preview">Eta</span><script type="math/tex">Eta</script></span> — 这两个文件都存在，是因为现在进行了EFG计算。</p>
+<p>此结果尚未完全收敛（在本教程中我们不会对此进行测试，但欢迎自行验证），但部分原子位置之间的相对位移已收敛（同样，您可以自行验证）。</p>
+<h3 id="analysing-and-comparing-to-experiment">分析并对比实验结果</h3>
+<p>我们现在将把这些结果与实验进行比较。下面的图是实验结果。 <sup>17</sup>L-丙氨酸的¹³C NMR谱图显示两个峰，由于四极耦合而非常宽，并且发生重叠。</p>
+<p><img alt='Solid-State O17 NMR spectrum of L-alanine"' src="../img/nmr_tut3.png" width="40%"/></p>
+<figure style="display: inline-block;">
+<figcaption style="text-align: left;">图3. 固态 <sup><small>17</small></sup>L-丙氨酸的¹³C NMR谱。（b）为MAS（魔角旋转）数据，（c）为DOR（双取向旋转）数据。</figcaption>
+</figure>
+<p>实验参数见下表1。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex"><span class="MathJax_Preview">\delta</span><script type="math/tex">\delta</script></span>(A)-<span class="arithmatex"><span class="MathJax_Preview">\delta</span><script type="math/tex">\delta</script></span>(B) (ppm)</td>
+<td>23.5</td>
+</tr>
+<tr>
+<td><span class="arithmatex"><span class="MathJax_Preview">C_Q</span><script type="math/tex">C_Q</script></span>（A）（兆赫）</td>
+<td>7.86</td>
+</tr>
+<tr>
+<td><span class="arithmatex"><span class="MathJax_Preview">\eta_Q</span><script type="math/tex">\eta_Q</script></span>(A)</td>
+<td>0.28</td>
+</tr>
+<tr>
+<td><span class="arithmatex"><span class="MathJax_Preview">C_Q</span><script type="math/tex">C_Q</script></span>（B）（兆赫）</td>
+<td>6.53</td>
+</tr>
+<tr>
+<td><span class="arithmatex"><span class="MathJax_Preview">\eta_Q</span><script type="math/tex">\eta_Q</script></span>(B)</td>
+<td>0.70</td>
+</tr>
+<tr>
+<td><strong>表1：实验数据 <sup>17</sup>丙氨酸的¹³C NMR参数。两个共振峰标记为A和B。各向同性化学位移 <span class="arithmatex"><span class="MathJax_Preview">\delta</span><script type="math/tex">\delta</script></span>，四极耦合 <span class="arithmatex"><span class="MathJax_Preview">C_{Q}</span><script type="math/tex">C_{Q}</script></span>，以及EFG不对称性 <span class="arithmatex"><span class="MathJax_Preview">\eta_Q</span><script type="math/tex">\eta_Q</script></span>.</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>从这一点出发，我们将尝试找出A和B的值。</p>
+<p>为此，我们将考察 <code>alanine.castep</code> <a href="alanine_table.txt">张量表</a>.</p>
+<p>通过快速查看表格，我们发现氢的化学位移范围为20-30ppm，碳约为0、124或159ppm，氮为194ppm，氧为48或63ppm。由于这一情况，我们可以判断这两个共振信号属于碳和氧：要获得23.5ppm的化学位移差，只有氧的48ppm和一个氢（理想值为24.5ppm）的组合才能接近该数值。</p>
+<p>我们在表格的氧部分看到</p>
+<div class="highlight"><pre><span></span><code><a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>===============================================================================
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>|                Chemical Shielding and Electric Field Gradient Tensors       |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>|-----------------------------------------------------------------------------|
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>|     Nucleus                       Shielding tensor             EFG Tensor   |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a>|    Species            Ion    Iso(ppm)   Aniso(ppm)  Asym    Cq(MHz)    Eta  |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a>|    O                  1       48.29     352.85      0.51   7.125E+00   0.25 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a>|    O                  2       62.86     255.66      0.71   5.794E+00   0.64 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>|    O                  3       48.29     352.85      0.51   7.125E+00   0.25 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a>|    O                  4       62.86     255.66      0.71   5.794E+00   0.64 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a>|    O                  5       48.29     352.85      0.51   7.125E+00   0.25 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a>|    O                  6       62.86     255.66      0.71   5.794E+00   0.64 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a>|    O                  7       48.29     352.85      0.51   7.125E+00   0.25 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a>|    O                  8       62.86     255.66      0.71   5.794E+00   0.64 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-2-14" id="__codelineno-2-14" name="__codelineno-2-14"></a>===============================================================================
+</code></pre></div>
+<p>那化学位移始终在48.29和62.86之间交替。为了探究其原因，我们可以考察一下 <code>alanine.cell</code> 文件在 Vesta（或）中 <code>alanine.pdb</code> 在Materials Studio中打开文件，或选择您偏好的其他选项（如显示氢键的工具）。与之类似地 <a href="Example_1_-Ethanol.html">示例 1</a>，我们将检查哪些原子对应于何种环境。</p>
+<p>下方展示了晶胞以及一个特意突出显示的原子。</p>
+<p><img alt="alanine cell" src="alanine_cell.png"/></p>
+<p>氧原子是红色的原子。我们在这里看到，实际上存在两种类型的氧原子——那些参与氢键（用虚线连接到一个氢原子（灰色原子））的，以及那些不参与氢键的。这里的原子52（氧离子8） <a href="alanine_table.txt">表格</a>；它从第44个原子开始（因为在该位置之前有44个原子），其化学屏蔽值为62.86 ppm，如上所示。当点击任何一个形成两个氢键的氧原子时，对应的是一个屏蔽张量为6或86 ppm的原子，而所有仅形成一个氢键的氧原子的值均为48.29 ppm。在本次练习中，我们已经确定共振A来源于一个仅与一个氢键相连的氧原子。</p>
+<p>氢原子数量要多得多，因此很难确定A具体指的是哪一个。因为 <span class="arithmatex"><span class="MathJax_Preview">\delta</span><script type="math/tex">\delta</script></span>(A) - <span class="arithmatex"><span class="MathJax_Preview">\delta</span><script type="math/tex">\delta</script></span>(B) = 23.5 ppm，我们知道化学屏蔽的值应约为 <span class="arithmatex"><span class="MathJax_Preview">48.29 - 23.5 = 24.79ppm</span><script type="math/tex">48.29 - 23.5 = 24.79ppm</script></span></p>
+<p>从表格中可以看到，最接近的值是 24.01 ppm，对应原子 1、8、15 和 22。通过点击氢原子直到找到其中一个时，我们发现</p>
+<p><img alt="Corresponding hydrogen" src="hydrogen_find.png" width="40%"/></p>
+<p>这三个氢原子都与一个氮原子成键，该氮原子还连接了两个氢原子和一个碳原子。它与其他两个氢原子不同，因为与其形成氢键的氧原子没有其他氢键：A 和 B 之间彼此形成了氢键。</p>
+<p>这些结果也由表中提供的其他数值所证实。为确认A为氧1（或3或5……—所有值均相同）， <span class="arithmatex"><span class="MathJax_Preview">C_Q</span><script type="math/tex">C_Q</script></span> 在 <a href="alanine_table.txt">表格</a> 是 7.125MHz，相比预期的 7.86MHz，和 <span class="arithmatex"><span class="MathJax_Preview">\eta_Q</span><script type="math/tex">\eta_Q</script></span> 是 0.25，相比预期的 0.28——结果非常相似。</p>
+<p>然而，氢的情况并非如此——一个 <span class="arithmatex"><span class="MathJax_Preview">C_Q</span><script type="math/tex">C_Q</script></span> 为 6.53MHz 和一个 <span class="arithmatex"><span class="MathJax_Preview">\eta_Q</span><script type="math/tex">\eta_Q</script></span> 预期值为0.7，但CASTEP的结果分别为0.21MHz和0.06。事实上，唯一一个接近匹配的离子是 <span class="arithmatex"><span class="MathJax_Preview">C_Q</span><script type="math/tex">C_Q</script></span> <span class="arithmatex"><span class="MathJax_Preview">eta_Q</span><script type="math/tex">eta_Q</script></span> 期望的是另一种（偶数编号）氧原子类型：即与所关注的氢原子（1、8 和 15）形成氢键的氧原子。</p>
+<h2 id="silicates-quartz-and-cristoballite">硅酸盐——石英与 cristoballite</h2>
+<p>作为一个额外的例子，我们现在将对两种硅酸盐——结晶石英和石英——进行类似的计算及相应的分析。当然，我们将分别对castep计算进行处理。</p>
+<h3 id="input-and-output-files">输入和输出文件</h3>
+<p>对于石英，我们将使用单元格文件</p>
+<p><a href="silicates/quartz.cell">quartz.cell</a></p>
+<p>以及参数文件 <code>quartz.param</code></p>
+<div class="highlight"><pre><span></span><code><a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>cut_off_energy  = 40 ry
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>xc_functional : PBE
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a>fix_occupancy = true
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a>opt_strategy : speed
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a>task        = magres
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a>magres_task = nmr
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a>elec_energy_tol = 1.0e-12 ry
+</code></pre></div>
+<p>参数文件与上面的丙氨酸文件完全相同。</p>
+<p>对于结晶石英，我们将使用单元格文件</p>
+<p><a href="silicates/crist.cell">crist.cell</a></p>
+<p>和上面完全相同的参数文件（只是名称不同） <code>crist.param</code> （相反）</p>
+<p>然后我们像平常一样在两种晶体结构上运行castep，得到输出文件 <code>quartz.castep</code> 并且 <code>crist.castep</code>在这些文件中，我们将有上述类型的表格：</p>
+<p>对于石英：</p>
+<div class="highlight"><pre><span></span><code><a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>===============================================================================
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>|                Chemical Shielding and Electric Field Gradient Tensors       |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a>|-----------------------------------------------------------------------------|
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a>|     Nucleus                       Shielding tensor             EFG Tensor   |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a>|    Species            Ion    Iso(ppm)   Aniso(ppm)  Asym    Cq(MHz)    Eta  |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a>|    O                  1      234.54      68.31      0.12  -5.085E+00   0.20 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a>|    O                  2      234.54      68.30      0.12  -5.086E+00   0.20 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a>|    O                  3      234.54      68.30      0.12  -5.086E+00   0.20 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a>|    O                  4      234.54      68.30      0.12  -5.086E+00   0.20 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-4-10" id="__codelineno-4-10" name="__codelineno-4-10"></a>|    O                  5      234.54      68.30      0.12  -5.086E+00   0.20 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-4-11" id="__codelineno-4-11" name="__codelineno-4-11"></a>|    O                  6      234.54      68.31      0.12  -5.085E+00   0.20 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-4-12" id="__codelineno-4-12" name="__codelineno-4-12"></a>|    Si                 1      435.01      -5.44      0.82   2.067E+01   0.72 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-4-13" id="__codelineno-4-13" name="__codelineno-4-13"></a>|    Si                 2      435.01      -5.45      0.81   2.067E+01   0.72 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-4-14" id="__codelineno-4-14" name="__codelineno-4-14"></a>|    Si                 3      435.01      -5.44      0.82   2.067E+01   0.72 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-4-15" id="__codelineno-4-15" name="__codelineno-4-15"></a>===============================================================================
+</code></pre></div>
+<p>以及对于结晶石英 <div class="highlight"><pre><span></span><code><a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>===============================================================================
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>|                Chemical Shielding and Electric Field Gradient Tensors       |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a>|-----------------------------------------------------------------------------|
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a>|     Nucleus                       Shielding tensor             EFG Tensor   |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a>|    Species            Ion    Iso(ppm)   Aniso(ppm)  Asym    Cq(MHz)    Eta  |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a>|    O                  1      239.47      79.97      0.08  -5.055E+00   0.14 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a>|    O                  2      239.47      79.97      0.08  -5.055E+00   0.14 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-5-8" id="__codelineno-5-8" name="__codelineno-5-8"></a>|    O                  3      239.47      79.97      0.08  -5.055E+00   0.14 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-5-9" id="__codelineno-5-9" name="__codelineno-5-9"></a>|    O                  4      239.47      79.97      0.08  -5.055E+00   0.14 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-5-10" id="__codelineno-5-10" name="__codelineno-5-10"></a>|    O                  5      239.47      79.97      0.08  -5.055E+00   0.14 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-5-11" id="__codelineno-5-11" name="__codelineno-5-11"></a>|    O                  6      239.47      79.97      0.08  -5.055E+00   0.14 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-5-12" id="__codelineno-5-12" name="__codelineno-5-12"></a>|    O                  7      239.47      79.97      0.08  -5.055E+00   0.14 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-5-13" id="__codelineno-5-13" name="__codelineno-5-13"></a>|    O                  8      239.47      79.97      0.08  -5.055E+00   0.14 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-5-14" id="__codelineno-5-14" name="__codelineno-5-14"></a>|    Si                 1      437.12      -9.36      0.61  -1.077E+01   0.88 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-5-15" id="__codelineno-5-15" name="__codelineno-5-15"></a>|    Si                 2      437.12      -9.36      0.61  -1.077E+01   0.88 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-5-16" id="__codelineno-5-16" name="__codelineno-5-16"></a>|    Si                 3      437.12      -9.36      0.61  -1.077E+01   0.88 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-5-17" id="__codelineno-5-17" name="__codelineno-5-17"></a>|    Si                 4      437.12      -9.36      0.61  -1.077E+01   0.88 |
+<a href="Examples_3_-Alanine_and_Silicates.html#__codelineno-5-18" id="__codelineno-5-18" name="__codelineno-5-18"></a>===============================================================================
+</code></pre></div></p>
+<h3 id="analysing-and-comparing-to-experiment_1">分析并对比实验结果</h3>
+<p>如同与丙氨酸相比，我们将将其与实验结果进行比较。 <sup>17</sup>¹H NMR 参数表——如下以表2的形式展示</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><span class="arithmatex"><span class="MathJax_Preview">\delta</span><script type="math/tex">\delta</script></span> （ppm）</th>
+<th><span class="arithmatex"><span class="MathJax_Preview">C_Q</span><script type="math/tex">C_Q</script></span> (兆赫兹)</th>
+<th><span class="arithmatex"><span class="MathJax_Preview">\eta_Q</span><script type="math/tex">\eta_Q</script></span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>材料A</td>
+<td>37.2</td>
+<td>5.21</td>
+<td>0.13</td>
+</tr>
+<tr>
+<td>材料B</td>
+<td>40.8</td>
+<td>5.19</td>
+<td>0.19</td>
+</tr>
+<tr>
+<td><strong>表2：实验数据 <sup>17</sup>两种硅酸盐的¹⁹F NMR参数。各向同性化学位移 <span class="arithmatex"><span class="MathJax_Preview">\delta</span><script type="math/tex">\delta</script></span> ，四极耦合 <span class="arithmatex"><span class="MathJax_Preview">C_Q</span><script type="math/tex">C_Q</script></span>，以及EFG不对称性 <span class="arithmatex"><span class="MathJax_Preview">\eta_Q</span><script type="math/tex">\eta_Q</script></span>.</strong></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>这个例子要直接得多——某种元素的所有原子都是相同的。</p>
+<p>我们已知一个合适的 <span class="arithmatex"><span class="MathJax_Preview">\sigma_{ref}</span><script type="math/tex">\sigma_{ref}</script></span> （对于氧）为263ppm。使用该方程 <span class="arithmatex"><span class="MathJax_Preview">\delta_{iso}</span><script type="math/tex">\delta_{iso}</script></span>=<span class="arithmatex"><span class="MathJax_Preview">\sigma_{iso}</span><script type="math/tex">\sigma_{iso}</script></span> - <span class="arithmatex"><span class="MathJax_Preview">\sigma</span><script type="math/tex">\sigma</script></span> - 在之前使用过 <a href="Example_1_-Ethanol.html#equation">示例 1</a> — 我们能够将等轴化学屏蔽张量转换为相对化学位移：在石英中，氧的化学位移为 28.46 ppm，在水晶石中为 23.53 ppm。</p>
+</article>
+</div>
+
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright"> 原版采用 <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+
+
+
+<script src="../../assets/zh-search-data.js"></script><script data-root="../../" src="../../assets/zh-site.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:true},showMathMenu:false,messageStyle:"none"});</script><script src="../../assets/mathjax/MathJax.js?config=TeX-MML-AM_CHTML"></script></body>
+</html>

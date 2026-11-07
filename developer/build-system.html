@@ -1,0 +1,1367 @@
+
+<!DOCTYPE html>
+
+<html class="js" lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="adding_pair_pots.html" rel="prev"/>
+<link href="style_guide.html" rel="next"/>
+<link href="../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.0" name="generator"/>
+<title>CASTEP 构建系统 — CASTEP 中文文档</title>
+<link href="../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../stylesheets/extra.css" rel="stylesheet"/>
+
+<link href="../assets/zh-site.css" rel="stylesheet"/></head>
+<body dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="build-system.html#the-castep-build-sytem"> 跳转到正文 </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="页眉" class="md-header__inner md-grid">
+<a aria-label="CASTEP 中文文档" class="md-header__button md-logo" data-md-component="logo" href="../index.html" title="CASTEP 中文文档">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis"> CASTEP 中文文档 </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis"> 构建系统 </span>
+</div>
+</div>
+</div>
+
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="搜索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="搜索" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="搜索" class="md-search__options">
+<button aria-label="清除" class="md-search__icon md-icon" tabindex="-1" title="清除" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta"> 搜索中文或英文导航标题 </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="导航" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="CASTEP 中文文档" class="md-nav__button md-logo" data-md-component="logo" href="../index.html" title="CASTEP 中文文档">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a> CASTEP 中文文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../index.html">
+<span class="md-ellipsis"> 首页 </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis"> 使用文档 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span> 使用文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+<span class="md-ellipsis"> 入门指南 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_1">
+<span class="md-nav__icon md-icon"></span> 入门指南 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Getting_Started/intro.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Getting_Started/built_in_help.html">
+<span class="md-ellipsis"> 命令行帮助 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Getting_Started/running_castep.html">
+<span class="md-ellipsis"> 运行 CASTEP </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Getting_Started/basic_cell_file.html">
+<span class="md-ellipsis"> 晶胞文件（.cell） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Getting_Started/basic_param_file.html">
+<span class="md-ellipsis"> 参数文件（.param） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Getting_Started/restarting.html">
+<span class="md-ellipsis"> 检查点与续算 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+<span class="md-ellipsis"> 基态 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_2">
+<span class="md-nav__icon md-icon"></span> 基态 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Groundstate/intro.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Groundstate/dftd.html">
+<span class="md-ellipsis"> 色散修正 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Groundstate/soc.html">
+<span class="md-ellipsis"> 自旋–轨道耦合 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Groundstate/spin_constraints.html">
+<span class="md-ellipsis"> 自旋约束 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Groundstate/population_analysis.html">
+<span class="md-ellipsis"> 布居分析 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Groundstate/ELF.html">
+<span class="md-ellipsis"> 电子局域函数（ELF） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+<span class="md-ellipsis"> 几何结构优化 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_3">
+<span class="md-nav__icon md-icon"></span> 几何结构优化 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Geometry_Optimisation/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Geometry_Optimisation/keywords.html">
+<span class="md-ellipsis"> 关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Geometry_Optimisation/constraints.html">
+<span class="md-ellipsis"> 约束条件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Geometry_Optimisation/files.html">
+<span class="md-ellipsis"> 文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Geometry_Optimisation/tools.html">
+<span class="md-ellipsis"> 工具 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+<span class="md-ellipsis"> 分子动力学 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_4">
+<span class="md-nav__icon md-icon"></span> 分子动力学 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/overview.html">
+<span class="md-ellipsis"> 分子动力学概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/basics.html">
+<span class="md-ellipsis"> 分子动力学基础 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/restarts.html">
+<span class="md-ellipsis"> 分子动力学续算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/files.html">
+<span class="md-ellipsis"> 分子动力学文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/keywords.html">
+<span class="md-ellipsis"> 分子动力学关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/tools.html">
+<span class="md-ellipsis"> 分子动力学工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/pimd.html">
+<span class="md-ellipsis"> 路径积分分子动力学（PIMD） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/hugoniostat.html">
+<span class="md-ellipsis"> Hugoniostat 冲击波模拟方法 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+<span class="md-ellipsis"> 过渡态搜索 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_5">
+<span class="md-nav__icon md-icon"></span> 过渡态搜索 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Transition_State_Search/neb.html">
+<span class="md-ellipsis"> 微扰弹性带法（NEB） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+<span class="md-ellipsis"> 交换–关联（XC） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_6">
+<span class="md-nav__icon md-icon"></span> 交换–关联（XC） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/XC/XCoverview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/XC/XC.html">
+<span class="md-ellipsis"> 交换–关联设置 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/XC/libXC.html">
+<span class="md-ellipsis">
+    
+  
+    libXC
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+<span class="md-ellipsis"> 电子谱性质 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_7">
+<span class="md-nav__icon md-icon"></span> 电子谱性质 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Spectral/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Spectral/keywords.html">
+<span class="md-ellipsis"> 关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Spectral/restarts.html">
+<span class="md-ellipsis"> 续算 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+<span class="md-ellipsis"> 声子 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_8">
+<span class="md-nav__icon md-icon"></span> 声子 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Introduction.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Running-phonon-calculations.html">
+<span class="md-ellipsis"> 运行声子计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Dielectric-properties.html">
+<span class="md-ellipsis"> 介电性质 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Thermodynamic-properties.html">
+<span class="md-ellipsis"> 热力学性质 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Plotting-and-analysis-tools.html">
+<span class="md-ellipsis"> 绘图与分析工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Running-Large-Calculations.html">
+<span class="md-ellipsis"> 运行大规模计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Advanced-Topics.html">
+<span class="md-ellipsis"> 进阶主题 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Keyword-Reference.html">
+<span class="md-ellipsis"> 关键词参考 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Bibliography.html">
+<span class="md-ellipsis"> 参考文献 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+<span class="md-ellipsis"> 核磁共振（NMR） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_9">
+<span class="md-nav__icon md-icon"></span> 核磁共振（NMR） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/NMR/NMR_overview.html">
+<span class="md-ellipsis"> 核磁共振概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_10" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+<span class="md-ellipsis"> 电子顺磁共振（EPR） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_10_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_10">
+<span class="md-nav__icon md-icon"></span> 电子顺磁共振（EPR） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/EPR/overview.html">
+<span class="md-ellipsis"> 电子顺磁共振概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/XRD/overview.html">
+<span class="md-ellipsis"> X 射线衍射（XRD） </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_12" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_12" id="__nav_2_12_label" tabindex="0">
+<span class="md-ellipsis"> 含时密度泛函理论（TDDFT） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_12_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_12">
+<span class="md-nav__icon md-icon"></span> 含时密度泛函理论（TDDFT） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/TDDFT/overview.html">
+<span class="md-ellipsis"> 含时密度泛函理论概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_13" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_13" id="__nav_2_13_label" tabindex="0">
+<span class="md-ellipsis"> ΔSCF 方法 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_13_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_13">
+<span class="md-nav__icon md-icon"></span> ΔSCF 方法 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Delta_SCF/overview.html">
+<span class="md-ellipsis"> ΔSCF 方法概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Delta_SCF/simple_delta_scf.html">
+<span class="md-ellipsis"> 简单 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Delta_SCF/lin_ex_delta_scf.html">
+<span class="md-ellipsis"> 线性展开 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Delta_SCF/mo_delta_scf.html">
+<span class="md-ellipsis"> 分子轨道 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Delta_SCF/molpdos.html">
+<span class="md-ellipsis"> 分子投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_14" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_14" id="__nav_2_14_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    DFT+U
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_14_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_14">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    DFT+U
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/DFT+U/dftu-theory.html">
+<span class="md-ellipsis"> DFT+U：理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/DFT+U/dftu-input.html">
+<span class="md-ellipsis"> DFT+U：输入 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/DFT+U/koopmans-theory.html">
+<span class="md-ellipsis"> 线性响应法计算 U：理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/DFT+U/koopmans-input.html">
+<span class="md-ellipsis"> 线性响应法计算 U：输入 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/DFT+U/koopmans-output.html">
+<span class="md-ellipsis"> 线性响应法计算 U：输出 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/DFT+U/koopmans-warnings-errors.html">
+<span class="md-ellipsis"> 线性响应法计算 U：警告与错误 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_15" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_15" id="__nav_2_15_label" tabindex="0">
+<span class="md-ellipsis"> 赝势 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_15_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_15">
+<span class="md-nav__icon md-icon"></span> 赝势 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Pseudopotentials/theory.html">
+<span class="md-ellipsis"> 理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Pseudopotentials/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Pseudopotentials/reading_headers.html">
+<span class="md-ellipsis"> 头部信息 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Pseudopotentials/otfg_string.html">
+<span class="md-ellipsis"> 即时生成赝势（OTFG）字符串 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_16" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_16" id="__nav_2_16_label" tabindex="0">
+<span class="md-ellipsis"> 输入文件 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_16_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_16">
+<span class="md-nav__icon md-icon"></span> 输入文件 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Input_Files/cell_file.html">
+<span class="md-ellipsis"> 晶胞文件（.cell） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Input_Files/param_file.html">
+<span class="md-ellipsis"> 参数文件（.param） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Input_Files/cell_keywords.html">
+<span class="md-ellipsis"> 晶胞文件关键词 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_17" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_17" id="__nav_2_17_label" tabindex="0">
+<span class="md-ellipsis"> 输出文件 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_17_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_17">
+<span class="md-nav__icon md-icon"></span> 输出文件 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Output_Files/output_files.html">
+<span class="md-ellipsis"> 输出文件 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_18" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_18" id="__nav_2_18_label" tabindex="0">
+<span class="md-ellipsis"> 其他程序与工具 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_18_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_18">
+<span class="md-nav__icon md-icon"></span> 其他程序与工具 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Tools/tools.html">
+<span class="md-ellipsis"> 其他程序与工具 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_19" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_19" id="__nav_2_19_label" tabindex="0">
+<span class="md-ellipsis"> 故障排查 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_19_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_19">
+<span class="md-nav__icon md-icon"></span> 故障排查 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Troubleshooting/troubleshooting.html">
+<span class="md-ellipsis"> 常见错误 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Troubleshooting/linux_path.html">
+<span class="md-ellipsis"> Linux 帮助 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis"> 教程 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span> 教程 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+<span class="md-ellipsis"> 成键与电荷 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_1">
+<span class="md-nav__icon md-icon"></span> 成键与电荷 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bonding_and_Charge/charge_density.html">
+<span class="md-ellipsis"> 绘制电荷密度 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bonding_and_Charge/mulliken_population.html">
+<span class="md-ellipsis"> 布居分析 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bonding_and_Charge/ELF.html">
+<span class="md-ellipsis"> 电子局域函数（ELF） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+<span class="md-ellipsis"> 能带与态密度 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_2">
+<span class="md-nav__icon md-icon"></span> 能带与态密度 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+<span class="md-ellipsis"> 绘图 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_1_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_2_1">
+<span class="md-nav__icon md-icon"></span> 绘图 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bands_and_DOS/Plotting/plotting_perl.html">
+<span class="md-ellipsis"> 绘图：CASTEP 工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bands_and_DOS/Plotting/plotting_sumo.html">
+<span class="md-ellipsis"> 绘图：SUMO </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bands_and_DOS/Plotting/Optados/DOS.html">
+<span class="md-ellipsis"> OptaDOS：态密度 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bands_and_DOS/Plotting/Optados/pDOS.html">
+<span class="md-ellipsis"> OptaDOS：投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bands_and_DOS/semiconductors.html">
+<span class="md-ellipsis"> 半导体 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bands_and_DOS/metals.html">
+<span class="md-ellipsis"> 金属 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bands_and_DOS/magnetic.html">
+<span class="md-ellipsis"> 磁性材料 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+<span class="md-ellipsis"> 光学 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_3">
+<span class="md-nav__icon md-icon"></span> 光学 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Optics/Optics.html">
+<span class="md-ellipsis"> 光学 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Optics/Optics_aluminium.html">
+<span class="md-ellipsis"> 光学：铝 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Optics/Optics_ani.html">
+<span class="md-ellipsis"> 光学各向异性 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+<span class="md-ellipsis"> 芯能级能量损失谱 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_4">
+<span class="md-nav__icon md-icon"></span> 芯能级能量损失谱 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Coreloss/Coreloss.html">
+<span class="md-ellipsis"> 芯能级能量损失谱 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Optics/JDOS.html">
+<span class="md-ellipsis"> 联合态密度（JDOS） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/dispersion_corrections/castep-ase-dispersion-tutorial.html">
+<span class="md-ellipsis"> 色散修正 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/NEB/neb_tutorial.html">
+<span class="md-ellipsis"> 微扰弹性带法（NEB） </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+<span class="md-ellipsis"> 核磁共振屏蔽 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_7">
+<span class="md-nav__icon md-icon"></span> 核磁共振屏蔽 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/NMR/Example_1_-Ethanol.html">
+<span class="md-ellipsis"> 示例 1：乙醇 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/NMR/Example_2_-Diamond.html">
+<span class="md-ellipsis"> 示例 2：金刚石 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/NMR/Examples_3_-Alanine_and_Silicates.html">
+<span class="md-ellipsis"> 示例 3：丙氨酸与硅酸盐 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+<span class="md-ellipsis"> ΔSCF 方法 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_8">
+<span class="md-nav__icon md-icon"></span> ΔSCF 方法 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Delta_SCF/simple_delta_scf.html">
+<span class="md-ellipsis"> 简单 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Delta_SCF/lin_ex_delta_scf.html">
+<span class="md-ellipsis"> 线性展开 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Delta_SCF/molpdos.html">
+<span class="md-ellipsis"> 分子投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+<span class="md-ellipsis"> 遗传算法（GA） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_9">
+<span class="md-nav__icon md-icon"></span> 遗传算法（GA） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/GA/Silicon.html">
+<span class="md-ellipsis"> 硅 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/GA/Introduction.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_10" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+<span class="md-ellipsis"> 工具 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_10_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_10">
+<span class="md-nav__icon md-icon"></span> 工具 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Tools/elastic_constants.html">
+<span class="md-ellipsis"> 弹性常数 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+<span class="md-ellipsis"> 开发者文档 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span> 开发者文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="using_devel_codes.html">
+<span class="md-ellipsis"> 使用开发控制代码（Devel Codes） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="using_trace.html">
+<span class="md-ellipsis"> 使用 trace </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="adding_pair_pots.html">
+<span class="md-ellipsis"> 添加经验势 </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis"> 构建系统 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="build-system.html">
+<span class="md-ellipsis"> 构建系统 </span>
+</a>
+<nav aria-label="本页目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span> 本页目录 </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#introduction">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+<nav aria-label="简介" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#castep-directory-structure">
+<span class="md-ellipsis"> CASTEP 目录结构 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#gnu-make">
+<span class="md-ellipsis">
+      
+        GNU Make
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#cmake">
+<span class="md-ellipsis">
+      
+        CMake
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#adding-new-source-files">
+<span class="md-ellipsis"> 添加新源文件 </span>
+</a>
+<nav aria-label="添加新源文件" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#adding-to-gnu-make-build-system">
+<span class="md-ellipsis"> 添加到 GNU Make 构建系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#adding-to-the-cmake-build-system">
+<span class="md-ellipsis"> 添加到 CMake 构建系统 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#conditional-inclusion">
+<span class="md-ellipsis"> 条件包含 </span>
+</a>
+<nav aria-label="条件包含" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#adding-to-gnu-make-build-system_1">
+<span class="md-ellipsis"> 添加到 GNU Make 构建系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#adding-to-cmake-build-system">
+<span class="md-ellipsis"> 添加到 CMake 构建系统 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#special-compilation-options">
+<span class="md-ellipsis"> 特殊编译选项 </span>
+</a>
+<nav aria-label="特殊编译选项" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#adding-to-gnu-make-build-system_2">
+<span class="md-ellipsis"> 添加到 GNU Make 构建系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#adding-to-cmake-build-system_1">
+<span class="md-ellipsis"> 添加到 CMake 构建系统 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html">
+<span class="md-ellipsis"> 代码风格指南 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="test_suite.html">
+<span class="md-ellipsis"> 测试 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html">
+<span class="md-ellipsis"> 持续集成系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="git_workflow.html">
+<span class="md-ellipsis"> Git 工作流程 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="release_procedure.html">
+<span class="md-ellipsis"> 版本发布流程 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="本页目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span> 本页目录 </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#introduction">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+<nav aria-label="简介" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#castep-directory-structure">
+<span class="md-ellipsis"> CASTEP 目录结构 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#gnu-make">
+<span class="md-ellipsis">
+      
+        GNU Make
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#cmake">
+<span class="md-ellipsis">
+      
+        CMake
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#adding-new-source-files">
+<span class="md-ellipsis"> 添加新源文件 </span>
+</a>
+<nav aria-label="添加新源文件" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#adding-to-gnu-make-build-system">
+<span class="md-ellipsis"> 添加到 GNU Make 构建系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#adding-to-the-cmake-build-system">
+<span class="md-ellipsis"> 添加到 CMake 构建系统 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#conditional-inclusion">
+<span class="md-ellipsis"> 条件包含 </span>
+</a>
+<nav aria-label="条件包含" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#adding-to-gnu-make-build-system_1">
+<span class="md-ellipsis"> 添加到 GNU Make 构建系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#adding-to-cmake-build-system">
+<span class="md-ellipsis"> 添加到 CMake 构建系统 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#special-compilation-options">
+<span class="md-ellipsis"> 特殊编译选项 </span>
+</a>
+<nav aria-label="特殊编译选项" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#adding-to-gnu-make-build-system_2">
+<span class="md-ellipsis"> 添加到 GNU Make 构建系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html#adding-to-cmake-build-system_1">
+<span class="md-ellipsis"> 添加到 CMake 构建系统 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="the-castep-build-sytem">CASTEP 构建系统</h1><div class="zh-notice">中文译文 · 由本地英文文档翻译，已统一术语并进行重点抽查。 <a href="../https://castep-docs.github.io/castep-docs/developer/build-system.html">英文原文对照</a> · <a href="../translation-notes.html">翻译说明</a></div>
+<h2 id="introduction">简介</h2>
+<p>本文档旨在为计划向CASTEP系统添加新功能/数据源的开发者提供参考。如何构建CASTEP的快速入门指南见于 <code>CASTEP_ROOT</code> 在 <code>README.INSTALL</code> 用于 GNU Make 构建系统或 <code>README.cmake</code> 用于新的 CMake 构建系统。</p>
+<p>CASTEP 的构建系统旨在高效且易于使用。目前存在两个构建系统：一个基于 GNU Make，构建速度更快，适用于快速开发；另一个基于 CMake，对熟悉 CMake 构建系统的用户更直观，并能为普通用户提供自动检测最佳配置的功能。</p>
+<h3 id="castep-directory-structure">CASTEP 目录结构</h3>
+<p>在为 CASTEP 增加新源代码时，重要的是要考虑 CASTEP 的层次目录/模块结构。目前，CASTEP 源代码被组织成若干子库，每个子库都依赖于其在层级结构中上方的库。</p>
+<p>这些库按照层级顺序为：</p>
+<ul>
+<li><code>Utility</code></li>
+<li><code>Fundamental</code></li>
+<li><code>OTFG</code></li>
+<li><code>Dispersion</code></li>
+<li><code>Functional</code></li>
+</ul>
+<p>也存在 <code>Tools</code> 这些是分别构建的程序，依赖于 CASTEP 子库。</p>
+<h3 id="gnu-make">GNU Make</h3>
+<p>该 <a href="https://www.gnu.org/software/make/">GNU make</a> 构建系统被分解为一个层次化的树结构，以在尽可能多的异构系统上编译CASTEP时建立所需的规则，同时保持各部分的隔离性和可维护性。</p>
+<p>这些 Makefile 的层级结构如下：</p>
+<div class="highlight"><pre><span></span><code><a href="build-system.html#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>├ `&lt;CASTEP_ROOT&gt;/`
+<a href="build-system.html#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>└─┬─ `Makefile` - Root Makefile
+<a href="build-system.html#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>  ├─ `obj/`
+<a href="build-system.html#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>  └──┬─ `include_rules.mk`
+<a href="build-system.html#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>     ├─ `include_utility.mk`
+<a href="build-system.html#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>     ├─ `include_fundamental.mk`
+<a href="build-system.html#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>     ├─ `include_otfg.mk`
+<a href="build-system.html#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>     ├─ `include_dispersion.mk`
+<a href="build-system.html#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a>     ├─ `include_functional.mk`
+<a href="build-system.html#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a>     ├─ `include_test.mk`
+<a href="build-system.html#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>     ├─ `include_tools.mk`
+<a href="build-system.html#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a>     ├─ `platforms/`
+<a href="build-system.html#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a>     └──── Various make rules for different platforms
+</code></pre></div>
+<h3 id="cmake">CMake</h3>
+<p>该 <a href="https://cmake.org/">CMake</a> 系统旨在对熟悉 CMake 构建系统的用户具有直观性，同时对熟悉 CASTEP GNU Make 语法的用户仍保持亲切感。这意味着许多 CASTEP CMake 变量的命名被选择以匹配或别名为 CASTEP GNU Make 变量。此举旨在减少从 GNU Make 迁移到 CMake 的用户产生困惑的情况。</p>
+<p>CMake 系统也旨在扩展 CASTEP 的功能，使其能够高效地在 Windows 系统上进行编译和运行。</p>
+<h2 id="adding-new-source-files">添加新源文件</h2>
+<p>为了向CASTEP中添加新的源代码，首先需要确定相关的依赖关系，并明确它们在目录结构中的位置（即CASTEP的子库）。</p>
+<h3 id="adding-to-gnu-make-build-system">添加到 GNU Make 构建系统</h3>
+<p>随后应将该源添加到相关 <code>obj/include_&lt;sub_library&gt;.mk</code> <code>SRCS_$(D)</code>这将自动将您的新源包含在 CASTEP 子库中。</p>
+<h3 id="adding-to-the-cmake-build-system">添加到 CMake 构建系统</h3>
+<p>下一步是进入包含您新源文件的子库文件夹，并将源文件添加到其中。 <code>CMakeLists.txt</code> 其中。</p>
+<h2 id="conditional-inclusion">条件包含</h2>
+<p>如果源文件提供了应在CASTEP中条件性包含的函数（例如对外部库的接口），则该文件必须提供占位函数（通常） <code>no-op</code>以便条件包含可以被编译，这些内容通常会被保存为 <code>source_name.stub.f90</code> 并且这些必须有条件地包含在编译中。</p>
+<h3 id="adding-to-gnu-make-build-system_1">添加到 GNU Make 构建系统</h3>
+<p>首先，重要的是在相关部分添加一个条件语句。 <code>obj/include_&lt;sub_library&gt;.mk</code> 以包含你的 stub 或主源文件进入编译过程。</p>
+<p><code>obj/include_&lt;sub_library&gt;.mk</code>
+<div class="highlight"><pre><span></span><code><a href="build-system.html#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>ifeq (${MY_LIBRARY_VAR},none)
+<a href="build-system.html#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>SRCS_$(d) := $(SRCS_$(d)) source_name.stub.f90
+<a href="build-system.html#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>else
+<a href="build-system.html#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>SRCS_$(d) := $(SRCS_$(d)) source_name.f90
+<a href="build-system.html#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a>endif
+</code></pre></div></p>
+<p>如果需要有条件地链接额外库，则应按如下方式添加： <code>obj/include_rules.mk</code>
+<div class="highlight"><pre><span></span><code><a href="build-system.html#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>ifneq (${MY_LIBRARY_VAR},none)
+<a href="build-system.html#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>  ifneq ($(strip $(MY_LIB_REL_LIB_DIR)), )
+<a href="build-system.html#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>    CASTEP_LIB_SEARCH_PATH += -L"../$(MY_LIB_REL_LIB_DIR)"
+<a href="build-system.html#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>  ifdef SUN
+<a href="build-system.html#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a>    CASTEP_LIB_SEARCH_PATH += -R "$(abspath ../$(MY_LIB_REL_LIB_DIR))"
+<a href="build-system.html#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a>  else ifdef NAG
+<a href="build-system.html#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a>    CASTEP_LIB_SEARCH_PATH += -Wl,-Wl,,-rpath="$(abspath ../$(MY_LIB_REL_LIB_DIR))"
+<a href="build-system.html#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>  else ifdef LINUX
+<a href="build-system.html#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a>    CASTEP_LIB_SEARCH_PATH += -Wl,-rpath="$(abspath ../$(MY_LIB_REL_LIB_DIR))"
+<a href="build-system.html#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a>  endif
+<a href="build-system.html#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a>  LIBS += -lmy_extra_lib
+<a href="build-system.html#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a>endif
+</code></pre></div></p>
+<h3 id="adding-to-cmake-build-system">添加到 CMake 构建系统</h3>
+<p>使用 CMake 的过程类似，创建一个变量以根据选项选择源代码或占位符。</p>
+<p>e.g.
+<code>CASTEP_ROOT/CMakeLists.txt</code>
+<div class="highlight"><pre><span></span><code><a href="build-system.html#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>option(WITH_MY_LIB "my lib's features")
+</code></pre></div></p>
+<p><code>cmake/extralibs.cmake</code>
+<div class="highlight"><pre><span></span><code><a href="build-system.html#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>if(WITH_MY_LIB)
+<a href="build-system.html#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>    set(MY_LIB_MOD source_name.f90)
+<a href="build-system.html#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a>else()
+<a href="build-system.html#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a>    set(MY_LIB_MOD source_name.stub.f90)
+<a href="build-system.html#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a>endif()
+</code></pre></div></p>
+<p><code>SOURCE_DIR/CMakeLists.txt</code>
+<div class="highlight"><pre><span></span><code><a href="build-system.html#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>add_castep_lib(NAME sub_lib
+<a href="build-system.html#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>   SRCS
+<a href="build-system.html#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a>   ...
+<a href="build-system.html#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a>   ${MY_LIB_MOD}
+<a href="build-system.html#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a>   ...
+<a href="build-system.html#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a>   )
+</code></pre></div></p>
+<p>如果需要有条件地链接额外库，则应按如下方式添加： <code>cmake/extralibs.cmake</code>
+<div class="highlight"><pre><span></span><code><a href="build-system.html#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>if(WITH_MY_LIB)
+<a href="build-system.html#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a>  find_library(my_extra_lib NAMES my_extra_lib
+<a href="build-system.html#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a>               HINTS ${EXTERNAL_MY_LIB}
+<a href="build-system.html#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a>               DOC "Doc")
+<a href="build-system.html#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a>
+<a href="build-system.html#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a>  if (NOT my_extra_lib)
+<a href="build-system.html#__codelineno-6-7" id="__codelineno-6-7" name="__codelineno-6-7"></a>    message(FATAL_ERROR "MY_EXTRA_LIB requested, but not found.
+<a href="build-system.html#__codelineno-6-8" id="__codelineno-6-8" name="__codelineno-6-8"></a>Set EXTERNAL_MY_LIB to manually specify location of libraries (currently: '${EXTERNAL_MY_LIB}')")
+<a href="build-system.html#__codelineno-6-9" id="__codelineno-6-9" name="__codelineno-6-9"></a>  endif()
+<a href="build-system.html#__codelineno-6-10" id="__codelineno-6-10" name="__codelineno-6-10"></a>
+<a href="build-system.html#__codelineno-6-11" id="__codelineno-6-11" name="__codelineno-6-11"></a>  set(MY_EXTRA_LIB ${my_extra_lib})
+<a href="build-system.html#__codelineno-6-12" id="__codelineno-6-12" name="__codelineno-6-12"></a>  set(MY_LIB_MOD source_name.f90)
+<a href="build-system.html#__codelineno-6-13" id="__codelineno-6-13" name="__codelineno-6-13"></a>else()
+<a href="build-system.html#__codelineno-6-14" id="__codelineno-6-14" name="__codelineno-6-14"></a>  set(MY_EXTRA_LIB "")
+<a href="build-system.html#__codelineno-6-15" id="__codelineno-6-15" name="__codelineno-6-15"></a>  set(MY_LIB_MOD source_name.stub.f90)
+<a href="build-system.html#__codelineno-6-16" id="__codelineno-6-16" name="__codelineno-6-16"></a>endif()
+<a href="build-system.html#__codelineno-6-17" id="__codelineno-6-17" name="__codelineno-6-17"></a>
+<a href="build-system.html#__codelineno-6-18" id="__codelineno-6-18" name="__codelineno-6-18"></a>...
+<a href="build-system.html#__codelineno-6-19" id="__codelineno-6-19" name="__codelineno-6-19"></a>
+<a href="build-system.html#__codelineno-6-20" id="__codelineno-6-20" name="__codelineno-6-20"></a>mark_as_advanced(... my_extra_lib)
+</code></pre></div></p>
+<p><code>SOURCE_DIR/CMakeLists.txt</code>
+<div class="highlight"><pre><span></span><code><a href="build-system.html#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a>target_link_libraries(sub-lib ... ${MY_EXTRA_LIB})
+</code></pre></div></p>
+<h2 id="special-compilation-options">特殊编译选项</h2>
+<p>如果需要为每个文件添加特殊编译选项，首先应确保您的代码符合标准规范。若无法满足此要求，则可以通过在各个平台中设置选项来覆盖默认设置，但这种情况除非绝对必要，否则不建议这样做。</p>
+<h3 id="adding-to-gnu-make-build-system_2">添加到 GNU Make 构建系统</h3>
+<p>在 GNU make 系统中，需要在每个相关的平台下添加特殊的编译标志，以置于 <code>obj/platforms</code> 目录。例如</p>
+<p><code>obj/platforms/&lt;platform&gt;.mk</code>
+<div class="highlight"><pre><span></span><code><a href="build-system.html#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a>&lt;source_file&gt;.o: private OPT = -O2
+</code></pre></div></p>
+<h3 id="adding-to-cmake-build-system_1">添加到 CMake 构建系统</h3>
+<p>在 CMake 构建系统中，标志在的 <code>cmake/buildflags_&lt;platform&gt;.cmake</code> 文件。要覆盖标志，该 <code>set_special_flags</code> 已定义一个函数，用于覆盖特定构建优化的标志。</p>
+<div class="highlight"><pre><span></span><code><a href="build-system.html#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a>set_special_flags(OPT FAST FILES &lt;source_file&gt;.f90 FLAGS -O2)
+</code></pre></div>
+</article>
+</div>
+
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright"> 原版采用 <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+
+
+
+<script src="../assets/zh-search-data.js"></script><script data-root="../" src="../assets/zh-site.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:true},showMathMenu:false,messageStyle:"none"});</script><script src="../assets/mathjax/MathJax.js?config=TeX-MML-AM_CHTML"></script></body>
+</html>

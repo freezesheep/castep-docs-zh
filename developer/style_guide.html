@@ -1,0 +1,1948 @@
+
+<!DOCTYPE html>
+
+<html class="js" lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="build-system.html" rel="prev"/>
+<link href="test_suite.html" rel="next"/>
+<link href="../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.0" name="generator"/>
+<title>代码风格指南 — CASTEP 中文文档</title>
+<link href="../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../stylesheets/extra.css" rel="stylesheet"/>
+
+<link href="../assets/zh-site.css" rel="stylesheet"/></head>
+<body dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="style_guide.html#introduction"> 跳转到正文 </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="页眉" class="md-header__inner md-grid">
+<a aria-label="CASTEP 中文文档" class="md-header__button md-logo" data-md-component="logo" href="../index.html" title="CASTEP 中文文档">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis"> CASTEP 中文文档 </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis"> 代码风格指南 </span>
+</div>
+</div>
+</div>
+
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="搜索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="搜索" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="搜索" class="md-search__options">
+<button aria-label="清除" class="md-search__icon md-icon" tabindex="-1" title="清除" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta"> 搜索中文或英文导航标题 </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="导航" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="CASTEP 中文文档" class="md-nav__button md-logo" data-md-component="logo" href="../index.html" title="CASTEP 中文文档">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a> CASTEP 中文文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../index.html">
+<span class="md-ellipsis"> 首页 </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis"> 使用文档 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span> 使用文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+<span class="md-ellipsis"> 入门指南 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_1">
+<span class="md-nav__icon md-icon"></span> 入门指南 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Getting_Started/intro.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Getting_Started/built_in_help.html">
+<span class="md-ellipsis"> 命令行帮助 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Getting_Started/running_castep.html">
+<span class="md-ellipsis"> 运行 CASTEP </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Getting_Started/basic_cell_file.html">
+<span class="md-ellipsis"> 晶胞文件（.cell） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Getting_Started/basic_param_file.html">
+<span class="md-ellipsis"> 参数文件（.param） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Getting_Started/restarting.html">
+<span class="md-ellipsis"> 检查点与续算 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+<span class="md-ellipsis"> 基态 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_2">
+<span class="md-nav__icon md-icon"></span> 基态 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Groundstate/intro.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Groundstate/dftd.html">
+<span class="md-ellipsis"> 色散修正 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Groundstate/soc.html">
+<span class="md-ellipsis"> 自旋–轨道耦合 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Groundstate/spin_constraints.html">
+<span class="md-ellipsis"> 自旋约束 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Groundstate/population_analysis.html">
+<span class="md-ellipsis"> 布居分析 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Groundstate/ELF.html">
+<span class="md-ellipsis"> 电子局域函数（ELF） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+<span class="md-ellipsis"> 几何结构优化 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_3">
+<span class="md-nav__icon md-icon"></span> 几何结构优化 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Geometry_Optimisation/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Geometry_Optimisation/keywords.html">
+<span class="md-ellipsis"> 关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Geometry_Optimisation/constraints.html">
+<span class="md-ellipsis"> 约束条件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Geometry_Optimisation/files.html">
+<span class="md-ellipsis"> 文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Geometry_Optimisation/tools.html">
+<span class="md-ellipsis"> 工具 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+<span class="md-ellipsis"> 分子动力学 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_4">
+<span class="md-nav__icon md-icon"></span> 分子动力学 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/overview.html">
+<span class="md-ellipsis"> 分子动力学概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/basics.html">
+<span class="md-ellipsis"> 分子动力学基础 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/restarts.html">
+<span class="md-ellipsis"> 分子动力学续算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/files.html">
+<span class="md-ellipsis"> 分子动力学文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/keywords.html">
+<span class="md-ellipsis"> 分子动力学关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/tools.html">
+<span class="md-ellipsis"> 分子动力学工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/pimd.html">
+<span class="md-ellipsis"> 路径积分分子动力学（PIMD） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/hugoniostat.html">
+<span class="md-ellipsis"> Hugoniostat 冲击波模拟方法 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+<span class="md-ellipsis"> 过渡态搜索 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_5">
+<span class="md-nav__icon md-icon"></span> 过渡态搜索 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Transition_State_Search/neb.html">
+<span class="md-ellipsis"> 微扰弹性带法（NEB） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+<span class="md-ellipsis"> 交换–关联（XC） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_6">
+<span class="md-nav__icon md-icon"></span> 交换–关联（XC） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/XC/XCoverview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/XC/XC.html">
+<span class="md-ellipsis"> 交换–关联设置 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/XC/libXC.html">
+<span class="md-ellipsis">
+    
+  
+    libXC
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+<span class="md-ellipsis"> 电子谱性质 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_7">
+<span class="md-nav__icon md-icon"></span> 电子谱性质 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Spectral/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Spectral/keywords.html">
+<span class="md-ellipsis"> 关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Spectral/restarts.html">
+<span class="md-ellipsis"> 续算 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+<span class="md-ellipsis"> 声子 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_8">
+<span class="md-nav__icon md-icon"></span> 声子 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Introduction.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Running-phonon-calculations.html">
+<span class="md-ellipsis"> 运行声子计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Dielectric-properties.html">
+<span class="md-ellipsis"> 介电性质 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Thermodynamic-properties.html">
+<span class="md-ellipsis"> 热力学性质 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Plotting-and-analysis-tools.html">
+<span class="md-ellipsis"> 绘图与分析工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Running-Large-Calculations.html">
+<span class="md-ellipsis"> 运行大规模计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Advanced-Topics.html">
+<span class="md-ellipsis"> 进阶主题 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Keyword-Reference.html">
+<span class="md-ellipsis"> 关键词参考 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Bibliography.html">
+<span class="md-ellipsis"> 参考文献 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+<span class="md-ellipsis"> 核磁共振（NMR） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_9">
+<span class="md-nav__icon md-icon"></span> 核磁共振（NMR） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/NMR/NMR_overview.html">
+<span class="md-ellipsis"> 核磁共振概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_10" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+<span class="md-ellipsis"> 电子顺磁共振（EPR） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_10_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_10">
+<span class="md-nav__icon md-icon"></span> 电子顺磁共振（EPR） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/EPR/overview.html">
+<span class="md-ellipsis"> 电子顺磁共振概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/XRD/overview.html">
+<span class="md-ellipsis"> X 射线衍射（XRD） </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_12" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_12" id="__nav_2_12_label" tabindex="0">
+<span class="md-ellipsis"> 含时密度泛函理论（TDDFT） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_12_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_12">
+<span class="md-nav__icon md-icon"></span> 含时密度泛函理论（TDDFT） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/TDDFT/overview.html">
+<span class="md-ellipsis"> 含时密度泛函理论概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_13" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_13" id="__nav_2_13_label" tabindex="0">
+<span class="md-ellipsis"> ΔSCF 方法 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_13_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_13">
+<span class="md-nav__icon md-icon"></span> ΔSCF 方法 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Delta_SCF/overview.html">
+<span class="md-ellipsis"> ΔSCF 方法概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Delta_SCF/simple_delta_scf.html">
+<span class="md-ellipsis"> 简单 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Delta_SCF/lin_ex_delta_scf.html">
+<span class="md-ellipsis"> 线性展开 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Delta_SCF/mo_delta_scf.html">
+<span class="md-ellipsis"> 分子轨道 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Delta_SCF/molpdos.html">
+<span class="md-ellipsis"> 分子投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_14" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_14" id="__nav_2_14_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    DFT+U
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_14_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_14">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    DFT+U
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/DFT+U/dftu-theory.html">
+<span class="md-ellipsis"> DFT+U：理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/DFT+U/dftu-input.html">
+<span class="md-ellipsis"> DFT+U：输入 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/DFT+U/koopmans-theory.html">
+<span class="md-ellipsis"> 线性响应法计算 U：理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/DFT+U/koopmans-input.html">
+<span class="md-ellipsis"> 线性响应法计算 U：输入 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/DFT+U/koopmans-output.html">
+<span class="md-ellipsis"> 线性响应法计算 U：输出 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/DFT+U/koopmans-warnings-errors.html">
+<span class="md-ellipsis"> 线性响应法计算 U：警告与错误 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_15" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_15" id="__nav_2_15_label" tabindex="0">
+<span class="md-ellipsis"> 赝势 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_15_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_15">
+<span class="md-nav__icon md-icon"></span> 赝势 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Pseudopotentials/theory.html">
+<span class="md-ellipsis"> 理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Pseudopotentials/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Pseudopotentials/reading_headers.html">
+<span class="md-ellipsis"> 头部信息 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Pseudopotentials/otfg_string.html">
+<span class="md-ellipsis"> 即时生成赝势（OTFG）字符串 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_16" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_16" id="__nav_2_16_label" tabindex="0">
+<span class="md-ellipsis"> 输入文件 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_16_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_16">
+<span class="md-nav__icon md-icon"></span> 输入文件 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Input_Files/cell_file.html">
+<span class="md-ellipsis"> 晶胞文件（.cell） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Input_Files/param_file.html">
+<span class="md-ellipsis"> 参数文件（.param） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Input_Files/cell_keywords.html">
+<span class="md-ellipsis"> 晶胞文件关键词 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_17" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_17" id="__nav_2_17_label" tabindex="0">
+<span class="md-ellipsis"> 输出文件 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_17_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_17">
+<span class="md-nav__icon md-icon"></span> 输出文件 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Output_Files/output_files.html">
+<span class="md-ellipsis"> 输出文件 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_18" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_18" id="__nav_2_18_label" tabindex="0">
+<span class="md-ellipsis"> 其他程序与工具 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_18_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_18">
+<span class="md-nav__icon md-icon"></span> 其他程序与工具 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Tools/tools.html">
+<span class="md-ellipsis"> 其他程序与工具 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_19" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_19" id="__nav_2_19_label" tabindex="0">
+<span class="md-ellipsis"> 故障排查 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_19_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_19">
+<span class="md-nav__icon md-icon"></span> 故障排查 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Troubleshooting/troubleshooting.html">
+<span class="md-ellipsis"> 常见错误 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Troubleshooting/linux_path.html">
+<span class="md-ellipsis"> Linux 帮助 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis"> 教程 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span> 教程 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+<span class="md-ellipsis"> 成键与电荷 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_1">
+<span class="md-nav__icon md-icon"></span> 成键与电荷 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bonding_and_Charge/charge_density.html">
+<span class="md-ellipsis"> 绘制电荷密度 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bonding_and_Charge/mulliken_population.html">
+<span class="md-ellipsis"> 布居分析 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bonding_and_Charge/ELF.html">
+<span class="md-ellipsis"> 电子局域函数（ELF） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+<span class="md-ellipsis"> 能带与态密度 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_2">
+<span class="md-nav__icon md-icon"></span> 能带与态密度 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+<span class="md-ellipsis"> 绘图 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_1_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_2_1">
+<span class="md-nav__icon md-icon"></span> 绘图 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bands_and_DOS/Plotting/plotting_perl.html">
+<span class="md-ellipsis"> 绘图：CASTEP 工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bands_and_DOS/Plotting/plotting_sumo.html">
+<span class="md-ellipsis"> 绘图：SUMO </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bands_and_DOS/Plotting/Optados/DOS.html">
+<span class="md-ellipsis"> OptaDOS：态密度 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bands_and_DOS/Plotting/Optados/pDOS.html">
+<span class="md-ellipsis"> OptaDOS：投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bands_and_DOS/semiconductors.html">
+<span class="md-ellipsis"> 半导体 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bands_and_DOS/metals.html">
+<span class="md-ellipsis"> 金属 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bands_and_DOS/magnetic.html">
+<span class="md-ellipsis"> 磁性材料 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+<span class="md-ellipsis"> 光学 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_3">
+<span class="md-nav__icon md-icon"></span> 光学 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Optics/Optics.html">
+<span class="md-ellipsis"> 光学 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Optics/Optics_aluminium.html">
+<span class="md-ellipsis"> 光学：铝 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Optics/Optics_ani.html">
+<span class="md-ellipsis"> 光学各向异性 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+<span class="md-ellipsis"> 芯能级能量损失谱 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_4">
+<span class="md-nav__icon md-icon"></span> 芯能级能量损失谱 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Coreloss/Coreloss.html">
+<span class="md-ellipsis"> 芯能级能量损失谱 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Optics/JDOS.html">
+<span class="md-ellipsis"> 联合态密度（JDOS） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/dispersion_corrections/castep-ase-dispersion-tutorial.html">
+<span class="md-ellipsis"> 色散修正 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/NEB/neb_tutorial.html">
+<span class="md-ellipsis"> 微扰弹性带法（NEB） </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+<span class="md-ellipsis"> 核磁共振屏蔽 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_7">
+<span class="md-nav__icon md-icon"></span> 核磁共振屏蔽 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/NMR/Example_1_-Ethanol.html">
+<span class="md-ellipsis"> 示例 1：乙醇 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/NMR/Example_2_-Diamond.html">
+<span class="md-ellipsis"> 示例 2：金刚石 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/NMR/Examples_3_-Alanine_and_Silicates.html">
+<span class="md-ellipsis"> 示例 3：丙氨酸与硅酸盐 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+<span class="md-ellipsis"> ΔSCF 方法 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_8">
+<span class="md-nav__icon md-icon"></span> ΔSCF 方法 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Delta_SCF/simple_delta_scf.html">
+<span class="md-ellipsis"> 简单 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Delta_SCF/lin_ex_delta_scf.html">
+<span class="md-ellipsis"> 线性展开 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Delta_SCF/molpdos.html">
+<span class="md-ellipsis"> 分子投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+<span class="md-ellipsis"> 遗传算法（GA） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_9">
+<span class="md-nav__icon md-icon"></span> 遗传算法（GA） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/GA/Silicon.html">
+<span class="md-ellipsis"> 硅 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/GA/Introduction.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_10" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+<span class="md-ellipsis"> 工具 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_10_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_10">
+<span class="md-nav__icon md-icon"></span> 工具 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Tools/elastic_constants.html">
+<span class="md-ellipsis"> 弹性常数 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+<span class="md-ellipsis"> 开发者文档 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span> 开发者文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="using_devel_codes.html">
+<span class="md-ellipsis"> 使用开发控制代码（Devel Codes） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="using_trace.html">
+<span class="md-ellipsis"> 使用 trace </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="adding_pair_pots.html">
+<span class="md-ellipsis"> 添加经验势 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html">
+<span class="md-ellipsis"> 构建系统 </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis"> 代码风格指南 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="style_guide.html">
+<span class="md-ellipsis"> 代码风格指南 </span>
+</a>
+<nav aria-label="本页目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span> 本页目录 </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#introduction">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#castep-linter">
+<span class="md-ellipsis"> CASTEP 检查工具 </span>
+</a>
+<nav aria-label="CASTEP 检查工具" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#using-the-castep-linter">
+<span class="md-ellipsis"> 使用 CASTEP 检查工具 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#writing-to-the-specification-document">
+<span class="md-ellipsis"> 写入规范文档 </span>
+</a>
+<nav aria-label="写入规范文档" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#it-does-exactly-what-it-says-on-the-tin">
+<span class="md-ellipsis"> “它确实如其名所示。” </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#do-not-assume-anything-that-is-not-written-in-the-specification-document">
+<span class="md-ellipsis"> 不要假设规格文档中未写明的内容 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#code-robustly-for-errors">
+<span class="md-ellipsis"> 代码应稳健地处理错误 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#conditions-on-execution">
+<span class="md-ellipsis"> 执行条件 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#errors-and-warnings">
+<span class="md-ellipsis"> 错误与警告 </span>
+</a>
+<nav aria-label="错误与警告" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#use-stderr-from-any-node">
+<span class="md-ellipsis"> 使用任意节点的标准错误输出 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#use-iprint-consistently">
+<span class="md-ellipsis"> 始终一致地使用 iprint </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#efficiency-issues">
+<span class="md-ellipsis"> 效率问题 </span>
+</a>
+<nav aria-label="效率问题" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#libraries">
+<span class="md-ellipsis"> 库 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#fortran-array-intrinsics">
+<span class="md-ellipsis"> Fortran 数组内建函数 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#passing-arrays-to-subprograms">
+<span class="md-ellipsis"> 将数组传递给子程序 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#machine-specific-code">
+<span class="md-ellipsis"> 特定机器的代码 </span>
+</a>
+<nav aria-label="特定机器的代码" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#avoid">
+<span class="md-ellipsis"> 避免！ </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#test-thoroughly-to-prevent">
+<span class="md-ellipsis"> 仔细测试以防止 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#file-handling">
+<span class="md-ellipsis"> 文件处理 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#compilerpreprocessor-directives">
+<span class="md-ellipsis"> 编译器/预处理器指令 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#fortran90-features">
+<span class="md-ellipsis"> Fortran90 特性 </span>
+</a>
+<nav aria-label="Fortran90 特性" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#use-of-dynamic-arrays">
+<span class="md-ellipsis"> 动态数组的使用 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#pointers">
+<span class="md-ellipsis"> 指针 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#flow-of-control">
+<span class="md-ellipsis"> 控制流 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#functions">
+<span class="md-ellipsis"> 函数 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#use-of-use">
+<span class="md-ellipsis"> 使用使用 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#line-numbers">
+<span class="md-ellipsis"> 行号 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#general-features">
+<span class="md-ellipsis"> 一般特性 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#modules">
+<span class="md-ellipsis"> 模块 </span>
+</a>
+<nav aria-label="模块" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#general">
+<span class="md-ellipsis"> 常规设置 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#usage">
+<span class="md-ellipsis"> 用法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#auxiliary-modules">
+<span class="md-ellipsis"> 辅助模块 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#style-and-layout">
+<span class="md-ellipsis"> 风格与布局 </span>
+</a>
+<nav aria-label="风格与布局" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#use-the-module-template">
+<span class="md-ellipsis"> 使用模块模板 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#layout">
+<span class="md-ellipsis"> 布局 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#case">
+<span class="md-ellipsis"> 情况 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#names">
+<span class="md-ellipsis"> 名称 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#types">
+<span class="md-ellipsis"> 类型 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#free-format">
+<span class="md-ellipsis"> 自由格式 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#spaces">
+<span class="md-ellipsis"> 空间 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#code-cleanly">
+<span class="md-ellipsis"> 代码整洁 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#be-aware-of-vectorisation">
+<span class="md-ellipsis"> 请注意向量化处理 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#documentation">
+<span class="md-ellipsis"> 使用文档 </span>
+</a>
+<nav aria-label="使用文档" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#internal">
+<span class="md-ellipsis"> 内部 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#external">
+<span class="md-ellipsis"> 外部 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#testing">
+<span class="md-ellipsis"> 测试 </span>
+</a>
+<nav aria-label="测试" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#test-program">
+<span class="md-ellipsis"> 测试程序 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#reference-data">
+<span class="md-ellipsis"> 参考数据 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#module-template">
+<span class="md-ellipsis"> 模块模板 </span>
+</a>
+<nav aria-label="模块模板" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#general_1">
+<span class="md-ellipsis"> 常规设置 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#use-of-public-and-private">
+<span class="md-ellipsis"> 公共和私人资源的使用 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#template">
+<span class="md-ellipsis"> 模板 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="test_suite.html">
+<span class="md-ellipsis"> 测试 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html">
+<span class="md-ellipsis"> 持续集成系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="git_workflow.html">
+<span class="md-ellipsis"> Git 工作流程 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="release_procedure.html">
+<span class="md-ellipsis"> 版本发布流程 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="本页目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span> 本页目录 </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#introduction">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#castep-linter">
+<span class="md-ellipsis"> CASTEP 检查工具 </span>
+</a>
+<nav aria-label="CASTEP 检查工具" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#using-the-castep-linter">
+<span class="md-ellipsis"> 使用 CASTEP 检查工具 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#writing-to-the-specification-document">
+<span class="md-ellipsis"> 写入规范文档 </span>
+</a>
+<nav aria-label="写入规范文档" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#it-does-exactly-what-it-says-on-the-tin">
+<span class="md-ellipsis"> “它确实如其名所示。” </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#do-not-assume-anything-that-is-not-written-in-the-specification-document">
+<span class="md-ellipsis"> 不要假设规格文档中未写明的内容 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#code-robustly-for-errors">
+<span class="md-ellipsis"> 代码应稳健地处理错误 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#conditions-on-execution">
+<span class="md-ellipsis"> 执行条件 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#errors-and-warnings">
+<span class="md-ellipsis"> 错误与警告 </span>
+</a>
+<nav aria-label="错误与警告" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#use-stderr-from-any-node">
+<span class="md-ellipsis"> 使用任意节点的标准错误输出 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#use-iprint-consistently">
+<span class="md-ellipsis"> 始终一致地使用 iprint </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#efficiency-issues">
+<span class="md-ellipsis"> 效率问题 </span>
+</a>
+<nav aria-label="效率问题" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#libraries">
+<span class="md-ellipsis"> 库 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#fortran-array-intrinsics">
+<span class="md-ellipsis"> Fortran 数组内建函数 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#passing-arrays-to-subprograms">
+<span class="md-ellipsis"> 将数组传递给子程序 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#machine-specific-code">
+<span class="md-ellipsis"> 特定机器的代码 </span>
+</a>
+<nav aria-label="特定机器的代码" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#avoid">
+<span class="md-ellipsis"> 避免！ </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#test-thoroughly-to-prevent">
+<span class="md-ellipsis"> 仔细测试以防止 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#file-handling">
+<span class="md-ellipsis"> 文件处理 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#compilerpreprocessor-directives">
+<span class="md-ellipsis"> 编译器/预处理器指令 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#fortran90-features">
+<span class="md-ellipsis"> Fortran90 特性 </span>
+</a>
+<nav aria-label="Fortran90 特性" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#use-of-dynamic-arrays">
+<span class="md-ellipsis"> 动态数组的使用 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#pointers">
+<span class="md-ellipsis"> 指针 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#flow-of-control">
+<span class="md-ellipsis"> 控制流 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#functions">
+<span class="md-ellipsis"> 函数 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#use-of-use">
+<span class="md-ellipsis"> 使用使用 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#line-numbers">
+<span class="md-ellipsis"> 行号 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#general-features">
+<span class="md-ellipsis"> 一般特性 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#modules">
+<span class="md-ellipsis"> 模块 </span>
+</a>
+<nav aria-label="模块" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#general">
+<span class="md-ellipsis"> 常规设置 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#usage">
+<span class="md-ellipsis"> 用法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#auxiliary-modules">
+<span class="md-ellipsis"> 辅助模块 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#style-and-layout">
+<span class="md-ellipsis"> 风格与布局 </span>
+</a>
+<nav aria-label="风格与布局" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#use-the-module-template">
+<span class="md-ellipsis"> 使用模块模板 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#layout">
+<span class="md-ellipsis"> 布局 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#case">
+<span class="md-ellipsis"> 情况 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#names">
+<span class="md-ellipsis"> 名称 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#types">
+<span class="md-ellipsis"> 类型 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#free-format">
+<span class="md-ellipsis"> 自由格式 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#spaces">
+<span class="md-ellipsis"> 空间 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#code-cleanly">
+<span class="md-ellipsis"> 代码整洁 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#be-aware-of-vectorisation">
+<span class="md-ellipsis"> 请注意向量化处理 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#documentation">
+<span class="md-ellipsis"> 使用文档 </span>
+</a>
+<nav aria-label="使用文档" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#internal">
+<span class="md-ellipsis"> 内部 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#external">
+<span class="md-ellipsis"> 外部 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#testing">
+<span class="md-ellipsis"> 测试 </span>
+</a>
+<nav aria-label="测试" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#test-program">
+<span class="md-ellipsis"> 测试程序 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#reference-data">
+<span class="md-ellipsis"> 参考数据 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#module-template">
+<span class="md-ellipsis"> 模块模板 </span>
+</a>
+<nav aria-label="模块模板" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#general_1">
+<span class="md-ellipsis"> 常规设置 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#use-of-public-and-private">
+<span class="md-ellipsis"> 公共和私人资源的使用 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html#template">
+<span class="md-ellipsis"> 模板 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1>代码风格指南</h1><div class="zh-notice">中文译文 · 由本地英文文档翻译，已统一术语并进行重点抽查。 <a href="../https://castep-docs.github.io/castep-docs/developer/style_guide.html">英文原文对照</a> · <a href="../translation-notes.html">翻译说明</a></div>
+<h2 id="introduction">简介</h2>
+<p>CASTEP 程序自设计之初就旨在实现多种目标——包括高效性和可维护性。以下是一些关于编写 CASTEP 代码的简单指导原则。这些原则旨在帮助编写正确且高效的代码，并确保多位作者在代码中保持一致的风格，以便未来其他人员能够轻松维护。所有代码将使用 Fortran 2003 作为编程语言，因为该语言具备许多现代特性，能够在不牺牲效率和可移植性的前提下，编写出简洁、模块化的代码。</p>
+<p>在本文档中，有一个 <a href="style_guide.html#template">编写模块的模板</a>，以及在模块内编写子程序时使用。这些模板旨在强制执行良好的编程实践和对例行程序功能及副作用的文档说明。所有程序必须使用这些模板编写。本文中提到的关于风格的一般准则、模块模板的使用、文档的完整性等方面，都有助于使编写新代码和维护现有代码变得简单。</p>
+<p>程序员还有责任尽可能高效地编写每个子程序。虽然使用 Fortran 2003 的新内置功能很有吸引力，但经验表明，应谨慎使用这些功能，以免降低运行效率。因此，文档也给出了使用这些功能的指导原则。</p>
+<h2 id="castep-linter">CASTEP 检查工具</h2>
+<p>CASTEP 检查工具是一个 Python 工具，用于检查您的 CASTEP 构建是否存在与 CASTEP 风格相关的任何问题。在进行任何重大修改后应使用该工具。</p>
+<div class="admonition note">
+<p class="admonition-title">说明</p>
+<p>linters 也在 CASTEP CI 系统中运行，如果您的修改引入了新的问题，它会向您发出警告。如果您的拉取请求中包含新问题，该请求可能会被拒绝。</p>
+</div>
+<h3 id="using-the-castep-linter">使用 CASTEP 检查工具</h3>
+<p>语法检查工具可在 <a href="https://pypi.org/project/castep-linter/">PyPI</a> 并且可以使用 <code>pip</code>:</p>
+<div class="highlight"><pre><span></span><code><a href="style_guide.html#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>castep-linter
+</code></pre></div>
+<p>安装完成后，应可以通过运行以下命令来执行检查工具：</p>
+<div class="highlight"><pre><span></span><code><a href="style_guide.html#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>castep-lint<span class="w"> </span>&lt;file&gt;
+</code></pre></div>
+<p>e.g.</p>
+<div class="highlight"><pre><span></span><code><a href="style_guide.html#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>castep-lint<span class="w"> </span>Source/Functional/pair_pot.f90
+</code></pre></div>
+<p>如需进一步信息，请输入</p>
+<div class="highlight"><pre><span></span><code><a href="style_guide.html#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>castep-lint<span class="w"> </span>-h
+</code></pre></div>
+<p>也可以在以下编辑器中使用 CASTEP 静态检查工具： <a href="https://www.gnu.org/software/emacs/">Emacs</a> ，通过 <a href="https://github.com/byornski/castep-linter/blob/main/utils/flycheck-castep.el"><code>flycheck</code> 扩展实现</a>。为此，必须安装 <code>flycheck</code> 软件包，该软件包可通过 <a href="https://melpa.org/#/getting-started"><code>MELPA</code></a> Emacs 软件包仓库安装。</p>
+<h2 id="writing-to-the-specification-document">写入规范文档</h2>
+<h3 id="it-does-exactly-what-it-says-on-the-tin">“它确实如其名所示。”</h3>
+<p>显然，首要任务是确保你负责的每个子程序都严格执行规范规定的行为，尤其要注意退出条件、副作用等。</p>
+<p>规范涵盖的子程序和变量为 <code>public</code> ，而其他子程序和变量为 <code>private</code>规范中并未说明私有例程的作用或含义。私有例程和变量仅在其出现的模块内可访问。</p>
+<h3 id="do-not-assume-anything-that-is-not-written-in-the-specification-document">不要假设规格文档中未写明的内容</h3>
+<p>如果规范中未说明某个子程序在退出时会保留输入值，那么你不能假设编写该子程序的人会这样做！即使该子程序是你自己编写的……</p>
+<p>同样，即使某个变量的含义看似显而易见，只要规范未作定义，就不能自行假定。后续代码修订可以自由修改规范之外的子程序。如果所有代码始终遵循规范，维护工作就会简单得多。</p>
+<p>请注意，规范中并未提及任何模块中的私有子程序或变量。因此，在使用此类子程序时必须格外小心。 <a href="style_guide.html#template">子程序模板</a> 是否有提醒你记录每个例行程序的所有副作用！</p>
+<h3 id="code-robustly-for-errors">代码应稳健地处理错误</h3>
+<p>也就是说，用户永远不应该看到Fortran运行时错误消息——你的代码应检查可能的错误情况，并要么纠正错误，要么打印一条清晰且有意义的错误信息，然后通过优雅退出来结束程序。 <code>io_abort</code>.</p>
+<h3 id="conditions-on-execution">执行条件</h3>
+<p>规范中给出的条件必须为真，才能正确执行每个子程序。显然，这些条件应当被检验以确保正确性，但这样可能会引入相当大的性能开销，特别是对于 <code>Utility</code> 或者 <code>Fundamental</code> 子程序。因此，建议使用单一 <code>#ifdef debug</code> 每个例程开头的块用于测试这些条件（在适当情况下）并调用 <code>io_abort</code> 必要时。然后可以根据需要编译带有或不带完整错误检查的代码。</p>
+<h2 id="errors-and-warnings">错误与警告</h2>
+<h3 id="use-stderr-from-any-node">使用 <code>stderr</code> 从任意节点</h3>
+<p>与普通消息不同，任何节点都可以写入错误或警告消息。任何此类消息都应写入到 <code>stderr</code> 从相关节点获取。该例程随后将调用 <code>io_abort</code> 以便整洁地终止程序。</p>
+<h3 id="use-iprint-consistently">使用 <code>iprint</code> 一致地</h3>
+<p>正常输出，包括警告信息和调试信息，应仅写入到 <code>stdout</code> 由根节点处。细节程度由以下内容控制 <code>iprint</code> 变量：</p>
+<ul>
+<li>
+<p><code>0</code> - 最小输出 - 仅包含运行控制参数和结果！</p>
+</li>
+<li>
+<p><code>1</code> - 默认输出 - 将能量和力分解为各个组成部分等，但不包含调试信息。</p>
+</li>
+<li>
+<p><code>2</code> - 最小化调试 - 所有重要参数的值等，不打印所有数组。</p>
+</li>
+<li>
+<p><code>3</code> - 最大化调试 - 工作开始了！</p>
+</li>
+</ul>
+<h2 id="efficiency-issues">效率问题</h2>
+<h3 id="libraries">库</h3>
+<p>建议使用 BLAS 和 LAPACK 库，因为这些是免费可用的库，并且通常针对每个平台提供了厂商优化版本。为了提高效率，也建议不要使用 BLAS 的“级别 0 子程序”，因为其性能提升微乎其微，而对应的 FORTRAN 代码往往更简洁、更容易阅读。</p>
+<h3 id="fortran-array-intrinsics">Fortran 数组内建函数</h3>
+<p>注意使用 FORTRAN 数组内建函数——它们可能效率低下，并可能导致内存问题，例如 <code>result=matmul(a,matmul(b,c))</code> 需要隐式动态内存分配。在可行的情况下，尽量使用 BLAS。某些内建函数也可能阻碍编译器优化，尤其是在向量机上。同样，不要使用诸如……的函数。 <code>transfer</code> 或者 <code>mold</code> — 这些可能非常低效。</p>
+<h3 id="passing-arrays-to-subprograms">将数组传递给子程序</h3>
+<p>这是一个棘手的主题，很容易导致混淆和低效的代码。主要问题是存在多种传递数组的方法，而这些方法通常并不等价！</p>
+<p>最佳做法是始终一起传递整个数组及其大小，例如：</p>
+<div class="highlight"><pre><span></span><code><a href="style_guide.html#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">call </span><span class="n">foo</span><span class="p">(</span><span class="n">int_array</span><span class="p">,</span><span class="w"> </span><span class="n">N1</span><span class="p">,</span><span class="w"> </span><span class="n">N2</span><span class="p">)</span>
+<a href="style_guide.html#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="p">...</span>
+<a href="style_guide.html#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a>
+<a href="style_guide.html#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="k">subroutine </span><span class="n">foo</span><span class="p">(</span><span class="n">int_array</span><span class="p">,</span><span class="w"> </span><span class="n">N1</span><span class="p">,</span><span class="w"> </span><span class="n">N2</span><span class="p">)</span>
+<a href="style_guide.html#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="k">implicit none</span>
+<a href="style_guide.html#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">N1</span><span class="p">,</span><span class="w"> </span><span class="n">N2</span>
+<a href="style_guide.html#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">dimension</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">N1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="n">N2</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">int_array</span>
+<a href="style_guide.html#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="p">...</span>
+</code></pre></div>
+<p>由于这不会导致数组的复制，并允许编译器进行边界检查等操作。</p>
+<p>使用 <strong>假设形状数组</strong>，例如 <code>int_array(:, :)</code> 效率较低，因为其具有显式的秩，但隐式的形状。这需要使用诸如函数 <code>size(int_array,1)</code> 并且可能会阻止某些编译器优化。然而，它允许编译器进行边界检查。</p>
+<p>在传递数组时必须小心。如果要传递数组切片，则最好使用 <strong>假设大小的数组</strong> （即传统方式），也就是说</p>
+<div class="highlight"><pre><span></span><code><a href="style_guide.html#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="k">call </span><span class="n">foo2</span><span class="p">(</span><span class="n">int_array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">N</span><span class="p">))</span>
+<a href="style_guide.html#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="p">...</span>
+<a href="style_guide.html#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a>
+<a href="style_guide.html#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="k">subroutine </span><span class="n">foo2</span><span class="p">(</span><span class="n">int_array</span><span class="p">)</span>
+<a href="style_guide.html#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="k">implicit none</span>
+<a href="style_guide.html#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">dimension</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">int_array</span>
+<a href="style_guide.html#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="p">...</span>
+</code></pre></div>
+<p>不如直接通过 <code>int_array(:, N)</code> 并接收 <code>int_array(:)</code> 这将会在栈上创建数组的副本，从而迅速导致“内存不足”错误。</p>
+<p>使用预设大小的数组，例如 <code>int_array(*)</code> 如果想编写一个通用程序，能够处理任意大小和/或维度的数组，则该功能是有用的。然而，它通常不适用于标量，也不支持边界检查。不过，它不会导致数组的任何副本被创建。</p>
+<h2 id="machine-specific-code">特定机器的代码</h2>
+<h3 id="avoid">避免！</h3>
+<p>使用标准Fortran编写，避免使用厂商扩展，并尽可能不使用任何系统例程，以确保最大可移植性。唯一被允许的例外出现在 <code>Utility</code> 模块，其中所有低级别的输入/输出和通信均被处理。</p>
+<h3 id="test-thoroughly-to-prevent">仔细测试以防止</h3>
+<p>务必在多个平台上使用多种编译器测试子程序，确保没有无意中依赖某个编译器特有的默认行为。向 Bitbucket 仓库提交合并请求后，CI 系统会使用所有受支持的编译器进行编译；但为减少排错工作，应在提交之前完成这些测试。</p>
+<h3 id="file-handling">文件处理</h3>
+<p>一个明显的机器依赖领域是文件处理。因此， <code>io</code> 应使用模块来处理所有文件的打开操作。程序员需负责读取/写入数据以及关闭文件。文件不应被保持打开状态，除非绝对必要。</p>
+<h3 id="compilerpreprocessor-directives">编译器/预处理器指令</h3>
+<p>这些应尽可能避免，因为它们会妨碍可移植性。它们只应在以下情况下使用 <code>Utility</code> 用于特定机器代码的模块。所有模块文件名都应添加扩展名 <code>.f90</code>，例外的是 <code>Utility</code> 模块，其中 <code>.F90</code> 是被允许的，但通常只有在使用预处理的情况下才如此。</p>
+<h2 id="fortran90-features">Fortran90 特性</h2>
+<h3 id="use-of-dynamic-arrays">动态数组的使用</h3>
+<p>每个例程负责分配/使用/释放其自身的工作空间。我们建议此类 <code>allocate</code>/<code>deallocate</code>s 仅在例行程序中出现一次——绝不要放在循环内部，否则会造成显著的性能损失。你必须确保它始终 <code>deallocate</code> 局部工作数组在例行程序终止时的处理。显然，如果一个例行程序有多个退出点，则需要格外小心。</p>
+<h3 id="pointers">指针</h3>
+<p>始终将子程序中的传入数组视为数组，而非指针。这将强制编译器对数组进行自动解引用，并使编译器能够实现更好的优化。</p>
+<h3 id="flow-of-control">控制流</h3>
+<p>构造如 <code>select case</code> 并且 <code>do ... end do</code>，并使用“do循环”等标注以增强清晰度，推荐采用 <code>cycle</code> 并且 <code>exit</code> 可以使用，但应尽可能只跳出一层嵌套。不要使用 <code>goto</code>.</p>
+<h3 id="functions">函数</h3>
+<p>函数子程序应是“纯”的，即不能通过修改实参列表中的变量，或修改经 USE 关联访问的模块变量来产生副作用。避免递归。</p>
+<h3 id="use-of-use">使用 <code>use</code></h3>
+<p>如果只需要少量变量，在使用模块时应加上 <code>only</code> 子句。将适当的 <code>use</code> 语句放在需要它的各个子程序中，而不是模块头部，以便追踪模块变量的修改。</p>
+<h3 id="line-numbers">行号</h3>
+<p>尽可能避免使用。行号仅用于格式语句，以及 <code>end=</code> 或者 <code>err=</code> 文件处理。不要使用 <code>continue</code>.</p>
+<h3 id="general-features">一般特性</h3>
+<p>除非语句极其简单，否则避免在同一行中放置多条语句。</p>
+<h2 id="modules">模块</h2>
+<h3 id="general">常规设置</h3>
+<p>所有代码都应包含在模块内。</p>
+<h3 id="usage">用法</h3>
+<p>规范中描述的每个模块应为一个源文件。本模块规范中给出的所有例程都应包含在该文件中。</p>
+<h3 id="auxiliary-modules">辅助模块</h3>
+<p>CASTEP 也鼓励使用较新的（Fortran 2008） <code>submodule</code>s. 子模块允许对模块进行程序化划分，从而使得编译器可以预先编译接口、在仅子模块发生更改时减少必要的编译操作，并使开发者能够更有效地控制模块内部的范围。</p>
+<p>为清晰起见，并避免模块过长，该模块也可使用辅助模块，这些辅助模块可以位于单独的文件中（同样每个模块一个文件）。任何辅助模块必须仅在指定的一个模块中使用，即不允许在其他指定模块中重复使用辅助代码，因为辅助程序并未被明确指定！</p>
+<p>任何辅助模块的命名规范应继承自指定模块，以明确辅助程序的应用位置，例如，如果指定模块被称为 <code>me.F90</code> 带有称为的子程序 <code>me_sub</code>，等等。那么一个辅助模块就会 <code>me_extra.F90</code> 带有称为的子程序 <code>me_extra_sub</code>，等等。</p>
+<div class="admonition note">
+<p class="admonition-title">说明</p>
+<p>与其在现代CASTEP中使用完整的辅助模块， <code>submodule</code>被鼓励。</p>
+</div>
+<h2 id="style-and-layout">风格与布局</h2>
+<h3 id="use-the-module-template">使用模块模板</h3>
+<p><a href="style_guide.html#template">模块模板</a> 给出了模块和子程序的推荐布局。该内容可在 CASTEP 源代码中找到。 <code>Source/template.f90</code>特别是，请注意注释头的布局和内容，以及声明的顺序。除非明确指定为公共成员，否则所有内容都应为私有！这使得代码与规范之间的对比检查变得简单。</p>
+<h3 id="layout">布局</h3>
+<p>所有代码均应使用 GNU-Emacs f90-mode 生成的缩进格式。您可以使用任何编辑器编写代码，但请确保最终提交到 Bitbucket 仓库的代码都已通过 Emacs f90-mode 进行过缩进处理。为帮助您更好地使用 Emacs， <a href="style_guide.html#template">模块模板</a> 包含设置 f90-mode 等的 Emacs 指令。</p>
+<h3 id="case">情况</h3>
+<p>使用小写字母表示关键词，所有在规范中提及的例程和变量的大小写应按规范给出。对于私有例程和变量，一般使用小写字母。然而，你可以使用大写字母来区分名称中的单词，例如 <code>userInputData</code> — 只要你在整个模块中保持一致即可。</p>
+<p>使用大写，且去掉空格，用于在各程序模块之间传递的字符串变量值，例如 <code>run_type='MOLECULARDYNAMICS'</code> 不是 <code>'MolecularDynamics</code>' 或者 <code>'molecular dynamics'</code> 等等以简化字符串比较。</p>
+<h3 id="names">名称</h3>
+<p>为清晰起见，尽可能不更改变量名称以传递到不同的子程序中。除非是简单的循环计数器，否则避免使用短（1或2个字母）的变量名。采用新形式 <code>end subroutine name</code> 等等，不是旧版本 <code>end subroutine</code>.</p>
+<h3 id="types">类型</h3>
+<p>不要使用隐式类型。同样，你不必遵循旧的隐式类型规则——你可以使用以“”开头的整数名称。<code>c</code>等等！不要将类型标注为 <code>double precision</code> - 使用 <code>real(kind=dp)</code> 相反，作为 <code>dp</code> 是 Constants 模块中的一个常量，这将使移植到其他架构（例如 Cray）变得简单得多。请记住，所有与机器相关的代码都保留在 Utility 子程序中。同样，在声明常量时，请使用 <code>1.234_dp</code> NOT <code>1.234d0</code>.</p>
+<h3 id="free-format">自由格式</h3>
+<p>使用自由格式f90，最大行长度为132个字符。</p>
+<h3 id="spaces">空间</h3>
+<p>在关键词之间使用空格，例如 <code>end if</code> 不是 <code>endif</code>.</p>
+<h3 id="code-cleanly">代码整洁</h3>
+<p>显然，为了确保正确性并便于他人维护代码，如果编写一个子程序的显而易见方法效率低下，而高效的方法又晦涩难懂，则只要该子程序内部有充分的文档说明，并对所作的设计决策进行讨论，这种情况也是被允许的。</p>
+<h3 id="be-aware-of-vectorisation">请注意向量化处理</h3>
+<p>编程时，请注意代码几乎总是运行在向量架构上。因此，应编写能够良好实现向量化处理的代码——例如，不要将 <code>if</code> 在嵌套循环中尽可能将语句放在内部。</p>
+<h2 id="documentation">使用文档</h2>
+<h3 id="internal">内部</h3>
+<p>每个模块基于 <a href="style_guide.html#template">模块模板</a>，应包含一个描述其整体目的和功能的头部区块。</p>
+<p>每个编写到模板中的例程都应包含一个头部块，描述其功能、所需变量及其修改方式、正确运行所必需的条件等。这些注释应当清晰明了，易于理解。</p>
+<p>每个例程的代码中都应包含大量注释。注释要么与被注释的特征位于同一行（或几行），要么位于该特征上方的一段连续行内。</p>
+<p>注：密度应与代码密度相当。</p>
+<p>所有评论须用英文书写，并符合标准英语语法规则。</p>
+<h3 id="external">外部</h3>
+<p>一个模块（或任何修改）只有在提供了额外的文档以供包含时，才被视为完整。文档必须提供在相应的模块和函数头文件块中，解释该模块及每个子程序的功能、代码背后的物理原理、所采用的算法、关键变量和数据结构，并适当引用相关文献。</p>
+<h2 id="testing">测试</h2>
+<h3 id="test-program">测试程序</h3>
+<p>每个模块在被添加到 Bitbucket 仓库之前，都必须经过正确性测试。为此，应提供一组测试用例，这些测试用例必须能够在 CI 系统中成功编译和执行。这些测试的目的是验证模块中每项指定子程序的正常运行。</p>
+<p>CASTEP 使用的 <a href="https://testcode.readthedocs.io/en/latest/"><code>testcode</code></a> 一个测试平台，可从一组有效的 CASTEP 输入文件自动生成基准数据。</p>
+<p>请参见 <a href="test_suite.html">测试</a> 有关如何完成此操作的更多信息。</p>
+<h3 id="reference-data">参考数据</h3>
+<p>测试程序应附带适当的输入数据文件和参考输出结果。通过将实际输出与参考输出结果进行比较，以验证测试的正确运行。</p>
+<h2 id="module-template">模块模板</h2>
+<h3 id="general_1">常规设置</h3>
+<p>请注意声明的顺序，以及使用 <code>implicit none</code> 并且 <code>private</code>，以及标准的注释标题，用于内部文档。注释标题中的所有行宽度应为80个字符。并非所有标题部分对所有子程序都相关，因此可以删除不相关的部分。非常重要的是，标题必须始终保持最新且尽可能完整。</p>
+<h3 id="use-of-public-and-private">使用 <code>public</code> 并且 <code>private</code></h3>
+<p>每个模块使用一个初始值 <code>private</code> 声明强制模块中的所有实体默认为私有。然后具有显式 <code>public</code> 声明那些在规范文档中列出的数据类型、变量和（重载的）过程名称。这使得代码与规范文档的对比变得容易。</p>
+<h3 id="template">模板</h3>
+<div class="highlight"><pre><span></span><code><a href="style_guide.html#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="c">! -*- mode: F90 ; mode: font-lock ; column-number-mode: true ; vc-back-end: git -*-</span>
+<a href="style_guide.html#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="c">!=============================================================================!</span>
+<a href="style_guide.html#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="c">!                          D U M M Y                                          !</span>
+<a href="style_guide.html#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="c">!=============================================================================!</span>
+<a href="style_guide.html#__codelineno-6-5" id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="c">! Overall explanation of purpose and function of module.                      !</span>
+<a href="style_guide.html#__codelineno-6-6" id="__codelineno-6-6" name="__codelineno-6-6"></a><span class="c">!                                                                             !</span>
+<a href="style_guide.html#__codelineno-6-7" id="__codelineno-6-7" name="__codelineno-6-7"></a><span class="c">!-----------------------------------------------------------------------------!</span>
+<a href="style_guide.html#__codelineno-6-8" id="__codelineno-6-8" name="__codelineno-6-8"></a><span class="c">! Written from  "Module Specification for New Plane Wave Code",  M. Segall,   !</span>
+<a href="style_guide.html#__codelineno-6-9" id="__codelineno-6-9" name="__codelineno-6-9"></a><span class="c">!    P. Lindan, M. Probert, C. Pickard, P. Hasnip, S. Clark and M. Payne      !</span>
+<a href="style_guide.html#__codelineno-6-10" id="__codelineno-6-10" name="__codelineno-6-10"></a><span class="c">!                           Copyright 1999/2000                               !</span>
+<a href="style_guide.html#__codelineno-6-11" id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="c">!-----------------------------------------------------------------------------!</span>
+<a href="style_guide.html#__codelineno-6-12" id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="c">! Written by author, version, date                                            !</span>
+<a href="style_guide.html#__codelineno-6-13" id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="c">!-----------------------------------------------------------------------------!</span>
+<a href="style_guide.html#__codelineno-6-14" id="__codelineno-6-14" name="__codelineno-6-14"></a><span class="c">!                                                                             !</span>
+<a href="style_guide.html#__codelineno-6-15" id="__codelineno-6-15" name="__codelineno-6-15"></a><span class="c">!                                                                             !</span>
+<a href="style_guide.html#__codelineno-6-16" id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="c">!=============================================================================!</span>
+<a href="style_guide.html#__codelineno-6-17" id="__codelineno-6-17" name="__codelineno-6-17"></a>
+<a href="style_guide.html#__codelineno-6-18" id="__codelineno-6-18" name="__codelineno-6-18"></a><span class="k">module </span><span class="n">dummy</span>
+<a href="style_guide.html#__codelineno-6-19" id="__codelineno-6-19" name="__codelineno-6-19"></a><span class="w">  </span><span class="k">use </span><span class="n">constants</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">dp</span><span class="w">                      </span><span class="c">!Minimal useage where practical</span>
+<a href="style_guide.html#__codelineno-6-20" id="__codelineno-6-20" name="__codelineno-6-20"></a>
+<a href="style_guide.html#__codelineno-6-21" id="__codelineno-6-21" name="__codelineno-6-21"></a><span class="w">  </span><span class="k">implicit none</span><span class="w">                                 </span><span class="c">!Impose strong typing</span>
+<a href="style_guide.html#__codelineno-6-22" id="__codelineno-6-22" name="__codelineno-6-22"></a><span class="w">  </span><span class="k">private</span><span class="w">                                       </span><span class="c">!Everything is private ...</span>
+<a href="style_guide.html#__codelineno-6-23" id="__codelineno-6-23" name="__codelineno-6-23"></a>
+<a href="style_guide.html#__codelineno-6-24" id="__codelineno-6-24" name="__codelineno-6-24"></a><span class="w">  </span><span class="c">!---------------------------------------------------------------------------!</span>
+<a href="style_guide.html#__codelineno-6-25" id="__codelineno-6-25" name="__codelineno-6-25"></a><span class="w">  </span><span class="c">!                       P u b l i c   R o u t i n e s                       !</span>
+<a href="style_guide.html#__codelineno-6-26" id="__codelineno-6-26" name="__codelineno-6-26"></a><span class="w">  </span><span class="c">!---------------------------------------------------------------------------!</span>
+<a href="style_guide.html#__codelineno-6-27" id="__codelineno-6-27" name="__codelineno-6-27"></a><span class="w">  </span><span class="k">public</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">routine_name</span><span class="w"> </span><span class="p">...</span><span class="w">                    </span><span class="c">!... unless exposed here.</span>
+<a href="style_guide.html#__codelineno-6-28" id="__codelineno-6-28" name="__codelineno-6-28"></a><span class="w">  </span><span class="k">interface </span><span class="n">routine_name</span><span class="w">                        </span><span class="c">!Overloaded routines, etc.</span>
+<a href="style_guide.html#__codelineno-6-29" id="__codelineno-6-29" name="__codelineno-6-29"></a><span class="w">     </span><span class="p">...</span><span class="w">                                        </span><span class="c">!(specific names are private)</span>
+<a href="style_guide.html#__codelineno-6-30" id="__codelineno-6-30" name="__codelineno-6-30"></a><span class="w">  </span><span class="k">end interface</span>
+<a href="style_guide.html#__codelineno-6-31" id="__codelineno-6-31" name="__codelineno-6-31"></a>
+<a href="style_guide.html#__codelineno-6-32" id="__codelineno-6-32" name="__codelineno-6-32"></a><span class="w">  </span><span class="c">!---------------------------------------------------------------------------!</span>
+<a href="style_guide.html#__codelineno-6-33" id="__codelineno-6-33" name="__codelineno-6-33"></a><span class="w">  </span><span class="c">!                        P u b l i c   V a r i a b l e s                    !</span>
+<a href="style_guide.html#__codelineno-6-34" id="__codelineno-6-34" name="__codelineno-6-34"></a><span class="w">  </span><span class="c">!---------------------------------------------------------------------------!</span>
+<a href="style_guide.html#__codelineno-6-35" id="__codelineno-6-35" name="__codelineno-6-35"></a><span class="w">  </span><span class="k">public </span><span class="n">datatypes</span><span class="w"> </span><span class="p">...</span>
+<a href="style_guide.html#__codelineno-6-36" id="__codelineno-6-36" name="__codelineno-6-36"></a><span class="w">  </span><span class="k">public </span><span class="n">variables</span><span class="w"> </span><span class="p">...</span>
+<a href="style_guide.html#__codelineno-6-37" id="__codelineno-6-37" name="__codelineno-6-37"></a>
+<a href="style_guide.html#__codelineno-6-38" id="__codelineno-6-38" name="__codelineno-6-38"></a><span class="w">  </span><span class="c">!---------------------------------------------------------------------------!</span>
+<a href="style_guide.html#__codelineno-6-39" id="__codelineno-6-39" name="__codelineno-6-39"></a><span class="w">  </span><span class="c">!                      P r i v a t e   R o u t i n e s                      !</span>
+<a href="style_guide.html#__codelineno-6-40" id="__codelineno-6-40" name="__codelineno-6-40"></a><span class="w">  </span><span class="c">!---------------------------------------------------------------------------!</span>
+<a href="style_guide.html#__codelineno-6-41" id="__codelineno-6-41" name="__codelineno-6-41"></a>
+<a href="style_guide.html#__codelineno-6-42" id="__codelineno-6-42" name="__codelineno-6-42"></a>
+<a href="style_guide.html#__codelineno-6-43" id="__codelineno-6-43" name="__codelineno-6-43"></a><span class="w">  </span><span class="c">!---------------------------------------------------------------------------!</span>
+<a href="style_guide.html#__codelineno-6-44" id="__codelineno-6-44" name="__codelineno-6-44"></a><span class="w">  </span><span class="c">!                      P r i v a t e   V a r i a b l e s                    !</span>
+<a href="style_guide.html#__codelineno-6-45" id="__codelineno-6-45" name="__codelineno-6-45"></a><span class="w">  </span><span class="c">!---------------------------------------------------------------------------!</span>
+<a href="style_guide.html#__codelineno-6-46" id="__codelineno-6-46" name="__codelineno-6-46"></a>
+<a href="style_guide.html#__codelineno-6-47" id="__codelineno-6-47" name="__codelineno-6-47"></a><span class="w">  </span><span class="n">datatypes</span><span class="w"> </span><span class="p">...</span><span class="w">                                 </span><span class="c">!Private data for all routines</span>
+<a href="style_guide.html#__codelineno-6-48" id="__codelineno-6-48" name="__codelineno-6-48"></a><span class="w">  </span><span class="n">variables</span><span class="w"> </span><span class="p">..</span><span class="w">                                  </span><span class="c">!in this module ...</span>
+<a href="style_guide.html#__codelineno-6-49" id="__codelineno-6-49" name="__codelineno-6-49"></a><span class="w">  </span><span class="p">...</span>
+<a href="style_guide.html#__codelineno-6-50" id="__codelineno-6-50" name="__codelineno-6-50"></a>
+<a href="style_guide.html#__codelineno-6-51" id="__codelineno-6-51" name="__codelineno-6-51"></a><span class="k">contains</span>
+<a href="style_guide.html#__codelineno-6-52" id="__codelineno-6-52" name="__codelineno-6-52"></a><span class="k">  subroutine </span><span class="n">public1</span><span class="p">(</span><span class="n">var1</span><span class="p">,</span><span class="n">var2</span><span class="p">,...)</span>
+<a href="style_guide.html#__codelineno-6-53" id="__codelineno-6-53" name="__codelineno-6-53"></a><span class="w">    </span><span class="c">!=========================================================================!</span>
+<a href="style_guide.html#__codelineno-6-54" id="__codelineno-6-54" name="__codelineno-6-54"></a><span class="w">    </span><span class="c">! Explanation of purpose of routine                                       !</span>
+<a href="style_guide.html#__codelineno-6-55" id="__codelineno-6-55" name="__codelineno-6-55"></a><span class="w">    </span><span class="c">! ...                                                                     !</span>
+<a href="style_guide.html#__codelineno-6-56" id="__codelineno-6-56" name="__codelineno-6-56"></a><span class="w">    </span><span class="c">!-------------------------------------------------------------------------!</span>
+<a href="style_guide.html#__codelineno-6-57" id="__codelineno-6-57" name="__codelineno-6-57"></a><span class="w">    </span><span class="c">! Arguments:                                                              !</span>
+<a href="style_guide.html#__codelineno-6-58" id="__codelineno-6-58" name="__codelineno-6-58"></a><span class="w">    </span><span class="c">!   var1, intent, meaning                                                 !</span>
+<a href="style_guide.html#__codelineno-6-59" id="__codelineno-6-59" name="__codelineno-6-59"></a><span class="w">    </span><span class="c">! ...       (in order of call list)                                       !</span>
+<a href="style_guide.html#__codelineno-6-60" id="__codelineno-6-60" name="__codelineno-6-60"></a><span class="w">    </span><span class="c">!-------------------------------------------------------------------------!</span>
+<a href="style_guide.html#__codelineno-6-61" id="__codelineno-6-61" name="__codelineno-6-61"></a><span class="w">    </span><span class="c">! Parent module variables used:                                           !</span>
+<a href="style_guide.html#__codelineno-6-62" id="__codelineno-6-62" name="__codelineno-6-62"></a><span class="w">    </span><span class="c">!   globalvar1, meaning                                                   !</span>
+<a href="style_guide.html#__codelineno-6-63" id="__codelineno-6-63" name="__codelineno-6-63"></a><span class="w">    </span><span class="c">! ...                                                                     !</span>
+<a href="style_guide.html#__codelineno-6-64" id="__codelineno-6-64" name="__codelineno-6-64"></a><span class="w">    </span><span class="c">!-------------------------------------------------------------------------!</span>
+<a href="style_guide.html#__codelineno-6-65" id="__codelineno-6-65" name="__codelineno-6-65"></a><span class="w">    </span><span class="c">! Modules used:                                                           !</span>
+<a href="style_guide.html#__codelineno-6-66" id="__codelineno-6-66" name="__codelineno-6-66"></a><span class="w">    </span><span class="c">!   other_module used,                                                    !</span>
+<a href="style_guide.html#__codelineno-6-67" id="__codelineno-6-67" name="__codelineno-6-67"></a><span class="w">    </span><span class="c">!   other_vars, meanings, changes                                         !</span>
+<a href="style_guide.html#__codelineno-6-68" id="__codelineno-6-68" name="__codelineno-6-68"></a><span class="w">    </span><span class="c">! ...                                                                     !</span>
+<a href="style_guide.html#__codelineno-6-69" id="__codelineno-6-69" name="__codelineno-6-69"></a><span class="w">    </span><span class="c">!-------------------------------------------------------------------------!</span>
+<a href="style_guide.html#__codelineno-6-70" id="__codelineno-6-70" name="__codelineno-6-70"></a><span class="w">    </span><span class="c">! Key Internal Variables:                                                 !</span>
+<a href="style_guide.html#__codelineno-6-71" id="__codelineno-6-71" name="__codelineno-6-71"></a><span class="w">    </span><span class="c">!   intvar1, meaning                                                      !</span>
+<a href="style_guide.html#__codelineno-6-72" id="__codelineno-6-72" name="__codelineno-6-72"></a><span class="w">    </span><span class="c">! ...                                                                     !</span>
+<a href="style_guide.html#__codelineno-6-73" id="__codelineno-6-73" name="__codelineno-6-73"></a><span class="w">    </span><span class="c">!-------------------------------------------------------------------------!</span>
+<a href="style_guide.html#__codelineno-6-74" id="__codelineno-6-74" name="__codelineno-6-74"></a><span class="w">    </span><span class="c">! Necessary conditions:                                                   !</span>
+<a href="style_guide.html#__codelineno-6-75" id="__codelineno-6-75" name="__codelineno-6-75"></a><span class="w">    </span><span class="c">! ...                                                                     !</span>
+<a href="style_guide.html#__codelineno-6-76" id="__codelineno-6-76" name="__codelineno-6-76"></a><span class="w">    </span><span class="c">!-------------------------------------------------------------------------!</span>
+<a href="style_guide.html#__codelineno-6-77" id="__codelineno-6-77" name="__codelineno-6-77"></a><span class="w">    </span><span class="c">! Written by author, version, date                                        !</span>
+<a href="style_guide.html#__codelineno-6-78" id="__codelineno-6-78" name="__codelineno-6-78"></a><span class="w">    </span><span class="c">!=========================================================================!</span>
+<a href="style_guide.html#__codelineno-6-79" id="__codelineno-6-79" name="__codelineno-6-79"></a><span class="w">    </span><span class="k">use </span><span class="n">my_module</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">some_other_function</span>
+<a href="style_guide.html#__codelineno-6-80" id="__codelineno-6-80" name="__codelineno-6-80"></a><span class="w">    </span><span class="k">use </span><span class="n">other_module</span><span class="p">,</span><span class="w"> </span><span class="k">only</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">other_var1</span>
+<a href="style_guide.html#__codelineno-6-81" id="__codelineno-6-81" name="__codelineno-6-81"></a><span class="w">    </span><span class="k">implicit none</span>
+<a href="style_guide.html#__codelineno-6-82" id="__codelineno-6-82" name="__codelineno-6-82"></a>
+<a href="style_guide.html#__codelineno-6-83" id="__codelineno-6-83" name="__codelineno-6-83"></a><span class="k">    </span><span class="kt">integer</span><span class="p">,</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="w"> </span><span class="k">dimension</span><span class="p">(:,:)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">var1</span><span class="w">        </span><span class="c">!Variables in call order</span>
+<a href="style_guide.html#__codelineno-6-84" id="__codelineno-6-84" name="__codelineno-6-84"></a><span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">dp</span><span class="p">),</span><span class="w"> </span><span class="k">intent</span><span class="p">(</span><span class="n">in</span><span class="p">),</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">var2</span>
+<a href="style_guide.html#__codelineno-6-85" id="__codelineno-6-85" name="__codelineno-6-85"></a><span class="w">    </span><span class="p">...</span><span class="w"> </span><span class="p">(</span><span class="n">other</span><span class="w"> </span><span class="n">variables</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="k">call </span><span class="n">list</span><span class="p">)</span>
+<a href="style_guide.html#__codelineno-6-86" id="__codelineno-6-86" name="__codelineno-6-86"></a>
+<a href="style_guide.html#__codelineno-6-87" id="__codelineno-6-87" name="__codelineno-6-87"></a><span class="w">    </span><span class="kt">real</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">dp</span><span class="p">)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">my_var1</span><span class="o">=</span><span class="mf">2.7182818_dp</span><span class="w">             </span><span class="c">!base of natural logs</span>
+<a href="style_guide.html#__codelineno-6-88" id="__codelineno-6-88" name="__codelineno-6-88"></a><span class="w">    </span><span class="kt">complex</span><span class="p">(</span><span class="nb">kind</span><span class="o">=</span><span class="n">dp</span><span class="p">),</span><span class="w"> </span><span class="k">allocatable</span><span class="p">,</span><span class="w"> </span><span class="k">dimension</span><span class="p">(:)</span><span class="w"> </span><span class="kd">::</span><span class="w"> </span><span class="n">my_work1</span>
+<a href="style_guide.html#__codelineno-6-89" id="__codelineno-6-89" name="__codelineno-6-89"></a><span class="w">    </span><span class="p">...</span><span class="w"> </span><span class="p">(</span><span class="n">other</span><span class="w"> </span><span class="n">internal</span><span class="w"> </span><span class="n">variables</span><span class="p">)</span>
+<a href="style_guide.html#__codelineno-6-90" id="__codelineno-6-90" name="__codelineno-6-90"></a>
+<a href="style_guide.html#__codelineno-6-91" id="__codelineno-6-91" name="__codelineno-6-91"></a><span class="w">    </span><span class="p">...</span><span class="w"> </span><span class="p">(</span><span class="n">condition</span><span class="w"> </span><span class="n">checks</span><span class="p">)</span>
+<a href="style_guide.html#__codelineno-6-92" id="__codelineno-6-92" name="__codelineno-6-92"></a><span class="w">    </span><span class="p">...</span><span class="w"> </span><span class="p">(</span><span class="n">actual</span><span class="w"> </span><span class="n">code</span><span class="p">)</span>
+<a href="style_guide.html#__codelineno-6-93" id="__codelineno-6-93" name="__codelineno-6-93"></a>
+<a href="style_guide.html#__codelineno-6-94" id="__codelineno-6-94" name="__codelineno-6-94"></a><span class="w">    </span><span class="k">return</span>
+<a href="style_guide.html#__codelineno-6-95" id="__codelineno-6-95" name="__codelineno-6-95"></a><span class="k">  end subroutine </span><span class="n">public1</span>
+<a href="style_guide.html#__codelineno-6-96" id="__codelineno-6-96" name="__codelineno-6-96"></a>
+<a href="style_guide.html#__codelineno-6-97" id="__codelineno-6-97" name="__codelineno-6-97"></a><span class="w">  </span><span class="p">...</span><span class="w"> </span><span class="p">(</span><span class="n">other</span><span class="w"> </span><span class="k">public </span><span class="n">subroutines</span><span class="p">)</span>
+<a href="style_guide.html#__codelineno-6-98" id="__codelineno-6-98" name="__codelineno-6-98"></a>
+<a href="style_guide.html#__codelineno-6-99" id="__codelineno-6-99" name="__codelineno-6-99"></a><span class="w">  </span><span class="k">subroutine </span><span class="n">private1</span><span class="p">(....)</span>
+<a href="style_guide.html#__codelineno-6-100" id="__codelineno-6-100" name="__codelineno-6-100"></a><span class="w">    </span><span class="c">!=========================================================================!</span>
+<a href="style_guide.html#__codelineno-6-101" id="__codelineno-6-101" name="__codelineno-6-101"></a><span class="w">    </span><span class="c">! Explanation of purpose of routine                                       !</span>
+<a href="style_guide.html#__codelineno-6-102" id="__codelineno-6-102" name="__codelineno-6-102"></a><span class="w">    </span><span class="c">! ...                                                                     !</span>
+<a href="style_guide.html#__codelineno-6-103" id="__codelineno-6-103" name="__codelineno-6-103"></a><span class="w">    </span><span class="c">! (etc, as for public routines)                                           !</span>
+<a href="style_guide.html#__codelineno-6-104" id="__codelineno-6-104" name="__codelineno-6-104"></a><span class="w">    </span><span class="c">!=========================================================================!</span>
+<a href="style_guide.html#__codelineno-6-105" id="__codelineno-6-105" name="__codelineno-6-105"></a><span class="w">    </span><span class="p">....</span>
+<a href="style_guide.html#__codelineno-6-106" id="__codelineno-6-106" name="__codelineno-6-106"></a><span class="w">  </span><span class="k">end subroutine </span><span class="n">private1</span>
+<a href="style_guide.html#__codelineno-6-107" id="__codelineno-6-107" name="__codelineno-6-107"></a>
+<a href="style_guide.html#__codelineno-6-108" id="__codelineno-6-108" name="__codelineno-6-108"></a><span class="k">end module </span><span class="n">dummy</span>
+</code></pre></div>
+</article>
+</div>
+
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright"> 原版采用 <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+
+
+
+<script src="../assets/zh-search-data.js"></script><script data-root="../" src="../assets/zh-site.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:true},showMathMenu:false,messageStyle:"none"});</script><script src="../assets/mathjax/MathJax.js?config=TeX-MML-AM_CHTML"></script></body>
+</html>

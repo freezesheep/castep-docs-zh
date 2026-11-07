@@ -1,0 +1,1979 @@
+
+<!DOCTYPE html>
+
+<html class="js" lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="pimd.html" rel="prev"/>
+<link href="../Transition_State_Search/neb.html" rel="next"/>
+<link href="../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.0" name="generator"/>
+<title>Hugoniostat 冲击波模拟方法 — CASTEP 中文文档</title>
+<link href="../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../stylesheets/extra.css" rel="stylesheet"/>
+
+<link href="../../assets/zh-site.css" rel="stylesheet"/></head>
+<body dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="hugoniostat.html#hugoniostat"> 跳转到正文 </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="页眉" class="md-header__inner md-grid">
+<a aria-label="CASTEP 中文文档" class="md-header__button md-logo" data-md-component="logo" href="../../index.html" title="CASTEP 中文文档">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis"> CASTEP 中文文档 </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis"> Hugoniostat 冲击波模拟方法 </span>
+</div>
+</div>
+</div>
+
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="搜索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="搜索" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="搜索" class="md-search__options">
+<button aria-label="清除" class="md-search__icon md-icon" tabindex="-1" title="清除" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta"> 搜索中文或英文导航标题 </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="导航" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="CASTEP 中文文档" class="md-nav__button md-logo" data-md-component="logo" href="../../index.html" title="CASTEP 中文文档">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a> CASTEP 中文文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../index.html">
+<span class="md-ellipsis"> 首页 </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis"> 使用文档 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span> 使用文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+<span class="md-ellipsis"> 入门指南 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_1">
+<span class="md-nav__icon md-icon"></span> 入门指南 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Getting_Started/intro.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Getting_Started/built_in_help.html">
+<span class="md-ellipsis"> 命令行帮助 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Getting_Started/running_castep.html">
+<span class="md-ellipsis"> 运行 CASTEP </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Getting_Started/basic_cell_file.html">
+<span class="md-ellipsis"> 晶胞文件（.cell） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Getting_Started/basic_param_file.html">
+<span class="md-ellipsis"> 参数文件（.param） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Getting_Started/restarting.html">
+<span class="md-ellipsis"> 检查点与续算 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+<span class="md-ellipsis"> 基态 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_2">
+<span class="md-nav__icon md-icon"></span> 基态 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Groundstate/intro.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Groundstate/dftd.html">
+<span class="md-ellipsis"> 色散修正 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Groundstate/soc.html">
+<span class="md-ellipsis"> 自旋–轨道耦合 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Groundstate/spin_constraints.html">
+<span class="md-ellipsis"> 自旋约束 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Groundstate/population_analysis.html">
+<span class="md-ellipsis"> 布居分析 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Groundstate/ELF.html">
+<span class="md-ellipsis"> 电子局域函数（ELF） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+<span class="md-ellipsis"> 几何结构优化 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_3">
+<span class="md-nav__icon md-icon"></span> 几何结构优化 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Geometry_Optimisation/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Geometry_Optimisation/keywords.html">
+<span class="md-ellipsis"> 关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Geometry_Optimisation/constraints.html">
+<span class="md-ellipsis"> 约束条件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Geometry_Optimisation/files.html">
+<span class="md-ellipsis"> 文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Geometry_Optimisation/tools.html">
+<span class="md-ellipsis"> 工具 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+<span class="md-ellipsis"> 分子动力学 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_4">
+<span class="md-nav__icon md-icon"></span> 分子动力学 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="overview.html">
+<span class="md-ellipsis"> 分子动力学概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="basics.html">
+<span class="md-ellipsis"> 分子动力学基础 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="restarts.html">
+<span class="md-ellipsis"> 分子动力学续算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="files.html">
+<span class="md-ellipsis"> 分子动力学文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="keywords.html">
+<span class="md-ellipsis"> 分子动力学关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html">
+<span class="md-ellipsis"> 分子动力学工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="pimd.html">
+<span class="md-ellipsis"> 路径积分分子动力学（PIMD） </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis"> Hugoniostat 冲击波模拟方法 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="hugoniostat.html">
+<span class="md-ellipsis"> Hugoniostat 冲击波模拟方法 </span>
+</a>
+<nav aria-label="本页目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span> 本页目录 </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#hugoniot-equation-of-state">
+<span class="md-ellipsis"> 霍贡尼奥状态方程 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#nvhug">
+<span class="md-ellipsis">
+      
+        NVHug
+      
+    </span>
+</a>
+<nav aria-label="NVHug" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#example">
+<span class="md-ellipsis"> 示例 </span>
+</a>
+<nav aria-label="示例" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#param">
+<span class="md-ellipsis"> .参数 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#nphug">
+<span class="md-ellipsis">
+      
+        NPHug
+      
+    </span>
+</a>
+<nav aria-label="NPHug" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#example_1">
+<span class="md-ellipsis"> 示例 </span>
+</a>
+<nav aria-label="示例" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#param_1">
+<span class="md-ellipsis"> .参数 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#cell">
+<span class="md-ellipsis"> .细胞 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#accelerated-equilibration">
+<span class="md-ellipsis"> 加速平衡 </span>
+</a>
+<nav aria-label="加速平衡" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#damping">
+<span class="md-ellipsis"> 阻尼 </span>
+</a>
+<nav aria-label="阻尼" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#related-keywords">
+<span class="md-ellipsis"> 相关关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#examples">
+<span class="md-ellipsis"> 示例 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#quenching">
+<span class="md-ellipsis"> 淬火 </span>
+</a>
+<nav aria-label="淬火" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#related-keywords_1">
+<span class="md-ellipsis"> 相关关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#examples_1">
+<span class="md-ellipsis"> 示例 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#steady-compression">
+<span class="md-ellipsis"> 稳态压缩 </span>
+</a>
+<nav aria-label="稳态压缩" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#relevant-keywords">
+<span class="md-ellipsis"> 相关关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#examples_2">
+<span class="md-ellipsis"> 示例 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#predictor-corrector-experimental">
+<span class="md-ellipsis"> 预测-校正（实验） </span>
+</a>
+<nav aria-label="预测-校正（实验）" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#related-keywords_2">
+<span class="md-ellipsis"> 相关关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#examples_3">
+<span class="md-ellipsis"> 示例 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#keywords-summary">
+<span class="md-ellipsis"> 关键词摘要 </span>
+</a>
+<nav aria-label="关键词摘要" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#param-keywords">
+<span class="md-ellipsis"> 参数关键字 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#devel-code-parameters">
+<span class="md-ellipsis"> 开发代码参数 </span>
+</a>
+<nav aria-label="开发代码参数" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#md-block">
+<span class="md-ellipsis"> MD 块 </span>
+</a>
+<nav aria-label="MD 块" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#equilibration-acceleration">
+<span class="md-ellipsis"> 平衡加速 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#running-averages">
+<span class="md-ellipsis"> 运行平均值 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#initial-states">
+<span class="md-ellipsis"> 初始态 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#pc-block">
+<span class="md-ellipsis"> PC 块 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+<span class="md-ellipsis"> 过渡态搜索 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_5">
+<span class="md-nav__icon md-icon"></span> 过渡态搜索 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Transition_State_Search/neb.html">
+<span class="md-ellipsis"> 微扰弹性带法（NEB） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+<span class="md-ellipsis"> 交换–关联（XC） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_6">
+<span class="md-nav__icon md-icon"></span> 交换–关联（XC） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../XC/XCoverview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../XC/XC.html">
+<span class="md-ellipsis"> 交换–关联设置 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../XC/libXC.html">
+<span class="md-ellipsis">
+    
+  
+    libXC
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+<span class="md-ellipsis"> 电子谱性质 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_7">
+<span class="md-nav__icon md-icon"></span> 电子谱性质 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Spectral/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Spectral/keywords.html">
+<span class="md-ellipsis"> 关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Spectral/restarts.html">
+<span class="md-ellipsis"> 续算 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+<span class="md-ellipsis"> 声子 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_8">
+<span class="md-nav__icon md-icon"></span> 声子 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Introduction.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Running-phonon-calculations.html">
+<span class="md-ellipsis"> 运行声子计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Dielectric-properties.html">
+<span class="md-ellipsis"> 介电性质 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Thermodynamic-properties.html">
+<span class="md-ellipsis"> 热力学性质 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Plotting-and-analysis-tools.html">
+<span class="md-ellipsis"> 绘图与分析工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Running-Large-Calculations.html">
+<span class="md-ellipsis"> 运行大规模计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Advanced-Topics.html">
+<span class="md-ellipsis"> 进阶主题 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Keyword-Reference.html">
+<span class="md-ellipsis"> 关键词参考 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Bibliography.html">
+<span class="md-ellipsis"> 参考文献 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+<span class="md-ellipsis"> 核磁共振（NMR） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_9">
+<span class="md-nav__icon md-icon"></span> 核磁共振（NMR） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../NMR/NMR_overview.html">
+<span class="md-ellipsis"> 核磁共振概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_10" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+<span class="md-ellipsis"> 电子顺磁共振（EPR） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_10_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_10">
+<span class="md-nav__icon md-icon"></span> 电子顺磁共振（EPR） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../EPR/overview.html">
+<span class="md-ellipsis"> 电子顺磁共振概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../XRD/overview.html">
+<span class="md-ellipsis"> X 射线衍射（XRD） </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_12" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_12" id="__nav_2_12_label" tabindex="0">
+<span class="md-ellipsis"> 含时密度泛函理论（TDDFT） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_12_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_12">
+<span class="md-nav__icon md-icon"></span> 含时密度泛函理论（TDDFT） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../TDDFT/overview.html">
+<span class="md-ellipsis"> 含时密度泛函理论概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_13" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_13" id="__nav_2_13_label" tabindex="0">
+<span class="md-ellipsis"> ΔSCF 方法 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_13_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_13">
+<span class="md-nav__icon md-icon"></span> ΔSCF 方法 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/overview.html">
+<span class="md-ellipsis"> ΔSCF 方法概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/simple_delta_scf.html">
+<span class="md-ellipsis"> 简单 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/lin_ex_delta_scf.html">
+<span class="md-ellipsis"> 线性展开 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/mo_delta_scf.html">
+<span class="md-ellipsis"> 分子轨道 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/molpdos.html">
+<span class="md-ellipsis"> 分子投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_14" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_14" id="__nav_2_14_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    DFT+U
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_14_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_14">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    DFT+U
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../DFT+U/dftu-theory.html">
+<span class="md-ellipsis"> DFT+U：理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../DFT+U/dftu-input.html">
+<span class="md-ellipsis"> DFT+U：输入 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../DFT+U/koopmans-theory.html">
+<span class="md-ellipsis"> 线性响应法计算 U：理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../DFT+U/koopmans-input.html">
+<span class="md-ellipsis"> 线性响应法计算 U：输入 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../DFT+U/koopmans-output.html">
+<span class="md-ellipsis"> 线性响应法计算 U：输出 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../DFT+U/koopmans-warnings-errors.html">
+<span class="md-ellipsis"> 线性响应法计算 U：警告与错误 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_15" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_15" id="__nav_2_15_label" tabindex="0">
+<span class="md-ellipsis"> 赝势 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_15_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_15">
+<span class="md-nav__icon md-icon"></span> 赝势 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Pseudopotentials/theory.html">
+<span class="md-ellipsis"> 理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Pseudopotentials/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Pseudopotentials/reading_headers.html">
+<span class="md-ellipsis"> 头部信息 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Pseudopotentials/otfg_string.html">
+<span class="md-ellipsis"> 即时生成赝势（OTFG）字符串 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_16" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_16" id="__nav_2_16_label" tabindex="0">
+<span class="md-ellipsis"> 输入文件 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_16_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_16">
+<span class="md-nav__icon md-icon"></span> 输入文件 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Input_Files/cell_file.html">
+<span class="md-ellipsis"> 晶胞文件（.cell） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Input_Files/param_file.html">
+<span class="md-ellipsis"> 参数文件（.param） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Input_Files/cell_keywords.html">
+<span class="md-ellipsis"> 晶胞文件关键词 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_17" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_17" id="__nav_2_17_label" tabindex="0">
+<span class="md-ellipsis"> 输出文件 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_17_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_17">
+<span class="md-nav__icon md-icon"></span> 输出文件 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Output_Files/output_files.html">
+<span class="md-ellipsis"> 输出文件 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_18" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_18" id="__nav_2_18_label" tabindex="0">
+<span class="md-ellipsis"> 其他程序与工具 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_18_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_18">
+<span class="md-nav__icon md-icon"></span> 其他程序与工具 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Tools/tools.html">
+<span class="md-ellipsis"> 其他程序与工具 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_19" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_19" id="__nav_2_19_label" tabindex="0">
+<span class="md-ellipsis"> 故障排查 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_19_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_19">
+<span class="md-nav__icon md-icon"></span> 故障排查 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Troubleshooting/troubleshooting.html">
+<span class="md-ellipsis"> 常见错误 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Troubleshooting/linux_path.html">
+<span class="md-ellipsis"> Linux 帮助 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis"> 教程 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span> 教程 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+<span class="md-ellipsis"> 成键与电荷 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_1">
+<span class="md-nav__icon md-icon"></span> 成键与电荷 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bonding_and_Charge/charge_density.html">
+<span class="md-ellipsis"> 绘制电荷密度 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bonding_and_Charge/mulliken_population.html">
+<span class="md-ellipsis"> 布居分析 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bonding_and_Charge/ELF.html">
+<span class="md-ellipsis"> 电子局域函数（ELF） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+<span class="md-ellipsis"> 能带与态密度 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_2">
+<span class="md-nav__icon md-icon"></span> 能带与态密度 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+<span class="md-ellipsis"> 绘图 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_1_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_2_1">
+<span class="md-nav__icon md-icon"></span> 绘图 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bands_and_DOS/Plotting/plotting_perl.html">
+<span class="md-ellipsis"> 绘图：CASTEP 工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bands_and_DOS/Plotting/plotting_sumo.html">
+<span class="md-ellipsis"> 绘图：SUMO </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bands_and_DOS/Plotting/Optados/DOS.html">
+<span class="md-ellipsis"> OptaDOS：态密度 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bands_and_DOS/Plotting/Optados/pDOS.html">
+<span class="md-ellipsis"> OptaDOS：投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bands_and_DOS/semiconductors.html">
+<span class="md-ellipsis"> 半导体 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bands_and_DOS/metals.html">
+<span class="md-ellipsis"> 金属 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bands_and_DOS/magnetic.html">
+<span class="md-ellipsis"> 磁性材料 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+<span class="md-ellipsis"> 光学 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_3">
+<span class="md-nav__icon md-icon"></span> 光学 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Optics/Optics.html">
+<span class="md-ellipsis"> 光学 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Optics/Optics_aluminium.html">
+<span class="md-ellipsis"> 光学：铝 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Optics/Optics_ani.html">
+<span class="md-ellipsis"> 光学各向异性 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+<span class="md-ellipsis"> 芯能级能量损失谱 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_4">
+<span class="md-nav__icon md-icon"></span> 芯能级能量损失谱 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Coreloss/Coreloss.html">
+<span class="md-ellipsis"> 芯能级能量损失谱 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Optics/JDOS.html">
+<span class="md-ellipsis"> 联合态密度（JDOS） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/dispersion_corrections/castep-ase-dispersion-tutorial.html">
+<span class="md-ellipsis"> 色散修正 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/NEB/neb_tutorial.html">
+<span class="md-ellipsis"> 微扰弹性带法（NEB） </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+<span class="md-ellipsis"> 核磁共振屏蔽 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_7">
+<span class="md-nav__icon md-icon"></span> 核磁共振屏蔽 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/NMR/Example_1_-Ethanol.html">
+<span class="md-ellipsis"> 示例 1：乙醇 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/NMR/Example_2_-Diamond.html">
+<span class="md-ellipsis"> 示例 2：金刚石 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/NMR/Examples_3_-Alanine_and_Silicates.html">
+<span class="md-ellipsis"> 示例 3：丙氨酸与硅酸盐 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+<span class="md-ellipsis"> ΔSCF 方法 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_8">
+<span class="md-nav__icon md-icon"></span> ΔSCF 方法 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Delta_SCF/simple_delta_scf.html">
+<span class="md-ellipsis"> 简单 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Delta_SCF/lin_ex_delta_scf.html">
+<span class="md-ellipsis"> 线性展开 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Delta_SCF/molpdos.html">
+<span class="md-ellipsis"> 分子投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+<span class="md-ellipsis"> 遗传算法（GA） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_9">
+<span class="md-nav__icon md-icon"></span> 遗传算法（GA） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/GA/Silicon.html">
+<span class="md-ellipsis"> 硅 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/GA/Introduction.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_10" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+<span class="md-ellipsis"> 工具 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_10_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_10">
+<span class="md-nav__icon md-icon"></span> 工具 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Tools/elastic_constants.html">
+<span class="md-ellipsis"> 弹性常数 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+<span class="md-ellipsis"> 开发者文档 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span> 开发者文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/using_devel_codes.html">
+<span class="md-ellipsis"> 使用开发控制代码（Devel Codes） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/using_trace.html">
+<span class="md-ellipsis"> 使用 trace </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/adding_pair_pots.html">
+<span class="md-ellipsis"> 添加经验势 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/build-system.html">
+<span class="md-ellipsis"> 构建系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/style_guide.html">
+<span class="md-ellipsis"> 代码风格指南 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/test_suite.html">
+<span class="md-ellipsis"> 测试 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/CI.html">
+<span class="md-ellipsis"> 持续集成系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/git_workflow.html">
+<span class="md-ellipsis"> Git 工作流程 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/release_procedure.html">
+<span class="md-ellipsis"> 版本发布流程 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="本页目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span> 本页目录 </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#hugoniot-equation-of-state">
+<span class="md-ellipsis"> 霍贡尼奥状态方程 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#nvhug">
+<span class="md-ellipsis">
+      
+        NVHug
+      
+    </span>
+</a>
+<nav aria-label="NVHug" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#example">
+<span class="md-ellipsis"> 示例 </span>
+</a>
+<nav aria-label="示例" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#param">
+<span class="md-ellipsis"> .参数 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#nphug">
+<span class="md-ellipsis">
+      
+        NPHug
+      
+    </span>
+</a>
+<nav aria-label="NPHug" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#example_1">
+<span class="md-ellipsis"> 示例 </span>
+</a>
+<nav aria-label="示例" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#param_1">
+<span class="md-ellipsis"> .参数 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#cell">
+<span class="md-ellipsis"> .细胞 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#accelerated-equilibration">
+<span class="md-ellipsis"> 加速平衡 </span>
+</a>
+<nav aria-label="加速平衡" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#damping">
+<span class="md-ellipsis"> 阻尼 </span>
+</a>
+<nav aria-label="阻尼" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#related-keywords">
+<span class="md-ellipsis"> 相关关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#examples">
+<span class="md-ellipsis"> 示例 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#quenching">
+<span class="md-ellipsis"> 淬火 </span>
+</a>
+<nav aria-label="淬火" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#related-keywords_1">
+<span class="md-ellipsis"> 相关关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#examples_1">
+<span class="md-ellipsis"> 示例 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#steady-compression">
+<span class="md-ellipsis"> 稳态压缩 </span>
+</a>
+<nav aria-label="稳态压缩" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#relevant-keywords">
+<span class="md-ellipsis"> 相关关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#examples_2">
+<span class="md-ellipsis"> 示例 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#predictor-corrector-experimental">
+<span class="md-ellipsis"> 预测-校正（实验） </span>
+</a>
+<nav aria-label="预测-校正（实验）" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#related-keywords_2">
+<span class="md-ellipsis"> 相关关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#examples_3">
+<span class="md-ellipsis"> 示例 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#keywords-summary">
+<span class="md-ellipsis"> 关键词摘要 </span>
+</a>
+<nav aria-label="关键词摘要" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#param-keywords">
+<span class="md-ellipsis"> 参数关键字 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#devel-code-parameters">
+<span class="md-ellipsis"> 开发代码参数 </span>
+</a>
+<nav aria-label="开发代码参数" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#md-block">
+<span class="md-ellipsis"> MD 块 </span>
+</a>
+<nav aria-label="MD 块" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#equilibration-acceleration">
+<span class="md-ellipsis"> 平衡加速 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#running-averages">
+<span class="md-ellipsis"> 运行平均值 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#initial-states">
+<span class="md-ellipsis"> 初始态 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="hugoniostat.html#pc-block">
+<span class="md-ellipsis"> PC 块 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="hugoniostat">Hugoniostat 冲击波模拟方法</h1><div class="zh-notice">中文译文 · 由本地英文文档翻译，已统一术语并进行重点抽查。 <a href="../../https://castep-docs.github.io/castep-docs/documentation/Molecular_Dynamics/hugoniostat.html">英文原文对照</a> · <a href="../../translation-notes.html">翻译说明</a></div>
+<p>Hugoniostat 是一种通过伪系综模拟密度泛函理论（DFT）中冲击波的方法，该方法将温度和压力驱动至赫诺伊特线上的某一点。已实现两种赫诺伊特态方法。Maillet 提出的恒容赫诺伊特态（NVHug）。 <em>等</em><sup id="fnref:refMaillet2000"><a class="footnote-ref" href="hugoniostat.html#fn:refMaillet2000">1</a></sup> 以及Ravelo的恒压/应力胡戈诺斯塔特 <em>等</em><sup id="fnref:refRavelo2004"><a class="footnote-ref" href="hugoniostat.html#fn:refRavelo2004">2</a></sup>.</p>
+<p>NVHug 和 NPHug 算法是一种伪系综方法，这意味着它们不严格守恒某个形式上的物理量，而是将系统驱动至期望的状态。</p>
+<p>算法以其他 CASTEP 系综的方式实现，并使用了许多通用的 <a href="keywords.html">MD 关键字</a> 并且可以与任何标准的 CASTEP 恒温器方法一起使用（参见 <a href="basics.html">基础</a>).</p>
+<p>扩展Hugoniostat方法的详细信息可参见博士论文<sup id="fnref:refWilkins2019"><a class="footnote-ref" href="hugoniostat.html#fn:refWilkins2019">3</a></sup> 其中，这些方法最初是在 CASTEP 中实现的。</p>
+<h2 id="hugoniot-equation-of-state">霍贡尼奥状态方程</h2>
+<p>霍贡尼奥曲线描述了系统的冲击态</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+\text{Mass:} \qquad{}\quad{}~~\,\rho{}_{1}u_{1} = \rho{}_{2}u_{2}
+</div>
+<script type="math/tex; mode=display">
+\text{Mass:} \qquad{}\quad{}~~\,\rho{}_{1}u_{1} = \rho{}_{2}u_{2}
+</script>
+</div>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+\text{Momentum:} \qquad{} \rho{}u_{1}^{2} + P_{1} = \rho{}u_{2}^{2} + P_{2}
+</div>
+<script type="math/tex; mode=display">
+\text{Momentum:} \qquad{} \rho{}u_{1}^{2} + P_{1} = \rho{}u_{2}^{2} + P_{2}
+</script>
+</div>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+\text{Energy:} \qquad{} h_{1} + \tfrac{1}{2}u_{1}^{2} =  h_{2} + \tfrac{1}{2}u_{2}^{2}
+</div>
+<script type="math/tex; mode=display">
+\text{Energy:} \qquad{} h_{1} + \tfrac{1}{2}u_{1}^{2} =  h_{2} + \tfrac{1}{2}u_{2}^{2}
+</script>
+</div>
+<p>其中下标 <span class="arithmatex"><span class="MathJax_Preview">1</span><script type="math/tex">1</script></span> 并且 <span class="arithmatex"><span class="MathJax_Preview">2</span><script type="math/tex">2</script></span> 参考激波前前方和后方的状态， <span class="arithmatex"><span class="MathJax_Preview">\rho{}</span><script type="math/tex">\rho{}</script></span> 是流体的质量密度， <span class="arithmatex"><span class="MathJax_Preview">u</span><script type="math/tex">u</script></span> 是流体速度， <span class="arithmatex"><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span> 是压力和 <span class="arithmatex"><span class="MathJax_Preview">h</span><script type="math/tex">h</script></span> 是比焓（单位质量）。它也可以用冲击速度来表示：</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+\text{Mass:} \qquad{}\rho{}_{1}u_{s} = \rho{}_{2}(u_{s} - u_{2})
+</div>
+<script type="math/tex; mode=display">
+\text{Mass:} \qquad{}\rho{}_{1}u_{s} = \rho{}_{2}(u_{s} - u_{2})
+</script>
+</div>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+\text{Momentum:} \qquad{} P_{2}-P_{1} = \rho{}_{2}u_{2}(u_{s}-u_{2}) = \rho{}_{1}u_{s}u_{2}
+</div>
+<script type="math/tex; mode=display">
+\text{Momentum:} \qquad{} P_{2}-P_{1} = \rho{}_{2}u_{2}(u_{s}-u_{2}) = \rho{}_{1}u_{s}u_{2}
+</script>
+</div>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+\text{Energy:} \qquad{} P_2\,u_2  = \rho{}_{1}u_{s}(\tfrac{1}{2}u_{2}^{2} + e_{2} - e_{1})
+</div>
+<script type="math/tex; mode=display">
+\text{Energy:} \qquad{} P_2\,u_2  = \rho{}_{1}u_{s}(\tfrac{1}{2}u_{2}^{2} + e_{2} - e_{1})
+</script>
+</div>
+<p>其中 <span class="arithmatex"><span class="MathJax_Preview">u_{s}</span><script type="math/tex">u_{s}</script></span> 是冲击速度和 <span class="arithmatex"><span class="MathJax_Preview">e</span><script type="math/tex">e</script></span> 是比内能。通过将质量守恒和动量守恒代入能量守恒方程，可以推导出洪诺特方程：</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+e_{2} - e_{1} = \tfrac{1}{2}(P_{1} + P_{2})(\rho{}_{1}^{\text{-}1}-\rho{}_{2}^{\text{-}1}),
+</div>
+<script type="math/tex; mode=display">
+e_{2} - e_{1} = \tfrac{1}{2}(P_{1} + P_{2})(\rho{}_{1}^{\text{-}1}-\rho{}_{2}^{\text{-}1}),
+</script>
+</div>
+<p>其中以单位质量为基础可得：</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+e_{2} - e_{1} = \tfrac{1}{2}(P_{1} + P_{2})(V_{1}-V_{2}),
+</div>
+<script type="math/tex; mode=display">
+e_{2} - e_{1} = \tfrac{1}{2}(P_{1} + P_{2})(V_{1}-V_{2}),
+</script>
+</div>
+<h2 id="nvhug">NVHug</h2>
+<p>NVHug 方法在压缩比为 <code>md_hug_compression</code> 在指定方向上 <code>md_hug_dir</code> （默认情况下 <code>ISO</code>热带）。</p>
+<p>NVHug 所遵循的运动方程（采用 Nose-Hoover 格式）为：</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+\dot{\textbf{r}}_{i} = \frac{\textbf{p}_{i}}{m_{i}},
+</div>
+<script type="math/tex; mode=display">
+\dot{\textbf{r}}_{i} = \frac{\textbf{p}_{i}}{m_{i}},
+</script>
+</div>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+\dot{\textbf{p}}_{i} = \textbf{F}_{i} - \nu{}\chi{}\textbf{p}_{i},
+</div>
+<script type="math/tex; mode=display">
+\dot{\textbf{p}}_{i} = \textbf{F}_{i} - \nu{}\chi{}\textbf{p}_{i},
+</script>
+</div>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+\dot{\chi{}} = \frac{\nu{}}{C}(E(t) - E_{H}(t)),
+</div>
+<script type="math/tex; mode=display">
+\dot{\chi{}} = \frac{\nu{}}{C}(E(t) - E_{H}(t)),
+</script>
+</div>
+<p>其中 <span class="arithmatex"><span class="MathJax_Preview">\chi{}</span><script type="math/tex">\chi{}</script></span> 是恒温器向系统传递的热量流， <span class="arithmatex"><span class="MathJax_Preview">\nu{}</span><script type="math/tex">\nu{}</script></span> 是恒温器与系统之间的耦合， <span class="arithmatex"><span class="MathJax_Preview">C</span><script type="math/tex">C</script></span> 是一个单位为能量的缩放常数，用于保持系统尺寸无关性</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+E_{H}(t) = E(t_{0}) + \tfrac{1}{2}(P(t) + P(t_{0})(V(t_{0}) - V(t))
+</div>
+<script type="math/tex; mode=display">
+E_{H}(t) = E(t_{0}) + \tfrac{1}{2}(P(t) + P(t_{0})(V(t_{0}) - V(t))
+</script>
+</div>
+<p>其中 <span class="arithmatex"><span class="MathJax_Preview">t_{0}</span><script type="math/tex">t_{0}</script></span> 在系统尚未被压缩之前（即平衡态之前），我们认为当前状态与赫诺伊特状态的偏离程度称为赫诺伊特估计值：</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+E(t) - E_{H}(t) = E(t) - E(t_{0}) - \tfrac{1}{2}(P(t) + P(t_{0}))(V(t_{0}) - V(t)).
+</div>
+<script type="math/tex; mode=display">
+E(t) - E_{H}(t) = E(t) - E(t_{0}) - \tfrac{1}{2}(P(t) + P(t_{0}))(V(t_{0}) - V(t)).
+</script>
+</div>
+<h4 id="example">示例</h4>
+<h5 id="param"><code>.param</code></h5>
+<div class="highlight"><pre><span></span><code><a href="hugoniostat.html#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>task             : molecular dynamics
+<a href="hugoniostat.html#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>
+<a href="hugoniostat.html#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>md_ensemble      : HUG
+<a href="hugoniostat.html#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>md_hug_dir       : ZDIR
+<a href="hugoniostat.html#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>md_hug_method    : NVHug
+<a href="hugoniostat.html#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>md_temperature   : 70 K
+<a href="hugoniostat.html#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>md_thermostat    : langevin
+<a href="hugoniostat.html#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>md_hug_t         : 10 fs
+<a href="hugoniostat.html#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a>md_ion_t         : 50 fs
+<a href="hugoniostat.html#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a>md_delta_t       : 1 fs
+<a href="hugoniostat.html#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>md_eqm_t         : 500 fs
+<a href="hugoniostat.html#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a>md_num_iter      : 1000
+<a href="hugoniostat.html#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a>md_hug_compression : 0.7
+</code></pre></div>
+<h2 id="nphug">NPHug</h2>
+<p>支配NPHug Hugoniostat（采用Nose-Hoover形式）的运动方程为：</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+\dot{r}_{\alpha{}i} = \frac{p_{\alpha{}i}}{m_{i}} + \nu{}_{P}\eta{}_{\alpha{}}r_{\alpha{}i},
+</div>
+<script type="math/tex; mode=display">
+\dot{r}_{\alpha{}i} = \frac{p_{\alpha{}i}}{m_{i}} + \nu{}_{P}\eta{}_{\alpha{}}r_{\alpha{}i},
+</script>
+</div>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+\dot{p}_{\alpha{}i} = F_{\alpha{}i} - (\nu{}_{p}\eta{}_{\alpha{}} - \nu{}_{H}\chi{})p_{\alpha{}i},
+</div>
+<script type="math/tex; mode=display">
+\dot{p}_{\alpha{}i} = F_{\alpha{}i} - (\nu{}_{p}\eta{}_{\alpha{}} - \nu{}_{H}\chi{})p_{\alpha{}i},
+</script>
+</div>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+\dot{h}_{\alpha{}\alpha{}}     = \nu{}_{p}\eta{}_{\alpha{}}h_{\alpha{}\alpha{}},
+</div>
+<script type="math/tex; mode=display">
+\dot{h}_{\alpha{}\alpha{}}     = \nu{}_{p}\eta{}_{\alpha{}}h_{\alpha{}\alpha{}},
+</script>
+</div>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+\dot{\chi{}}      = \frac{\nu{}_{H}}{C}(E(t) - E_{H}(t)),
+</div>
+<script type="math/tex; mode=display">
+\dot{\chi{}}      = \frac{\nu{}_{H}}{C}(E(t) - E_{H}(t)),
+</script>
+</div>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+\dot{\eta{}}_{\alpha{}}      = \frac{\nu{}_{p}}{D}(P_{\alpha{}\alpha{}}(t) - \sigma{}_{\alpha{}\alpha{}}),
+</div>
+<script type="math/tex; mode=display">
+\dot{\eta{}}_{\alpha{}}      = \frac{\nu{}_{p}}{D}(P_{\alpha{}\alpha{}}(t) - \sigma{}_{\alpha{}\alpha{}}),
+</script>
+</div>
+<p>其中 <span class="arithmatex"><span class="MathJax_Preview">\alpha{}</span><script type="math/tex">\alpha{}</script></span> 指的是沿晶格矢量方向的一个分量 <span class="arithmatex"><span class="MathJax_Preview">\vec{h}</span><script type="math/tex">\vec{h}</script></span>, <span class="arithmatex"><span class="MathJax_Preview">\nu{}_{H}</span><script type="math/tex">\nu{}_{H}</script></span> 是恒温器与系统的耦合， <span class="arithmatex"><span class="MathJax_Preview">\nu{}_{P}{}</span><script type="math/tex">\nu{}_{P}{}</script></span> 是恒压器活塞与系统的耦合， <span class="arithmatex"><span class="MathJax_Preview">\sigma{}</span><script type="math/tex">\sigma{}</script></span> 是目标压强张量和 <span class="arithmatex"><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span> 是瞬时总压力张量， <span class="arithmatex"><span class="MathJax_Preview">D</span><script type="math/tex">D</script></span> 是用于保持系统尺寸无关性的压力单位比例常数，Ravelo <em>等</em>.<sup id="fnref2:refRavelo2004"><a class="footnote-ref" href="hugoniostat.html#fn:refRavelo2004">2</a></sup> 建议平衡体模量（<span class="arithmatex"><span class="MathJax_Preview">B_{0}</span><script type="math/tex">B_{0}</script></span>) .</p>
+<h4 id="example_1">示例</h4>
+<h5 id="param_1"><code>.param</code></h5>
+<div class="highlight"><pre><span></span><code><a href="hugoniostat.html#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>task             : molecular dynamics
+<a href="hugoniostat.html#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>
+<a href="hugoniostat.html#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>md_ensemble      : HUG
+<a href="hugoniostat.html#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>md_hug_dir       : ZDIR
+<a href="hugoniostat.html#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a>md_hug_method    : NPHug
+<a href="hugoniostat.html#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a>md_temperature   : 70 K
+<a href="hugoniostat.html#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a>md_thermostat    : langevin
+<a href="hugoniostat.html#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a>md_hug_t         : 10 fs
+<a href="hugoniostat.html#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a>md_ion_t         : 50 fs
+<a href="hugoniostat.html#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a>md_delta_t       : 1 fs
+<a href="hugoniostat.html#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a>md_eqm_t         : 500 fs
+<a href="hugoniostat.html#__codelineno-1-12" id="__codelineno-1-12" name="__codelineno-1-12"></a>md_num_iter      : 1000
+</code></pre></div>
+<h5 id="cell"><code>.cell</code></h5>
+<div class="highlight"><pre><span></span><code><a href="hugoniostat.html#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>...
+<a href="hugoniostat.html#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>
+<a href="hugoniostat.html#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>%block external_pressure
+<a href="hugoniostat.html#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>GPa
+<a href="hugoniostat.html#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a>0.0 0.0 0.0
+<a href="hugoniostat.html#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a>0.0 0.0 0.0
+<a href="hugoniostat.html#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a>0.0 0.0 10.0
+<a href="hugoniostat.html#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>%endblock external_pressure
+</code></pre></div>
+<h2 id="accelerated-equilibration">加速平衡</h2>
+<p>由于平面波密度泛函理论（DFT）计算的性质以及力的计算方式，DFT对结构的快速变化非常敏感，在极高温度下可能变得不稳定，且当原子彼此靠近时，DFT中关于内层电子非极化性的基本假设将不再成立。</p>
+<p>与经验力场相比，密度泛函理论（DFT）的计算也十分昂贵，因此尽可能减少计算量至关重要。加速平衡方法的存在是为了使冲击波计算过程更快、更稳健。</p>
+<h3 id="damping">阻尼</h3>
+<p>拉韦洛 <em>等</em>.<sup id="fnref3:refRavelo2004"><a class="footnote-ref" href="hugoniostat.html#fn:refRavelo2004">2</a></sup> 建议对“温度/压力”恒温器/恒压器的“速度”施加阻尼，以防止超过理想的巨大气体值。这使得恒温器的NVHug公式为：</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+\dot{\chi{}} = \frac{\nu{}_{H}}{C}(E(t) - E_{H}(t)) - \beta{}_{H}\chi{},
+</div>
+<script type="math/tex; mode=display">
+\dot{\chi{}} = \frac{\nu{}_{H}}{C}(E(t) - E_{H}(t)) - \beta{}_{H}\chi{},
+</script>
+</div>
+<p>以及同样适用于NPHug公式中的运动更新方程：</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">
+\dot{\eta{}}_{\alpha{}} = \frac{\nu{}_{p}}{D}(P_{\alpha{}\alpha{}}(t) - \sigma{}_{\alpha{}\alpha{}}) - \beta{}_{p}\eta{},
+</div>
+<script type="math/tex; mode=display">
+\dot{\eta{}}_{\alpha{}} = \frac{\nu{}_{p}}{D}(P_{\alpha{}\alpha{}}(t) - \sigma{}_{\alpha{}\alpha{}}) - \beta{}_{p}\eta{},
+</script>
+</div>
+<p>其中 <span class="arithmatex"><span class="MathJax_Preview">\beta{}_{H}</span><script type="math/tex">\beta{}_{H}</script></span> 并且 <span class="arithmatex"><span class="MathJax_Preview">\beta{}_{p}</span><script type="math/tex">\beta{}_{p}</script></span> 分别是用户定义的热流和恒压器活塞的阻尼系数，选择这些系数以实现霍贡尼态的临界阻尼。</p>
+<h4 id="related-keywords">相关关键词</h4>
+<ul>
+<li>
+<p><code>beta_t</code> ：（物理的）</p>
+<p>1/fs 中用于 Hugoniostat 温度耦合的阻尼参数</p>
+</li>
+<li>
+<p><code>beta_h</code> ：（物理的）</p>
+<p>1/fs 中 Hugoniostat 压力耦合的阻尼参数</p>
+</li>
+</ul>
+<h4 id="examples">示例</h4>
+<div class="highlight"><pre><span></span><code><a href="hugoniostat.html#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>%block devel_code
+<a href="hugoniostat.html#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>md: BETA_T=0.1 BETA_H=0.1 :endmd # Lightly Damped
+<a href="hugoniostat.html#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a>md: BETA_T=0.3 BETA_H=0.3 :endmd # Damped
+<a href="hugoniostat.html#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a>%enblock devel_code
+</code></pre></div>
+<p><img alt="Damping" src="../../img/LangDampC.png"/></p>
+<p>阻尼对朗格万方案（式4.2）在60%体积的500原子伦纳德-琼斯单元中的影响，该单元具有过强的虎克尼奥斯特耦合（<span class="arithmatex"><span class="MathJax_Preview">\nu{}_{H}</span><script type="math/tex">\nu{}_{H}</script></span>) 的 <span class="arithmatex"><span class="MathJax_Preview">0.1fs^{−1}</span><script type="math/tex">0.1fs^{−1}</script></span> 以及一个阻尼因子（<span class="arithmatex"><span class="MathJax_Preview">\beta{}_{H}</span><script type="math/tex">\beta{}_{H}</script></span>) 的 (无阻尼) 0.0，(轻阻尼) 0.1，(有阻尼) 0.3。</p>
+<h3 id="quenching">淬火</h3>
+<p>淬火是阻尼的一种更极端形式，当热/压强控制器的“加速度”改变符号时，“速度”会被重置为0。由于这种操作并不直接耦合到系统内部，因此不会破坏系统的内部动力学，反而可能加快收敛并使温度更加稳定。特别是在NVHug的初始阶段，当系统初次压缩时，温度和压力可能会出现剧烈波动。</p>
+<p>淬火仅在平衡阶段发生，这一点由确定。 <a href="keywords.html"><code>md_eqm_t</code></a></p>
+<h4 id="related-keywords_1">相关关键词</h4>
+<ul>
+<li>
+<p><code>quench_t</code> ：（逻辑的）</p>
+<p>快速平衡时改变方向时的淬火恒温器速度</p>
+</li>
+<li>
+<p><code>quench_p</code> ：（逻辑的）</p>
+<p>快速平衡时改变方向时淬火恒压器的速度</p>
+</li>
+</ul>
+<h4 id="examples_1">示例</h4>
+<div class="highlight"><pre><span></span><code><a href="hugoniostat.html#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>%block devel_code
+<a href="hugoniostat.html#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>md: QUENCH_T=T :endmd # Quench Thermostat
+<a href="hugoniostat.html#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a>md: QUENCH_P=T :endmd # Quench Barostat
+<a href="hugoniostat.html#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a>%enblock devel_code
+</code></pre></div>
+<p><img alt="Quenched" src="../../img/Quench.png"/></p>
+<p>淬火对一个70%体积、500个原子的伦纳德-琼斯系统的温度的影响，未淬火线（黑色）在初始阶段表现出较大的瞬态变化，而淬火线（蓝色和绿色）则消除了这一瞬态，但以“非物理”的温度动力学为代价；当淬火在平衡后关闭时，这种非物理的温度动力学便被消除（蓝色）。需要注意的是，三条曲线最终都收敛到相同的温度。</p>
+<h3 id="steady-compression">稳态压缩</h3>
+<p>稳态压缩将系统在NVHug压缩过程中分阶段进行，而非瞬时压缩，以使系统更平稳地达到平衡，并避免瞬时的温度和压力峰值。这一观点也在Ravelo中提出。 <em>等</em>.<sup id="fnref4:refRavelo2004"><a class="footnote-ref" href="hugoniostat.html#fn:refRavelo2004">2</a></sup> 作为一种平滑平衡过程的方法。</p>
+<p>k点和波函数样本是根据压缩后的单元格确定的，以便在大多数计算过程中NVHug能更高效地运行。</p>
+<p><code>compression_t</code> 并且 <code>compression_rate</code> 是两种指定同一事物的方式，无论是作为 <code>%/fs</code> 或者 <code>fs/%</code>当压缩达到目标压缩量时，压缩将停止。对于稳态压缩，通常最好将系统压缩的时间略短于平衡期，以确保在测量数据之前系统已处于一个有效的稳态。</p>
+<p><code>compression_block</code> 使系统在压缩之间有时间达到平衡，通过每次压缩 <code>compression_block</code> 步骤而不是每一步（尽管在每个压缩步骤中的压缩量会更大）。 <code>compression_rate</code> 并且 <code>compression_t</code> 得以保留）。</p>
+<h4 id="relevant-keywords">相关关键词</h4>
+<ul>
+<li>
+<p><code>compression_t</code> ：（物理的）</p>
+<p>压缩过程应持续的时间，用于压力梯度计算中 <span class="arithmatex"><span class="MathJax_Preview">fs</span><script type="math/tex">fs</script></span>.</p>
+</li>
+<li>
+<p><code>compression_rate</code> ：（物理的）</p>
+<p>单元体积减小的速率作为 <span class="arithmatex"><span class="MathJax_Preview">\tfrac{\%}{fs}</span><script type="math/tex">\tfrac{\%}{fs}</script></span>.</p>
+</li>
+<li>
+<p><code>compression_block</code> ：（整数）</p>
+<p>每次单元格压缩之间的时间步数，用于平稳地升高压力。</p>
+</li>
+</ul>
+<h4 id="examples_2">示例</h4>
+<div class="highlight"><pre><span></span><code><a href="hugoniostat.html#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>md_eqm_t: 600fs
+<a href="hugoniostat.html#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>
+<a href="hugoniostat.html#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a>%block devel_code
+<a href="hugoniostat.html#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a>md: compression_t=400 :endmd
+<a href="hugoniostat.html#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a>%enblock devel_code
+</code></pre></div>
+<p><img alt="Steady Compression" src="../../img/lang_steadT.png"/> 恒定压缩对平衡过程中减少初始瞬态的影响。</p>
+<h2 id="predictor-corrector-experimental">预测-校正（实验）</h2>
+<p>由于密度泛函理论（DFT）的特性，许多重要性质（例如波函数）都与模拟单元相关，因此通常更高效地使用固定单元计算，以减少因重新计算所有与单元相关的性质而带来的计算开销。这意味着在CASTEP中使用NVHug通常更为高效，然而，我们通常更关心的是在赫诺特曲线上特定压力点的采样，而非某一压缩状态的影响。</p>
+<p>预测-校正方法通过利用赫诺伊特曲线上的历史数据，自动进行一系列NVHug模拟，以追踪赫诺伊特曲线直至达到某一压力。</p>
+<p>它使用之前的 <code>hist_len</code> 拟合曲线以预测何种压缩可达到目标压力并进行计算。绘制出赫诺伊特曲线至 <code>target_p</code> 无论是哪一个 <code>steps</code> 步骤或步长为 <code>pstep</code>. E.g.</p>
+<p><div class="highlight"><pre><span></span><code><a href="hugoniostat.html#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>pc:
+<a href="hugoniostat.html#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a>target_p=10
+<a href="hugoniostat.html#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a>steps=2
+<a href="hugoniostat.html#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a>:endpc
+</code></pre></div> 目标为 5 和 10 GPa <div class="highlight"><pre><span></span><code><a href="hugoniostat.html#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a>pc:
+<a href="hugoniostat.html#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>target_p=10
+<a href="hugoniostat.html#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a>pstep=2
+<a href="hugoniostat.html#__codelineno-7-4" id="__codelineno-7-4" name="__codelineno-7-4"></a>:endpc
+</code></pre></div> 将目标设定为 2、4、6、8 和 10 GPa</p>
+<p><code>err</code> 确定实际压力必须接近目标压力的程度，相对于实际的目标压力。例如 <div class="highlight"><pre><span></span><code><a href="hugoniostat.html#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a>pc:
+<a href="hugoniostat.html#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a>target_p=10
+<a href="hugoniostat.html#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a>err=0.1
+<a href="hugoniostat.html#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a>:endpc
+</code></pre></div> 将接受任何最终赫诺伊特曲线的计算。 <span class="arithmatex"><span class="MathJax_Preview">P</span><script type="math/tex">P</script></span> 在9-11 GPa之间作为完整过程，然后转向下一个目标。</p>
+<p>该 <code>reuse</code> 关键词使P-C使用前一步的最终状态作为当前步骤的初始状态。包含温度/压力和原子位置，以加快平衡过程。</p>
+<p><code>max_delta</code> 限制了P-C在各阶段之间可承受的压缩步长，以确保在初始步骤中（由于数据点不足导致估算受限）对于非常刚性的材料不会出现极端的温度或压力跃变，从而避免密度泛函理论的基本假设失效而导致系统崩溃。</p>
+<h4 id="related-keywords_2">相关关键词</h4>
+<ul>
+<li>
+<p><code>pc</code> ：（逻辑的）</p>
+<p>使用预测-校正算法尝试自动追踪赫诺伊特线。</p>
+</li>
+<li>
+<p><code>reuse</code> ：（逻辑的）</p>
+<p>重用前一次压缩的最终状态作为下一步的初始状态。</p>
+</li>
+<li>
+<p><code>max_delta</code> ：（物理的）</p>
+<p>P-C 在 GPa 单位下的最大尝试压缩步长差</p>
+</li>
+<li>
+<p><code>err</code> （物理的）</p>
+<p>达到值与目标值之间的允许差异被视为可接受。</p>
+</li>
+<li>
+<p><code>target_p</code> ：（物理的）</p>
+<p>P-C 相达到的最大目标压力（单位：GPa）</p>
+</li>
+<li>
+<p><code>pstep</code> ：（物理的）</p>
+<p>抵达 <code>target_p</code> 以大约为步长 <code>pstep</code> GPa</p>
+</li>
+<li>
+<p><code>steps</code> ：（整数）</p>
+<p>抵达 <code>target_p</code> 大约在 <code>steps</code> 步骤</p>
+</li>
+<li>
+<p><code>method</code> ：（LIN，POLY，EXP）</p>
+<p>用于预测校正估计的方程形式， <code>POLY</code>推荐使用名义值。</p>
+</li>
+<li>
+<p><code>poly_order</code> ：（整数）</p>
+<p>在中使用的多项式阶数 <code>POLY</code>名义方法</p>
+</li>
+<li>
+<p><code>hist_len</code> ：（整数）</p>
+<p>保留历史记录的长度</p>
+</li>
+</ul>
+<h4 id="examples_3">示例</h4>
+<div class="highlight"><pre><span></span><code><a href="hugoniostat.html#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a>PC: PC=T TARGET_P=1.0 STEPS=2 METHOD='LIN' AV_METHOD='RUNAV' :ENDPC
+</code></pre></div>
+<h2 id="keywords-summary">关键词摘要</h2>
+<h3 id="param-keywords">参数关键字</h3>
+<ul>
+<li>
+<p><code>md_ensemble</code>:</p>
+<p>应设置为 <code>HUG</code> 使用霍诺伊奥斯塔特方法。</p>
+</li>
+<li>
+<p><code>md_hug_method</code> ：（无，NVHUG，NPHUG）</p>
+<p>霍贡尼奥斯特法。（默认值：NONE）</p>
+</li>
+<li>
+<p><code>md_hug_dir</code> ：（XDIR，YDIR，ZDIR，ISO）</p>
+<p>压强方向（默认值：ISO）</p>
+</li>
+<li>
+<p><code>md_hug_t</code> ：（物理的）</p>
+<p>等压耦合常数。</p>
+</li>
+<li>
+<p><code>md_hug_compression</code> ：（物理的）</p>
+<p>压强比（Hugoniostat） <span class="arithmatex"><span class="MathJax_Preview">\frac{V}{V_{0}}</span><script type="math/tex">\frac{V}{V_{0}}</script></span>值范围从 0.0 到 1.0（默认）</p>
+</li>
+</ul>
+<h3 id="devel-code-parameters">开发代码参数</h3>
+<h4 id="md-block">MD 块</h4>
+<ul>
+<li>
+<p><code>chem_pot</code> ：（物理的）</p>
+<p>手动指定总化学势（缩放因子），单位为 eV</p>
+</li>
+</ul>
+<h5 id="equilibration-acceleration">平衡加速</h5>
+<ul>
+<li>
+<p><code>quench_t</code> ：（逻辑的）</p>
+<p>快速平衡时改变方向时的淬火恒温器速度</p>
+</li>
+<li>
+<p><code>quench_p</code> ：（逻辑的）</p>
+<p>在改变方向时使用淬火恒压器以实现快速平衡</p>
+</li>
+<li>
+<p><code>eqm_hug_t</code> ：（物理的）</p>
+<p>在1/fs计算中等温平衡阶段的Hugoniostat耦合</p>
+</li>
+<li>
+<p><code>beta_t</code> ：（物理的）</p>
+<p>1/fs 中用于 Hugoniostat 温度耦合的阻尼参数</p>
+</li>
+<li>
+<p><code>beta_h</code> ：（物理的）</p>
+<p>1/fs 中 Hugoniostat 压力耦合的阻尼参数</p>
+</li>
+<li>
+<p><code>compression_t</code> ：（物理的）</p>
+<p>压缩过程应持续的时间，用于压力梯度计算中 <span class="arithmatex"><span class="MathJax_Preview">fs</span><script type="math/tex">fs</script></span>.</p>
+</li>
+<li>
+<p><code>compression_rate</code> ：（物理的）</p>
+<p>单元体积减小的速率作为 <span class="arithmatex"><span class="MathJax_Preview">\tfrac{\%}{fs}</span><script type="math/tex">\tfrac{\%}{fs}</script></span>.</p>
+</li>
+<li>
+<p><code>compression_block</code> ：（整数）</p>
+<p>每次单元格压缩之间的时间步数，用于平稳地升高压力。</p>
+</li>
+</ul>
+<h5 id="running-averages">运行平均值</h5>
+<ul>
+<li>
+<p><code>ra_len</code> ：（整数）</p>
+<p>用于计算最终赫贡尼特曲线的运行平均步数</p>
+</li>
+<li>
+<p><code>av_method</code> ：（CUMAV，RUNAV，DIRCT，FINAL）</p>
+<p>计算赫诺伊特曲线的方法到dump文件 <code>.hug</code> 文件。</p>
+</li>
+</ul>
+<h5 id="initial-states">初始态</h5>
+<ul>
+<li>
+<p><code>ma_init_t</code> ：（逻辑的）</p>
+<p>使用 Maillet hugoniostat 温度估计器作为初始温度。</p>
+</li>
+<li>
+<p><code>init_eta</code> ：（物理的）</p>
+<p>初始 <span class="arithmatex"><span class="MathJax_Preview">\eta{}</span><script type="math/tex">\eta{}</script></span> （单元体压缩速度）用于 NPHug 在 <span class="arithmatex"><span class="MathJax_Preview">\tfrac{A}{fs}</span><script type="math/tex">\tfrac{A}{fs}</script></span>.</p>
+</li>
+<li>
+<p><code>temp_init</code> ：（物理的）</p>
+<p>每个阶段使用的初始温度（覆盖） <code>md_temperature</code> P-C) 中的每个阶段在 <span class="arithmatex"><span class="MathJax_Preview">K</span><script type="math/tex">K</script></span>.</p>
+</li>
+</ul>
+<h4 id="pc-block">PC 块</h4>
+<ul>
+<li>
+<p><code>pc</code> ：（逻辑的）</p>
+<p>使用预测-校正算法尝试自动追踪赫诺伊特线。</p>
+</li>
+<li>
+<p><code>reuse</code> ：（逻辑的）</p>
+<p>重用之前压缩的温度作为初始温度而非 <code>md_temperature</code></p>
+</li>
+<li>
+<p><code>max_delta</code> ：（物理的）</p>
+<p>P-C 中最大尝试的压力步长差（单位：GPa）</p>
+</li>
+<li>
+<p><code>err</code> （物理的）</p>
+<p>达到值与目标值之间的允许差异被视为可接受。</p>
+</li>
+<li>
+<p><code>target_p</code> ：（物理的）</p>
+<p>P-C 相达到的最大目标压力（单位：GPa）</p>
+</li>
+<li>
+<p><code>pstep</code> ：（物理的）</p>
+<p>抵达 <code>target_p</code> 以大约为步长 <code>pstep</code> GPa</p>
+</li>
+<li>
+<p><code>steps</code> ：（整数）</p>
+<p>抵达 <code>target_p</code> 大约在 <code>steps</code> 步骤</p>
+</li>
+<li>
+<p><code>method</code> ：（LIN，POLY，EXP）</p>
+<p>用于预测校正估计的方程形式， <code>POLY</code>推荐使用名义值。</p>
+</li>
+<li>
+<p><code>poly_order</code> ：（整数）</p>
+<p>在中使用的多项式阶数 <code>POLY</code>名义方法</p>
+</li>
+<li>
+<p><code>hist_len</code> ：（整数）</p>
+<p>保留历史记录的长度</p>
+</li>
+</ul>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="fn:refMaillet2000">
+<p>J.-B. Maillet, M. Mareschal, L. Soulard, R. Ravelo, P. S. Lomdahl, T. C. Germann, and B. L. Holian. Uniaxial hugoniostat: a method for atomistic simulations of shocked materials. <em>Phys. Rev. E</em>, 63:016121, Dec 2000. <a href="https://doi.org/10.1103/PhysRevE.63.016121">doi:10.1103/PhysRevE.63.016121</a>. <a class="footnote-backref" href="hugoniostat.html#fnref:refMaillet2000" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:refRavelo2004">
+<p>R. Ravelo, B. L. Holian, T. C. Germann, and P. S. Lomdahl. Constant-stress hugoniostat method for following the dynamical evolution of shocked matter. <em>Phys. Rev. B</em>, 70:014103, Jul 2004. <a href="https://doi.org/10.1103/PhysRevB.70.014103">doi:10.1103/PhysRevB.70.014103</a>. <a class="footnote-backref" href="hugoniostat.html#fnref:refRavelo2004" title="Jump back to footnote 2 in the text">↩</a><a class="footnote-backref" href="hugoniostat.html#fnref2:refRavelo2004" title="Jump back to footnote 2 in the text">↩</a><a class="footnote-backref" href="hugoniostat.html#fnref3:refRavelo2004" title="Jump back to footnote 2 in the text">↩</a><a class="footnote-backref" href="hugoniostat.html#fnref4:refRavelo2004" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+<li id="fn:refWilkins2019">
+<p>Jacob Wilkins. <em>Exploration of approaches to shock-wave simulations</em>. PhD thesis, University of York, July 2019. URL: <a href="https://etheses.whiterose.ac.uk/24444/">https://etheses.whiterose.ac.uk/24444/</a>. <a class="footnote-backref" href="hugoniostat.html#fnref:refWilkins2019" title="Jump back to footnote 3 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+</article>
+</div>
+
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright"> 原版采用 <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+
+
+
+<script src="../../assets/zh-search-data.js"></script><script data-root="../../" src="../../assets/zh-site.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:true},showMathMenu:false,messageStyle:"none"});</script><script src="../../assets/mathjax/MathJax.js?config=TeX-MML-AM_CHTML"></script></body>
+</html>

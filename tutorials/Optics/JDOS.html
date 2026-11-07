@@ -1,0 +1,1305 @@
+
+<!DOCTYPE html>
+
+<html class="js" lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="../Coreloss/Coreloss.html" rel="prev"/>
+<link href="../dispersion_corrections/castep-ase-dispersion-tutorial.html" rel="next"/>
+<link href="../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.0" name="generator"/>
+<title>联合态密度（JDOS） — CASTEP 中文文档</title>
+<link href="../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../stylesheets/extra.css" rel="stylesheet"/>
+
+<link href="../../assets/zh-site.css" rel="stylesheet"/></head>
+<body dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="JDOS.html#jdos"> 跳转到正文 </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="页眉" class="md-header__inner md-grid">
+<a aria-label="CASTEP 中文文档" class="md-header__button md-logo" data-md-component="logo" href="../../index.html" title="CASTEP 中文文档">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis"> CASTEP 中文文档 </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis"> 联合态密度（JDOS） </span>
+</div>
+</div>
+</div>
+
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="搜索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="搜索" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="搜索" class="md-search__options">
+<button aria-label="清除" class="md-search__icon md-icon" tabindex="-1" title="清除" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta"> 搜索中文或英文导航标题 </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="导航" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="CASTEP 中文文档" class="md-nav__button md-logo" data-md-component="logo" href="../../index.html" title="CASTEP 中文文档">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a> CASTEP 中文文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../index.html">
+<span class="md-ellipsis"> 首页 </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis"> 使用文档 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span> 使用文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+<span class="md-ellipsis"> 入门指南 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_1">
+<span class="md-nav__icon md-icon"></span> 入门指南 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Getting_Started/intro.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Getting_Started/built_in_help.html">
+<span class="md-ellipsis"> 命令行帮助 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Getting_Started/running_castep.html">
+<span class="md-ellipsis"> 运行 CASTEP </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Getting_Started/basic_cell_file.html">
+<span class="md-ellipsis"> 晶胞文件（.cell） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Getting_Started/basic_param_file.html">
+<span class="md-ellipsis"> 参数文件（.param） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Getting_Started/restarting.html">
+<span class="md-ellipsis"> 检查点与续算 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+<span class="md-ellipsis"> 基态 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_2">
+<span class="md-nav__icon md-icon"></span> 基态 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Groundstate/intro.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Groundstate/dftd.html">
+<span class="md-ellipsis"> 色散修正 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Groundstate/soc.html">
+<span class="md-ellipsis"> 自旋–轨道耦合 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Groundstate/spin_constraints.html">
+<span class="md-ellipsis"> 自旋约束 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Groundstate/population_analysis.html">
+<span class="md-ellipsis"> 布居分析 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Groundstate/ELF.html">
+<span class="md-ellipsis"> 电子局域函数（ELF） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+<span class="md-ellipsis"> 几何结构优化 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_3">
+<span class="md-nav__icon md-icon"></span> 几何结构优化 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Geometry_Optimisation/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Geometry_Optimisation/keywords.html">
+<span class="md-ellipsis"> 关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Geometry_Optimisation/constraints.html">
+<span class="md-ellipsis"> 约束条件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Geometry_Optimisation/files.html">
+<span class="md-ellipsis"> 文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Geometry_Optimisation/tools.html">
+<span class="md-ellipsis"> 工具 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+<span class="md-ellipsis"> 分子动力学 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_4">
+<span class="md-nav__icon md-icon"></span> 分子动力学 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/overview.html">
+<span class="md-ellipsis"> 分子动力学概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/basics.html">
+<span class="md-ellipsis"> 分子动力学基础 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/restarts.html">
+<span class="md-ellipsis"> 分子动力学续算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/files.html">
+<span class="md-ellipsis"> 分子动力学文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/keywords.html">
+<span class="md-ellipsis"> 分子动力学关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/tools.html">
+<span class="md-ellipsis"> 分子动力学工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/pimd.html">
+<span class="md-ellipsis"> 路径积分分子动力学（PIMD） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/hugoniostat.html">
+<span class="md-ellipsis"> Hugoniostat 冲击波模拟方法 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+<span class="md-ellipsis"> 过渡态搜索 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_5">
+<span class="md-nav__icon md-icon"></span> 过渡态搜索 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Transition_State_Search/neb.html">
+<span class="md-ellipsis"> 微扰弹性带法（NEB） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+<span class="md-ellipsis"> 交换–关联（XC） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_6">
+<span class="md-nav__icon md-icon"></span> 交换–关联（XC） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/XC/XCoverview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/XC/XC.html">
+<span class="md-ellipsis"> 交换–关联设置 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/XC/libXC.html">
+<span class="md-ellipsis">
+    
+  
+    libXC
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+<span class="md-ellipsis"> 电子谱性质 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_7">
+<span class="md-nav__icon md-icon"></span> 电子谱性质 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Spectral/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Spectral/keywords.html">
+<span class="md-ellipsis"> 关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Spectral/restarts.html">
+<span class="md-ellipsis"> 续算 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+<span class="md-ellipsis"> 声子 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_8">
+<span class="md-nav__icon md-icon"></span> 声子 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Introduction.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Running-phonon-calculations.html">
+<span class="md-ellipsis"> 运行声子计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Dielectric-properties.html">
+<span class="md-ellipsis"> 介电性质 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Thermodynamic-properties.html">
+<span class="md-ellipsis"> 热力学性质 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Plotting-and-analysis-tools.html">
+<span class="md-ellipsis"> 绘图与分析工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Running-Large-Calculations.html">
+<span class="md-ellipsis"> 运行大规模计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Advanced-Topics.html">
+<span class="md-ellipsis"> 进阶主题 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Keyword-Reference.html">
+<span class="md-ellipsis"> 关键词参考 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Bibliography.html">
+<span class="md-ellipsis"> 参考文献 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+<span class="md-ellipsis"> 核磁共振（NMR） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_9">
+<span class="md-nav__icon md-icon"></span> 核磁共振（NMR） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/NMR/NMR_overview.html">
+<span class="md-ellipsis"> 核磁共振概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_10" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+<span class="md-ellipsis"> 电子顺磁共振（EPR） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_10_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_10">
+<span class="md-nav__icon md-icon"></span> 电子顺磁共振（EPR） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/EPR/overview.html">
+<span class="md-ellipsis"> 电子顺磁共振概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/XRD/overview.html">
+<span class="md-ellipsis"> X 射线衍射（XRD） </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_12" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_12" id="__nav_2_12_label" tabindex="0">
+<span class="md-ellipsis"> 含时密度泛函理论（TDDFT） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_12_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_12">
+<span class="md-nav__icon md-icon"></span> 含时密度泛函理论（TDDFT） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/TDDFT/overview.html">
+<span class="md-ellipsis"> 含时密度泛函理论概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_13" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_13" id="__nav_2_13_label" tabindex="0">
+<span class="md-ellipsis"> ΔSCF 方法 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_13_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_13">
+<span class="md-nav__icon md-icon"></span> ΔSCF 方法 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Delta_SCF/overview.html">
+<span class="md-ellipsis"> ΔSCF 方法概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Delta_SCF/simple_delta_scf.html">
+<span class="md-ellipsis"> 简单 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Delta_SCF/lin_ex_delta_scf.html">
+<span class="md-ellipsis"> 线性展开 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Delta_SCF/mo_delta_scf.html">
+<span class="md-ellipsis"> 分子轨道 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Delta_SCF/molpdos.html">
+<span class="md-ellipsis"> 分子投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_14" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_14" id="__nav_2_14_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    DFT+U
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_14_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_14">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    DFT+U
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/DFT+U/dftu-theory.html">
+<span class="md-ellipsis"> DFT+U：理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/DFT+U/dftu-input.html">
+<span class="md-ellipsis"> DFT+U：输入 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/DFT+U/koopmans-theory.html">
+<span class="md-ellipsis"> 线性响应法计算 U：理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/DFT+U/koopmans-input.html">
+<span class="md-ellipsis"> 线性响应法计算 U：输入 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/DFT+U/koopmans-output.html">
+<span class="md-ellipsis"> 线性响应法计算 U：输出 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/DFT+U/koopmans-warnings-errors.html">
+<span class="md-ellipsis"> 线性响应法计算 U：警告与错误 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_15" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_15" id="__nav_2_15_label" tabindex="0">
+<span class="md-ellipsis"> 赝势 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_15_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_15">
+<span class="md-nav__icon md-icon"></span> 赝势 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Pseudopotentials/theory.html">
+<span class="md-ellipsis"> 理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Pseudopotentials/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Pseudopotentials/reading_headers.html">
+<span class="md-ellipsis"> 头部信息 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Pseudopotentials/otfg_string.html">
+<span class="md-ellipsis"> 即时生成赝势（OTFG）字符串 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_16" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_16" id="__nav_2_16_label" tabindex="0">
+<span class="md-ellipsis"> 输入文件 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_16_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_16">
+<span class="md-nav__icon md-icon"></span> 输入文件 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Input_Files/cell_file.html">
+<span class="md-ellipsis"> 晶胞文件（.cell） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Input_Files/param_file.html">
+<span class="md-ellipsis"> 参数文件（.param） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Input_Files/cell_keywords.html">
+<span class="md-ellipsis"> 晶胞文件关键词 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_17" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_17" id="__nav_2_17_label" tabindex="0">
+<span class="md-ellipsis"> 输出文件 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_17_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_17">
+<span class="md-nav__icon md-icon"></span> 输出文件 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Output_Files/output_files.html">
+<span class="md-ellipsis"> 输出文件 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_18" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_18" id="__nav_2_18_label" tabindex="0">
+<span class="md-ellipsis"> 其他程序与工具 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_18_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_18">
+<span class="md-nav__icon md-icon"></span> 其他程序与工具 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Tools/tools.html">
+<span class="md-ellipsis"> 其他程序与工具 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_19" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_19" id="__nav_2_19_label" tabindex="0">
+<span class="md-ellipsis"> 故障排查 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_19_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_19">
+<span class="md-nav__icon md-icon"></span> 故障排查 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Troubleshooting/troubleshooting.html">
+<span class="md-ellipsis"> 常见错误 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Troubleshooting/linux_path.html">
+<span class="md-ellipsis"> Linux 帮助 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis"> 教程 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span> 教程 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+<span class="md-ellipsis"> 成键与电荷 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_1">
+<span class="md-nav__icon md-icon"></span> 成键与电荷 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bonding_and_Charge/charge_density.html">
+<span class="md-ellipsis"> 绘制电荷密度 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bonding_and_Charge/mulliken_population.html">
+<span class="md-ellipsis"> 布居分析 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bonding_and_Charge/ELF.html">
+<span class="md-ellipsis"> 电子局域函数（ELF） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+<span class="md-ellipsis"> 能带与态密度 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_2">
+<span class="md-nav__icon md-icon"></span> 能带与态密度 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+<span class="md-ellipsis"> 绘图 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_1_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_2_1">
+<span class="md-nav__icon md-icon"></span> 绘图 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bands_and_DOS/Plotting/plotting_perl.html">
+<span class="md-ellipsis"> 绘图：CASTEP 工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bands_and_DOS/Plotting/plotting_sumo.html">
+<span class="md-ellipsis"> 绘图：SUMO </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bands_and_DOS/Plotting/Optados/DOS.html">
+<span class="md-ellipsis"> OptaDOS：态密度 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bands_and_DOS/Plotting/Optados/pDOS.html">
+<span class="md-ellipsis"> OptaDOS：投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bands_and_DOS/semiconductors.html">
+<span class="md-ellipsis"> 半导体 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bands_and_DOS/metals.html">
+<span class="md-ellipsis"> 金属 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bands_and_DOS/magnetic.html">
+<span class="md-ellipsis"> 磁性材料 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+<span class="md-ellipsis"> 光学 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_3">
+<span class="md-nav__icon md-icon"></span> 光学 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Optics.html">
+<span class="md-ellipsis"> 光学 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Optics_aluminium.html">
+<span class="md-ellipsis"> 光学：铝 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Optics_ani.html">
+<span class="md-ellipsis"> 光学各向异性 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+<span class="md-ellipsis"> 芯能级能量损失谱 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_3_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_4">
+<span class="md-nav__icon md-icon"></span> 芯能级能量损失谱 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Coreloss/Coreloss.html">
+<span class="md-ellipsis"> 芯能级能量损失谱 </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis"> 联合态密度（JDOS） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="JDOS.html">
+<span class="md-ellipsis"> 联合态密度（JDOS） </span>
+</a>
+<nav aria-label="本页目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span> 本页目录 </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="JDOS.html#jdos-calculation">
+<span class="md-ellipsis"> JDOS 计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="JDOS.html#imaginary-dielectric">
+<span class="md-ellipsis"> 虚介电常数 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="JDOS.html#real-dielectric">
+<span class="md-ellipsis"> 实际介电常数 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="JDOS.html#sampling-parameters">
+<span class="md-ellipsis"> 采样参数 </span>
+</a>
+<nav aria-label="采样参数" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="JDOS.html#maximum-energy">
+<span class="md-ellipsis"> 最大能量 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="JDOS.html#spacing">
+<span class="md-ellipsis"> 间距 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../dispersion_corrections/castep-ase-dispersion-tutorial.html">
+<span class="md-ellipsis"> 色散修正 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../NEB/neb_tutorial.html">
+<span class="md-ellipsis"> 微扰弹性带法（NEB） </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+<span class="md-ellipsis"> 核磁共振屏蔽 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_7">
+<span class="md-nav__icon md-icon"></span> 核磁共振屏蔽 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../NMR/Example_1_-Ethanol.html">
+<span class="md-ellipsis"> 示例 1：乙醇 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../NMR/Example_2_-Diamond.html">
+<span class="md-ellipsis"> 示例 2：金刚石 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../NMR/Examples_3_-Alanine_and_Silicates.html">
+<span class="md-ellipsis"> 示例 3：丙氨酸与硅酸盐 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+<span class="md-ellipsis"> ΔSCF 方法 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_8">
+<span class="md-nav__icon md-icon"></span> ΔSCF 方法 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/simple_delta_scf.html">
+<span class="md-ellipsis"> 简单 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/lin_ex_delta_scf.html">
+<span class="md-ellipsis"> 线性展开 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/molpdos.html">
+<span class="md-ellipsis"> 分子投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+<span class="md-ellipsis"> 遗传算法（GA） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_9">
+<span class="md-nav__icon md-icon"></span> 遗传算法（GA） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../GA/Silicon.html">
+<span class="md-ellipsis"> 硅 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../GA/Introduction.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_10" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+<span class="md-ellipsis"> 工具 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_10_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_10">
+<span class="md-nav__icon md-icon"></span> 工具 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Tools/elastic_constants.html">
+<span class="md-ellipsis"> 弹性常数 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+<span class="md-ellipsis"> 开发者文档 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span> 开发者文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/using_devel_codes.html">
+<span class="md-ellipsis"> 使用开发控制代码（Devel Codes） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/using_trace.html">
+<span class="md-ellipsis"> 使用 trace </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/adding_pair_pots.html">
+<span class="md-ellipsis"> 添加经验势 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/build-system.html">
+<span class="md-ellipsis"> 构建系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/style_guide.html">
+<span class="md-ellipsis"> 代码风格指南 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/test_suite.html">
+<span class="md-ellipsis"> 测试 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/CI.html">
+<span class="md-ellipsis"> 持续集成系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/git_workflow.html">
+<span class="md-ellipsis"> Git 工作流程 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/release_procedure.html">
+<span class="md-ellipsis"> 版本发布流程 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="本页目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span> 本页目录 </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="JDOS.html#jdos-calculation">
+<span class="md-ellipsis"> JDOS 计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="JDOS.html#imaginary-dielectric">
+<span class="md-ellipsis"> 虚介电常数 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="JDOS.html#real-dielectric">
+<span class="md-ellipsis"> 实际介电常数 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="JDOS.html#sampling-parameters">
+<span class="md-ellipsis"> 采样参数 </span>
+</a>
+<nav aria-label="采样参数" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="JDOS.html#maximum-energy">
+<span class="md-ellipsis"> 最大能量 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="JDOS.html#spacing">
+<span class="md-ellipsis"> 间距 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="jdos">联合态密度（JDOS）</h1><div class="zh-notice">中文译文 · 由本地英文文档翻译，已统一术语并进行重点抽查。 <a href="../../https://castep-docs.github.io/castep-docs/tutorials/Optics/JDOS.html">英文原文对照</a> · <a href="../../translation-notes.html">翻译说明</a></div>
+<p>联合态密度（JDOS）本质上是导带与价带之间能隙范围内的态密度——这使得我们可以计算在给定光子能量下激发发生的概率。人们可以直观地理解这一点如何导致光学性质的计算：那些能量对应于导带与价带之间能隙的光子将与材料相互作用，从而产生其光学性质。</p>
+<p>在本教程中，我们将计算硅的JDOS，并将其与介电函数的虚部和实部联系起来。</p>
+<h2 id="jdos-calculation">JDOS 计算</h2>
+<p>让我们先实际获取JDOS的结果。在以下内容上运行Castep <code>cell</code> 文件</p>
+<p><em>Si.cell</em>
+<div class="highlight"><pre><span></span><code><a href="JDOS.html#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>%BLOCK LATTICE_CART
+<a href="JDOS.html#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>2.73  2.73 0.00
+<a href="JDOS.html#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>2.73  0.00 2.73
+<a href="JDOS.html#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>0.00  2.73 2.73
+<a href="JDOS.html#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>%ENDBLOCK  LATTICE_CART
+<a href="JDOS.html#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>
+<a href="JDOS.html#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>%BLOCK POSITIONS_FRAC
+<a href="JDOS.html#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>Si 0.0     0.0     0.0
+<a href="JDOS.html#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a>Si 0.25    0.25    0.25
+<a href="JDOS.html#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a>%ENDBLOCK POSITIONS_FRAC
+<a href="JDOS.html#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>
+<a href="JDOS.html#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a>SYMMETRY_GENERATE
+<a href="JDOS.html#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a>
+<a href="JDOS.html#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a>KPOINTS_MP_GRID 10 10 10  
+<a href="JDOS.html#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a>SPECTRAL_KPOINTS_MP_GRID 10 10 10
+</code></pre></div></p>
+<p>并且 <code>param</code> 文件</p>
+<p><em>Si.param</em>
+<div class="highlight"><pre><span></span><code><a href="JDOS.html#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>TASK                   : SPECTRAL
+<a href="JDOS.html#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>SPECTRAL_TASK          : DOS
+<a href="JDOS.html#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>PDOS_CALCULATE_WEIGHTS : TRUE
+<a href="JDOS.html#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>CUT_OFF_ENERGY         : 200
+</code></pre></div></p>
+<p>随后，使用 Optados 输入文件运行 Optados。</p>
+<p><em>Si.do.i</em>
+<div class="highlight"><pre><span></span><code><a href="JDOS.html#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>TASK              : jdos
+<a href="JDOS.html#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>
+<a href="JDOS.html#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a>JDOS_MAX_ENERGY   : 30
+<a href="JDOS.html#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a>JDOS_SPACING      : 0.01
+<a href="JDOS.html#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a>EFERMI            : optados
+<a href="JDOS.html#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a>DOS_SPACING       : 0.1
+<a href="JDOS.html#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a>BROADENING        : adaptive # Default
+<a href="JDOS.html#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a>ADAPTIVE_SMEARING : 0.4      # Default
+<a href="JDOS.html#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a>FIXED_SMEARING    : 0.3      # Default
+<a href="JDOS.html#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a>SET_EFERMI_ZERO : true       # Default
+<a href="JDOS.html#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a>NUMERICAL_INTDOS      : false  # Default
+<a href="JDOS.html#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a>FINITE_BIN_CORRECTION : true  # Default
+</code></pre></div></p>
+<p>这条线 <code>TASK : jdos</code> 是告诉它计算我们感兴趣的JDOS的。这将生成该文件 <code>Si.jadaptive.dat</code> （以及配套的） <code>agr</code> 文件）。The <code>dat</code> 数据表应以如下形式开始</p>
+<div class="highlight"><pre><span></span><code><a href="JDOS.html#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>0.0000000000000E+00    0.3375085335870E-14
+<a href="JDOS.html#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>0.1000333444481E-01    0.3869643667676E-14
+</code></pre></div>
+<p>1<sup>st</sup> 列是能量，和 2<sup>并</sup> 是JDOS。 <code>agr</code> 文件让我们可以用xmgrace制作一个漂亮的图表（当然，你也可以用你喜欢的软件绘制结果）——我们来运行</p>
+<p><code>xmgrace Si.jadaptive.agr</code></p>
+<p>结果应如下所示：</p>
+<p><img alt="JDOS Result" src="jdos_result.png" width="50%"/></p>
+<h2 id="imaginary-dielectric">虚介电常数</h2>
+<p>现在我们已经得到了结果，让我们看看它们是如何用来获得介电函数的。您可能会立即注意到，上面图表的形状与介电函数的任一成分都完全不同。我们需要对这些结果进行处理，才能使其具有意义。</p>
+<p>我们将通过使用Python脚本开始处理数据。</p>
+<p><div class="highlight"><pre><span></span><code><a href="JDOS.html#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">energies</span> <span class="o">=</span> <span class="p">[]</span>
+<a href="JDOS.html#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="n">imaginaries</span> <span class="o">=</span> <span class="p">[]</span>
+<a href="JDOS.html#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a>
+<a href="JDOS.html#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="n">input_file</span> <span class="o">=</span> <span class="s1">'Si.jadaptive.dat'</span>
+<a href="JDOS.html#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="n">output_file</span> <span class="o">=</span> <span class="s1">'imaginary.dat'</span>
+<a href="JDOS.html#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="n">new_lines</span> <span class="o">=</span> <span class="p">[]</span>
+<a href="JDOS.html#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">input_file</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">infile</span><span class="p">:</span>
+<a href="JDOS.html#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a>    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">infile</span><span class="p">:</span>
+<a href="JDOS.html#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a>        <span class="k">if</span> <span class="s2">"#"</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+<a href="JDOS.html#__codelineno-4-10" id="__codelineno-4-10" name="__codelineno-4-10"></a>            <span class="k">continue</span>
+<a href="JDOS.html#__codelineno-4-11" id="__codelineno-4-11" name="__codelineno-4-11"></a>        <span class="n">parts</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+<a href="JDOS.html#__codelineno-4-12" id="__codelineno-4-12" name="__codelineno-4-12"></a>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+<a href="JDOS.html#__codelineno-4-13" id="__codelineno-4-13" name="__codelineno-4-13"></a>            <span class="n">energy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<a href="JDOS.html#__codelineno-4-14" id="__codelineno-4-14" name="__codelineno-4-14"></a>            <span class="n">jdos</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">parts</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<a href="JDOS.html#__codelineno-4-15" id="__codelineno-4-15" name="__codelineno-4-15"></a>            <span class="n">energies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">energy</span><span class="p">)</span>
+<a href="JDOS.html#__codelineno-4-16" id="__codelineno-4-16" name="__codelineno-4-16"></a>            <span class="k">if</span> <span class="n">jdos</span> <span class="o">==</span> <span class="mf">0.0</span> <span class="ow">or</span> <span class="n">energy</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<a href="JDOS.html#__codelineno-4-17" id="__codelineno-4-17" name="__codelineno-4-17"></a>                <span class="n">eps2</span> <span class="o">=</span> <span class="mi">0</span>
+<a href="JDOS.html#__codelineno-4-18" id="__codelineno-4-18" name="__codelineno-4-18"></a>            <span class="k">else</span><span class="p">:</span>
+<a href="JDOS.html#__codelineno-4-19" id="__codelineno-4-19" name="__codelineno-4-19"></a>                <span class="n">eps2</span> <span class="o">=</span> <span class="p">(</span><span class="n">jdos</span><span class="o">/</span><span class="n">energy</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<a href="JDOS.html#__codelineno-4-20" id="__codelineno-4-20" name="__codelineno-4-20"></a>            <span class="n">imaginaries</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">eps2</span><span class="p">)</span>
+<a href="JDOS.html#__codelineno-4-21" id="__codelineno-4-21" name="__codelineno-4-21"></a>            <span class="n">new_line</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">energy</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">jdos</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">test</span><span class="si">}</span><span class="se">\n</span><span class="s2">"</span>
+<a href="JDOS.html#__codelineno-4-22" id="__codelineno-4-22" name="__codelineno-4-22"></a>            <span class="n">new_lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_line</span><span class="p">)</span>
+<a href="JDOS.html#__codelineno-4-23" id="__codelineno-4-23" name="__codelineno-4-23"></a>
+<a href="JDOS.html#__codelineno-4-24" id="__codelineno-4-24" name="__codelineno-4-24"></a><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">output_file</span><span class="p">,</span> <span class="s1">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+<a href="JDOS.html#__codelineno-4-25" id="__codelineno-4-25" name="__codelineno-4-25"></a>    <span class="n">outfile</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">new_lines</span><span class="p">)</span>
+</code></pre></div> 这将创建一个新文件 <code>imaginary.dat</code> 包含能量、JDOS以及我们对虚介电函数在3<sup>rd</sup> 列。这通过如下关系式来近似表示</p>
+<p><span class="arithmatex"><span class="MathJax_Preview">\epsilon_2 \propto \frac{\text{JDOS}}{\omega^2}</span><script type="math/tex">\epsilon_2 \propto \frac{\text{JDOS}}{\omega^2}</script></span></p>
+<p>其中在行中实现的</p>
+<div class="highlight"><pre><span></span><code><a href="JDOS.html#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">eps2</span> <span class="o">=</span> <span class="p">(</span><span class="n">jdos</span><span class="o">/</span><span class="n">energy</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+<p>我们可以绘制这个 <code>dat</code> 使用xmgrace处理批处理脚本中的文件</p>
+<p><em>plot.bat</em>
+<div class="highlight"><pre><span></span><code><a href="JDOS.html#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>READ BLOCK "imaginary.dat"
+<a href="JDOS.html#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a>BLOCK XY "1:3"
+</code></pre></div></p>
+<p>以获取纯虚部输出。图表应如下所示：</p>
+<p><img alt="First Imaginary Approximation" src="first_approx.png" width="50%"/></p>
+<p>我们开始看到一些与虚介电函数的虚部相似之处，但显然仍有改进空间——该计算是通过将我们得到的结果乘以一个矩阵元来实现的，而在此情况下我们假设该矩阵元与能量无关，这在现实中并不成立。我们可以通过使用如下关系式来改进这一近似。</p>
+<p><span class="arithmatex"><span class="MathJax_Preview">\epsilon_2 \propto \frac{1}{m^*}</span><script type="math/tex">\epsilon_2 \propto \frac{1}{m^*}</script></span></p>
+<p>这一点要正确实现起来非常困难；有效质量很难获得，且依赖于k空间中的位置等。然而，我们可以用一个近似方法简化这个问题：在能带边缘附近，有效质量与能量成正比。</p>
+<div class="admonition note">
+<p class="admonition-title">说明</p>
+<p>这一点确实具有一定的数学依据——如果你想了解其来源，请参见 <a href="https://arxiv.org/abs/1207.4282">本文</a></p>
+</div>
+<p>让我们修改其中一条线路的地方 <code>eps2</code> 在Python脚本中计算</p>
+<div class="highlight"><pre><span></span><code><a href="JDOS.html#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">eps2</span> <span class="o">=</span> <span class="p">(</span><span class="n">dos</span><span class="o">/</span><span class="n">energy</span><span class="o">**</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div>
+<p>重新运行相同的步骤现在得到如下图形：</p>
+<p><img alt="Better Imaginary Approximation" src="second_approx.png" width="50%"/></p>
+<p>总体来看，你可以看到它趋于平稳的速度要快得多——这与更准确计算出的介电函数情况一致。</p>
+<p>为了确认结果是合理的，让我们将此结果与实际的Optados光学计算结果一起绘制出来。您可以在开头部分看到如何获取这些数据。 <a href="Optics.html">光学教程</a>，或者您可以下载相关文件 <code>dat</code> 文件 <a href="Si_epsilon.dat">这里</a>因为我们是通过简单的比例关系得到结果的，因此必须对结果进行缩放，以使其与实验数据相符——通过修改Python脚本中的参数来实现这一调整。 <code>eps2</code> 计算行至</p>
+<div class="highlight"><pre><span></span><code><a href="JDOS.html#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a>eps2 = (dos/energy**3) * 650
+</code></pre></div>
+<p>通过反复尝试发现，650 能给出一个合理的匹配——这仅仅是估算在整个近似过程中被忽略的比例常数。你可以使用批处理文件</p>
+<div class="highlight"><pre><span></span><code><a href="JDOS.html#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a>READ BLOCK "Si_epsilon.dat"
+<a href="JDOS.html#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a>
+<a href="JDOS.html#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a>BLOCK XY "1:3"
+<a href="JDOS.html#__codelineno-9-4" id="__codelineno-9-4" name="__codelineno-9-4"></a>S0 LEGEND "Optics Calculated"
+<a href="JDOS.html#__codelineno-9-5" id="__codelineno-9-5" name="__codelineno-9-5"></a>
+<a href="JDOS.html#__codelineno-9-6" id="__codelineno-9-6" name="__codelineno-9-6"></a>READ BLOCK "imaginary.dat"
+<a href="JDOS.html#__codelineno-9-7" id="__codelineno-9-7" name="__codelineno-9-7"></a>
+<a href="JDOS.html#__codelineno-9-8" id="__codelineno-9-8" name="__codelineno-9-8"></a>BLOCK XY "1:3"
+<a href="JDOS.html#__codelineno-9-9" id="__codelineno-9-9" name="__codelineno-9-9"></a>S1 LEGEND "JDOS Approximated"
+</code></pre></div>
+<p>用 xmgrace 绘图。你可以看到生成的图表中它们非常相似：</p>
+<p><img alt="Plotted together" src="eps1_calc.png"/></p>
+<h2 id="real-dielectric">实际介电常数</h2>
+<p>我们已经看到如何利用JDOS计算介电函数的虚部，现在我们将探讨如何计算其实部。其实部实际上仅通过虚部来计算，使用克拉默-克罗内格关系——我们将对此进行演示。</p>
+<p>我们将使用的方程是</p>
+<p><span class="arithmatex"><span class="MathJax_Preview">\epsilon_1(\omega) = 1 + \frac{2}{\pi} \mathcal{P} \int_{0}^{\infty} \frac{\omega' \epsilon_2(\omega')}{\omega'^2 - \omega^2} \, d\omega'</span><script type="math/tex">\epsilon_1(\omega) = 1 + \frac{2}{\pi} \mathcal{P} \int_{0}^{\infty} \frac{\omega' \epsilon_2(\omega')}{\omega'^2 - \omega^2} \, d\omega'</script></span></p>
+<p>我们将再次忽略比例常数，并仅调整结果。将这段代码添加到之前的Python脚本中</p>
+<div class="highlight"><pre><span></span><code><a href="JDOS.html#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<a href="JDOS.html#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="n">energies_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">energies</span><span class="p">)</span>
+<a href="JDOS.html#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="n">eps2_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">imaginaries</span><span class="p">)</span>
+<a href="JDOS.html#__codelineno-10-4" id="__codelineno-10-4" name="__codelineno-10-4"></a>
+<a href="JDOS.html#__codelineno-10-5" id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">kramers</span><span class="p">():</span>
+<a href="JDOS.html#__codelineno-10-6" id="__codelineno-10-6" name="__codelineno-10-6"></a>    <span class="n">eps1_arr</span> <span class="o">=</span> <span class="p">[]</span>
+<a href="JDOS.html#__codelineno-10-7" id="__codelineno-10-7" name="__codelineno-10-7"></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">energies_arr</span><span class="p">):</span>
+<a href="JDOS.html#__codelineno-10-8" id="__codelineno-10-8" name="__codelineno-10-8"></a>        <span class="n">real</span> <span class="o">=</span> <span class="mi">0</span>
+<a href="JDOS.html#__codelineno-10-9" id="__codelineno-10-9" name="__codelineno-10-9"></a>        <span class="n">sub</span> <span class="o">=</span> <span class="p">(</span><span class="n">energies_arr</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="p">(</span><span class="n">e</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<a href="JDOS.html#__codelineno-10-10" id="__codelineno-10-10" name="__codelineno-10-10"></a>        <span class="n">sub</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+<a href="JDOS.html#__codelineno-10-11" id="__codelineno-10-11" name="__codelineno-10-11"></a>
+<a href="JDOS.html#__codelineno-10-12" id="__codelineno-10-12" name="__codelineno-10-12"></a>        <span class="n">integrand</span> <span class="o">=</span> <span class="p">(</span><span class="n">energies_arr</span> <span class="o">*</span> <span class="n">eps2_arr</span><span class="p">)</span><span class="o">/</span><span class="n">sub</span>
+<a href="JDOS.html#__codelineno-10-13" id="__codelineno-10-13" name="__codelineno-10-13"></a>        <span class="n">real</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">0.6</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">integrand</span><span class="p">,</span> <span class="n">energies_arr</span><span class="p">))</span>
+<a href="JDOS.html#__codelineno-10-14" id="__codelineno-10-14" name="__codelineno-10-14"></a>        <span class="n">eps1_arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">real</span><span class="p">)</span>
+<a href="JDOS.html#__codelineno-10-15" id="__codelineno-10-15" name="__codelineno-10-15"></a>    <span class="k">return</span> <span class="n">eps1_arr</span>
+<a href="JDOS.html#__codelineno-10-16" id="__codelineno-10-16" name="__codelineno-10-16"></a><span class="n">eps1_arr</span> <span class="o">=</span> <span class="n">kramers</span><span class="p">()</span>
+<a href="JDOS.html#__codelineno-10-17" id="__codelineno-10-17" name="__codelineno-10-17"></a><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">energies_arr</span><span class="p">,</span> <span class="n">eps2_arr</span><span class="p">,</span> <span class="n">eps1_arr</span><span class="p">))</span>
+<a href="JDOS.html#__codelineno-10-18" id="__codelineno-10-18" name="__codelineno-10-18"></a><span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="s2">"both.dat"</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+</code></pre></div>
+<p>实现过程相当直接：对于每一个能量，方程中的积分都简单地针对每个能量进行计算。虽然方程中指定了在积分上加上1的操作，但比例常数是通过反复尝试确定的，直到得到一个合理的拟合结果（并且虚部已经以相同方式进行了缩放）。</p>
+<p>数据随后被保存在 <code>both.dat</code> 和第 1<sup>st</sup> 列为能量，2<sup>并</sup> 虚介电常数和3<sup>rd</sup> 实介电常数。现在我们使用xmgrace比较虚部。适当调整批处理文件，你应该得到如下图形：</p>
+<p><img alt="Real part plotted together" src="eps2_calc.png"/></p>
+<p>现在我们已经展示了介电常数的两部分如何与极化子密度谱相关联。</p>
+<h2 id="sampling-parameters">采样参数</h2>
+<p>我们现在将观察增加和减少的影响。 <code>JDOS_MAX_ENERGY</code> 并且 <code>JDOS_SPACING</code> 参数。 <code>JDOS_MAX_ENERGY</code> 确定所考察的最高能量带，而 <code>JDOS_SPACING</code> 确定结果采样的频率。我们将执行与上述完全相同的步骤（包括计算实部和虚部介电常数——这是关键部分）。建议您在新的目录中进行这些计算，以便更容易地比较结果。</p>
+<h3 id="maximum-energy">最大能量</h3>
+<p>我们先来看如何增加和减少最大能量。我们将首先将其提高到100 eV。按照上述步骤运行完整流程（最终得到） <code>both.dat</code> 在新目录中），除了以下情况外 <code>odi</code> 包含该行的文件</p>
+<p><code>JDOS_MAX_ENERGY   : 100</code></p>
+<p>改为30。在这种情况下，最实用的是将该结果与我们从30 eV最大能量处得到的结果进行比较——将两者绘制在同一张图上。这是使用适当的批处理文件获得的结果：</p>
+<p><img alt="100 and 30 maximum on same graph" src="100_comparison.png" width="40%"/></p>
+<p>我们看到重叠几乎完美：超过30 eV的采样不会改善任何结果。这表明所有参与的能带能量均不超过30 eV。</p>
+<p>现在我们尝试降低最大能量。如果我们尝试使用20 eV，并以与30 eV结果相同的方式将其绘图，我们会看到如下情况：</p>
+<p><img alt="20 and 30 maximum same graph" src="20.png" width="70%"/></p>
+<p>现在重叠已不再完美：尤其是在末端，实部变得越来越不同。欢迎尝试不同的低能量设置——你应该会注意到，最大能量越低，实部的差异越大，而虚部保持不变。下面的例子是针对极低的5 eV情况：</p>
+<p><img alt="5 and 30 maximum same graph" src="5.png" width="50%"/></p>
+<p>这表明，每个能量点的虚部是独立计算的，但由于实部是通过对所有能量进行积分得到的，因此当积分范围不覆盖完整相关区间时，虚部会变得越来越不准确。</p>
+<h3 id="spacing">间距</h3>
+<p>现在让我们尝试通过改变采样率来降低和提高采样速率。 <code>JDOS_SPACING</code> 参数。我们将将其与之前计算的标准 0.01 eV 结果进行比较。首先，我们尝试降低该值——请注意，如果设置过低，将使用于获取实部分量的 Python 脚本运行得极其缓慢；当点数过多时，积分会变得过于复杂。</p>
+<p><code>JDOS_SPACING      : 0.0005</code></p>
+<p>用于下述结果中：</p>
+<p><img alt="0.0005 spacing" src="00005.png"/></p>
+<p>我们在这里看到，低频和高频下的结果几乎完全相同，即使在中间部分也大多一致，仅在极窄的能量范围内存在差异——而这正是出现最剧烈跃变的地方。增加采样数量未能捕捉到最大的增幅，而提高采样率则使得这些增幅得以显现。由于介电函数的其他部分并没有如此极端的变化，因此略微提高采样间距并未遗漏任何信息。</p>
+<p>现在我们来看看当间距增大时会发生什么。结果大致符合预期：图表只是失去了部分细节，如下所示。</p>
+<p><img alt="0.1 Spacing" src="01.png"/></p>
+<p>该图被平滑处理，如果你进一步增加间距，将会丢失越来越多的细节。尽管两种结果都会受到影响，但实部受到的影响更大：因为它通过积分虚部来计算，因此对采样变化极为敏感。</p>
+</article>
+</div>
+
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright"> 原版采用 <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+
+
+
+<script src="../../assets/zh-search-data.js"></script><script data-root="../../" src="../../assets/zh-site.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:true},showMathMenu:false,messageStyle:"none"});</script><script src="../../assets/mathjax/MathJax.js?config=TeX-MML-AM_CHTML"></script></body>
+</html>

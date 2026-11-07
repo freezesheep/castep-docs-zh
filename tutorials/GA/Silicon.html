@@ -1,0 +1,1257 @@
+
+<!DOCTYPE html>
+
+<html class="js" lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="../Delta_SCF/molpdos.html" rel="prev"/>
+<link href="Introduction.html" rel="next"/>
+<link href="../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.0" name="generator"/>
+<title>硅的CASTEP GA计算 — CASTEP 中文文档</title>
+<link href="../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../stylesheets/extra.css" rel="stylesheet"/>
+
+<link href="../../assets/zh-site.css" rel="stylesheet"/></head>
+<body dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="Silicon.html#castep-ga-for-silicon"> 跳转到正文 </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="页眉" class="md-header__inner md-grid">
+<a aria-label="CASTEP 中文文档" class="md-header__button md-logo" data-md-component="logo" href="../../index.html" title="CASTEP 中文文档">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis"> CASTEP 中文文档 </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis"> 硅 </span>
+</div>
+</div>
+</div>
+
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="搜索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="搜索" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="搜索" class="md-search__options">
+<button aria-label="清除" class="md-search__icon md-icon" tabindex="-1" title="清除" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta"> 搜索中文或英文导航标题 </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="导航" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="CASTEP 中文文档" class="md-nav__button md-logo" data-md-component="logo" href="../../index.html" title="CASTEP 中文文档">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a> CASTEP 中文文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../index.html">
+<span class="md-ellipsis"> 首页 </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis"> 使用文档 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span> 使用文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+<span class="md-ellipsis"> 入门指南 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_1">
+<span class="md-nav__icon md-icon"></span> 入门指南 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Getting_Started/intro.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Getting_Started/built_in_help.html">
+<span class="md-ellipsis"> 命令行帮助 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Getting_Started/running_castep.html">
+<span class="md-ellipsis"> 运行 CASTEP </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Getting_Started/basic_cell_file.html">
+<span class="md-ellipsis"> 晶胞文件（.cell） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Getting_Started/basic_param_file.html">
+<span class="md-ellipsis"> 参数文件（.param） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Getting_Started/restarting.html">
+<span class="md-ellipsis"> 检查点与续算 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+<span class="md-ellipsis"> 基态 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_2">
+<span class="md-nav__icon md-icon"></span> 基态 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Groundstate/intro.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Groundstate/dftd.html">
+<span class="md-ellipsis"> 色散修正 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Groundstate/soc.html">
+<span class="md-ellipsis"> 自旋–轨道耦合 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Groundstate/spin_constraints.html">
+<span class="md-ellipsis"> 自旋约束 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Groundstate/population_analysis.html">
+<span class="md-ellipsis"> 布居分析 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Groundstate/ELF.html">
+<span class="md-ellipsis"> 电子局域函数（ELF） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+<span class="md-ellipsis"> 几何结构优化 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_3">
+<span class="md-nav__icon md-icon"></span> 几何结构优化 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Geometry_Optimisation/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Geometry_Optimisation/keywords.html">
+<span class="md-ellipsis"> 关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Geometry_Optimisation/constraints.html">
+<span class="md-ellipsis"> 约束条件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Geometry_Optimisation/files.html">
+<span class="md-ellipsis"> 文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Geometry_Optimisation/tools.html">
+<span class="md-ellipsis"> 工具 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+<span class="md-ellipsis"> 分子动力学 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_4">
+<span class="md-nav__icon md-icon"></span> 分子动力学 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/overview.html">
+<span class="md-ellipsis"> 分子动力学概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/basics.html">
+<span class="md-ellipsis"> 分子动力学基础 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/restarts.html">
+<span class="md-ellipsis"> 分子动力学续算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/files.html">
+<span class="md-ellipsis"> 分子动力学文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/keywords.html">
+<span class="md-ellipsis"> 分子动力学关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/tools.html">
+<span class="md-ellipsis"> 分子动力学工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/pimd.html">
+<span class="md-ellipsis"> 路径积分分子动力学（PIMD） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Molecular_Dynamics/hugoniostat.html">
+<span class="md-ellipsis"> Hugoniostat 冲击波模拟方法 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+<span class="md-ellipsis"> 过渡态搜索 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_5">
+<span class="md-nav__icon md-icon"></span> 过渡态搜索 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Transition_State_Search/neb.html">
+<span class="md-ellipsis"> 微扰弹性带法（NEB） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+<span class="md-ellipsis"> 交换–关联（XC） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_6">
+<span class="md-nav__icon md-icon"></span> 交换–关联（XC） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/XC/XCoverview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/XC/XC.html">
+<span class="md-ellipsis"> 交换–关联设置 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/XC/libXC.html">
+<span class="md-ellipsis">
+    
+  
+    libXC
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+<span class="md-ellipsis"> 电子谱性质 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_7">
+<span class="md-nav__icon md-icon"></span> 电子谱性质 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Spectral/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Spectral/keywords.html">
+<span class="md-ellipsis"> 关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Spectral/restarts.html">
+<span class="md-ellipsis"> 续算 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+<span class="md-ellipsis"> 声子 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_8">
+<span class="md-nav__icon md-icon"></span> 声子 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Introduction.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Running-phonon-calculations.html">
+<span class="md-ellipsis"> 运行声子计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Dielectric-properties.html">
+<span class="md-ellipsis"> 介电性质 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Thermodynamic-properties.html">
+<span class="md-ellipsis"> 热力学性质 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Plotting-and-analysis-tools.html">
+<span class="md-ellipsis"> 绘图与分析工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Running-Large-Calculations.html">
+<span class="md-ellipsis"> 运行大规模计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Advanced-Topics.html">
+<span class="md-ellipsis"> 进阶主题 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Keyword-Reference.html">
+<span class="md-ellipsis"> 关键词参考 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Phonons/Castep_Phonons/Bibliography.html">
+<span class="md-ellipsis"> 参考文献 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+<span class="md-ellipsis"> 核磁共振（NMR） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_9">
+<span class="md-nav__icon md-icon"></span> 核磁共振（NMR） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/NMR/NMR_overview.html">
+<span class="md-ellipsis"> 核磁共振概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_10" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+<span class="md-ellipsis"> 电子顺磁共振（EPR） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_10_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_10">
+<span class="md-nav__icon md-icon"></span> 电子顺磁共振（EPR） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/EPR/overview.html">
+<span class="md-ellipsis"> 电子顺磁共振概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/XRD/overview.html">
+<span class="md-ellipsis"> X 射线衍射（XRD） </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_12" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_12" id="__nav_2_12_label" tabindex="0">
+<span class="md-ellipsis"> 含时密度泛函理论（TDDFT） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_12_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_12">
+<span class="md-nav__icon md-icon"></span> 含时密度泛函理论（TDDFT） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/TDDFT/overview.html">
+<span class="md-ellipsis"> 含时密度泛函理论概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_13" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_13" id="__nav_2_13_label" tabindex="0">
+<span class="md-ellipsis"> ΔSCF 方法 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_13_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_13">
+<span class="md-nav__icon md-icon"></span> ΔSCF 方法 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Delta_SCF/overview.html">
+<span class="md-ellipsis"> ΔSCF 方法概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Delta_SCF/simple_delta_scf.html">
+<span class="md-ellipsis"> 简单 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Delta_SCF/lin_ex_delta_scf.html">
+<span class="md-ellipsis"> 线性展开 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Delta_SCF/mo_delta_scf.html">
+<span class="md-ellipsis"> 分子轨道 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Delta_SCF/molpdos.html">
+<span class="md-ellipsis"> 分子投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_14" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_14" id="__nav_2_14_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    DFT+U
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_14_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_14">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    DFT+U
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/DFT+U/dftu-theory.html">
+<span class="md-ellipsis"> DFT+U：理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/DFT+U/dftu-input.html">
+<span class="md-ellipsis"> DFT+U：输入 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/DFT+U/koopmans-theory.html">
+<span class="md-ellipsis"> 线性响应法计算 U：理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/DFT+U/koopmans-input.html">
+<span class="md-ellipsis"> 线性响应法计算 U：输入 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/DFT+U/koopmans-output.html">
+<span class="md-ellipsis"> 线性响应法计算 U：输出 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/DFT+U/koopmans-warnings-errors.html">
+<span class="md-ellipsis"> 线性响应法计算 U：警告与错误 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_15" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_15" id="__nav_2_15_label" tabindex="0">
+<span class="md-ellipsis"> 赝势 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_15_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_15">
+<span class="md-nav__icon md-icon"></span> 赝势 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Pseudopotentials/theory.html">
+<span class="md-ellipsis"> 理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Pseudopotentials/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Pseudopotentials/reading_headers.html">
+<span class="md-ellipsis"> 头部信息 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Pseudopotentials/otfg_string.html">
+<span class="md-ellipsis"> 即时生成赝势（OTFG）字符串 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_16" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_16" id="__nav_2_16_label" tabindex="0">
+<span class="md-ellipsis"> 输入文件 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_16_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_16">
+<span class="md-nav__icon md-icon"></span> 输入文件 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Input_Files/cell_file.html">
+<span class="md-ellipsis"> 晶胞文件（.cell） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Input_Files/param_file.html">
+<span class="md-ellipsis"> 参数文件（.param） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Input_Files/cell_keywords.html">
+<span class="md-ellipsis"> 晶胞文件关键词 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_17" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_17" id="__nav_2_17_label" tabindex="0">
+<span class="md-ellipsis"> 输出文件 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_17_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_17">
+<span class="md-nav__icon md-icon"></span> 输出文件 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Output_Files/output_files.html">
+<span class="md-ellipsis"> 输出文件 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_18" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_18" id="__nav_2_18_label" tabindex="0">
+<span class="md-ellipsis"> 其他程序与工具 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_18_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_18">
+<span class="md-nav__icon md-icon"></span> 其他程序与工具 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Tools/tools.html">
+<span class="md-ellipsis"> 其他程序与工具 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_19" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_19" id="__nav_2_19_label" tabindex="0">
+<span class="md-ellipsis"> 故障排查 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_19_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_19">
+<span class="md-nav__icon md-icon"></span> 故障排查 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Troubleshooting/troubleshooting.html">
+<span class="md-ellipsis"> 常见错误 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../documentation/Troubleshooting/linux_path.html">
+<span class="md-ellipsis"> Linux 帮助 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis"> 教程 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span> 教程 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+<span class="md-ellipsis"> 成键与电荷 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_1">
+<span class="md-nav__icon md-icon"></span> 成键与电荷 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bonding_and_Charge/charge_density.html">
+<span class="md-ellipsis"> 绘制电荷密度 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bonding_and_Charge/mulliken_population.html">
+<span class="md-ellipsis"> 布居分析 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bonding_and_Charge/ELF.html">
+<span class="md-ellipsis"> 电子局域函数（ELF） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+<span class="md-ellipsis"> 能带与态密度 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_2">
+<span class="md-nav__icon md-icon"></span> 能带与态密度 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+<span class="md-ellipsis"> 绘图 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_1_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_2_1">
+<span class="md-nav__icon md-icon"></span> 绘图 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bands_and_DOS/Plotting/plotting_perl.html">
+<span class="md-ellipsis"> 绘图：CASTEP 工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bands_and_DOS/Plotting/plotting_sumo.html">
+<span class="md-ellipsis"> 绘图：SUMO </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bands_and_DOS/Plotting/Optados/DOS.html">
+<span class="md-ellipsis"> OptaDOS：态密度 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bands_and_DOS/Plotting/Optados/pDOS.html">
+<span class="md-ellipsis"> OptaDOS：投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bands_and_DOS/semiconductors.html">
+<span class="md-ellipsis"> 半导体 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bands_and_DOS/metals.html">
+<span class="md-ellipsis"> 金属 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Bands_and_DOS/magnetic.html">
+<span class="md-ellipsis"> 磁性材料 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+<span class="md-ellipsis"> 光学 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_3">
+<span class="md-nav__icon md-icon"></span> 光学 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Optics/Optics.html">
+<span class="md-ellipsis"> 光学 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Optics/Optics_aluminium.html">
+<span class="md-ellipsis"> 光学：铝 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Optics/Optics_ani.html">
+<span class="md-ellipsis"> 光学各向异性 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+<span class="md-ellipsis"> 芯能级能量损失谱 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_4">
+<span class="md-nav__icon md-icon"></span> 芯能级能量损失谱 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Coreloss/Coreloss.html">
+<span class="md-ellipsis"> 芯能级能量损失谱 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Optics/JDOS.html">
+<span class="md-ellipsis"> 联合态密度（JDOS） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../dispersion_corrections/castep-ase-dispersion-tutorial.html">
+<span class="md-ellipsis"> 色散修正 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../NEB/neb_tutorial.html">
+<span class="md-ellipsis"> 微扰弹性带法（NEB） </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+<span class="md-ellipsis"> 核磁共振屏蔽 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_7">
+<span class="md-nav__icon md-icon"></span> 核磁共振屏蔽 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../NMR/Example_1_-Ethanol.html">
+<span class="md-ellipsis"> 示例 1：乙醇 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../NMR/Example_2_-Diamond.html">
+<span class="md-ellipsis"> 示例 2：金刚石 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../NMR/Examples_3_-Alanine_and_Silicates.html">
+<span class="md-ellipsis"> 示例 3：丙氨酸与硅酸盐 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+<span class="md-ellipsis"> ΔSCF 方法 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_8">
+<span class="md-nav__icon md-icon"></span> ΔSCF 方法 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/simple_delta_scf.html">
+<span class="md-ellipsis"> 简单 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/lin_ex_delta_scf.html">
+<span class="md-ellipsis"> 线性展开 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/molpdos.html">
+<span class="md-ellipsis"> 分子投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_3_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+<span class="md-ellipsis"> 遗传算法（GA） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_3_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_9">
+<span class="md-nav__icon md-icon"></span> 遗传算法（GA） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis"> 硅 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="Silicon.html">
+<span class="md-ellipsis"> 硅 </span>
+</a>
+<nav aria-label="本页目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span> 本页目录 </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Silicon.html#input-files">
+<span class="md-ellipsis"> 输入文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Silicon.html#running-and-output">
+<span class="md-ellipsis"> 运行与输出 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Introduction.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_10" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+<span class="md-ellipsis"> 工具 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_10_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_10">
+<span class="md-nav__icon md-icon"></span> 工具 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Tools/elastic_constants.html">
+<span class="md-ellipsis"> 弹性常数 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+<span class="md-ellipsis"> 开发者文档 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span> 开发者文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/using_devel_codes.html">
+<span class="md-ellipsis"> 使用开发控制代码（Devel Codes） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/using_trace.html">
+<span class="md-ellipsis"> 使用 trace </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/adding_pair_pots.html">
+<span class="md-ellipsis"> 添加经验势 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/build-system.html">
+<span class="md-ellipsis"> 构建系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/style_guide.html">
+<span class="md-ellipsis"> 代码风格指南 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/test_suite.html">
+<span class="md-ellipsis"> 测试 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/CI.html">
+<span class="md-ellipsis"> 持续集成系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/git_workflow.html">
+<span class="md-ellipsis"> Git 工作流程 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/release_procedure.html">
+<span class="md-ellipsis"> 版本发布流程 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="本页目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span> 本页目录 </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Silicon.html#input-files">
+<span class="md-ellipsis"> 输入文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Silicon.html#running-and-output">
+<span class="md-ellipsis"> 运行与输出 </span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="castep-ga-for-silicon">硅的CASTEP GA计算</h1><div class="zh-notice">中文译文 · 由本地英文文档翻译，已统一术语并进行重点抽查。 <a href="../../https://castep-docs.github.io/castep-docs/tutorials/GA/Silicon.html">英文原文对照</a> · <a href="../../translation-notes.html">翻译说明</a></div>
+<p>让我们假设我们不知道Stillinger-Weber硅的基态结构，于是使用CASTEP的遗传算法来发现它。</p>
+<h2 id="input-files">输入文件</h2>
+<p>我们将使用 <code>cell</code> 文件 <em>Si.cell</em></p>
+<div class="highlight"><pre><span></span><code><a href="Silicon.html#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>%block LATTICE_ABC
+<a href="Silicon.html#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>ang
+<a href="Silicon.html#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>3.8 3.8 3.8
+<a href="Silicon.html#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a> 90  90  90
+<a href="Silicon.html#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>%endblock LATTICE_ABC
+<a href="Silicon.html#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>
+<a href="Silicon.html#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>%block POSITIONS_FRAC
+<a href="Silicon.html#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>Si  0.203  0.617  0.209
+<a href="Silicon.html#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a>Si  0.844  0.442  0.350
+<a href="Silicon.html#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a>Si  0.964  0.379  0.096
+<a href="Silicon.html#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>Si  0.762  0.524  0.941
+<a href="Silicon.html#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a>Si  0.544  0.605  0.781
+<a href="Silicon.html#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a>Si  0.238  0.597  0.531
+<a href="Silicon.html#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a>Si  0.728  0.914  0.742
+<a href="Silicon.html#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a>Si  0.209  0.929  0.435
+<a href="Silicon.html#__codelineno-0-16" id="__codelineno-0-16" name="__codelineno-0-16"></a>%endblock POSITIONS_FRAC
+<a href="Silicon.html#__codelineno-0-17" id="__codelineno-0-17" name="__codelineno-0-17"></a>
+<a href="Silicon.html#__codelineno-0-18" id="__codelineno-0-18" name="__codelineno-0-18"></a>%BLOCK SPECIES_POT
+<a href="Silicon.html#__codelineno-0-19" id="__codelineno-0-19" name="__codelineno-0-19"></a>QC5
+<a href="Silicon.html#__codelineno-0-20" id="__codelineno-0-20" name="__codelineno-0-20"></a>%ENDBLOCK SPECIES_POT
+<a href="Silicon.html#__codelineno-0-21" id="__codelineno-0-21" name="__codelineno-0-21"></a>
+<a href="Silicon.html#__codelineno-0-22" id="__codelineno-0-22" name="__codelineno-0-22"></a>symmetry_generate
+<a href="Silicon.html#__codelineno-0-23" id="__codelineno-0-23" name="__codelineno-0-23"></a>symmetry_tol : 0.05 ang
+</code></pre></div>
+<p>晶格的定义以及原子位置对最终结果影响不大：在 0<sup>那</sup> 生成时会变得有效随机化。唯一重要的是在其中定义的硅原子数量。 <code>POSITIONS_FRAC</code> 块 - 这里是 8，因此未来的结构也将有 8 个原子。另一个值得注意的是使用了 QC5 势能函数 - 它被选用是因为其速度，这一点在需要进行大量计算的情况下尤为重要。</p>
+<p>对于 <code>param</code> 文件我们将使用 <em>Si.param</em></p>
+<div class="highlight"><pre><span></span><code><a href="Silicon.html#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>task             = genetic algor # Run the GA
+<a href="Silicon.html#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>ga_pop_size      = 12            # Parent population size
+<a href="Silicon.html#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>ga_max_gens      = 12            # Max number of generations to run for
+<a href="Silicon.html#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>ga_mutate_amp    = 1.00          # Mutation amplitude (in Angstrom)
+<a href="Silicon.html#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a>ga_mutate_rate   = 0.15          # Probability of mutation to occur
+<a href="Silicon.html#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a>ga_fixed_N       = true          # Fix number of ions in each member based on input cell
+<a href="Silicon.html#__codelineno-1-7" id="__codelineno-1-7" name="__codelineno-1-7"></a>
+<a href="Silicon.html#__codelineno-1-8" id="__codelineno-1-8" name="__codelineno-1-8"></a>rand_seed        = 101213 # Random seed for replicability
+<a href="Silicon.html#__codelineno-1-9" id="__codelineno-1-9" name="__codelineno-1-9"></a>opt_strategy     = SPEED  # Run quick
+<a href="Silicon.html#__codelineno-1-10" id="__codelineno-1-10" name="__codelineno-1-10"></a>
+<a href="Silicon.html#__codelineno-1-11" id="__codelineno-1-11" name="__codelineno-1-11"></a>geom_max_iter    = 211 # Can have a large max iter as using pair potentials
+<a href="Silicon.html#__codelineno-1-12" id="__codelineno-1-12" name="__codelineno-1-12"></a>
+<a href="Silicon.html#__codelineno-1-13" id="__codelineno-1-13" name="__codelineno-1-13"></a># Don't write most output files for each population member
+<a href="Silicon.html#__codelineno-1-14" id="__codelineno-1-14" name="__codelineno-1-14"></a>write_checkpoint = NONE
+<a href="Silicon.html#__codelineno-1-15" id="__codelineno-1-15" name="__codelineno-1-15"></a>write_bib        = FALSE
+<a href="Silicon.html#__codelineno-1-16" id="__codelineno-1-16" name="__codelineno-1-16"></a>write_cst_esp    = FALSE
+<a href="Silicon.html#__codelineno-1-17" id="__codelineno-1-17" name="__codelineno-1-17"></a>write_bands      = FALSE
+<a href="Silicon.html#__codelineno-1-18" id="__codelineno-1-18" name="__codelineno-1-18"></a>write_cell_structure = TRUE
+<a href="Silicon.html#__codelineno-1-19" id="__codelineno-1-19" name="__codelineno-1-19"></a>
+<a href="Silicon.html#__codelineno-1-20" id="__codelineno-1-20" name="__codelineno-1-20"></a>######################################
+<a href="Silicon.html#__codelineno-1-21" id="__codelineno-1-21" name="__codelineno-1-21"></a># Any extra devel code options       #
+<a href="Silicon.html#__codelineno-1-22" id="__codelineno-1-22" name="__codelineno-1-22"></a># &amp; required GA specific devel flags #
+<a href="Silicon.html#__codelineno-1-23" id="__codelineno-1-23" name="__codelineno-1-23"></a>######################################
+<a href="Silicon.html#__codelineno-1-24" id="__codelineno-1-24" name="__codelineno-1-24"></a>
+<a href="Silicon.html#__codelineno-1-25" id="__codelineno-1-25" name="__codelineno-1-25"></a>%block devel_code
+<a href="Silicon.html#__codelineno-1-26" id="__codelineno-1-26" name="__codelineno-1-26"></a>
+<a href="Silicon.html#__codelineno-1-27" id="__codelineno-1-27" name="__codelineno-1-27"></a>  # Command used to call castep for each population member
+<a href="Silicon.html#__codelineno-1-28" id="__codelineno-1-28" name="__codelineno-1-28"></a>  # If not given this defaults to castep.serial
+<a href="Silicon.html#__codelineno-1-29" id="__codelineno-1-29" name="__codelineno-1-29"></a>  CMD: castep.serial :ENDCMD
+<a href="Silicon.html#__codelineno-1-30" id="__codelineno-1-30" name="__codelineno-1-30"></a>
+<a href="Silicon.html#__codelineno-1-31" id="__codelineno-1-31" name="__codelineno-1-31"></a>  GA:
+<a href="Silicon.html#__codelineno-1-32" id="__codelineno-1-32" name="__codelineno-1-32"></a>
+<a href="Silicon.html#__codelineno-1-33" id="__codelineno-1-33" name="__codelineno-1-33"></a>    PP=T   # Using a pair potential
+<a href="Silicon.html#__codelineno-1-34" id="__codelineno-1-34" name="__codelineno-1-34"></a>    IPM=M  # Randomly mutated initial population
+<a href="Silicon.html#__codelineno-1-35" id="__codelineno-1-35" name="__codelineno-1-35"></a>
+<a href="Silicon.html#__codelineno-1-36" id="__codelineno-1-36" name="__codelineno-1-36"></a>    CW=24  # Num gens for convergence
+<a href="Silicon.html#__codelineno-1-37" id="__codelineno-1-37" name="__codelineno-1-37"></a>
+<a href="Silicon.html#__codelineno-1-38" id="__codelineno-1-38" name="__codelineno-1-38"></a>    NI=F   # No niching
+<a href="Silicon.html#__codelineno-1-39" id="__codelineno-1-39" name="__codelineno-1-39"></a>    FW=0.5 # Fitness weighting
+<a href="Silicon.html#__codelineno-1-40" id="__codelineno-1-40" name="__codelineno-1-40"></a>
+<a href="Silicon.html#__codelineno-1-41" id="__codelineno-1-41" name="__codelineno-1-41"></a>    # Asynchronous running options
+<a href="Silicon.html#__codelineno-1-42" id="__codelineno-1-42" name="__codelineno-1-42"></a>    # Required for asynchronous running, without this all geom opts will be run
+<a href="Silicon.html#__codelineno-1-43" id="__codelineno-1-43" name="__codelineno-1-43"></a>    # one after another
+<a href="Silicon.html#__codelineno-1-44" id="__codelineno-1-44" name="__codelineno-1-44"></a>    AS=T   # Run geometry optimisations asynchronously
+<a href="Silicon.html#__codelineno-1-45" id="__codelineno-1-45" name="__codelineno-1-45"></a>    MS=3   # Run 3 geometry optimisations at once
+<a href="Silicon.html#__codelineno-1-46" id="__codelineno-1-46" name="__codelineno-1-46"></a>
+<a href="Silicon.html#__codelineno-1-47" id="__codelineno-1-47" name="__codelineno-1-47"></a>    # Random symmetry children
+<a href="Silicon.html#__codelineno-1-48" id="__codelineno-1-48" name="__codelineno-1-48"></a>    NUM_CHILDREN=12
+<a href="Silicon.html#__codelineno-1-49" id="__codelineno-1-49" name="__codelineno-1-49"></a>    RSC=F
+<a href="Silicon.html#__codelineno-1-50" id="__codelineno-1-50" name="__codelineno-1-50"></a>
+<a href="Silicon.html#__codelineno-1-51" id="__codelineno-1-51" name="__codelineno-1-51"></a>    CORE_RADII_LAMBDA=0.8 # Core radii 0.8 pseudopotenital radii
+<a href="Silicon.html#__codelineno-1-52" id="__codelineno-1-52" name="__codelineno-1-52"></a>
+<a href="Silicon.html#__codelineno-1-53" id="__codelineno-1-53" name="__codelineno-1-53"></a>    SCALE_IGNORE_CONV=T   # Ignore convergence in fitness calcualtion
+<a href="Silicon.html#__codelineno-1-54" id="__codelineno-1-54" name="__codelineno-1-54"></a>
+<a href="Silicon.html#__codelineno-1-55" id="__codelineno-1-55" name="__codelineno-1-55"></a>  :ENDGA
+<a href="Silicon.html#__codelineno-1-56" id="__codelineno-1-56" name="__codelineno-1-56"></a>
+<a href="Silicon.html#__codelineno-1-57" id="__codelineno-1-57" name="__codelineno-1-57"></a>  # Use pair potentials in geometry optimisations and perform a final snap to symmetry
+<a href="Silicon.html#__codelineno-1-58" id="__codelineno-1-58" name="__codelineno-1-58"></a>  GEOM: PP=T SNAP=T :ENDGEOM
+<a href="Silicon.html#__codelineno-1-59" id="__codelineno-1-59" name="__codelineno-1-59"></a>
+<a href="Silicon.html#__codelineno-1-60" id="__codelineno-1-60" name="__codelineno-1-60"></a>  # Use the Stillinger-Weber pair potential
+<a href="Silicon.html#__codelineno-1-61" id="__codelineno-1-61" name="__codelineno-1-61"></a>  PP=T
+<a href="Silicon.html#__codelineno-1-62" id="__codelineno-1-62" name="__codelineno-1-62"></a>  PP:
+<a href="Silicon.html#__codelineno-1-63" id="__codelineno-1-63" name="__codelineno-1-63"></a>    SW=T
+<a href="Silicon.html#__codelineno-1-64" id="__codelineno-1-64" name="__codelineno-1-64"></a>  :ENDPP
+<a href="Silicon.html#__codelineno-1-65" id="__codelineno-1-65" name="__codelineno-1-65"></a>
+<a href="Silicon.html#__codelineno-1-66" id="__codelineno-1-66" name="__codelineno-1-66"></a>%endblock devel_code
+</code></pre></div>
+<p>了解这个文件中发生了什么非常重要。这一行 <code>task = genetic algor</code> 这是告诉我们要实际运行GA。GA参数决定了GA如何运行——与前一个教程（添加链接）不同，这些值都是合理的（大多数情况下，突变幅度和速率不应偏离这些数值）。如你所见，每一代将有12个父代个体（意味着会选出12个单元格进行繁殖），并且将运行12代。 <code>ga_fixed_N</code> 正是这一点确保了单元格中存在固定的8个离子（信息越固定，结果收敛得越快，因为需要尝试的变量就越少）。</p>
+<p>存在许多加速遗传算法的选项——由于正在进行的计算数量，这一点至关重要，以确保其可行性。 <code>op_strategy = SPEED</code> 并且 <code>geom_max_iter = 211</code> 请确保几何结构优化（每代有12次，因此本次首次运行共144次）既快速又具有合理的准确性。 <code>AS=T</code> 并且 <code>MS=3</code> 允许异步并行化，其中3个种群成员将同时进行几何优化。</p>
+<p>该 <code>devel_code</code> 块稍微复杂一些。事实是，所使用的对势被定义在两者中都存在。 <code>GA</code> 子块和 <code>GEOM</code> 子块，再次对速度是必要的。The <code>CMD</code> 子块的存在是为了对所有成员执行几何结构优化：其发生的情况是 <code>cell</code> 文件被生成（最初是随机的，并在 1<sup>st</sup> 从生成开始通过育种+突变)，以及相应的 <code>param</code> 包含告诉它们进行几何优化的文件，针对每个成员，然后进行运行。</p>
+<p>一个非常重要的事情需要注意的是这些线条</p>
+<div class="highlight"><pre><span></span><code><a href="Silicon.html#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>NUM_CHILDREN = 12
+<a href="Silicon.html#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a>RSC = F
+</code></pre></div>
+<p>这种情况非常不寻常，大多数实际计算中都不会使用：它通常会呈现如下形式： <div class="highlight"><pre><span></span><code><a href="Silicon.html#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>NUM_CHILDREN=11
+<a href="Silicon.html#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>RSC=T
+<a href="Silicon.html#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a>RSN=1
+</code></pre></div></p>
+<p>根据一般规则 <code>NUM_CHILREN</code> + <code>RSN</code> = <code>ga_pop_size</code> （此前已定义）。它所做的事是，在每一代中，随机生成一个高对称性结构作为子代（其余11个， <code>NUM_CHILDREN</code>，即被培育）。这里没有使用这一方法的原因是：硅是一个非常简单的例子；它很可能会随机猜测其结构为金刚石，这意味着实际的遗传算法（GA）作用微乎其微，最终结果也缺乏趣味性。</p>
+<div class="admonition note">
+<p class="admonition-title">说明</p>
+<p>尽管并非保证，使用相同的 <code>RAND_SEED</code> 使其很可能你将得到与本教程完全相同的结果，因此可以更轻松地跟随操作。</p>
+</div>
+<h2 id="running-and-output">运行与输出</h2>
+<p>现在我们可以对硅（Si）运行CASTEP的遗传算法（GA）。你可以使用</p>
+<p><code>tail -f Si.castep</code></p>
+<p>如果你想查看其中发生了什么情况 <code>castep</code> 文件在运行时生成（更详细的说明见前一个教程 ADD LINK）。运行完成后，我们将使用脚本 <a href="get_data.sh">get_data.sh</a> 并且 <a href="plot_results.py">plot_results.py</a> - 第一次运行</p>
+<p><code>./get_data.sh</code></p>
+<p>以获取输出文件 <code>out.put</code>. 运行 Python 脚本以在视觉上查看数据 <code>all_gens.png</code>图应如下所示</p>
+<p><img alt="First image output" src="all_gens.png"/></p>
+<p>图中的每个点代表一个成员，显示了其每离子体积与焓之间的关系。该图中最低焓的成员（在第6代、成员9）被突出标出——目前认为这是所发现最稳定的结构。</p>
+<p>你也可以通过运行来找到最低焓结构</p>
+<p><code>grep 'child' Si.castep | sort -k10,10n | head -20</code></p>
+<p>这给出了焓最低的10个成员（每个成员重复两次——不必担心这一点）。输出看起来有点像</p>
+<p><div class="highlight"><pre><span></span><code><a href="Silicon.html#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a> GA: gen #  6 child  #  9 enthalpy = -4.336393E+000 eV/atom un-scaled fitness =  0.880797 conv = T member error = F seed = Si.gen_006_mem_009 vol/ion =    20.0224 A**3/atom
+<a href="Silicon.html#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a> GA: gen #  6 child  #  9 enthalpy = -4.336393E+000 eV/atom updated fitness =  0.880797 conv = T member error = F seed = Si.gen_006_mem_009 vol/ion =    20.0224 A**3/atom
+<a href="Silicon.html#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a> GA: gen # 12 child  #  8 enthalpy = -4.336381E+000 eV/atom un-scaled fitness =  0.880788 conv = T member error = F seed = Si.gen_012_mem_008 vol/ion =    20.0241 A**3/atom
+<a href="Silicon.html#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a> GA: gen # 12 child  #  8 enthalpy = -4.336381E+000 eV/atom updated fitness =  0.452993 conv = T member error = F seed = Si.gen_012_mem_008 vol/ion =    20.0241 A**3/atom
+<a href="Silicon.html#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a> GA: gen #  5 child  #  9 enthalpy = -4.336369E+000 eV/atom un-scaled fitness =  0.880797 conv = T member error = F seed = Si.gen_005_mem_009 vol/ion =    20.0230 A**3/atom
+<a href="Silicon.html#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a> GA: gen #  5 child  #  9 enthalpy = -4.336369E+000 eV/atom updated fitness =  0.880797 conv = T member error = F seed = Si.gen_005_mem_009 vol/ion =    20.0230 A**3/atom
+<a href="Silicon.html#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a> GA: gen # 11 child  #  6 enthalpy = -4.258665E+000 eV/atom un-scaled fitness =  0.828518 conv = T member error = F seed = Si.gen_011_mem_006 vol/ion =    19.7822 A**3/atom
+<a href="Silicon.html#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a> GA: gen # 11 child  #  6 enthalpy = -4.258665E+000 eV/atom updated fitness =  0.456619 conv = T member error = F seed = Si.gen_011_mem_006 vol/ion =    19.7822 A**3/atom
+<a href="Silicon.html#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a> GA: gen #  4 child  # 10 enthalpy = -4.241488E+000 eV/atom un-scaled fitness =  0.880797 conv = T member error = F seed = Si.gen_004_mem_010 vol/ion =    18.2369 A**3/atom
+<a href="Silicon.html#__codelineno-4-10" id="__codelineno-4-10" name="__codelineno-4-10"></a> GA: gen #  4 child  # 10 enthalpy = -4.241488E+000 eV/atom updated fitness =  0.880797 conv = T member error = F seed = Si.gen_004_mem_010 vol/ion =    18.2369 A**3/atom
+<a href="Silicon.html#__codelineno-4-11" id="__codelineno-4-11" name="__codelineno-4-11"></a> GA: gen #  1 child  #  8 enthalpy = -4.240423E+000 eV/atom un-scaled fitness =  0.880797 conv = T member error = F seed = Si.gen_001_mem_008 vol/ion =    18.2175 A**3/atom
+<a href="Silicon.html#__codelineno-4-12" id="__codelineno-4-12" name="__codelineno-4-12"></a> GA: gen #  1 child  #  8 enthalpy = -4.240423E+000 eV/atom updated fitness =  0.880797 conv = T member error = F seed = Si.gen_001_mem_008 vol/ion =    18.2175 A**3/atom
+<a href="Silicon.html#__codelineno-4-13" id="__codelineno-4-13" name="__codelineno-4-13"></a> GA: gen #  9 child  #  3 enthalpy = -4.240415E+000 eV/atom un-scaled fitness =  0.835359 conv = T member error = F seed = Si.gen_009_mem_003 vol/ion =    18.2164 A**3/atom
+<a href="Silicon.html#__codelineno-4-14" id="__codelineno-4-14" name="__codelineno-4-14"></a> GA: gen #  9 child  #  3 enthalpy = -4.240415E+000 eV/atom updated fitness =  0.432991 conv = T member error = F seed = Si.gen_009_mem_003 vol/ion =    18.2164 A**3/atom
+<a href="Silicon.html#__codelineno-4-15" id="__codelineno-4-15" name="__codelineno-4-15"></a> GA: gen #  9 child  #  5 enthalpy = -4.240388E+000 eV/atom un-scaled fitness =  0.835345 conv = T member error = F seed = Si.gen_009_mem_005 vol/ion =    18.2140 A**3/atom
+<a href="Silicon.html#__codelineno-4-16" id="__codelineno-4-16" name="__codelineno-4-16"></a> GA: gen #  9 child  #  5 enthalpy = -4.240388E+000 eV/atom updated fitness =  0.432963 conv = T member error = F seed = Si.gen_009_mem_005 vol/ion =    18.2140 A**3/atom
+<a href="Silicon.html#__codelineno-4-17" id="__codelineno-4-17" name="__codelineno-4-17"></a> GA: gen # 11 child  # 10 enthalpy = -4.225493E+000 eV/atom un-scaled fitness =  0.801207 conv = T member error = F seed = Si.gen_011_mem_010 vol/ion =    19.0956 A**3/atom
+<a href="Silicon.html#__codelineno-4-18" id="__codelineno-4-18" name="__codelineno-4-18"></a> GA: gen # 11 child  # 10 enthalpy = -4.225493E+000 eV/atom updated fitness =  0.420408 conv = T member error = F seed = Si.gen_011_mem_010 vol/ion =    19.0956 A**3/atom
+<a href="Silicon.html#__codelineno-4-19" id="__codelineno-4-19" name="__codelineno-4-19"></a> GA: gen #  1 child  #  9 enthalpy = -4.225480E+000 eV/atom un-scaled fitness =  0.865596 conv = T member error = F seed = Si.gen_001_mem_009 vol/ion =    19.0992 A**3/atom
+<a href="Silicon.html#__codelineno-4-20" id="__codelineno-4-20" name="__codelineno-4-20"></a> GA: gen #  1 child  #  9 enthalpy = -4.225480E+000 eV/atom updated fitness =  0.444351 conv = T member error = F seed = Si.gen_001_mem_009 vol/ion =    19.0992 A**3/atom
+</code></pre></div> 这进一步证实了6,9是最稳定的成员。现在我们将研究它的结构。</p>
+<p>通过它运行c2x</p>
+<p><code>c2x --int -e=0.1-0.0001 Si.gen_006_mem_009</code></p>
+<p>它告诉我们其对结构的近似情况。在我的情况下，它给出了输出</p>
+<p><div class="highlight"><pre><span></span><code><a href="Silicon.html#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>Tol=0.1     International symmetry is P6_3/mmc
+<a href="Silicon.html#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>Tol=0.00316 International symmetry is C2/m
+</code></pre></div> 从这一点我们可以立即判断结果不完美：实际结构应为金刚石结构（Fd-3m）。不过不必担心，因为在VESTA中查看一个2×2超胞时，可以明显看到其与我们预期的结构相似：</p>
+<p><img alt="Initial supercell" src="6_9_2x2.png"/></p>
+<p>这很有希望——尽管它一开始生成的是随机结构，但已经得到了类似金刚石的结构。</p>
+<p>让我们看看更多的代数是否能改善结果。修改初始 <code>param</code> 需要的文件</p>
+<p><code>ga_max_gens = 18</code></p>
+<p>并且添加该行</p>
+<p><code>continuation = Si.xyz</code></p>
+<p>这会告诉它继续运行，最多进行18代迭代，使用之前的结果作为其历史记录。再次运行castep GA对Si的计算将使其按以前的方式运行。</p>
+<p>运行完成后，如果希望保存之前的图表，只需将其重命名即可。然后再次运行bash脚本和python脚本，以获取新的图表。 <code>all_gens.png</code> 用于持续、长时间的运行。新图像将在图上具有更多的数据点，因为已考察了更多的成员，并（希望）发现了具有更低焓值的新成员。运行相同的 <code>grep</code> 命令将在此顶部4处给出</p>
+<div class="highlight"><pre><span></span><code><a href="Silicon.html#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>GA: gen # 16 child  #  7 enthalpy = -4.336404E+000 eV/atom un-scaled fitness =  0.880797 conv = T member error = F seed = Si.gen_016_mem_007 vol/ion =    20.0237 A**3/atom
+<a href="Silicon.html#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a>GA: gen # 16 child  #  7 enthalpy = -4.336404E+000 eV/atom updated fitness =  0.880797 conv = T member error = F seed = Si.gen_016_mem_007 vol/ion =    20.0237 A**3/atom
+<a href="Silicon.html#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a>GA: gen #  6 child  #  9 enthalpy = -4.336393E+000 eV/atom un-scaled fitness =  0.880797 conv = T member error = F seed = Si.gen_006_mem_009 vol/ion =    20.0224 A**3/atom
+<a href="Silicon.html#__codelineno-6-4" id="__codelineno-6-4" name="__codelineno-6-4"></a>GA: gen #  6 child  #  9 enthalpy = -4.336393E+000 eV/atom updated fitness =  0.880797 conv = T member error = F seed = Si.gen_006_mem_009 vol/ion =    20.0224 A**3/atom
+</code></pre></div>
+<p>这相当有趣：即使在生成了 6 × 12 = 72 个新成员之后，原来的最小值仍然是 2<sup>并</sup> 最低焓值：它确实是一个良好的结构。然而，目前16,7被认为是最好的：我们来看看它的改进之处。</p>
+<p>在它上面运行c2x告诉我这一点</p>
+<p><div class="highlight"><pre><span></span><code><a href="Silicon.html#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a>Tol=0.1     International symmetry is Fd-3m
+<a href="Silicon.html#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>Tol=0.0001  International symmetry is P-1
+</code></pre></div> 根据c2x来看，它现在更接近金刚石结构（尽管如果你非常严格地看，它仍然不是——它依然存在缺陷，但已经更接近了）。在VESTA中查看（再次是2x2超胞）也告诉我们类似的情况。</p>
+<p><img alt="2nd vesta image" src="16_7_2x2.png"/></p>
+<p>正如GA预期的那样，它已经通过多代演化成功优化了结构。如果需要，您可以通过保留当前设置继续运行更多代。 <code>continuation</code> 线性并增加 <code>ga_max_gens</code> 更多——事实上，如果使用不同的种子值，或者你的环境对所述种子值处理方式不同，你可能需要——额外6代并不保证能发现一个新的最低焓结构！</p>
+</article>
+</div>
+
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright"> 原版采用 <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+
+
+
+<script src="../../assets/zh-search-data.js"></script><script data-root="../../" src="../../assets/zh-site.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:true},showMathMenu:false,messageStyle:"none"});</script><script src="../../assets/mathjax/MathJax.js?config=TeX-MML-AM_CHTML"></script></body>
+</html>

@@ -1,0 +1,1281 @@
+
+<!DOCTYPE html>
+
+<html class="js" lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="../Output_Files/output_files.html" rel="prev"/>
+<link href="../Troubleshooting/troubleshooting.html" rel="next"/>
+<link href="../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.0" name="generator"/>
+<title>其他程序与工具 — CASTEP 中文文档</title>
+<link href="../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../stylesheets/extra.css" rel="stylesheet"/>
+
+<link href="../../assets/zh-site.css" rel="stylesheet"/></head>
+<body dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="tools.html#pre-processing-tools"> 跳转到正文 </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="页眉" class="md-header__inner md-grid">
+<a aria-label="CASTEP 中文文档" class="md-header__button md-logo" data-md-component="logo" href="../../index.html" title="CASTEP 中文文档">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis"> CASTEP 中文文档 </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis"> 其他程序与工具 </span>
+</div>
+</div>
+</div>
+
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="搜索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="搜索" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="搜索" class="md-search__options">
+<button aria-label="清除" class="md-search__icon md-icon" tabindex="-1" title="清除" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta"> 搜索中文或英文导航标题 </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="导航" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="CASTEP 中文文档" class="md-nav__button md-logo" data-md-component="logo" href="../../index.html" title="CASTEP 中文文档">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a> CASTEP 中文文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../index.html">
+<span class="md-ellipsis"> 首页 </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis"> 使用文档 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span> 使用文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+<span class="md-ellipsis"> 入门指南 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_1">
+<span class="md-nav__icon md-icon"></span> 入门指南 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Getting_Started/intro.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Getting_Started/built_in_help.html">
+<span class="md-ellipsis"> 命令行帮助 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Getting_Started/running_castep.html">
+<span class="md-ellipsis"> 运行 CASTEP </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Getting_Started/basic_cell_file.html">
+<span class="md-ellipsis"> 晶胞文件（.cell） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Getting_Started/basic_param_file.html">
+<span class="md-ellipsis"> 参数文件（.param） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Getting_Started/restarting.html">
+<span class="md-ellipsis"> 检查点与续算 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+<span class="md-ellipsis"> 基态 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_2">
+<span class="md-nav__icon md-icon"></span> 基态 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Groundstate/intro.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Groundstate/dftd.html">
+<span class="md-ellipsis"> 色散修正 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Groundstate/soc.html">
+<span class="md-ellipsis"> 自旋–轨道耦合 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Groundstate/spin_constraints.html">
+<span class="md-ellipsis"> 自旋约束 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Groundstate/population_analysis.html">
+<span class="md-ellipsis"> 布居分析 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Groundstate/ELF.html">
+<span class="md-ellipsis"> 电子局域函数（ELF） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+<span class="md-ellipsis"> 几何结构优化 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_3">
+<span class="md-nav__icon md-icon"></span> 几何结构优化 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Geometry_Optimisation/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Geometry_Optimisation/keywords.html">
+<span class="md-ellipsis"> 关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Geometry_Optimisation/constraints.html">
+<span class="md-ellipsis"> 约束条件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Geometry_Optimisation/files.html">
+<span class="md-ellipsis"> 文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Geometry_Optimisation/tools.html">
+<span class="md-ellipsis"> 工具 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+<span class="md-ellipsis"> 分子动力学 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_4">
+<span class="md-nav__icon md-icon"></span> 分子动力学 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Molecular_Dynamics/overview.html">
+<span class="md-ellipsis"> 分子动力学概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Molecular_Dynamics/basics.html">
+<span class="md-ellipsis"> 分子动力学基础 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Molecular_Dynamics/restarts.html">
+<span class="md-ellipsis"> 分子动力学续算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Molecular_Dynamics/files.html">
+<span class="md-ellipsis"> 分子动力学文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Molecular_Dynamics/keywords.html">
+<span class="md-ellipsis"> 分子动力学关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Molecular_Dynamics/tools.html">
+<span class="md-ellipsis"> 分子动力学工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Molecular_Dynamics/pimd.html">
+<span class="md-ellipsis"> 路径积分分子动力学（PIMD） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Molecular_Dynamics/hugoniostat.html">
+<span class="md-ellipsis"> Hugoniostat 冲击波模拟方法 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+<span class="md-ellipsis"> 过渡态搜索 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_5">
+<span class="md-nav__icon md-icon"></span> 过渡态搜索 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Transition_State_Search/neb.html">
+<span class="md-ellipsis"> 微扰弹性带法（NEB） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+<span class="md-ellipsis"> 交换–关联（XC） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_6">
+<span class="md-nav__icon md-icon"></span> 交换–关联（XC） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../XC/XCoverview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../XC/XC.html">
+<span class="md-ellipsis"> 交换–关联设置 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../XC/libXC.html">
+<span class="md-ellipsis">
+    
+  
+    libXC
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+<span class="md-ellipsis"> 电子谱性质 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_7">
+<span class="md-nav__icon md-icon"></span> 电子谱性质 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Spectral/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Spectral/keywords.html">
+<span class="md-ellipsis"> 关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Spectral/restarts.html">
+<span class="md-ellipsis"> 续算 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+<span class="md-ellipsis"> 声子 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_8">
+<span class="md-nav__icon md-icon"></span> 声子 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Introduction.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Running-phonon-calculations.html">
+<span class="md-ellipsis"> 运行声子计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Dielectric-properties.html">
+<span class="md-ellipsis"> 介电性质 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Thermodynamic-properties.html">
+<span class="md-ellipsis"> 热力学性质 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Plotting-and-analysis-tools.html">
+<span class="md-ellipsis"> 绘图与分析工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Running-Large-Calculations.html">
+<span class="md-ellipsis"> 运行大规模计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Advanced-Topics.html">
+<span class="md-ellipsis"> 进阶主题 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Keyword-Reference.html">
+<span class="md-ellipsis"> 关键词参考 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Phonons/Castep_Phonons/Bibliography.html">
+<span class="md-ellipsis"> 参考文献 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+<span class="md-ellipsis"> 核磁共振（NMR） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_9">
+<span class="md-nav__icon md-icon"></span> 核磁共振（NMR） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../NMR/NMR_overview.html">
+<span class="md-ellipsis"> 核磁共振概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_10" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+<span class="md-ellipsis"> 电子顺磁共振（EPR） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_10_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_10">
+<span class="md-nav__icon md-icon"></span> 电子顺磁共振（EPR） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../EPR/overview.html">
+<span class="md-ellipsis"> 电子顺磁共振概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../XRD/overview.html">
+<span class="md-ellipsis"> X 射线衍射（XRD） </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_12" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_12" id="__nav_2_12_label" tabindex="0">
+<span class="md-ellipsis"> 含时密度泛函理论（TDDFT） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_12_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_12">
+<span class="md-nav__icon md-icon"></span> 含时密度泛函理论（TDDFT） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../TDDFT/overview.html">
+<span class="md-ellipsis"> 含时密度泛函理论概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_13" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_13" id="__nav_2_13_label" tabindex="0">
+<span class="md-ellipsis"> ΔSCF 方法 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_13_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_13">
+<span class="md-nav__icon md-icon"></span> ΔSCF 方法 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/overview.html">
+<span class="md-ellipsis"> ΔSCF 方法概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/simple_delta_scf.html">
+<span class="md-ellipsis"> 简单 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/lin_ex_delta_scf.html">
+<span class="md-ellipsis"> 线性展开 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/mo_delta_scf.html">
+<span class="md-ellipsis"> 分子轨道 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Delta_SCF/molpdos.html">
+<span class="md-ellipsis"> 分子投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_14" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_14" id="__nav_2_14_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    DFT+U
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_14_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_14">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    DFT+U
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../DFT+U/dftu-theory.html">
+<span class="md-ellipsis"> DFT+U：理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../DFT+U/dftu-input.html">
+<span class="md-ellipsis"> DFT+U：输入 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../DFT+U/koopmans-theory.html">
+<span class="md-ellipsis"> 线性响应法计算 U：理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../DFT+U/koopmans-input.html">
+<span class="md-ellipsis"> 线性响应法计算 U：输入 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../DFT+U/koopmans-output.html">
+<span class="md-ellipsis"> 线性响应法计算 U：输出 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../DFT+U/koopmans-warnings-errors.html">
+<span class="md-ellipsis"> 线性响应法计算 U：警告与错误 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_15" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_15" id="__nav_2_15_label" tabindex="0">
+<span class="md-ellipsis"> 赝势 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_15_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_15">
+<span class="md-nav__icon md-icon"></span> 赝势 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Pseudopotentials/theory.html">
+<span class="md-ellipsis"> 理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Pseudopotentials/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Pseudopotentials/reading_headers.html">
+<span class="md-ellipsis"> 头部信息 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Pseudopotentials/otfg_string.html">
+<span class="md-ellipsis"> 即时生成赝势（OTFG）字符串 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_16" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_16" id="__nav_2_16_label" tabindex="0">
+<span class="md-ellipsis"> 输入文件 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_16_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_16">
+<span class="md-nav__icon md-icon"></span> 输入文件 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Input_Files/cell_file.html">
+<span class="md-ellipsis"> 晶胞文件（.cell） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Input_Files/param_file.html">
+<span class="md-ellipsis"> 参数文件（.param） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Input_Files/cell_keywords.html">
+<span class="md-ellipsis"> 晶胞文件关键词 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_17" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_17" id="__nav_2_17_label" tabindex="0">
+<span class="md-ellipsis"> 输出文件 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_17_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_17">
+<span class="md-nav__icon md-icon"></span> 输出文件 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Output_Files/output_files.html">
+<span class="md-ellipsis"> 输出文件 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_18" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_18" id="__nav_2_18_label" tabindex="0">
+<span class="md-ellipsis"> 其他程序与工具 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_2_18_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_18">
+<span class="md-nav__icon md-icon"></span> 其他程序与工具 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis"> 其他程序与工具 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="tools.html">
+<span class="md-ellipsis"> 其他程序与工具 </span>
+</a>
+<nav aria-label="本页目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span> 本页目录 </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#pre-processing-tools">
+<span class="md-ellipsis"> 预处理工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#convergence-testing">
+<span class="md-ellipsis"> 收敛性测试 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#general-postprocessing">
+<span class="md-ellipsis"> 通用后处理 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#spectroscopy-modelling-tools">
+<span class="md-ellipsis"> 光谱建模工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#visualisation">
+<span class="md-ellipsis"> 可视化 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#databases-big-data-and-workflow">
+<span class="md-ellipsis"> 数据库、大数据与工作流 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#structure-prediction">
+<span class="md-ellipsis"> 结构预测 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#md-analysis">
+<span class="md-ellipsis"> 分子动力学分析 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#machine-learned-potentials">
+<span class="md-ellipsis"> 机器学习势函数 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#transport">
+<span class="md-ellipsis"> 输运 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#miscellaneous">
+<span class="md-ellipsis"> 其他事项 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#commercial-codes">
+<span class="md-ellipsis"> 商业软件 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_19" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_19" id="__nav_2_19_label" tabindex="0">
+<span class="md-ellipsis"> 故障排查 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_19_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_19">
+<span class="md-nav__icon md-icon"></span> 故障排查 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Troubleshooting/troubleshooting.html">
+<span class="md-ellipsis"> 常见错误 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Troubleshooting/linux_path.html">
+<span class="md-ellipsis"> Linux 帮助 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis"> 教程 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span> 教程 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+<span class="md-ellipsis"> 成键与电荷 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_1">
+<span class="md-nav__icon md-icon"></span> 成键与电荷 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bonding_and_Charge/charge_density.html">
+<span class="md-ellipsis"> 绘制电荷密度 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bonding_and_Charge/mulliken_population.html">
+<span class="md-ellipsis"> 布居分析 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bonding_and_Charge/ELF.html">
+<span class="md-ellipsis"> 电子局域函数（ELF） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+<span class="md-ellipsis"> 能带与态密度 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_2">
+<span class="md-nav__icon md-icon"></span> 能带与态密度 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+<span class="md-ellipsis"> 绘图 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_1_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_2_1">
+<span class="md-nav__icon md-icon"></span> 绘图 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bands_and_DOS/Plotting/plotting_perl.html">
+<span class="md-ellipsis"> 绘图：CASTEP 工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bands_and_DOS/Plotting/plotting_sumo.html">
+<span class="md-ellipsis"> 绘图：SUMO </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bands_and_DOS/Plotting/Optados/DOS.html">
+<span class="md-ellipsis"> OptaDOS：态密度 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bands_and_DOS/Plotting/Optados/pDOS.html">
+<span class="md-ellipsis"> OptaDOS：投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bands_and_DOS/semiconductors.html">
+<span class="md-ellipsis"> 半导体 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bands_and_DOS/metals.html">
+<span class="md-ellipsis"> 金属 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Bands_and_DOS/magnetic.html">
+<span class="md-ellipsis"> 磁性材料 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+<span class="md-ellipsis"> 光学 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_3">
+<span class="md-nav__icon md-icon"></span> 光学 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Optics/Optics.html">
+<span class="md-ellipsis"> 光学 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Optics/Optics_aluminium.html">
+<span class="md-ellipsis"> 光学：铝 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Optics/Optics_ani.html">
+<span class="md-ellipsis"> 光学各向异性 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+<span class="md-ellipsis"> 芯能级能量损失谱 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_4">
+<span class="md-nav__icon md-icon"></span> 芯能级能量损失谱 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Coreloss/Coreloss.html">
+<span class="md-ellipsis"> 芯能级能量损失谱 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Optics/JDOS.html">
+<span class="md-ellipsis"> 联合态密度（JDOS） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/dispersion_corrections/castep-ase-dispersion-tutorial.html">
+<span class="md-ellipsis"> 色散修正 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/NEB/neb_tutorial.html">
+<span class="md-ellipsis"> 微扰弹性带法（NEB） </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+<span class="md-ellipsis"> 核磁共振屏蔽 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_7">
+<span class="md-nav__icon md-icon"></span> 核磁共振屏蔽 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/NMR/Example_1_-Ethanol.html">
+<span class="md-ellipsis"> 示例 1：乙醇 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/NMR/Example_2_-Diamond.html">
+<span class="md-ellipsis"> 示例 2：金刚石 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/NMR/Examples_3_-Alanine_and_Silicates.html">
+<span class="md-ellipsis"> 示例 3：丙氨酸与硅酸盐 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+<span class="md-ellipsis"> ΔSCF 方法 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_8">
+<span class="md-nav__icon md-icon"></span> ΔSCF 方法 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Delta_SCF/simple_delta_scf.html">
+<span class="md-ellipsis"> 简单 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Delta_SCF/lin_ex_delta_scf.html">
+<span class="md-ellipsis"> 线性展开 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Delta_SCF/molpdos.html">
+<span class="md-ellipsis"> 分子投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+<span class="md-ellipsis"> 遗传算法（GA） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_9">
+<span class="md-nav__icon md-icon"></span> 遗传算法（GA） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/GA/Silicon.html">
+<span class="md-ellipsis"> 硅 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/GA/Introduction.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_10" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+<span class="md-ellipsis"> 工具 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_10_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_10">
+<span class="md-nav__icon md-icon"></span> 工具 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../tutorials/Tools/elastic_constants.html">
+<span class="md-ellipsis"> 弹性常数 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+<span class="md-ellipsis"> 开发者文档 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span> 开发者文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/using_devel_codes.html">
+<span class="md-ellipsis"> 使用开发控制代码（Devel Codes） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/using_trace.html">
+<span class="md-ellipsis"> 使用 trace </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/adding_pair_pots.html">
+<span class="md-ellipsis"> 添加经验势 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/build-system.html">
+<span class="md-ellipsis"> 构建系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/style_guide.html">
+<span class="md-ellipsis"> 代码风格指南 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/test_suite.html">
+<span class="md-ellipsis"> 测试 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/CI.html">
+<span class="md-ellipsis"> 持续集成系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/git_workflow.html">
+<span class="md-ellipsis"> Git 工作流程 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../developer/release_procedure.html">
+<span class="md-ellipsis"> 版本发布流程 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="本页目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span> 本页目录 </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#pre-processing-tools">
+<span class="md-ellipsis"> 预处理工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#convergence-testing">
+<span class="md-ellipsis"> 收敛性测试 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#general-postprocessing">
+<span class="md-ellipsis"> 通用后处理 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#spectroscopy-modelling-tools">
+<span class="md-ellipsis"> 光谱建模工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#visualisation">
+<span class="md-ellipsis"> 可视化 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#databases-big-data-and-workflow">
+<span class="md-ellipsis"> 数据库、大数据与工作流 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#structure-prediction">
+<span class="md-ellipsis"> 结构预测 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#md-analysis">
+<span class="md-ellipsis"> 分子动力学分析 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#machine-learned-potentials">
+<span class="md-ellipsis"> 机器学习势函数 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#transport">
+<span class="md-ellipsis"> 输运 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#miscellaneous">
+<span class="md-ellipsis"> 其他事项 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="tools.html#commercial-codes">
+<span class="md-ellipsis"> 商业软件 </span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1>其他程序与工具</h1><div class="zh-notice">中文译文 · 由本地英文文档翻译，已统一术语并进行重点抽查。 <a href="../../https://castep-docs.github.io/castep-docs/documentation/Tools/tools.html">英文原文对照</a> · <a href="../../translation-notes.html">翻译说明</a></div>
+<p>本页面列出了各种分析代码（其中一些随 CASTEP 分发包提供，其他则为第三方代码），这些程序可与 CASTEP 互操作。部分程序需要额外的接口代码/脚本，以将 CASTEP 输出作为其输入等。</p>
+<h2 id="pre-processing-tools">预处理工具</h2>
+<ul>
+<li><a href="http://www.c2x.org.uk/">c2x</a> （也随 CASTEP 分发包一同提供）可读取并转换一系列晶体结构文件格式，包括 <code>.cif</code> 这些功能与密度泛函理论（DFT）相关，并能执行结构操作。它可以旋转晶胞、生成超胞、添加真空空间、创建表面层和纳米管。</li>
+<li><a href="https://sourceforge.net/projects/cif2cell/">Cif2Cell</a> 是用于从CIF（晶体学信息框架）文件生成各种电子结构代码的几何设置的工具。也支持超胞生成以及可视化工具的格式。</li>
+<li><a href="https://www.materialscloud.org/work/tools/seekpath">见路径</a> 是一个k路径查找器，提供与空间群对称性兼容的能带路径，并具备交互式3D可视化功能。</li>
+</ul>
+<h2 id="convergence-testing">收敛性测试</h2>
+<ul>
+<li><a href="https://github.com/CCP-NC/castepconv">castepconv</a> CASTEPconv（也随 CASTEP 分发包一同提供）可自动执行平面波截断能、k点密度和细网格尺度的收敛性测试。基于标准输入模板，它会生成相关文件、分析输出结果并生成汇总数据文件。独立版本随 CASTEP 源码一同提供。后续版本依赖于 ASE，并可在 github 上下载（<a href="https://github.com/CCP-NC/castepconv">https://github.com/CCP-NC/castepconv</a>）并且还可以生成图表。</li>
+</ul>
+<h2 id="general-postprocessing">通用后处理</h2>
+<ul>
+<li><a href="https://github.com/oerc0122/castep_outputs">castep输出结果</a> 是一个Python包，用于读取和解析CASTEP的所有输出文件，并将其转换为标准格式。这是推荐的CASTEP输出解析接口。提供了一个简单的命令行工具以导出一个 <code>.json</code> 文件，但其主要用途是作为一个库，供未来的分析代码调用。这是为Python分析工具开发者推荐的接口。目前该程序可以读取并解析所有CASTEP文本格式文件，但不支持二进制文件。</li>
+<li><a href="https://github.com/zhubonan/castepxbin.git">castepxbin</a> 是一组用于读取 CASTEP 二进制输出文件的程序集合 <code>.check</code>,<code>.castep_bin</code>, <code>.orbitals</code> 等等。</li>
+<li><a href="http://www.c2x.org.uk/">c2x</a> （也随 CASTEP 分发包一同提供）可以读取 CASTEP 二进制输出文件 <code>.check</code>,<code>.castep_bin</code>,<code>.orbitals</code> 并提取单元格几何数据、电子密度、波函数，以供可视化和进一步分析。它可以通过三线性插值与傅里叶插值的组合对密度进行插值，对密度进行积分并计算其偶极矩，以及对能带进行倒易空间对称性分析。它可以生成与XCrysDen、VESTA、VMD和Jmol等程序兼容的输出格式，还可生成适用于gnuplot的1D数据格式。</li>
+</ul>
+<h2 id="spectroscopy-modelling-tools">光谱建模工具</h2>
+<ul>
+<li><em>dispersion.pl</em> 并且 <em>dos.pl</em> （CASTEP 分发包的一部分）是用于从 CASTEP .bands 文件生成能带结构和态密度图的工具。它们还支持生成声子色散和态密度图。Dispersion.pl 可对指定激光频率和温度下的粉末拉曼光谱进行简单的建模。</li>
+<li><a href="http://www.tcm.phy.cam.ac.uk/~ajm255/optados/">OptaDOS</a> 是一种用于计算光学、内层电子激发谱以及全态密度、部分态密度和联合态密度（DOS）的代码。</li>
+<li><a href="https://smtg-bham.github.io/sumo/">SUMO</a> 是一套用于电子能带结构和声子色散分析与绘图的工具。</li>
+<li><a href="https://johnkendrick.github.io/PDielec/introduction.html">PDielec</a> 基于CASTEP（及其他）声子计算结果，计算包含光学谐振腔效应的模型粉末红外光谱。</li>
+<li><em>轨道到能带</em> （CASTEP 分发包的一部分）读取一个 CASTEP 文件 <code>.orbitals</code> 来自谱/能带结构计算的文件，分析能带交叉并生成一个 <code>.bands</code> 包含考虑交叉情况的重新排序本征值文件，用于生成能带图。</li>
+<li><em>bs_sc2pc</em> （CASTEP 分布包的一部分）是用于 CASTEP 的能带结构展开工具。它实现了 Popescu 和 Zunger 所描述的有效能带结构方法。 <a href="http://dx.doi.org/10.1103/PhysRevB.85.085201|10.1103/PhysRevB.85.085201">http://dx.doi.org/10.1103/PhysRevB.85.085201|10.1103/PhysRevB.85.085201</a>，并作为 CASTEP 学术分发版的一部分提供。Peter Brommer 和 David Quigley（2014）“缺陷和不匹配超胞的自动有效能带结构。”《凝聚态物理杂志》26 485501。 <a href="http://dx.doi.org/10.1088/0953-8984/26/48/485501|10.1088/0953-8984/26/48/485501">http://dx.doi.org/10.1088/0953-8984/26/48/485501|10.1088/0953-8984/26/48/485501</a>.</li>
+<li><a href="https://github.com/band-unfolding/bandup">band_up</a> 是另一个用于对缺陷超胞进行能带展开计算的程序。</li>
+<li><a href="https://pypi.org/project/easyunfold/">easyunfold</a> 是另一种能展开能带的工具，支持CASTEP。</li>
+<li><a href="https://fwzheng.github.io/PU/PU.html">声子展开</a> 是一个用于声子色散关系展开的程序。</li>
+<li><em>mode_follow</em> （CASTEP 分发包的一部分）读取一个 <code>.phonon</code> 输出文件并生成一系列 <code>.cell</code> 用于单点能计算的输入文件，用于沿模式计算能量轮廓，以便绘图和分析非谐性或双阱深度。</li>
+<li><a href="../Delta_SCF/molpdos.html">molpdos</a> （CASTEP 分发包的一部分）在材料计算中计算态密度（DOS），以及将其投影到分子态上的态密度（DOS）。 <a href="../Delta_SCF/molpdos.html">ΔSCF 方法</a> 计算。</li>
+<li><a href="http://docs.mantidproject.org/v3.9.1/algorithms/Abins-v1.html">Abins</a> 是Mantid的一个插件，允许科学家将实验数据与理论弹性中子散射谱进行比较。AbINS利用由密度泛函理论（DFT）程序（如CASTEP）计算出的声子数据，生成粉末样品的中子散射谱，从而更方便地建立理论与实验之间的联系。</li>
+<li><a href="https://euphonic.readthedocs.io/en/stable/">悦耳的</a> 是一个用于计算四维（4-D）中弹性的中子散射谱函数的库和前端<strong>Q</strong>,<span class="arithmatex"><span class="MathJax_Preview">\omega</span><script type="math/tex">\omega</script></span>) 空间与单晶时间飞行中子散射谱仪的数据进行比较。</li>
+<li><a href="https://sites.google.com/site/ornliceman/download">OCLIMAX</a> 是一款用于基于振动频率和极化矢量输入的非弹性中子散射模拟的免费程序。它既能对粉末样品也能对单晶样品进行模拟，输入的声子数据可来源于第一性原理或经验计算。</li>
+<li><a href="https://phonopy.github.io/phonopy/">phonopy</a> 是一个用于声子计算的开源软件包，支持谐波和准谐水平的计算。</li>
+<li><a href="https://phonopy.github.io/phono3py/">phono3py</a> 使用超胞方法计算声子-声子相互作用及相关性质。这些性质包括晶格热导率、联合态密度以及声子寿命。</li>
+<li><a href="https://github.com/theloanerkit/phonon-to-json">声子到json</a> 一个小型 Python 工具用于转换 CASTEP <code>.phonon</code> 用于在中的文件 <a href="https://henriquemiranda.github.io/phononwebsite/phonon.html">TSS 物理声子可视化工具</a>.</li>
+</ul>
+<h2 id="visualisation">可视化</h2>
+<ul>
+<li><a href="http://crystalmaker.com/crystalmaker/specs/index.html">CrystalMaker</a> 是一个用于设计和研究晶体与分子结构的可视化工具包。它还提供了对原子级和电子性质建模及动画的支持。</li>
+<li><a href="http://jmol.sourceforge.net/">JMOL</a> 是一个开源的基于浏览器的HTML5查看器以及独立的Java查看器，用于三维化学结构的显示，支持分子、晶体、材料和生物大分子。它能够读取CASTEP <code>.cell</code>, <code>.castep</code>, <code>.den_fmt</code>, .<code>elf-fmt</code>, <code>.geom</code>, <code>.md</code>, <code>.phonon</code> 以及更多内容，包括晶体结构、密度的可视化展示， <a href="../Groundstate/ELF.html">电子局域函数（ELF）</a> 等等，以及优化或分子动力学轨迹的动画和声子振动。</li>
+<li><a href="https://www.ccpnc.ac.uk/magresview/magresview/magres_view.html">MagresView</a> 是用于可视化和处理计算固体态核磁共振参数的工具。</li>
+<li><a href="https://ovito.org/">OVITO</a> 是用于原子级和粒子模拟数据的科学可视化与分析软件。</li>
+<li><a href="http://jp-minerals.org/vesta/en/">VESTA</a> 是一款用于结构模型、体数据（如电子/核密度）以及晶体形态的三维可视化程序。</li>
+<li><a href="http://www.xcrysden.org/">XCrysDen</a> 是一个用于显示等值面和轮廓的晶体与分子结构可视化程序，可将其叠加在晶体结构上，并支持交互式旋转和操作。（<code>.c2x</code> 可以将 CASTEP 输出转换为 <code>.xsf</code> 格式转换器及其他转换工具作为 CASTEP 分发包的一部分提供）</li>
+<li><a href="https://github.com/zachary-hawk/castep2fs">castep2fs</a> 是用于从 CASTEP 输出文件生成可用于发表的费米面及相关数量的 CASTEP 工具。</li>
+<li><em>castep2cube</em> （CASTEP 分发包的一部分）读取 <code>.check</code> 或者 <code>.castep_bin</code> 输出文件，并将电子密度转换为高斯形式 <code>.cube</code> 格式，许多其他可视化工具均可读取。</li>
+</ul>
+<h2 id="databases-big-data-and-workflow">数据库、大数据与工作流</h2>
+<ul>
+<li><a href="https://repository.nomad-coe.eu/">NOMAD</a> 支持 CASTEP 及其用户。该服务包括上传、下载、共享、分配 DOI 等功能。数据存储期限至少为 10 年，这是多个资助机构的要求。NOMAD 仓库也是计算材料科学领域唯一被 NATURE Scientific Data 推荐的存储库。目前，该仓库包含超过 10<sup>8</sup> 条目 - 请参见 <a href="https://metainfo.nomad-coe.eu/nomadmetainfo_public/archive.html">档案</a> 用于最新数据。</li>
+<li><a href="https://aiida-castep.readthedocs.io/en/latest/index.html">aiida-castep</a> 接口到 <a href="https://www.aiida.net/">AiiDA</a> 工作流基础设施。</li>
+<li><a href="https://ccp-nc.github.io/soprano/">萨普罗诺</a> 是一个旨在帮助晶体学家搜索和分类特定材料新晶型的Python库。它提供了多种类和函数，用于处理大量候选结构、比较它们、排序和聚类它们。</li>
+</ul>
+<h2 id="structure-prediction">结构预测</h2>
+<ul>
+<li><em>CASTEP_GA</em> （CASTEP 分发包的一部分）是一种基于改进型遗传算法（GA）的晶体结构预测工具，适用于周期性系统。它能够处理三维体材料、二维表面重构/界面以及一维纳米带边缘等结构。该工具维护一个初始晶态父代群体，通过变异和繁殖生成候选子代结构，随后将这些子代结构输入到CASTEP中进行局部结构优化。此外，还可以根据随机空间群生成随机结构。经过若干代演化后，可能会出现具有最低焓值的全局最优晶体结构。该功能已扩展至多目标遗传算法（MOGA），从而生成一组帕累托前沿最优结构，其中一条轴表示最小焓值，另一条轴为用户自定义的性质。分布中包含用于生成该性质值的示例脚本。最近的工作集中在CHGA（凸包遗传算法）方法上，该方法同时优化化学计量比，从而生成多维凸包。更详细的文档包含在“ReadMe”目录中。</li>
+<li><a href="https://www.mtg.msm.cam.ac.uk/Codes/AIRSS">AIRSS</a> （从头算随机结构搜索）是一种非常简单、却强大且高度并行的结构预测方法。它生成具有合理密度和原子间距的随机合理结构，并将其松弛至附近的能量极小值。这些合理的随机结构在密度和原子间距方面都具备合理性，此外还可能包含晶体学、化学或先前实验/计算知识。除了这些明确的约束条件外，该方法的重点是广泛而均匀地对结构空间进行采样。它与CASTEP紧密集成，并已被用于多项里程碑式研究中，以发现材料的新相。</li>
+<li><a href="http://www.calypso.cn/">Calypso</a> 《基于粒子群优化的晶体结构分析》是一种高效的结构预测代码。该方法仅需给定化合物的化学组成，即可预测在特定外部条件下稳定的或亚稳态结构，并可用于预测/确定晶体结构以及设计多功能材料。</li>
+<li><a href="http://uspex-team.org/">USPEX</a> （“通用结构预测：进化晶格学”）是Oganov实验室开发的一种用于晶体结构预测的方法。它能非常高效地处理分子晶体（包括具有柔性及极为复杂分子的晶体），并能够在仅给出化学元素名称的前提下，预测稳定的化学组成及其相应的晶体结构。除了完全非经验性的搜索之外，USPEX还能预测大量稳健的亚稳态结构，并可利用不同程度的先验知识进行多种类型的模拟。</li>
+<li><a href="http://xtalopt.github.io/">XtalOPT</a> 是一种免费且真正开源的进化算法，专为先验晶体结构预测而设计，作为对的扩展实现。 <a href="http://avogadro.cc/">Avogadro</a> 分子编辑器。</li>
+</ul>
+<h2 id="md-analysis">分子动力学分析</h2>
+<ul>
+<li><em>geom2xyz.pl</em>, <em>geom2xsf</em>, <em>geom2dcd</em> （CASTEP 分发包的一部分）是用于将 CASTEP 转换的过滤器 <code>.geom</code> 并且 <code>.md</code> 输出文件可转换为其他轨迹格式，并可用于与多种其他分析程序接口。</li>
+<li><em>md_to_phonon</em> （CASTEP 分发包的一部分）是一个简单的 Python 工具，用于读取 CASTEP 轨迹文件并进行各种基于声子的分析，包括质量加权速度自相关函数（VACF）随频率的变化（这与实验测得的 VDOS 相近）。该工具还可以从 VACF 中指定峰处提取特定的本征模式和本征矢，并将其写入单模式的 CASTEP 声子文件，以便用其他工具（如 JMol）进行可视化。</li>
+<li><a href="https://github.com/ISISNeutronMuon/MDANSE/">MDANSE</a> 《用于中子散射实验的分子动力学分析》是一款用于分子动力学轨迹分析的Python应用程序。除了对结构和动力学进行一般性分析（如van Hove函数、振动态密度）外，它主要用于计算可直接与中子散射实验对比的性质，例如相干和非相干中间散射函数及其傅里叶变换、弹性非相干结构因子、静态相干结构因子或径向分布函数。</li>
+<li><a href="https://z-laboratory.github.io/LiquidLib/">LiquidLib</a> 是一个“用于分析经典和从头计算分子动力学模拟的液体及类液体物质，并应用于中子散射实验的综合性工具包”。</li>
+<li><a href="https://www.potfit.net/">potfit</a> 试图将一个模型力场拟合到所提供的数据集上。CASTEP 分发包中包含一个 Python 转换工具，用于读取 CASTEP 轨迹文件并生成可用于其他程序的原子构型文件。 <a href="https://www.potfit.net/">potfit</a> 代码。</li>
+<li><a href="http://www.tcm.phy.cam.ac.uk/castep/MD/node19.html">MDTEP</a> 是一个用于分析分子动力学轨迹并计算热力学性质（如比热容和速度自相关函数）的简单程序。</li>
+</ul>
+<h2 id="machine-learned-potentials">机器学习势函数</h2>
+<ul>
+<li><a href="https://github.com/libAtoms/QUIP">QUIP</a> 它是一组用于进行分子动力学模拟的软件工具。它实现了多种原子间势能和紧结合量子力学方法。详见 <a href="https://pubs.aip.org/aip/jcp/article/159/4/044803/2904492/Machine-learned-acceleration-for-molecular">https://pubs.aip.org/aip/jcp/article/159/4/044803/2904492/Machine-learned-acceleration-for-molecular</a>.</li>
+</ul>
+<h2 id="transport">输运</h2>
+<ul>
+<li><a href="http://www.shengbte.org/">ShengBTE</a> 是一个用于求解声子的玻尔兹曼输运方程的软件包。其主要目的是计算体单晶固体中晶格对热导率的贡献，但在假设扩散边界条件下，也可用于处理纳米线。</li>
+<li><a href="http://www.almabte.eu/|AlmaBTE">AlmaBTA</a> 将目前用于均匀体材料的Sheng-BTE方法扩展至介观尺度，以完整描述从电子第一性原理层面、原子级层面，直至介观结构层面的热输运过程。</li>
+<li><a href="https://www.imc.tuwien.ac.at//forschungsbereich_theoretische_chemie/forschungsgruppen/prof_dr_gkh_madsen_theoretical_materials_chemistry/boltztrap/">BoltzTraP</a> 是一个用于计算半经典输运系数的程序。</li>
+<li><a href="https://www.tuwien.at/en/tch/tc/theoretical-materials-chemistry/boltztrap2">BoltzTrap2</a> 是平滑傅里叶插值算法在电子能带中的现代实现版本，该算法构成了原始且广泛使用的BoltzTraP程序的基础。BoltzTraP最典型的用途之一是在刚性能带模型下计算热电输运系数随温度和化学势的变化关系。然而，该程序还提供了许多其他功能，包括基于重构能带的三维费米面图示。</li>
+<li><a href="https://github.com/afonari/emc">EMC</a> （有效质量计算器）实现了利用有限差分法计算能带极值处的有效质量。该程序有两个版本：用FORTRAN编写和用Python编写。</li>
+</ul>
+<h2 id="miscellaneous">其他事项</h2>
+<ul>
+<li><a href="https://wiki.fysik.dtu.dk/ase/index.html">ASE</a> 是一套用于设置、操作、运行、可视化和分析原子模拟的工具及Python模块。该代码在GNU LGPL许可下免费提供。它可以与多种不同的电子结构计算程序进行接口连接。</li>
+<li><a href="http://theory.cm.utexas.edu/henkelman/code/bader/">巴德尔</a> 是一种对电荷密度网格进行Bader电荷分析的工具。在分子体系中，电荷密度通常会在原子之间达到最小值，这为将原子彼此分开提供了一个自然的位置。除了作为可视化分子中原子位置的一种直观方案外，Bader定义在电荷分析中也常常非常有用。例如，包含在Bader体积内的电荷是原子总电子电荷的良好近似值。</li>
+<li><a href="https://www.brown.edu/Departments/Engineering/Labs/avdw/atat/">ATAT</a> （合金理论自动化工具包）是阿克塞尔·范德瓦尔开发的一系列合金理论工具。</li>
+<li><a href="https://vallico.net/casinoqmc/">CASINO</a> 是一个由剑桥大学物理系凝聚态理论组成员及其合作者在超过20年的时间里开发的用于执行量子蒙特卡洛（QMC）电子结构计算的计算机程序系统。它能够对由原子构成的真实体系的量子力学薛定谔方程求解出极其精确的解。一个接口 <code>castep2casino</code> 随 CASTEP 分发包提供。</li>
+<li><em>Emacs 模式</em> （CASTEP 分发包的一部分）是用于 CASTEP 输入文件的 Emacs 主模式，具备基于数据类型的语法高亮和内置帮助功能。</li>
+<li><a href="http://ipi-code.org/">i-PI</a> 是一个通过 Unix 套接字驱动接口执行分子动力学和路径积分分子动力学的软件包。更多详情 <a href="../Molecular_Dynamics/pimd.html">其他地方</a> 在此站点。</li>
+</ul>
+<h2 id="commercial-codes">商业软件</h2>
+<p><a href="https://www.3ds.com/products-services/biovia/products/molecular-modeling-simulation/biovia-materials-studio/">BIOVIA 材料工作室</a> 是一套用于材料量子和经典模拟的图形工具和代码，也是CASTEP商业分发的形式。</p>
+</article>
+</div>
+
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright"> 原版采用 <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+
+
+
+<script src="../../assets/zh-search-data.js"></script><script data-root="../../" src="../../assets/zh-site.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:true},showMathMenu:false,messageStyle:"none"});</script><script src="../../assets/mathjax/MathJax.js?config=TeX-MML-AM_CHTML"></script></body>
+</html>

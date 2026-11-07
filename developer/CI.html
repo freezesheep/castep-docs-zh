@@ -1,0 +1,1839 @@
+
+<!DOCTYPE html>
+
+<html class="js" lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="test_suite.html" rel="prev"/>
+<link href="git_workflow.html" rel="next"/>
+<link href="../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.0" name="generator"/>
+<title>CI测试系统 — CASTEP 中文文档</title>
+<link href="../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../stylesheets/extra.css" rel="stylesheet"/>
+
+<link href="../assets/zh-site.css" rel="stylesheet"/></head>
+<body dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="CI.html#ci-testing-system"> 跳转到正文 </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="页眉" class="md-header__inner md-grid">
+<a aria-label="CASTEP 中文文档" class="md-header__button md-logo" data-md-component="logo" href="../index.html" title="CASTEP 中文文档">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis"> CASTEP 中文文档 </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis"> 持续集成系统 </span>
+</div>
+</div>
+</div>
+
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="搜索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="搜索" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="搜索" class="md-search__options">
+<button aria-label="清除" class="md-search__icon md-icon" tabindex="-1" title="清除" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta"> 搜索中文或英文导航标题 </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="导航" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="CASTEP 中文文档" class="md-nav__button md-logo" data-md-component="logo" href="../index.html" title="CASTEP 中文文档">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a> CASTEP 中文文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../index.html">
+<span class="md-ellipsis"> 首页 </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis"> 使用文档 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span> 使用文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+<span class="md-ellipsis"> 入门指南 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_1">
+<span class="md-nav__icon md-icon"></span> 入门指南 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Getting_Started/intro.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Getting_Started/built_in_help.html">
+<span class="md-ellipsis"> 命令行帮助 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Getting_Started/running_castep.html">
+<span class="md-ellipsis"> 运行 CASTEP </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Getting_Started/basic_cell_file.html">
+<span class="md-ellipsis"> 晶胞文件（.cell） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Getting_Started/basic_param_file.html">
+<span class="md-ellipsis"> 参数文件（.param） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Getting_Started/restarting.html">
+<span class="md-ellipsis"> 检查点与续算 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+<span class="md-ellipsis"> 基态 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_2">
+<span class="md-nav__icon md-icon"></span> 基态 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Groundstate/intro.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Groundstate/dftd.html">
+<span class="md-ellipsis"> 色散修正 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Groundstate/soc.html">
+<span class="md-ellipsis"> 自旋–轨道耦合 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Groundstate/spin_constraints.html">
+<span class="md-ellipsis"> 自旋约束 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Groundstate/population_analysis.html">
+<span class="md-ellipsis"> 布居分析 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Groundstate/ELF.html">
+<span class="md-ellipsis"> 电子局域函数（ELF） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+<span class="md-ellipsis"> 几何结构优化 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_3">
+<span class="md-nav__icon md-icon"></span> 几何结构优化 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Geometry_Optimisation/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Geometry_Optimisation/keywords.html">
+<span class="md-ellipsis"> 关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Geometry_Optimisation/constraints.html">
+<span class="md-ellipsis"> 约束条件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Geometry_Optimisation/files.html">
+<span class="md-ellipsis"> 文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Geometry_Optimisation/tools.html">
+<span class="md-ellipsis"> 工具 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+<span class="md-ellipsis"> 分子动力学 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_4">
+<span class="md-nav__icon md-icon"></span> 分子动力学 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/overview.html">
+<span class="md-ellipsis"> 分子动力学概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/basics.html">
+<span class="md-ellipsis"> 分子动力学基础 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/restarts.html">
+<span class="md-ellipsis"> 分子动力学续算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/files.html">
+<span class="md-ellipsis"> 分子动力学文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/keywords.html">
+<span class="md-ellipsis"> 分子动力学关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/tools.html">
+<span class="md-ellipsis"> 分子动力学工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/pimd.html">
+<span class="md-ellipsis"> 路径积分分子动力学（PIMD） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Molecular_Dynamics/hugoniostat.html">
+<span class="md-ellipsis"> Hugoniostat 冲击波模拟方法 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+<span class="md-ellipsis"> 过渡态搜索 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_5">
+<span class="md-nav__icon md-icon"></span> 过渡态搜索 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Transition_State_Search/neb.html">
+<span class="md-ellipsis"> 微扰弹性带法（NEB） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+<span class="md-ellipsis"> 交换–关联（XC） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_6">
+<span class="md-nav__icon md-icon"></span> 交换–关联（XC） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/XC/XCoverview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/XC/XC.html">
+<span class="md-ellipsis"> 交换–关联设置 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/XC/libXC.html">
+<span class="md-ellipsis">
+    
+  
+    libXC
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+<span class="md-ellipsis"> 电子谱性质 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_7">
+<span class="md-nav__icon md-icon"></span> 电子谱性质 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Spectral/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Spectral/keywords.html">
+<span class="md-ellipsis"> 关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Spectral/restarts.html">
+<span class="md-ellipsis"> 续算 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+<span class="md-ellipsis"> 声子 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_8">
+<span class="md-nav__icon md-icon"></span> 声子 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Introduction.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Running-phonon-calculations.html">
+<span class="md-ellipsis"> 运行声子计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Dielectric-properties.html">
+<span class="md-ellipsis"> 介电性质 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Thermodynamic-properties.html">
+<span class="md-ellipsis"> 热力学性质 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Plotting-and-analysis-tools.html">
+<span class="md-ellipsis"> 绘图与分析工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Running-Large-Calculations.html">
+<span class="md-ellipsis"> 运行大规模计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Advanced-Topics.html">
+<span class="md-ellipsis"> 进阶主题 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Keyword-Reference.html">
+<span class="md-ellipsis"> 关键词参考 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Phonons/Castep_Phonons/Bibliography.html">
+<span class="md-ellipsis"> 参考文献 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+<span class="md-ellipsis"> 核磁共振（NMR） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_9">
+<span class="md-nav__icon md-icon"></span> 核磁共振（NMR） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/NMR/NMR_overview.html">
+<span class="md-ellipsis"> 核磁共振概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_10" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+<span class="md-ellipsis"> 电子顺磁共振（EPR） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_10_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_10">
+<span class="md-nav__icon md-icon"></span> 电子顺磁共振（EPR） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/EPR/overview.html">
+<span class="md-ellipsis"> 电子顺磁共振概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/XRD/overview.html">
+<span class="md-ellipsis"> X 射线衍射（XRD） </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_12" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_12" id="__nav_2_12_label" tabindex="0">
+<span class="md-ellipsis"> 含时密度泛函理论（TDDFT） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_12_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_12">
+<span class="md-nav__icon md-icon"></span> 含时密度泛函理论（TDDFT） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/TDDFT/overview.html">
+<span class="md-ellipsis"> 含时密度泛函理论概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_13" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_13" id="__nav_2_13_label" tabindex="0">
+<span class="md-ellipsis"> ΔSCF 方法 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_13_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_13">
+<span class="md-nav__icon md-icon"></span> ΔSCF 方法 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Delta_SCF/overview.html">
+<span class="md-ellipsis"> ΔSCF 方法概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Delta_SCF/simple_delta_scf.html">
+<span class="md-ellipsis"> 简单 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Delta_SCF/lin_ex_delta_scf.html">
+<span class="md-ellipsis"> 线性展开 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Delta_SCF/mo_delta_scf.html">
+<span class="md-ellipsis"> 分子轨道 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Delta_SCF/molpdos.html">
+<span class="md-ellipsis"> 分子投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_14" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_14" id="__nav_2_14_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    DFT+U
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_14_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_14">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    DFT+U
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/DFT+U/dftu-theory.html">
+<span class="md-ellipsis"> DFT+U：理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/DFT+U/dftu-input.html">
+<span class="md-ellipsis"> DFT+U：输入 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/DFT+U/koopmans-theory.html">
+<span class="md-ellipsis"> 线性响应法计算 U：理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/DFT+U/koopmans-input.html">
+<span class="md-ellipsis"> 线性响应法计算 U：输入 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/DFT+U/koopmans-output.html">
+<span class="md-ellipsis"> 线性响应法计算 U：输出 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/DFT+U/koopmans-warnings-errors.html">
+<span class="md-ellipsis"> 线性响应法计算 U：警告与错误 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_15" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_15" id="__nav_2_15_label" tabindex="0">
+<span class="md-ellipsis"> 赝势 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_15_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_15">
+<span class="md-nav__icon md-icon"></span> 赝势 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Pseudopotentials/theory.html">
+<span class="md-ellipsis"> 理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Pseudopotentials/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Pseudopotentials/reading_headers.html">
+<span class="md-ellipsis"> 头部信息 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Pseudopotentials/otfg_string.html">
+<span class="md-ellipsis"> 即时生成赝势（OTFG）字符串 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_16" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_16" id="__nav_2_16_label" tabindex="0">
+<span class="md-ellipsis"> 输入文件 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_16_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_16">
+<span class="md-nav__icon md-icon"></span> 输入文件 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Input_Files/cell_file.html">
+<span class="md-ellipsis"> 晶胞文件（.cell） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Input_Files/param_file.html">
+<span class="md-ellipsis"> 参数文件（.param） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Input_Files/cell_keywords.html">
+<span class="md-ellipsis"> 晶胞文件关键词 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_17" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_17" id="__nav_2_17_label" tabindex="0">
+<span class="md-ellipsis"> 输出文件 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_17_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_17">
+<span class="md-nav__icon md-icon"></span> 输出文件 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Output_Files/output_files.html">
+<span class="md-ellipsis"> 输出文件 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_18" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_18" id="__nav_2_18_label" tabindex="0">
+<span class="md-ellipsis"> 其他程序与工具 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_18_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_18">
+<span class="md-nav__icon md-icon"></span> 其他程序与工具 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Tools/tools.html">
+<span class="md-ellipsis"> 其他程序与工具 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_19" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_19" id="__nav_2_19_label" tabindex="0">
+<span class="md-ellipsis"> 故障排查 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_19_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_19">
+<span class="md-nav__icon md-icon"></span> 故障排查 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Troubleshooting/troubleshooting.html">
+<span class="md-ellipsis"> 常见错误 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../documentation/Troubleshooting/linux_path.html">
+<span class="md-ellipsis"> Linux 帮助 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis"> 教程 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span> 教程 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+<span class="md-ellipsis"> 成键与电荷 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_1">
+<span class="md-nav__icon md-icon"></span> 成键与电荷 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bonding_and_Charge/charge_density.html">
+<span class="md-ellipsis"> 绘制电荷密度 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bonding_and_Charge/mulliken_population.html">
+<span class="md-ellipsis"> 布居分析 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bonding_and_Charge/ELF.html">
+<span class="md-ellipsis"> 电子局域函数（ELF） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+<span class="md-ellipsis"> 能带与态密度 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_2">
+<span class="md-nav__icon md-icon"></span> 能带与态密度 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+<span class="md-ellipsis"> 绘图 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_1_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_2_1">
+<span class="md-nav__icon md-icon"></span> 绘图 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bands_and_DOS/Plotting/plotting_perl.html">
+<span class="md-ellipsis"> 绘图：CASTEP 工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bands_and_DOS/Plotting/plotting_sumo.html">
+<span class="md-ellipsis"> 绘图：SUMO </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bands_and_DOS/Plotting/Optados/DOS.html">
+<span class="md-ellipsis"> OptaDOS：态密度 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bands_and_DOS/Plotting/Optados/pDOS.html">
+<span class="md-ellipsis"> OptaDOS：投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bands_and_DOS/semiconductors.html">
+<span class="md-ellipsis"> 半导体 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bands_and_DOS/metals.html">
+<span class="md-ellipsis"> 金属 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Bands_and_DOS/magnetic.html">
+<span class="md-ellipsis"> 磁性材料 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+<span class="md-ellipsis"> 光学 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_3">
+<span class="md-nav__icon md-icon"></span> 光学 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Optics/Optics.html">
+<span class="md-ellipsis"> 光学 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Optics/Optics_aluminium.html">
+<span class="md-ellipsis"> 光学：铝 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Optics/Optics_ani.html">
+<span class="md-ellipsis"> 光学各向异性 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+<span class="md-ellipsis"> 芯能级能量损失谱 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_4">
+<span class="md-nav__icon md-icon"></span> 芯能级能量损失谱 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Coreloss/Coreloss.html">
+<span class="md-ellipsis"> 芯能级能量损失谱 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Optics/JDOS.html">
+<span class="md-ellipsis"> 联合态密度（JDOS） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/dispersion_corrections/castep-ase-dispersion-tutorial.html">
+<span class="md-ellipsis"> 色散修正 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/NEB/neb_tutorial.html">
+<span class="md-ellipsis"> 微扰弹性带法（NEB） </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+<span class="md-ellipsis"> 核磁共振屏蔽 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_7">
+<span class="md-nav__icon md-icon"></span> 核磁共振屏蔽 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/NMR/Example_1_-Ethanol.html">
+<span class="md-ellipsis"> 示例 1：乙醇 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/NMR/Example_2_-Diamond.html">
+<span class="md-ellipsis"> 示例 2：金刚石 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/NMR/Examples_3_-Alanine_and_Silicates.html">
+<span class="md-ellipsis"> 示例 3：丙氨酸与硅酸盐 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+<span class="md-ellipsis"> ΔSCF 方法 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_8">
+<span class="md-nav__icon md-icon"></span> ΔSCF 方法 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Delta_SCF/simple_delta_scf.html">
+<span class="md-ellipsis"> 简单 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Delta_SCF/lin_ex_delta_scf.html">
+<span class="md-ellipsis"> 线性展开 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Delta_SCF/molpdos.html">
+<span class="md-ellipsis"> 分子投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+<span class="md-ellipsis"> 遗传算法（GA） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_9">
+<span class="md-nav__icon md-icon"></span> 遗传算法（GA） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/GA/Silicon.html">
+<span class="md-ellipsis"> 硅 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/GA/Introduction.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_10" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+<span class="md-ellipsis"> 工具 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_10_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_10">
+<span class="md-nav__icon md-icon"></span> 工具 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../tutorials/Tools/elastic_constants.html">
+<span class="md-ellipsis"> 弹性常数 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+<span class="md-ellipsis"> 开发者文档 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span> 开发者文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="using_devel_codes.html">
+<span class="md-ellipsis"> 使用开发控制代码（Devel Codes） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="using_trace.html">
+<span class="md-ellipsis"> 使用 trace </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="adding_pair_pots.html">
+<span class="md-ellipsis"> 添加经验势 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="build-system.html">
+<span class="md-ellipsis"> 构建系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="style_guide.html">
+<span class="md-ellipsis"> 代码风格指南 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="test_suite.html">
+<span class="md-ellipsis"> 测试 </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis"> 持续集成系统 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="CI.html">
+<span class="md-ellipsis"> 持续集成系统 </span>
+</a>
+<nav aria-label="本页目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span> 本页目录 </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#overview">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+<nav aria-label="概述" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#personal-pipeline">
+<span class="md-ellipsis"> 个人工作流 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#navigating-jenkins">
+<span class="md-ellipsis"> 在 Jenkins 中导航 </span>
+</a>
+<nav aria-label="在 Jenkins 中导航" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#waterfall-diagram">
+<span class="md-ellipsis"> 瀑布图 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#pipeline-menu">
+<span class="md-ellipsis"> 管道菜单 </span>
+</a>
+<nav aria-label="管道菜单" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#navigation-bar">
+<span class="md-ellipsis"> 导航栏 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#pipeline-status">
+<span class="md-ellipsis"> 管道状态 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#reports">
+<span class="md-ellipsis"> 报告 </span>
+</a>
+<nav aria-label="报告" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#linting-and-compiler-warnings">
+<span class="md-ellipsis"> 语法检查和编译器警告 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#test-coverage-report">
+<span class="md-ellipsis"> 测试覆盖率报告 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#ford-api-documentation">
+<span class="md-ellipsis"> FORD API 文档 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#build-artefacts">
+<span class="md-ellipsis"> 构建制品 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#jenkins-pipelines">
+<span class="md-ellipsis"> Jenkins 管道 </span>
+</a>
+<nav aria-label="Jenkins 管道" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#default-builds-run">
+<span class="md-ellipsis"> 默认构建运行 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#pr-builds-run">
+<span class="md-ellipsis"> PR构建运行 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#manual-parametrised-runs">
+<span class="md-ellipsis"> 参数化运行手册 </span>
+</a>
+<nav aria-label="参数化运行手册" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#build-keys">
+<span class="md-ellipsis"> 构建密钥 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#comment-tags">
+<span class="md-ellipsis"> 注释标签 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#bitbucket-pipelines">
+<span class="md-ellipsis"> BitBucket 管道 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#modifying-the-jenkinsfile">
+<span class="md-ellipsis"> 修改 Jenkinsfile </span>
+</a>
+<nav aria-label="修改 Jenkinsfile" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#adding-new-configurations">
+<span class="md-ellipsis"> 添加新配置 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#adding-new-comment-tags">
+<span class="md-ellipsis"> 添加新的注释标签 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#submitting-modifications-to-the-jenkinsfile">
+<span class="md-ellipsis"> 向 Jenkinsfile 提交修改 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="git_workflow.html">
+<span class="md-ellipsis"> Git 工作流程 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="release_procedure.html">
+<span class="md-ellipsis"> 版本发布流程 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="本页目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span> 本页目录 </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#overview">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+<nav aria-label="概述" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#personal-pipeline">
+<span class="md-ellipsis"> 个人工作流 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#navigating-jenkins">
+<span class="md-ellipsis"> 在 Jenkins 中导航 </span>
+</a>
+<nav aria-label="在 Jenkins 中导航" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#waterfall-diagram">
+<span class="md-ellipsis"> 瀑布图 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#pipeline-menu">
+<span class="md-ellipsis"> 管道菜单 </span>
+</a>
+<nav aria-label="管道菜单" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#navigation-bar">
+<span class="md-ellipsis"> 导航栏 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#pipeline-status">
+<span class="md-ellipsis"> 管道状态 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#reports">
+<span class="md-ellipsis"> 报告 </span>
+</a>
+<nav aria-label="报告" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#linting-and-compiler-warnings">
+<span class="md-ellipsis"> 语法检查和编译器警告 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#test-coverage-report">
+<span class="md-ellipsis"> 测试覆盖率报告 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#ford-api-documentation">
+<span class="md-ellipsis"> FORD API 文档 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#build-artefacts">
+<span class="md-ellipsis"> 构建制品 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#jenkins-pipelines">
+<span class="md-ellipsis"> Jenkins 管道 </span>
+</a>
+<nav aria-label="Jenkins 管道" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#default-builds-run">
+<span class="md-ellipsis"> 默认构建运行 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#pr-builds-run">
+<span class="md-ellipsis"> PR构建运行 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#manual-parametrised-runs">
+<span class="md-ellipsis"> 参数化运行手册 </span>
+</a>
+<nav aria-label="参数化运行手册" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#build-keys">
+<span class="md-ellipsis"> 构建密钥 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#comment-tags">
+<span class="md-ellipsis"> 注释标签 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#bitbucket-pipelines">
+<span class="md-ellipsis"> BitBucket 管道 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#modifying-the-jenkinsfile">
+<span class="md-ellipsis"> 修改 Jenkinsfile </span>
+</a>
+<nav aria-label="修改 Jenkinsfile" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#adding-new-configurations">
+<span class="md-ellipsis"> 添加新配置 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#adding-new-comment-tags">
+<span class="md-ellipsis"> 添加新的注释标签 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="CI.html#submitting-modifications-to-the-jenkinsfile">
+<span class="md-ellipsis"> 向 Jenkinsfile 提交修改 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1 id="ci-testing-system">CI测试系统</h1><div class="zh-notice">中文译文 · 由本地英文文档翻译，已统一术语并进行重点抽查。 <a href="../https://castep-docs.github.io/castep-docs/developer/CI.html">英文原文对照</a> · <a href="../translation-notes.html">翻译说明</a></div>
+<h2 id="overview">概述</h2>
+<div class="admonition warning">
+<p class="admonition-title">通知</p>
+<p>本文件假设您同时拥有 CASTEP 源代码和 ANVIL CI 系统的访问权限。</p>
+</div>
+<p>CASTEP 的持续集成（CI）系统分为 3 个阶段：</p>
+<dl>
+<dt><a href="CI.html#bitbucket-pipelines">快速响应（BitBucket）</a></dt>
+<dd>一个简短的测试集，在每次创建或推送拉取请求时都会运行。</dd>
+<dt><a href="CI.html#jenkins-pipelines">CASTEP 测试（Jenkins）</a></dt>
+<dd>一组更全面的测试在创建或推送拉取请求时运行。</dd>
+<dt><a href="CI.html#default-builds-run">CASTEP 默认测试（Jenkins）</a></dt>
+<dd>一组在默认分支或发布分支合并时自动运行的测试。</dd>
+</dl>
+<p>CASTEP 的主要持续集成（CI）系统是一个 <a href="https://www.jenkins.io/">詹金斯</a> 实例在……上运行 <a href="https://anvil.softeng-support.ac.uk/">ANVIL</a> 服务。</p>
+<p>主 CASTEP Jenkins 实例位于：</p>
+<p><a href="https://anvil.softeng-support.ac.uk/jenkins/job/CASTEP/view/all/">https://anvil.softeng-support.ac.uk/jenkins/job/CASTEP/view/all/</a></p>
+<p>通过 Jenkins Dashboard 将会带你进入 <a href="CI.html#waterfall-diagram">瀑布图</a> 首页。</p>
+<!-- In order to request access to the ANVIL service to check the status of
+testing please [contact here]() -->
+<div class="admonition note">
+<p class="admonition-title">说明</p>
+<p>ANVIL 服务是一个由STFC云平台管理的系统，注册请求将根据具体情况由他们酌情考虑，且不受CASTEP团队的控制。</p>
+</div>
+<h3 id="personal-pipeline">个人工作流</h3>
+<p>为了开发测试的目的，您可以申请一个个人流水线，以便能够快速在主 CASTEP 测试所涉及的各种环境中进行测试。</p>
+<p>这例如所需。 <a href="CI.html#modifying-the-jenkinsfile">修改的 <code>Jenkinsfile</code></a></p>
+<p>访问此流程需要一个 ANVIL 账户以及合理的申请理由。</p>
+<h2 id="navigating-jenkins">在 Jenkins 中导航</h2>
+<h3 id="waterfall-diagram">瀑布图</h3>
+<p>Jenkins 控制台的首页是一个瀑布图，它快速展示了最近的计算结果。 <code>default</code>, <code>Release</code> 并且 <code>PR_builds</code> 管道。</p>
+<div class="admonition tip">
+<p class="admonition-title">提示</p>
+<p>为了启用包括文字大小调整和色盲模式在内的可访问性选项，请选择右上角的齿轮图标。</p>
+</div>
+<p><img alt="Waterfall diagram" src="../img/CI/Waterfall.jpg"/></p>
+<p>颜色代表管道的状态：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">颜色</th>
+<th style="text-align: center;">色盲</th>
+<th style="text-align: center;">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">绿色</td>
+<td style="text-align: center;">平的</td>
+<td style="text-align: center;">上一次运行成功。</td>
+</tr>
+<tr>
+<td style="text-align: center;">橙色</td>
+<td style="text-align: center;">金刚石</td>
+<td style="text-align: center;">上一次运行失败了测试，但成功构建。</td>
+</tr>
+<tr>
+<td style="text-align: center;">红色</td>
+<td style="text-align: center;">对角条纹</td>
+<td style="text-align: center;">上一次运行未能成功构建一个或多个管道。</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">说明</p>
+<p>管道下方的文本描述了该管道故障持续的时间以及故障的程度。</p>
+</div>
+<p>点击任一管道名称将带您进入该管道的管道菜单。</p>
+<h3 id="pipeline-menu">管道菜单</h3>
+<p>管道菜单是任意单个管道状态的显示界面。它包含多个重要的显示内容和按钮。</p>
+<p>下图突出了这些内容。</p>
+<p><img alt="Pipeline menu display" src="../img/CI/PipelineLayoutAnnotated.jpg"/></p>
+<div class="admonition note">
+<p class="admonition-title">说明</p>
+<p>侧边栏是动态的，对于特定的管道，您可用的选项可能与上方图片中的选项不一致。例如，该管道尚未生成覆盖率报告。</p>
+</div>
+<h4 id="navigation-bar">导航栏</h4>
+<p>导航栏允许您查看其他流水线，每个名称都是指向该Jenkins部分/层级的链接。</p>
+<div class="admonition warning">
+<p class="admonition-title">注意</p>
+<p>“CASTEP”级别的按钮将带您进入Waterfall页面。若要到达顶层的CASTEP仪表板，请选择“全部”。</p>
+</div>
+<p>当查看时 <a href="CI.html#linting-and-compiler-warnings">语法检查和警告报告</a> 导航栏还将按应用顺序显示当前生效的筛选条件，并提供移除这些筛选条件的方式。</p>
+<h4 id="pipeline-status">管道状态</h4>
+<p>管道状态显示了之前的运行状态。可以单击任意阶段，然后查看日志以获取问题的详细步骤分解。任何失败的步骤将显示为粉色，而不是通常的灰色。</p>
+<p><img alt="Step View" src="../img/CI/ErrorLogs.jpg"/></p>
+<p>然后可以点击标签来展开该步骤的控制台输出。通常在以下情况下：</p>
+<ul>
+<li>
+<dl>
+<dt>构建</dt>
+<dd>这将是 <code>Compile</code> 步骤 <strong>以上</strong> 断裂。</dd>
+</dl>
+</li>
+<li>
+<dl>
+<dt>测试</dt>
+<dd>这将是 <code>Diff</code> 步骤 <strong>如下</strong> 断裂。</dd>
+</dl>
+</li>
+</ul>
+<p><img alt="Step View with logs" src="../img/CI/ErrorLogsExpanded.jpg"/></p>
+<div class="admonition note">
+<p class="admonition-title">说明</p>
+<p>点击步骤名称将带您进入一个不同页面，该页面会以全页显示该步骤的输出内容。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">提示</p>
+<p>选项卡在选择另一个时会折叠。</p>
+</div>
+<h4 id="reports">报告</h4>
+<p>在 Jenkins 的一次运行过程中，可能会生成多个“报告”，并在生成这些报告的流水线侧边栏中提供这些报告。</p>
+<h5 id="linting-and-compiler-warnings">语法检查和编译器警告</h5>
+<p>构建完成后，Jenkins 将收集构建过程中产生的编译器警告，以及如果运行了静态检查阶段，则生成的静态分析问题，并将这些内容汇总为一个可通过侧边栏访问的报告。</p>
+<div class="admonition warning">
+<p class="admonition-title">注意</p>
+<p>警告收集将采用首次构建时使用以下任一编译器所产生的警告集合：</p>
+<ul>
+<li>gfortran</li>
+<li>ifort</li>
+<li>nag</li>
+</ul>
+<p>这意味着如果每个编译器的第一个项目为 <code>builds_to_run</code> （见 <a href="CI.html#manual-parametrised-runs">手动参数化运行</a>) 不是一个 <code>opt=debug</code> 构建时，你可能会错过大多数警告。</p>
+</div>
+<p><img alt="Warnings Report" src="../img/CI/WarningReportAnnotated.jpg"/></p>
+<p>报告允许选择并过滤问题类型：</p>
+<ul>
+<li>
+<p>它们可以通过点击主表格上方的相应按钮进行分组和排序。</p>
+</li>
+<li>
+<p>严重性的甜甜圈实际上是一个可点击的过滤器，用于筛选该级别的警告！</p>
+</li>
+<li>
+<p>该 <code>+</code> 在“问题”中的“按组分类”模式下，问题左侧的图标允许你展开该问题以获取更多详情。</p>
+</li>
+<li>
+<p>从“文件”列中选择文件会显示注释源代码，然而，请参见下面的问题。</p>
+</li>
+</ul>
+<div class="admonition failure">
+<p class="admonition-title">已知问题</p>
+<p>由于CASTEP源文件相对较大，在选择时会遇到问题。 <code>file:line</code> 链接将带您跳转到问题发生点的源代码注释版本，但渲染引擎往往会拖慢机器性能，导致浏览器难以加载甚至无法加载该注释文件。</p>
+</div>
+<h5 id="test-coverage-report">测试覆盖率报告</h5>
+<p>每当一个 <code>coverage</code> 构建并运行（即使用either的） <code>ifort</code> 或者 <code>gfortran</code> 编译器和 <code>opt=coverage</code>)，Jenkins 将汇总覆盖率报告并将其在侧边栏中提供访问。</p>
+<p><img alt="Interactive report" src="../img/CI/CoverageReport.jpg"/></p>
+<div class="admonition failure">
+<p class="admonition-title">已知问题</p>
+<p>由于 ANVIL 当前的安全设置， <code>ifort</code> 报告无法通过此视图查看，必须下载后才能查看。</p>
+</div>
+<h5 id="ford-api-documentation">FORD API 文档</h5>
+<p>作为完整构建的一部分 <code>default</code> 分支跟随合并时，Jenkins 将触发一个 <a href="https://forddocs.readthedocs.io/en/latest/">FORD</a> 构建 API 文档。</p>
+<p>本构建的结果可从侧边栏获取。 <code>CASTEP &gt; All &gt; Default_branch &gt; docs-trigger</code> 管道。</p>
+<h4 id="build-artefacts">构建制品</h4>
+<p>在 Jenkins 运行过程中，会保存各种文件，使其可供下载。</p>
+<p>目前保存下来的文物有：</p>
+<ul>
+<li>linting 报告</li>
+<li>失败的测试数据</li>
+<li>覆盖报告</li>
+<li>FORD 文档说明</li>
+</ul>
+<p>部分插件可在上述上一运行任务上方的管道菜单顶部下载。</p>
+<p>在交互式报告（覆盖率和FORD）中打开时，右上角会显示下载按钮。</p>
+<h2 id="jenkins-pipelines">Jenkins 管道</h2>
+<p>课程中CI运行的测试通过以下方式控制 <code>Jenkinsfile</code> 在 CASTEP 文件夹的根目录下。</p>
+<h3 id="default-builds-run">默认构建运行</h3>
+<p>一般来说，默认配置集在 <code>rocky8</code> 使用：</p>
+<ul>
+<li>英特尔 23</li>
+<li>如果 x 24</li>
+<li>GCC 13</li>
+<li>GCC 9</li>
+<li>NAG 7.1</li>
+<li>NVFortran 23.7</li>
+</ul>
+<p>不同组合的 <code>arch</code>, <code>comms</code> 以及外部库试图覆盖各种可能的使用场景。</p>
+<div class="admonition note">
+<p class="admonition-title">说明</p>
+<p>全部 <code>default</code> 或者手动编译也会运行对源代码分发包正确性和完整性的测试 GNU Make 和 CMake <code>dist</code> 目标。</p>
+</div>
+<details class="note">
+<summary>默认构建密钥</summary>
+<p>截至撰写之时，默认 <a href="CI.html#build-keys">构建密钥</a> 是：</p>
+<p><div class="highlight"><pre><span></span><code><a href="CI.html#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>rocky8;linux_x86_64_ifort;debug;mpi#intel23
+<a href="CI.html#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>rocky8;linux_x86_64_gfortran;debug;mpi#gcc9
+<a href="CI.html#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>rocky8;linux_x86_64_nag;debug;serial
+<a href="CI.html#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>rocky8;linux_x86_64_gfortran10;coverage;mpi#gcc13-libxc
+<a href="CI.html#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>rocky8;linux_x86_64_ifort;coverage;serial#intel23-nocmake
+<a href="CI.html#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>rocky8;linux_x86_64_ifort;fast;serial#intel23-nocmake
+<a href="CI.html#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>rocky8;linux_x86_64_gfortran;fast;mpi#gcc9-nocmake
+<a href="CI.html#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>rocky8;linux_x86_64_gfortran10;fast;mpi#gcc13-nocmake
+<a href="CI.html#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a>rocky8;linux_x86_64_gfortran10;fast;serial#gcc13-nocmake
+<a href="CI.html#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a>rocky8;linux_x86_64_nvfortran;fast;mpi#nogrimmed4
+<a href="CI.html#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>rocky8;linux_x86_64_ifx;fast;mpi#ifx24-nocmake
+</code></pre></div> 然而，这些内容可能会发生变化。</p>
+</details>
+<h3 id="pr-builds-run">PR构建运行</h3>
+<p>当打开一个 PR 时，BitBucket 会触发一组有限的 Jenkins 测试。</p>
+<p>这些构建仅运行 <code>quick</code> 测试的一个子集。</p>
+<div class="admonition note">
+<p class="admonition-title">说明</p>
+<p>如果一个PR只影响未被测试的CASTEP部分，例如文档或独立工具，则应有 <code>[skiptest]</code> 或者 <code>[skipanvil]</code> 在PR标题中。</p>
+<p>如果一个PR尚未准备好进行测试，它应该有 <code>[wip]</code> 或者 <code>[draft]</code> 在PR标题中。</p>
+<p>这些设置将防止PR触发Jenkins构建从而节省资源。</p>
+</div>
+<details class="note">
+<summary>默认PR构建</summary>
+<p>这些构建版本（在本文撰写时）是：</p>
+<div class="highlight"><pre><span></span><code><a href="CI.html#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>rocky8;linux_x86_64_nag;intermediate;serial#nocmake
+<a href="CI.html#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>rocky8;linux_x86_64_gfortran10;fast;mpi#gcc13-fftw-nocmake
+<a href="CI.html#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>rocky8;linux_x86_64_ifort;intermediate;serial#intel23-nocmake
+<a href="CI.html#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>rocky8;linux_x86_64_nvfortran;fast;serial#nogrimmed4-nognumake
+</code></pre></div>
+<p>然而，这些内容可能会发生变化。</p>
+</details>
+<h3 id="manual-parametrised-runs">参数化运行手册</h3>
+<p>如果您希望从特定配置或测试子集开始运行，可以手动启动参数化运行。</p>
+<p>从 Jenkins 接口选择要运行构建的管道（参见 <a href="CI.html#personal-pipeline">个人管道</a>) 并选择 <code>Build with
+Parameters</code>这允许用户手动指定要使用的组件。</p>
+<details class="note">
+<summary>参数</summary>
+<p>参数如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">参数</th>
+<th style="text-align: center;">含义</th>
+<th style="text-align: center;">默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>repo_method</code></td>
+<td style="text-align: center;">定义获取仓库的方法。 <br/><strong>不需要更改。</strong></td>
+<td style="text-align: center;"><code>https</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>repo_host</code></td>
+<td style="text-align: center;">如果外部托管，则仓库的 URL。 <br/><strong>不需要更改。</strong></td>
+<td style="text-align: center;"><code>bitbucket.org</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>repo_path</code></td>
+<td style="text-align: center;">工作区和仓库的 URL 路径。 <a href="CI.html#urlnote"><sup>1</sup></a></td>
+<td style="text-align: center;"><code>castep/castep</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>branch</code></td>
+<td style="text-align: center;">分支用于构建和测试。 <a href="CI.html#branchnote"><sup>2</sup></a></td>
+<td style="text-align: center;"><code>default</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>builds_to_run</code>   </td>
+<td style="text-align: center;">构建为运行列表 <a href="CI.html#build-keys">构建密钥</a>.</td>
+<td style="text-align: center;">参见： <a href="CI.html#default-builds-run">默认构建列表</a></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>tests_to_run</code></td>
+<td style="text-align: center;">要运行的测试列表。</td>
+<td style="text-align: center;">所有例外情况 <code>quick</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>baseURL</code></td>
+<td style="text-align: center;">用于发布消息的 Slack 链接。 <br/><strong>N.B.</strong> 设为空字符串则不发送消息。</td>
+<td style="text-align: center;"><code>https://corecastepdevelopers.slack.com/services/hooks/</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>lint</code></td>
+<td style="text-align: center;">运行或跳过检查阶段。</td>
+<td style="text-align: center;"><code>true</code></td>
+</tr>
+</tbody>
+</table>
+<!-- Could make these notes, sidenotes, full footnotes or fake footnotes like this -->
+<p><sup>1</sup><a id="urlnote" name="urlnote"></a> 检出过程中执行的命令将大致等同于：</p>
+<div class="highlight"><pre><span></span><code><a href="CI.html#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>git<span class="w"> </span>clone<span class="w"> </span><span class="si">${</span><span class="nv">repo_method</span><span class="si">}</span>://<span class="si">${</span><span class="nv">repo_host</span><span class="si">}</span>/<span class="si">${</span><span class="nv">repo_path</span><span class="si">}</span><span class="w"> </span>--single-branch<span class="w"> </span>--branch<span class="w"> </span><span class="si">${</span><span class="nv">branch</span><span class="si">}</span>
+</code></pre></div>
+<p><sup>2</sup> <a id="branchnote" name="branchnote"></a>詹金斯将自动把运行状态推送到 <code>HEAD</code> 运行时正在测试的分支的提交。</p>
+</details>
+<div class="admonition warning">
+<p class="admonition-title">注意</p>
+<p>在测试运行期间推送分支可能导致Jenkins获取最新更改并针对新内容运行部分测试。 <code>HEAD</code></p>
+</div>
+<h4 id="build-keys">构建密钥</h4>
+<p>Jenkins 的测试可以在多种不同的系统配置上运行。为了选择特定的配置，必须指定标识该配置的关键参数。</p>
+<p>这些键的格式为：</p>
+<div class="highlight"><pre><span></span><code><a href="CI.html#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>agent;arch;opt;comms#comment
+</code></pre></div>
+<p>哪里 <code>agent</code> 是以下之一：</p>
+<ul>
+<li><code>rocky8</code> -- Rocky Linux 8</li>
+<li><code>rocky8-gpu</code> -- 支持GPU的Rocky Linux 8</li>
+<li><code>rocky9</code> -- 罗基Linux 9</li>
+<li><code>icdpacewin</code> -- Windows</li>
+</ul>
+<p>并且 <code>arch</code>, <code>opt</code> 并且 <code>comms</code> 对应于 CASTEP 构建系统变量 <code>ARCH</code>, <code>OPT</code> 并且 <code>COMMS</code>. <code>comment</code> 用于区分其他相似变体，并唯一标识某一特定配置，以及对构建过程应用修改（见） <a href="CI.html#comment-tags">注释标签</a>).</p>
+<p>然而需要注意的是，某些计算节点上仅提供特定变量的组合。要获得完整的可用组合列表，必须查阅相关资料。 <code>Jenkinsfile</code> 本身，因为这份列表经常被更新和修改。</p>
+<h4 id="comment-tags">注释标签</h4>
+<p>构建密钥的评论部分允许在常规构建标志之外对配置进行修改。</p>
+<p>这些是以以下方式添加的（添加） <code>nocmake</code>):</p>
+<dl>
+<dt>如果基础构建没有注释</dt>
+<dd><code>rocky8;linux_x86_64_nag;debug;serial#nocmake</code></dd>
+<dt>如果它确实如此</dt>
+<dd><code>rocky8;linux_x86_64_ifort;debug;mpi#intel23-nocmake</code></dd>
+<dt>多个注释标签使用 <code>-</code></dt>
+<dd><code>rocky8;linux_x86_64_ifort;debug;mpi#intel23-nocmake-nognumake</code></dd>
+</dl>
+<details class="note">
+<summary>注释标签</summary>
+<p>目前可用的标签有：</p>
+<!-- Weird nbsp is to force Tag to not line-wrap-->
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">标签</th>
+<th style="text-align: center;">影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>targetHost</code></td>
+<td style="text-align: center;">编译针对 VM 架构的优化版 CASTEP</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>targetPortable</code>  </td>
+<td style="text-align: center;">编译可移植的 CASTEP</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>libxc</code></td>
+<td style="text-align: center;">将 CASTEP 与 LibXC 链接起来</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>nogrimmed3</code></td>
+<td style="text-align: center;">无法编译（或测试）D3 SEDC</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>nogrimmed4</code></td>
+<td style="text-align: center;">无法编译（或测试）D4 SEDC</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>nodlmg</code></td>
+<td style="text-align: center;">无法编译（或测试）DLMG库</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>debug</code></td>
+<td style="text-align: center;">启用详细构建阶段</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>nocmake</code></td>
+<td style="text-align: center;">禁用 CMake 构建阶段和测试</td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>nognumake</code></td>
+<td style="text-align: center;">禁用 GNU Make 构建阶段和测试，若未禁用则在 CMake 构建上运行指定的测试套件</td>
+</tr>
+</tbody>
+</table>
+<p><!-- | Make added           | Cmake added                    -->
+<!-- |:--------------------:|:-----------------------------: -->
+<!-- | <code>TARGETCPU=host</code>     | <code>-DPORTABLE=OFF</code>               -->
+<!-- | <code>TARGETCPU=portable</code> | <code>-DPORTABLE=ON</code>                -->
+<!-- | <code>LIBXC=compile</code>      | <code>-DWITH_LIBXC=ON</code>              -->
+<!-- | <code>GRIMMED3=none</code>      | <code>-DWITH_GRIMMED3=OFF</code>          -->
+<!-- | <code>GRIMMED4=none</code>      | <code>-DWITH_GRIMMED4=OFF</code>          -->
+<!-- | <code>DL_MG=none</code>         | <code>-DWITH_DLMG=OFF</code>              -->
+<!-- | <code>VERBOSE=1</code>          | <code>-DCMAKE_VERBOSE_MAKEFILE=ON</code>  -->
+<!-- | -                    | <code>NO_CMAKE</code>                     -->
+<!-- | <code>NO_GNUMAKE</code>         | -                              --></p>
+</details>
+<h2 id="bitbucket-pipelines">BitBucket 管道</h2>
+<p>除了主要的 Jenkins 测试之外，还有一个由短而快速的测试子集，在每次提交到 BitBucket 时都会运行，以迅速验证功能。</p>
+<p>BitBucket 的管道通过以下方式管理 <code>bitbucket-pipelines.yml</code> 在 CASTEP 文件夹的根目录下。</p>
+<p>它们目前运行：</p>
+<ul>
+<li><code>lint</code> -- 运行 <a href="https://pypi.org/project/castep-linter/">castep校验工具</a> 关于源。</li>
+<li><code>build-castep</code> -- A <code>debug</code> 使用包含 LibXC 的 CASTEP 编译</li>
+<li><code>build-castep-python</code> -- <code>debug</code> 构建 CASTEP 的 Python 绑定</li>
+<li><code>test-castep</code> -- CASTEP 程序的运行记录 <code>quick</code> 测试套件。</li>
+<li><code>test-python</code> -- CASTEP 程序的运行记录 <code>python</code> 测试套件。</li>
+</ul>
+<p>所有这些都在一个编译了的Linux系统图像上进行 <code>gfortran</code> 以及静态 <code>LAPACK</code> 并且 <code>BLAS</code> 库文件。它们不应被视为全面的。</p>
+<h2 id="modifying-the-jenkinsfile">修改 Jenkinsfile</h2>
+<h3 id="adding-new-configurations">添加新配置</h3>
+<p>为了添加一个新的组合（参见 <a href="CI.html#submitting-modifications-to-the-jenkinsfile">修改</a>)，有必要在其中定义它 <code>matrix</code> 变量在……中 <code>Jenkinsfile</code>。此 <code>matrix</code> 是一个 Groovy <code>Map</code> 一个将特定构型转换为 <code>Map</code> 所需额外参数以执行构建。</p>
+<p>i.e.
+<div class="highlight"><pre><span></span><code><a href="CI.html#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">matrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
+<a href="CI.html#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="w">    </span><span class="s2">"agent;arch#comment"</span><span class="o">:</span><span class="w"> </span><span class="o">[</span><span class="s2">"modules"</span><span class="o">:</span><span class="w"> </span><span class="s2">""</span><span class="o">,</span><span class="w"> </span><span class="s2">"fft"</span><span class="o">:</span><span class="w"> </span><span class="s2">""</span><span class="o">,</span><span class="w"> </span><span class="o">...],</span>
+<a href="CI.html#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">    </span><span class="o">...</span>
+<a href="CI.html#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="o">]</span>
+</code></pre></div></p>
+<div class="admonition note">
+<p class="admonition-title">说明</p>
+<p>所有参数都是可选的。要指定一个空值 <code>Map</code> （无参数）使用： <div class="highlight"><pre><span></span><code><a href="CI.html#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="o">[:]</span>
+</code></pre></div></p>
+</div>
+<p>构建列表的参数说明如下在 <code>get_buildconfig_from_map</code> 函数。</p>
+<details class="note">
+<summary>构建参数</summary>
+<p>目前的构建参数为：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">参数</th>
+<th style="text-align: center;">说明</th>
+<th style="text-align: center;">默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><code>modules</code></td>
+<td style="text-align: center;">在Linux代理上需要加载的模块<a href="CI.html#modulenote"><sup>1</sup></a></td>
+<td style="text-align: center;"><code>""</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>fft</code></td>
+<td style="text-align: center;">作为 CASTEP 构建系统变量传递 <code>FFT</code></td>
+<td style="text-align: center;"><code>"generic"</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>math_libs</code></td>
+<td style="text-align: center;">作为 CASTEP 构建系统变量传递 <code>MATHLIBS</code></td>
+<td style="text-align: center;"><code>"generic"</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>fft_lib_dir</code></td>
+<td style="text-align: center;">作为 CASTEP 构建系统变量传递 <code>FFTLIBDIR</code></td>
+<td style="text-align: center;"><code>""</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>math_lib_dir</code></td>
+<td style="text-align: center;">作为 CASTEP 构建系统变量传递 <code>MATHLIBDIR</code></td>
+<td style="text-align: center;"><code>""</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>extra_args</code></td>
+<td style="text-align: center;">额外直接传递给 GNU make 构建系统的命令行参数。</td>
+<td style="text-align: center;"><code>""</code></td>
+</tr>
+<tr>
+<td style="text-align: center;"><code>cmake_extra_args</code>   </td>
+<td style="text-align: center;">额外直接传递给 CMake 构建系统的命令行参数。</td>
+<td style="text-align: center;"><code>""</code></td>
+</tr>
+</tbody>
+</table>
+<p><sup>1</sup><a id="modulenote" name="modulenote"></a> 可用模块列表可在 ANVIL 系统的以下位置找到： <code>Examples</code>
+-&gt; <code>List of available software</code>.</p>
+</details>
+<h3 id="adding-new-comment-tags">添加新的注释标签</h3>
+<p>注释标签在的管理方式为 <code>get_buildconfig_from_map</code> 子例程。它们被从矩阵键中提取出来，因此可以应用于任何特定的构建配置。</p>
+<p>在该子程序中有一个闭合（closure）<code>process_buildconfig_arg</code>) 负责处理此过程，其签名是：</p>
+<p><div class="highlight"><pre><span></span><code><a href="CI.html#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">process_buildconfig_arg</span><span class="o">(</span><span class="n">String</span><span class="w"> </span><span class="n">comment_key</span><span class="o">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">make_arg</span><span class="o">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">cmake_arg</span><span class="o">)</span>
+</code></pre></div> 其中：</p>
+<dl>
+<dt><code>comment_key</code></dt>
+<dd>注释标签用于处理</dd>
+<dt><code>make_arg</code></dt>
+<dd>额外传递给 GNU Make 构建的命令行参数</dd>
+<dt><code>cmake_arg</code></dt>
+<dd>额外传递给 CMake 构建的命令行参数</dd>
+</dl>
+<p>此例程检查是否存在注释标签，从构建查找键中移除该标签，并添加 <code>make_arg</code> 并且 <code>cmake_arg</code> 到它们各自对应的参数列表中。</p>
+<div class="admonition note">
+<p class="admonition-title">说明</p>
+<p>在不需要添加或修改编译参数的情况下，将它们设置为空字符串是合理的（<code>""</code>。注释标签由 <code>config[0]</code> 可以检查是否存在该键。</p>
+</div>
+<h3 id="submitting-modifications-to-the-jenkinsfile">向 Jenkinsfile 提交修改</h3>
+<p>任何对 Jenkinsfile 进行修改的 PR 必须附带以下内容：</p>
+<ul>
+<li>详细说明变更的原因以及变更的具体内容</li>
+<li>A <a href="CI.html#personal-pipeline">自定义流水线</a> 运行演示修改后的流水线在所有预期使用场景下的应用，可能包括：<ul>
+<li>常用每种代理（目前 <code>rocky8</code>, <code>icdpacewin</code>, <code>rocky8-gpu</code>)</li>
+<li>一种广泛使用的构建配置的重要选择</li>
+<li>包含至少一个带注释的 WITH，以及一个不带注释的 WITH。</li>
+<li>常见标签的组合</li>
+<li>所有测试（包括 <code>quick</code> 哪一项不是默认设置）</li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">说明</p>
+<p>为了开发和测试一个自定义 <code>Jenkinsfile</code>，需要向其中一个 Jenkins 管理员提出请求以重新配置 <a href="CI.html#personal-pipeline">你的流水线</a> 指向相关仓库，才能运行自定义功能 <code>Jenkinsfile</code>.</p>
+</div>
+</article>
+</div>
+
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright"> 原版采用 <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+
+
+
+<script src="../assets/zh-search-data.js"></script><script data-root="../" src="../assets/zh-site.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:true},showMathMenu:false,messageStyle:"none"});</script><script src="../assets/mathjax/MathJax.js?config=TeX-MML-AM_CHTML"></script></body>
+</html>

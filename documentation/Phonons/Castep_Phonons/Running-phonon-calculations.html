@@ -1,0 +1,2065 @@
+
+<!DOCTYPE html>
+
+<html class="js" lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<link href="Introduction.html" rel="prev"/>
+<link href="Dielectric-properties.html" rel="next"/>
+<link href="../../../assets/images/favicon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.8.0" name="generator"/>
+<title>运行声子计算 — CASTEP 中文文档</title>
+<link href="../../../assets/stylesheets/main.57a0d79d.min.css" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../../stylesheets/extra.css" rel="stylesheet"/>
+
+<link href="../../../assets/zh-site.css" rel="stylesheet"/></head>
+<body dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="Running-phonon-calculations.html#sec:dfpt-gamma"> 跳转到正文 </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="页眉" class="md-header__inner md-grid">
+<a aria-label="CASTEP 中文文档" class="md-header__button md-logo" data-md-component="logo" href="../../../index.html" title="CASTEP 中文文档">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis"> CASTEP 中文文档 </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis"> 运行声子计算 </span>
+</div>
+</div>
+</div>
+
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="搜索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="搜索" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="搜索" class="md-search__options">
+<button aria-label="清除" class="md-search__icon md-icon" tabindex="-1" title="清除" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta"> 搜索中文或英文导航标题 </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="导航" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="CASTEP 中文文档" class="md-nav__button md-logo" data-md-component="logo" href="../../../index.html" title="CASTEP 中文文档">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"></path></svg>
+</a> CASTEP 中文文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../index.html">
+<span class="md-ellipsis"> 首页 </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis"> 使用文档 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span> 使用文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+<span class="md-ellipsis"> 入门指南 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_1">
+<span class="md-nav__icon md-icon"></span> 入门指南 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Getting_Started/intro.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Getting_Started/built_in_help.html">
+<span class="md-ellipsis"> 命令行帮助 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Getting_Started/running_castep.html">
+<span class="md-ellipsis"> 运行 CASTEP </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Getting_Started/basic_cell_file.html">
+<span class="md-ellipsis"> 晶胞文件（.cell） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Getting_Started/basic_param_file.html">
+<span class="md-ellipsis"> 参数文件（.param） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Getting_Started/restarting.html">
+<span class="md-ellipsis"> 检查点与续算 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+<span class="md-ellipsis"> 基态 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_2">
+<span class="md-nav__icon md-icon"></span> 基态 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Groundstate/intro.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Groundstate/dftd.html">
+<span class="md-ellipsis"> 色散修正 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Groundstate/soc.html">
+<span class="md-ellipsis"> 自旋–轨道耦合 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Groundstate/spin_constraints.html">
+<span class="md-ellipsis"> 自旋约束 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Groundstate/population_analysis.html">
+<span class="md-ellipsis"> 布居分析 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Groundstate/ELF.html">
+<span class="md-ellipsis"> 电子局域函数（ELF） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+<span class="md-ellipsis"> 几何结构优化 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_3">
+<span class="md-nav__icon md-icon"></span> 几何结构优化 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Geometry_Optimisation/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Geometry_Optimisation/keywords.html">
+<span class="md-ellipsis"> 关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Geometry_Optimisation/constraints.html">
+<span class="md-ellipsis"> 约束条件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Geometry_Optimisation/files.html">
+<span class="md-ellipsis"> 文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Geometry_Optimisation/tools.html">
+<span class="md-ellipsis"> 工具 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+<span class="md-ellipsis"> 分子动力学 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_4">
+<span class="md-nav__icon md-icon"></span> 分子动力学 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Molecular_Dynamics/overview.html">
+<span class="md-ellipsis"> 分子动力学概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Molecular_Dynamics/basics.html">
+<span class="md-ellipsis"> 分子动力学基础 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Molecular_Dynamics/restarts.html">
+<span class="md-ellipsis"> 分子动力学续算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Molecular_Dynamics/files.html">
+<span class="md-ellipsis"> 分子动力学文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Molecular_Dynamics/keywords.html">
+<span class="md-ellipsis"> 分子动力学关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Molecular_Dynamics/tools.html">
+<span class="md-ellipsis"> 分子动力学工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Molecular_Dynamics/pimd.html">
+<span class="md-ellipsis"> 路径积分分子动力学（PIMD） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Molecular_Dynamics/hugoniostat.html">
+<span class="md-ellipsis"> Hugoniostat 冲击波模拟方法 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+<span class="md-ellipsis"> 过渡态搜索 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_5_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_5">
+<span class="md-nav__icon md-icon"></span> 过渡态搜索 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Transition_State_Search/neb.html">
+<span class="md-ellipsis"> 微扰弹性带法（NEB） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+<span class="md-ellipsis"> 交换–关联（XC） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_6_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_6">
+<span class="md-nav__icon md-icon"></span> 交换–关联（XC） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../XC/XCoverview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../XC/XC.html">
+<span class="md-ellipsis"> 交换–关联设置 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../XC/libXC.html">
+<span class="md-ellipsis">
+    
+  
+    libXC
+  
+
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+<span class="md-ellipsis"> 电子谱性质 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_7">
+<span class="md-nav__icon md-icon"></span> 电子谱性质 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Spectral/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Spectral/keywords.html">
+<span class="md-ellipsis"> 关键词 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Spectral/restarts.html">
+<span class="md-ellipsis"> 续算 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+<span class="md-ellipsis"> 声子 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_2_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_8">
+<span class="md-nav__icon md-icon"></span> 声子 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Introduction.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis"> 运行声子计算 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="Running-phonon-calculations.html">
+<span class="md-ellipsis"> 运行声子计算 </span>
+</a>
+<nav aria-label="本页目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span> 本页目录 </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:dfpt-gamma">
+<span class="md-ellipsis"> 在Γ点进行的DFPT声子计算 </span>
+</a>
+<nav aria-label="在Γ点进行的DFPT声子计算" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:input-basic">
+<span class="md-ellipsis"> 输入文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:output-gamma">
+<span class="md-ellipsis"> 读取输出 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:raman">
+<span class="md-ellipsis"> 拉曼活性计算 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:ddos">
+<span class="md-ellipsis"> 色散关系和态密度 </span>
+</a>
+<nav aria-label="色散关系和态密度" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:interpolation-setup">
+<span class="md-ellipsis"> 设置插值计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:continuation">
+<span class="md-ellipsis"> 续接 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:interpolation-control">
+<span class="md-ellipsis"> 插值方案的控制 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:asr">
+<span class="md-ellipsis"> 声学求和规则修正 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#density-of-states">
+<span class="md-ellipsis"> 态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:fd">
+<span class="md-ellipsis"> 有限位移 </span>
+</a>
+<nav aria-label="有限位移" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#primitive-cell-finite-displacement">
+<span class="md-ellipsis"> 原胞有限位移 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#born-charges-permittivity-and-loto-splitting-with-fd">
+<span class="md-ellipsis"> 本征电荷、介电常数以及LO/TO分裂与FD </span>
+</a>
+<nav aria-label="本征电荷、介电常数以及LO/TO分裂与FD" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:berry-fd">
+<span class="md-ellipsis"> 本征电荷来自贝里相位极化 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:ndsc">
+<span class="md-ellipsis"> 使用非对角超胞的有限位移方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:supercell">
+<span class="md-ellipsis"> 传统有限位移/超胞 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:convergence">
+<span class="md-ellipsis"> 收敛性 </span>
+</a>
+<nav aria-label="收敛性" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#convergence-of-dfpt-solver">
+<span class="md-ellipsis"> DFPT求解器的收敛性 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#convergence-of-finite-displacement-forces">
+<span class="md-ellipsis"> 有限位移力的收敛性 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#convergence-of-interpolation-and-supercell">
+<span class="md-ellipsis"> 插值与超胞的收敛性 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Dielectric-properties.html">
+<span class="md-ellipsis"> 介电性质 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Thermodynamic-properties.html">
+<span class="md-ellipsis"> 热力学性质 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Plotting-and-analysis-tools.html">
+<span class="md-ellipsis"> 绘图与分析工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-Large-Calculations.html">
+<span class="md-ellipsis"> 运行大规模计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Advanced-Topics.html">
+<span class="md-ellipsis"> 进阶主题 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Keyword-Reference.html">
+<span class="md-ellipsis"> 关键词参考 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Bibliography.html">
+<span class="md-ellipsis"> 参考文献 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+<span class="md-ellipsis"> 核磁共振（NMR） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_9">
+<span class="md-nav__icon md-icon"></span> 核磁共振（NMR） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../NMR/NMR_overview.html">
+<span class="md-ellipsis"> 核磁共振概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_10" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+<span class="md-ellipsis"> 电子顺磁共振（EPR） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_10_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_10">
+<span class="md-nav__icon md-icon"></span> 电子顺磁共振（EPR） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../EPR/overview.html">
+<span class="md-ellipsis"> 电子顺磁共振概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../XRD/overview.html">
+<span class="md-ellipsis"> X 射线衍射（XRD） </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_12" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_12" id="__nav_2_12_label" tabindex="0">
+<span class="md-ellipsis"> 含时密度泛函理论（TDDFT） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_12_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_12">
+<span class="md-nav__icon md-icon"></span> 含时密度泛函理论（TDDFT） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../TDDFT/overview.html">
+<span class="md-ellipsis"> 含时密度泛函理论概述 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_13" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_13" id="__nav_2_13_label" tabindex="0">
+<span class="md-ellipsis"> ΔSCF 方法 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_13_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_13">
+<span class="md-nav__icon md-icon"></span> ΔSCF 方法 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Delta_SCF/overview.html">
+<span class="md-ellipsis"> ΔSCF 方法概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Delta_SCF/simple_delta_scf.html">
+<span class="md-ellipsis"> 简单 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Delta_SCF/lin_ex_delta_scf.html">
+<span class="md-ellipsis"> 线性展开 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Delta_SCF/mo_delta_scf.html">
+<span class="md-ellipsis"> 分子轨道 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Delta_SCF/molpdos.html">
+<span class="md-ellipsis"> 分子投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_14" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_14" id="__nav_2_14_label" tabindex="0">
+<span class="md-ellipsis">
+    
+  
+    DFT+U
+  
+
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_14_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_14">
+<span class="md-nav__icon md-icon"></span>
+            
+  
+    DFT+U
+  
+
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../DFT+U/dftu-theory.html">
+<span class="md-ellipsis"> DFT+U：理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../DFT+U/dftu-input.html">
+<span class="md-ellipsis"> DFT+U：输入 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../DFT+U/koopmans-theory.html">
+<span class="md-ellipsis"> 线性响应法计算 U：理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../DFT+U/koopmans-input.html">
+<span class="md-ellipsis"> 线性响应法计算 U：输入 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../DFT+U/koopmans-output.html">
+<span class="md-ellipsis"> 线性响应法计算 U：输出 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../DFT+U/koopmans-warnings-errors.html">
+<span class="md-ellipsis"> 线性响应法计算 U：警告与错误 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_15" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_15" id="__nav_2_15_label" tabindex="0">
+<span class="md-ellipsis"> 赝势 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_15_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_15">
+<span class="md-nav__icon md-icon"></span> 赝势 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Pseudopotentials/theory.html">
+<span class="md-ellipsis"> 理论 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Pseudopotentials/overview.html">
+<span class="md-ellipsis"> 概述 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Pseudopotentials/reading_headers.html">
+<span class="md-ellipsis"> 头部信息 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Pseudopotentials/otfg_string.html">
+<span class="md-ellipsis"> 即时生成赝势（OTFG）字符串 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_16" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_16" id="__nav_2_16_label" tabindex="0">
+<span class="md-ellipsis"> 输入文件 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_16_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_16">
+<span class="md-nav__icon md-icon"></span> 输入文件 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Input_Files/cell_file.html">
+<span class="md-ellipsis"> 晶胞文件（.cell） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Input_Files/param_file.html">
+<span class="md-ellipsis"> 参数文件（.param） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Input_Files/cell_keywords.html">
+<span class="md-ellipsis"> 晶胞文件关键词 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_17" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_17" id="__nav_2_17_label" tabindex="0">
+<span class="md-ellipsis"> 输出文件 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_17_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_17">
+<span class="md-nav__icon md-icon"></span> 输出文件 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Output_Files/output_files.html">
+<span class="md-ellipsis"> 输出文件 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_18" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_18" id="__nav_2_18_label" tabindex="0">
+<span class="md-ellipsis"> 其他程序与工具 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_18_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_18">
+<span class="md-nav__icon md-icon"></span> 其他程序与工具 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Tools/tools.html">
+<span class="md-ellipsis"> 其他程序与工具 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2_19" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2_19" id="__nav_2_19_label" tabindex="0">
+<span class="md-ellipsis"> 故障排查 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_19_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_2_19">
+<span class="md-nav__icon md-icon"></span> 故障排查 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Troubleshooting/troubleshooting.html">
+<span class="md-ellipsis"> 常见错误 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../Troubleshooting/linux_path.html">
+<span class="md-ellipsis"> Linux 帮助 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis"> 教程 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span> 教程 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+<span class="md-ellipsis"> 成键与电荷 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_1_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_1">
+<span class="md-nav__icon md-icon"></span> 成键与电荷 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/Bonding_and_Charge/charge_density.html">
+<span class="md-ellipsis"> 绘制电荷密度 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/Bonding_and_Charge/mulliken_population.html">
+<span class="md-ellipsis"> 布居分析 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/Bonding_and_Charge/ELF.html">
+<span class="md-ellipsis"> 电子局域函数（ELF） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+<span class="md-ellipsis"> 能带与态密度 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_2">
+<span class="md-nav__icon md-icon"></span> 能带与态密度 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_2_1" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+<span class="md-ellipsis"> 绘图 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_2_1_label" class="md-nav" data-md-level="3">
+<label class="md-nav__title" for="__nav_3_2_1">
+<span class="md-nav__icon md-icon"></span> 绘图 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/Bands_and_DOS/Plotting/plotting_perl.html">
+<span class="md-ellipsis"> 绘图：CASTEP 工具 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/Bands_and_DOS/Plotting/plotting_sumo.html">
+<span class="md-ellipsis"> 绘图：SUMO </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/Bands_and_DOS/Plotting/Optados/DOS.html">
+<span class="md-ellipsis"> OptaDOS：态密度 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/Bands_and_DOS/Plotting/Optados/pDOS.html">
+<span class="md-ellipsis"> OptaDOS：投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/Bands_and_DOS/semiconductors.html">
+<span class="md-ellipsis"> 半导体 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/Bands_and_DOS/metals.html">
+<span class="md-ellipsis"> 金属 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/Bands_and_DOS/magnetic.html">
+<span class="md-ellipsis"> 磁性材料 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+<span class="md-ellipsis"> 光学 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_3_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_3">
+<span class="md-nav__icon md-icon"></span> 光学 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/Optics/Optics.html">
+<span class="md-ellipsis"> 光学 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/Optics/Optics_aluminium.html">
+<span class="md-ellipsis"> 光学：铝 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/Optics/Optics_ani.html">
+<span class="md-ellipsis"> 光学各向异性 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+<span class="md-ellipsis"> 芯能级能量损失谱 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_4_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_4">
+<span class="md-nav__icon md-icon"></span> 芯能级能量损失谱 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/Coreloss/Coreloss.html">
+<span class="md-ellipsis"> 芯能级能量损失谱 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/Optics/JDOS.html">
+<span class="md-ellipsis"> 联合态密度（JDOS） </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/dispersion_corrections/castep-ase-dispersion-tutorial.html">
+<span class="md-ellipsis"> 色散修正 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/NEB/neb_tutorial.html">
+<span class="md-ellipsis"> 微扰弹性带法（NEB） </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+<span class="md-ellipsis"> 核磁共振屏蔽 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_7_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_7">
+<span class="md-nav__icon md-icon"></span> 核磁共振屏蔽 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/NMR/Example_1_-Ethanol.html">
+<span class="md-ellipsis"> 示例 1：乙醇 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/NMR/Example_2_-Diamond.html">
+<span class="md-ellipsis"> 示例 2：金刚石 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/NMR/Examples_3_-Alanine_and_Silicates.html">
+<span class="md-ellipsis"> 示例 3：丙氨酸与硅酸盐 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_8" id="__nav_3_8_label" tabindex="0">
+<span class="md-ellipsis"> ΔSCF 方法 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_8_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_8">
+<span class="md-nav__icon md-icon"></span> ΔSCF 方法 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/Delta_SCF/simple_delta_scf.html">
+<span class="md-ellipsis"> 简单 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/Delta_SCF/lin_ex_delta_scf.html">
+<span class="md-ellipsis"> 线性展开 ΔSCF 方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/Delta_SCF/molpdos.html">
+<span class="md-ellipsis"> 分子投影态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_9" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_9" id="__nav_3_9_label" tabindex="0">
+<span class="md-ellipsis"> 遗传算法（GA） </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_9_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_9">
+<span class="md-nav__icon md-icon"></span> 遗传算法（GA） </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/GA/Silicon.html">
+<span class="md-ellipsis"> 硅 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/GA/Introduction.html">
+<span class="md-ellipsis"> 简介 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3_10" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3_10" id="__nav_3_10_label" tabindex="0">
+<span class="md-ellipsis"> 工具 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_10_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_3_10">
+<span class="md-nav__icon md-icon"></span> 工具 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../tutorials/Tools/elastic_constants.html">
+<span class="md-ellipsis"> 弹性常数 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+<span class="md-ellipsis"> 开发者文档 </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span> 开发者文档 </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../developer/using_devel_codes.html">
+<span class="md-ellipsis"> 使用开发控制代码（Devel Codes） </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../developer/using_trace.html">
+<span class="md-ellipsis"> 使用 trace </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../developer/adding_pair_pots.html">
+<span class="md-ellipsis"> 添加经验势 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../developer/build-system.html">
+<span class="md-ellipsis"> 构建系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../developer/style_guide.html">
+<span class="md-ellipsis"> 代码风格指南 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../developer/test_suite.html">
+<span class="md-ellipsis"> 测试 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../developer/CI.html">
+<span class="md-ellipsis"> 持续集成系统 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../developer/git_workflow.html">
+<span class="md-ellipsis"> Git 工作流程 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../../developer/release_procedure.html">
+<span class="md-ellipsis"> 版本发布流程 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="本页目录" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span> 本页目录 </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:dfpt-gamma">
+<span class="md-ellipsis"> 在Γ点进行的DFPT声子计算 </span>
+</a>
+<nav aria-label="在Γ点进行的DFPT声子计算" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:input-basic">
+<span class="md-ellipsis"> 输入文件 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:output-gamma">
+<span class="md-ellipsis"> 读取输出 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:raman">
+<span class="md-ellipsis"> 拉曼活性计算 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:ddos">
+<span class="md-ellipsis"> 色散关系和态密度 </span>
+</a>
+<nav aria-label="色散关系和态密度" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:interpolation-setup">
+<span class="md-ellipsis"> 设置插值计算 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:continuation">
+<span class="md-ellipsis"> 续接 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:interpolation-control">
+<span class="md-ellipsis"> 插值方案的控制 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:asr">
+<span class="md-ellipsis"> 声学求和规则修正 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#density-of-states">
+<span class="md-ellipsis"> 态密度 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:fd">
+<span class="md-ellipsis"> 有限位移 </span>
+</a>
+<nav aria-label="有限位移" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#primitive-cell-finite-displacement">
+<span class="md-ellipsis"> 原胞有限位移 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#born-charges-permittivity-and-loto-splitting-with-fd">
+<span class="md-ellipsis"> 本征电荷、介电常数以及LO/TO分裂与FD </span>
+</a>
+<nav aria-label="本征电荷、介电常数以及LO/TO分裂与FD" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:berry-fd">
+<span class="md-ellipsis"> 本征电荷来自贝里相位极化 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:ndsc">
+<span class="md-ellipsis"> 使用非对角超胞的有限位移方法 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:supercell">
+<span class="md-ellipsis"> 传统有限位移/超胞 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#sec:convergence">
+<span class="md-ellipsis"> 收敛性 </span>
+</a>
+<nav aria-label="收敛性" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#convergence-of-dfpt-solver">
+<span class="md-ellipsis"> DFPT求解器的收敛性 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#convergence-of-finite-displacement-forces">
+<span class="md-ellipsis"> 有限位移力的收敛性 </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="Running-phonon-calculations.html#convergence-of-interpolation-and-supercell">
+<span class="md-ellipsis"> 插值与超胞的收敛性 </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<h1>运行声子计算</h1><div class="zh-notice">中文译文 · 由本地英文文档翻译，已统一术语并进行重点抽查。 <a href="../../../https://castep-docs.github.io/castep-docs/documentation/Phonons/Castep_Phonons/Running-phonon-calculations.html">英文原文对照</a> · <a href="../../../translation-notes.html">翻译说明</a></div>
+<p>CASTEP 包含了多种计算电子响应轨道和动力矩阵的方法（<a href="Bibliography.html#ref-Refson2006">Refson, Tulip 和 Clark 2006</a>）。存在实现限制，最适合的选择取决于计算类型、哈密顿量以及所需的性质计算。参见表格 <a href="Running-phonon-calculations.html#tbl:captable">[能力表]</a> 详情请参见。对于简单的半局域密度泛函理论计算（LDA、PBE 等）， <em>密度泛函微扰理论方法</em> (DFPT) 方法更受青睐（章节） <a href="Running-phonon-calculations.html#sec:dfpt-gamma">[dfpt-伽玛]</a>)，因为这不仅是最高效的方法，而且允许计算红外和拉曼强度，用于光谱建模。目前DFPT尚未实现用于超软赝势，或用于Hubbard U或某些包含色散校正的密度泛函理论方法（截至24.1版本），在这些情况下 <em>有限位移</em> 应使用的方法（第几节） <a href="Running-phonon-calculations.html#sec:fd">[fd]</a>). 如果需要态密度或沿高对称方向精细采样的能带曲线，则可以采用DFPT方法与 <em>傅里叶插值</em> （节） <a href="Running-phonon-calculations.html#sec:ddos">[ddos]</a>) 是最合适的或是 <em>有限位移超胞</em> （节） <a href="Running-phonon-calculations.html#sec:supercell">[超胞]</a>；如果需要使用超软赝势）。各种性质计算推荐方法的总结见表 <a href="Running-phonon-calculations.html#tbl:method-selection">[方法选择]</a>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;"></th>
+<th style="text-align: center;">DFPT（声子）</th>
+<th style="text-align: center;">DFPT（电场）</th>
+<th style="text-align: center;">FD（声子）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">USP</td>
+<td style="text-align: center;">✘</td>
+<td style="text-align: center;">✘</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td style="text-align: left;">NCP</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td style="text-align: left;">LDA，GGA</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td style="text-align: left;">MGGA</td>
+<td style="text-align: center;">✘</td>
+<td style="text-align: center;">✘</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td style="text-align: left;">DFT+U</td>
+<td style="text-align: center;">✘</td>
+<td style="text-align: center;">✘</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td style="text-align: left;">NCM/SOC</td>
+<td style="text-align: center;">✘</td>
+<td style="text-align: center;">✘</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td style="text-align: left;">PBE0，杂化交换关联功能</td>
+<td style="text-align: center;">✘</td>
+<td style="text-align: center;">✘</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td style="text-align: left;">DFT+D：TS，D2</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+</tr>
+<tr>
+<td style="text-align: left;">DFT+D：D3、D4、MBD*、XDM</td>
+<td style="text-align: center;">✘</td>
+<td style="text-align: center;">✓</td>
+<td style="text-align: center;">✓</td>
+</tr>
+</tbody>
+</table>
+<dl>
+<dd id="tbl:captable"><strong>表1：</strong> CASTEP 声子计算实现矩阵。通常，DFPT 对半局域 DFPT 是可用的，但对其他哈密顿量不可用。DFPT 与 USPs 的组合尚未实现。 </dd>
+</dl>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">目标性质</th>
+<th style="text-align: left;">首选方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">红外光谱</td>
+<td style="text-align: left;">DFPT 在 q=0 时使用 NCP 势能 <em>（节。） <a href="Running-phonon-calculations.html#sec:dfpt-gamma">[dfpt-伽玛]</a>)</em></td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">FD 在 q=0 时使用 NCP 势和 DFPT 电场 <em>（节。） <a href="Running-phonon-calculations.html#sec:fd">[fd]</a>)</em></td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">FD 在 q=0 时使用 USP 势和 Berry 相位 <span class="arithmatex"><span class="MathJax_Preview">Z^{*}</span><script type="math/tex">Z^{*}</script></span> <em>（节。） <a href="Running-phonon-calculations.html#sec:berry-fd">[berry-fd]</a>)</em></td>
+</tr>
+<tr>
+<td style="text-align: left;">拉曼光谱</td>
+<td style="text-align: left;">DFPT 在 q=0 时使用 NCP 势能（2n+1 定理） <em>（节。） <a href="Running-phonon-calculations.html#sec:raman">[拉曼]</a>)</em></td>
+</tr>
+<tr>
+<td style="text-align: left;">有效电荷（Born）<span class="arithmatex"><span class="MathJax_Preview">Z^{*}</span><script type="math/tex">Z^{*}</script></span>)</td>
+<td style="text-align: left;">使用NCP势的DFPT电场计算 <em>（节。） <a href="Dielectric-properties.html#sec:efield">[efield]</a>)</em></td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">FD 在 q=0 时使用 USP 势和 Berry 相位 <span class="arithmatex"><span class="MathJax_Preview">Z^{*}</span><script type="math/tex">Z^{*}</script></span>  <em>（节。） <a href="Running-phonon-calculations.html#sec:berry-fd">[berry-fd]</a>)</em></td>
+</tr>
+<tr>
+<td style="text-align: left;">介电常数（<span class="arithmatex"><span class="MathJax_Preview">\epsilon_\infty</span><script type="math/tex">\epsilon_\infty</script></span>)</td>
+<td style="text-align: left;">使用NCP势的DFPT电场计算 <em>（节。） <a href="Dielectric-properties.html#sec:efield">[efield]</a>)</em></td>
+</tr>
+<tr>
+<td style="text-align: left;">非线性光学极化率（<span class="arithmatex"><span class="MathJax_Preview">\chi^{(2)}</span><script type="math/tex">\chi^{(2)}</script></span>)</td>
+<td style="text-align: left;">使用NCP势的DFPT电场（2n+1定理） <em>（节。） <a href="Dielectric-properties.html#sec:nlo">[非局域轨道]</a>)</em></td>
+</tr>
+<tr>
+<td style="text-align: left;">声子色散或态密度</td>
+<td style="text-align: left;">DFPT 加入NCP势能的插值计算 <em>（节。） <a href="Running-phonon-calculations.html#sec:ddos">[ddos]</a>)</em></td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">使用 USP 或 NCP 势能进行 FD 加插值 <em>（节。） <a href="Running-phonon-calculations.html#sec:ndsc">[ndsc]</a>)</em></td>
+</tr>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">使用 USP 或 NCP 势能的超胞 FD 计算 <em>（节。） <a href="Running-phonon-calculations.html#sec:supercell">[超胞]</a>)</em></td>
+</tr>
+<tr>
+<td style="text-align: left;">振动热力学</td>
+<td style="text-align: left;">与DOS相同 <em>（节。） <a href="Thermodynamic-properties.html#sec:thermodynamics">[热力学]</a>)</em></td>
+</tr>
+</tbody>
+</table>
+<dl>
+<dd id="tbl:method-selection"><strong>表2：</strong> 不同性质计算的可用且推荐的方法。<br/></dd>
+</dl>
+<h3 id="sec:dfpt-gamma">一个基于DFPT的声子计算在 <span class="arithmatex"><span class="MathJax_Preview">\Gamma</span><script type="math/tex">\Gamma</script></span>单点</h3>
+<p>许多建立和运行声子计算的基本原则，都可以通过最简单的情况来说明——在点处计算声子频率。 <span class="arithmatex"><span class="MathJax_Preview">q=(0,0,0)</span><script type="math/tex">q=(0,0,0)</script></span>，通常被称为的 <span class="arithmatex"><span class="MathJax_Preview">\Gamma</span><script type="math/tex">\Gamma</script></span> 点。这是非常常见的计算，因为它构成了红外或拉曼光谱以及群论分析和振动模式归属的基础。</p>
+<h4 id="sec:input-basic">输入文件</h4>
+<p>进行 CASTEP 声子计算的设置需要在文档中添加几个额外的关键字。 <em>seedname</em><code>.cell</code> 文件。如同任何类型的计算一样，必须使用以下任一种方式指定晶胞 <code>%block LATTICE_ABC</code> 或者 <code>%block LATTICE_CART</code>，并使用原子坐标 <code>%block POSITIONS_FRAC</code> 或者 <code>%block POSITIONS_ABS</code>。图 <a href="Running-phonon-calculations.html#fig:example-gamma">[示例-伽马]</a> 展示了在六方硫化物结构中硼氮化合物计算的完整输入文件。附加的关键字。 <code>phonon_kpoint_list</code> 用于指定计算一个声子波矢（0,0,0）<sup id="fnref:4"><a class="footnote-ref" href="Running-phonon-calculations.html#fn:4">1</a></sup>. 可以通过在此块中添加额外的行来指定更多的波矢。<sup id="fnref:5"><a class="footnote-ref" href="Running-phonon-calculations.html#fn:5">2</a></sup></p>
+<div class="highlight"><pre><span></span><code><a href="Running-phonon-calculations.html#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>%block LATTICE_ABC
+<a href="Running-phonon-calculations.html#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a>   2.536000   2.536000     4.199000  ! a, b, c
+<a href="Running-phonon-calculations.html#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a>  90.000000  90.000000   120.000000  ! alpha, beta, gamma
+<a href="Running-phonon-calculations.html#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a>%endblock LATTICE_ABC
+<a href="Running-phonon-calculations.html#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a>
+<a href="Running-phonon-calculations.html#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a>%block POSITIONS_FRAC
+<a href="Running-phonon-calculations.html#__codelineno-0-7" id="__codelineno-0-7" name="__codelineno-0-7"></a>  B   2/3   1/3    0.000000  ! Atom co-ordinates in crystallographic
+<a href="Running-phonon-calculations.html#__codelineno-0-8" id="__codelineno-0-8" name="__codelineno-0-8"></a>  N   2/3   1/3    0.374536  ! fractional system.
+<a href="Running-phonon-calculations.html#__codelineno-0-9" id="__codelineno-0-9" name="__codelineno-0-9"></a>  B   1/3   2/3    0.500000
+<a href="Running-phonon-calculations.html#__codelineno-0-10" id="__codelineno-0-10" name="__codelineno-0-10"></a>  N   1/3   2/3    0.874536
+<a href="Running-phonon-calculations.html#__codelineno-0-11" id="__codelineno-0-11" name="__codelineno-0-11"></a>%endblock POSITIONS_FRAC
+<a href="Running-phonon-calculations.html#__codelineno-0-12" id="__codelineno-0-12" name="__codelineno-0-12"></a>
+<a href="Running-phonon-calculations.html#__codelineno-0-13" id="__codelineno-0-13" name="__codelineno-0-13"></a>%block SPECIES_POT
+<a href="Running-phonon-calculations.html#__codelineno-0-14" id="__codelineno-0-14" name="__codelineno-0-14"></a>B   B_00.recpot              ! File names of pseudopotential to use for B
+<a href="Running-phonon-calculations.html#__codelineno-0-15" id="__codelineno-0-15" name="__codelineno-0-15"></a>N   N_00.recpot
+<a href="Running-phonon-calculations.html#__codelineno-0-16" id="__codelineno-0-16" name="__codelineno-0-16"></a>%endblock SPECIES_POT
+<a href="Running-phonon-calculations.html#__codelineno-0-17" id="__codelineno-0-17" name="__codelineno-0-17"></a>
+<a href="Running-phonon-calculations.html#__codelineno-0-18" id="__codelineno-0-18" name="__codelineno-0-18"></a>kpoints_mp_spacing 0.07      ! Generate MP grid of electronic k-points.
+<a href="Running-phonon-calculations.html#__codelineno-0-19" id="__codelineno-0-19" name="__codelineno-0-19"></a>symmetry_generate            ! Find symmetry operations of crystal structure
+<a href="Running-phonon-calculations.html#__codelineno-0-20" id="__codelineno-0-20" name="__codelineno-0-20"></a>
+<a href="Running-phonon-calculations.html#__codelineno-0-21" id="__codelineno-0-21" name="__codelineno-0-21"></a>%block PHONON_KPOINT_LIST
+<a href="Running-phonon-calculations.html#__codelineno-0-22" id="__codelineno-0-22" name="__codelineno-0-22"></a>    0.0   0.0   0.0    1.0   ! Wavevector of phonon(s) to compute ( qx qy qz, weight)
+<a href="Running-phonon-calculations.html#__codelineno-0-23" id="__codelineno-0-23" name="__codelineno-0-23"></a>%endblock PHONON_KPOINT_LIST
+</code></pre></div>
+<dl>
+<dt><div class="highlight"><pre><span></span><code><a href="Running-phonon-calculations.html#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>task             : PHONON    ! Choose a phonon calculation
+<a href="Running-phonon-calculations.html#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a>xc_functional    : LDA
+<a href="Running-phonon-calculations.html#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a>opt_strategy     : SPEED     ! Optimise for speed over memory saving
+<a href="Running-phonon-calculations.html#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a>cut_off_energy   : 700.0 eV  ! Plane-wave cutoff for this system
+<a href="Running-phonon-calculations.html#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a>elec_method      : DM        ! Use fast DM solver even for insulating system
+<a href="Running-phonon-calculations.html#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a>phonon_sum_rule  : TRUE      ! Enforce acoustic sum rule on calculated D
+</code></pre></div></dt>
+<dd>
+<p id="fig:example-gamma"><strong>图1：</strong> 用于BN在钨青铜结构中的注释示例单元格和参数文件。请注意 <code>phonon_method</code> 默认为 <code>DFPT</code>.  <br/></p>
+</dd>
+</dl>
+<h4 id="sec:output-gamma">读取输出</h4>
+<p>图 <a href="Running-phonon-calculations.html#fig:example-gamma-out">[示例-伽马输出]</a> 展示了从计算中提取的部分与声子相关的输出内容 <code>.castep</code> 上一节输入文件运行所得的文件。输出包含多个部分，每个部分对应一个选定的方向。 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}\rightarrow 0</span><script type="math/tex">{\mathbf{q}}\rightarrow 0</script></span> 在LO-TO分裂项中。请注意，CASTEP已添加了一个没有LO-TO分裂的计算（第一个区块），即使这并未明确请求。每个区块中，频率以每行一条的形式列出。此外，在每一行上还包含：(a) 一个表示该模式从群论分析得出的不可约表示的标签，(b) 在粉末（或其他方向平均）红外实验中该模式计算出的吸收率，(c) 该模式是否为红外活性，(d) Raman活性（如果已计算），以及(e) 该模式是否为Raman活性。</p>
+<dl>
+<dt><div class="highlight"><pre><span></span><code><a href="Running-phonon-calculations.html#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a> ==============================================================================
+<a href="Running-phonon-calculations.html#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a> +                           Vibrational Frequencies                          +
+<a href="Running-phonon-calculations.html#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a> +                           -----------------------                          +
+<a href="Running-phonon-calculations.html#__codelineno-2-4" id="__codelineno-2-4" name="__codelineno-2-4"></a> +                                                                            +
+<a href="Running-phonon-calculations.html#__codelineno-2-5" id="__codelineno-2-5" name="__codelineno-2-5"></a> + Performing frequency calculation at  1 wavevector  (q-pt )                 +
+<a href="Running-phonon-calculations.html#__codelineno-2-6" id="__codelineno-2-6" name="__codelineno-2-6"></a> + ========================================================================== +
+<a href="Running-phonon-calculations.html#__codelineno-2-7" id="__codelineno-2-7" name="__codelineno-2-7"></a> +                                                                            +
+<a href="Running-phonon-calculations.html#__codelineno-2-8" id="__codelineno-2-8" name="__codelineno-2-8"></a> + -------------------------------------------------------------------------- +
+<a href="Running-phonon-calculations.html#__codelineno-2-9" id="__codelineno-2-9" name="__codelineno-2-9"></a> +  q-pt=    1 (  0.000000  0.000000  0.000000)     1.0000000000              +
+<a href="Running-phonon-calculations.html#__codelineno-2-10" id="__codelineno-2-10" name="__codelineno-2-10"></a> + -------------------------------------------------------------------------- +
+<a href="Running-phonon-calculations.html#__codelineno-2-11" id="__codelineno-2-11" name="__codelineno-2-11"></a> +  Acoustic sum rule correction &lt;   8.094974 cm-1 applied                    +
+<a href="Running-phonon-calculations.html#__codelineno-2-12" id="__codelineno-2-12" name="__codelineno-2-12"></a> +     N      Frequency irrep.    ir intensity active            raman active + 
+<a href="Running-phonon-calculations.html#__codelineno-2-13" id="__codelineno-2-13" name="__codelineno-2-13"></a> +                (cm-1)         ((D/A)**2/amu)                               + 
+<a href="Running-phonon-calculations.html#__codelineno-2-14" id="__codelineno-2-14" name="__codelineno-2-14"></a> +                                                                            +
+<a href="Running-phonon-calculations.html#__codelineno-2-15" id="__codelineno-2-15" name="__codelineno-2-15"></a> +     1      -0.049170   a          0.0000000  N                       N     + 
+<a href="Running-phonon-calculations.html#__codelineno-2-16" id="__codelineno-2-16" name="__codelineno-2-16"></a> +     2      -0.034768   b          0.0000000  N                       N     + 
+<a href="Running-phonon-calculations.html#__codelineno-2-17" id="__codelineno-2-17" name="__codelineno-2-17"></a> +     3      -0.034768   b          0.0000000  N                       N     + 
+<a href="Running-phonon-calculations.html#__codelineno-2-18" id="__codelineno-2-18" name="__codelineno-2-18"></a> +     4     475.116083   c          0.0000000  N                       Y     + 
+<a href="Running-phonon-calculations.html#__codelineno-2-19" id="__codelineno-2-19" name="__codelineno-2-19"></a> +     5     475.116083   c          0.0000000  N                       Y     + 
+<a href="Running-phonon-calculations.html#__codelineno-2-20" id="__codelineno-2-20" name="__codelineno-2-20"></a> +     6     952.000075   c          0.0000000  N                       Y     + 
+<a href="Running-phonon-calculations.html#__codelineno-2-21" id="__codelineno-2-21" name="__codelineno-2-21"></a> +     7     952.000075   c          0.0000000  N                       Y     + 
+<a href="Running-phonon-calculations.html#__codelineno-2-22" id="__codelineno-2-22" name="__codelineno-2-22"></a> +     8     963.032787   d          0.0000000  N                       N     + 
+<a href="Running-phonon-calculations.html#__codelineno-2-23" id="__codelineno-2-23" name="__codelineno-2-23"></a> +     9    1016.312039   a         28.5895083  Y                       Y     + 
+<a href="Running-phonon-calculations.html#__codelineno-2-24" id="__codelineno-2-24" name="__codelineno-2-24"></a> +    10    1051.124801   b         25.8079204  Y                       Y     + 
+<a href="Running-phonon-calculations.html#__codelineno-2-25" id="__codelineno-2-25" name="__codelineno-2-25"></a> +    11    1051.124801   b         25.8079204  Y                       Y     + 
+<a href="Running-phonon-calculations.html#__codelineno-2-26" id="__codelineno-2-26" name="__codelineno-2-26"></a> +    12    1123.472590   d          0.0000000  N                       N     + 
+<a href="Running-phonon-calculations.html#__codelineno-2-27" id="__codelineno-2-27" name="__codelineno-2-27"></a> + .......................................................................... +
+<a href="Running-phonon-calculations.html#__codelineno-2-28" id="__codelineno-2-28" name="__codelineno-2-28"></a> +        Character table from group theory analysis of eigenvectors          +
+<a href="Running-phonon-calculations.html#__codelineno-2-29" id="__codelineno-2-29" name="__codelineno-2-29"></a> +                           Point Group =  25, C6v                           +
+<a href="Running-phonon-calculations.html#__codelineno-2-30" id="__codelineno-2-30" name="__codelineno-2-30"></a> + .......................................................................... +
+<a href="Running-phonon-calculations.html#__codelineno-2-31" id="__codelineno-2-31" name="__codelineno-2-31"></a> +  Rep  Mul |    E   6   3   2 m_v m_v                                       +
+<a href="Running-phonon-calculations.html#__codelineno-2-32" id="__codelineno-2-32" name="__codelineno-2-32"></a> +           | ------------------------                                       +
+<a href="Running-phonon-calculations.html#__codelineno-2-33" id="__codelineno-2-33" name="__codelineno-2-33"></a> + a A1    2 |    1   1   1   1   1   1                                       +
+<a href="Running-phonon-calculations.html#__codelineno-2-34" id="__codelineno-2-34" name="__codelineno-2-34"></a> + b E1    2 |    2   1  -1  -2   0   0                                       +
+<a href="Running-phonon-calculations.html#__codelineno-2-35" id="__codelineno-2-35" name="__codelineno-2-35"></a> + c E2    2 |    2  -1  -1   2   0   0                                       +
+<a href="Running-phonon-calculations.html#__codelineno-2-36" id="__codelineno-2-36" name="__codelineno-2-36"></a> + d B1    2 |    1  -1   1  -1  -1   1                                       +
+</code></pre></div></dt>
+<dd>
+<p id="fig:example-gamma"><strong>图2</strong> 前一段输入文件生成的纤锌矿BN计算所输出的.castep文件中的内容。各列显示了模式频率、该模式不可约表示的字母标记、红外吸收率和拉曼活性，以及该模式是否具有拉曼和/或红外活性。根据对称性使用情况和输入选项的不同，并非每个计算都会包含所有这些信息。 <br/></p>
+</dd>
+</dl>
+<div class="highlight"><pre><span></span><code><a href="Running-phonon-calculations.html#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a> + -------------------------------------------------------------------------- +
+<a href="Running-phonon-calculations.html#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a> +  q-pt=    1 (  0.000000  0.000000  0.000000)     0.0000000000              +
+<a href="Running-phonon-calculations.html#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a> +  q-&gt;0 along (  0.000000  0.000000  1.000000)                               +
+<a href="Running-phonon-calculations.html#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a> + -------------------------------------------------------------------------- +
+<a href="Running-phonon-calculations.html#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a> +  Acoustic sum rule correction &lt;   8.094974 cm-1 applied                    +
+<a href="Running-phonon-calculations.html#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a> +     N      Frequency irrep.    ir intensity active            raman active + 
+<a href="Running-phonon-calculations.html#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a> +                (cm-1)         ((D/A)**2/amu)                               + 
+<a href="Running-phonon-calculations.html#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a> +                                                                            +
+<a href="Running-phonon-calculations.html#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a> +     1      -0.037851   a          0.0000000  N                       N     + 
+<a href="Running-phonon-calculations.html#__codelineno-3-10" id="__codelineno-3-10" name="__codelineno-3-10"></a> +     2      -0.034768   b          0.0000000  N                       N     + 
+<a href="Running-phonon-calculations.html#__codelineno-3-11" id="__codelineno-3-11" name="__codelineno-3-11"></a> +     3      -0.034768   b          0.0000000  N                       N     + 
+<a href="Running-phonon-calculations.html#__codelineno-3-12" id="__codelineno-3-12" name="__codelineno-3-12"></a> +     4     475.116083   c          0.0000000  N                       Y     + 
+<a href="Running-phonon-calculations.html#__codelineno-3-13" id="__codelineno-3-13" name="__codelineno-3-13"></a> +     5     475.116083   c          0.0000000  N                       Y     + 
+<a href="Running-phonon-calculations.html#__codelineno-3-14" id="__codelineno-3-14" name="__codelineno-3-14"></a> +     6     952.000075   c          0.0000000  N                       Y     + 
+<a href="Running-phonon-calculations.html#__codelineno-3-15" id="__codelineno-3-15" name="__codelineno-3-15"></a> +     7     952.000075   c          0.0000000  N                       Y     + 
+<a href="Running-phonon-calculations.html#__codelineno-3-16" id="__codelineno-3-16" name="__codelineno-3-16"></a> +     8     963.032787   d          0.0000000  N                       N     + 
+<a href="Running-phonon-calculations.html#__codelineno-3-17" id="__codelineno-3-17" name="__codelineno-3-17"></a> +     9    1051.124801   b         25.8079204  Y                       Y     + 
+<a href="Running-phonon-calculations.html#__codelineno-3-18" id="__codelineno-3-18" name="__codelineno-3-18"></a> +    10    1051.124801   b         25.8079204  Y                       Y     + 
+<a href="Running-phonon-calculations.html#__codelineno-3-19" id="__codelineno-3-19" name="__codelineno-3-19"></a> +    11    1123.472590   d          0.0000000  N                       N     + 
+<a href="Running-phonon-calculations.html#__codelineno-3-20" id="__codelineno-3-20" name="__codelineno-3-20"></a> +    12    1262.933291   a         28.5895083  Y                       Y     + 
+<a href="Running-phonon-calculations.html#__codelineno-3-21" id="__codelineno-3-21" name="__codelineno-3-21"></a> + .......................................................................... +
+<a href="Running-phonon-calculations.html#__codelineno-3-22" id="__codelineno-3-22" name="__codelineno-3-22"></a> +        Character table from group theory analysis of eigenvectors          +
+<a href="Running-phonon-calculations.html#__codelineno-3-23" id="__codelineno-3-23" name="__codelineno-3-23"></a> +                           Point Group =  25, C6v                           +
+<a href="Running-phonon-calculations.html#__codelineno-3-24" id="__codelineno-3-24" name="__codelineno-3-24"></a> + (Due to LO/TO splitting this character table may not contain some symmetry +
+<a href="Running-phonon-calculations.html#__codelineno-3-25" id="__codelineno-3-25" name="__codelineno-3-25"></a> +  operations of the full crystallographic point group.  Additional          +
+<a href="Running-phonon-calculations.html#__codelineno-3-26" id="__codelineno-3-26" name="__codelineno-3-26"></a> +  representations may be also be present corresponding to split LO modes.   +
+<a href="Running-phonon-calculations.html#__codelineno-3-27" id="__codelineno-3-27" name="__codelineno-3-27"></a> +  A conventional analysis can be generated by specifying an additional null +
+<a href="Running-phonon-calculations.html#__codelineno-3-28" id="__codelineno-3-28" name="__codelineno-3-28"></a> +  (all zero) field direction or one along any unique crystallographic axis  +
+<a href="Running-phonon-calculations.html#__codelineno-3-29" id="__codelineno-3-29" name="__codelineno-3-29"></a> +  in %BLOCK PHONON_GAMMA_DIRECTIONS in &lt;seedname&gt;.cell.)                    +
+<a href="Running-phonon-calculations.html#__codelineno-3-30" id="__codelineno-3-30" name="__codelineno-3-30"></a> + .......................................................................... +
+<a href="Running-phonon-calculations.html#__codelineno-3-31" id="__codelineno-3-31" name="__codelineno-3-31"></a> +  Rep  Mul |    E   6   3   2 m_v m_v                                       +
+<a href="Running-phonon-calculations.html#__codelineno-3-32" id="__codelineno-3-32" name="__codelineno-3-32"></a> +           | ------------------------                                       +
+<a href="Running-phonon-calculations.html#__codelineno-3-33" id="__codelineno-3-33" name="__codelineno-3-33"></a> + a A1    2 |    1   1   1   1   1   1                                       +
+<a href="Running-phonon-calculations.html#__codelineno-3-34" id="__codelineno-3-34" name="__codelineno-3-34"></a> + b E1    2 |    2   1  -1  -2   0   0                                       +
+<a href="Running-phonon-calculations.html#__codelineno-3-35" id="__codelineno-3-35" name="__codelineno-3-35"></a> + c E2    2 |    2  -1  -1   2   0   0                                       +
+<a href="Running-phonon-calculations.html#__codelineno-3-36" id="__codelineno-3-36" name="__codelineno-3-36"></a> + d B1    2 |    1  -1   1  -1  -1   1                                       +
+<a href="Running-phonon-calculations.html#__codelineno-3-37" id="__codelineno-3-37" name="__codelineno-3-37"></a> ==============================================================================
+</code></pre></div>
+<p id="fig:example-gamma-out"><strong>图2</strong> 运行输出（续）：如果启用了LO-TO分裂计算，则 <span class="arithmatex"><span class="MathJax_Preview">\Gamma</span><script type="math/tex">\Gamma</script></span> 点频率表被重复，无论是包含还是不包含产生某一或多个方向LO/TO分裂的非解析贡献（见Gonze和Lee（<a href="Bibliography.html#ref-GonzeL97">Gonze 和 Lee，1997</a>）。（对LO模式的群论分析不如预期那样有用，很可能将成为未来发展的主题。） <br/></p>
+<p>与其他计算相同，写入文件的信息量 <code>.castep</code> 文件由参数的值控制 <code>iprint</code>输出级别为</p>
+<dl>
+<dt><code>iprint : 0</code></dt>
+<dd>
+<p>最小输出如图所示 <a href="Running-phonon-calculations.html#fig:example-gamma-out">[示例-伽马输出]</a>. 无进度信息。</p>
+</dd>
+<dt><code>iprint : 1</code></dt>
+<dd>
+<p>至于 <code>iprint : 0</code> 但包括对q点和扰动的令人安心的进度报告。</p>
+</dd>
+<dt><code>iprint : 2</code></dt>
+<dd>
+<p>更详细的输出内容，包括每次扰动中k点和对称性的详细信息，每个扰动循环的DFPT最小化器报告，以及动力矩阵（和力常数矩阵）的打印。</p>
+</dd>
+</dl>
+<p>除了用户可读的输出内容在 <code>.castep</code> 文件<sup id="fnref:6"><a class="footnote-ref" href="Running-phonon-calculations.html#fn:6">3</a></sup>，每一次声子计算都会生成一个带有后缀的额外输出文件 <code>.phonon</code> 这是供其他程序进行后处理分析用的。这不仅包括频率，还包括本征矢。 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{\varepsilon}_{m{\kappa,\alpha}{\mathbf{q}}}}</span><script type="math/tex">{\mathbf{\varepsilon}_{m{\kappa,\alpha}{\mathbf{q}}}}</script></span> 由对动力矩阵进行对角化得到的本征矢。这些本征矢是正交归一化的，本征矢与原子位移之间的关系由下式给出</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">u_{\kappa,\alpha,a} = \frac{1}{\sqrt{M_{\kappa}}} Q_{m} {\mathbf{\varepsilon}_{m{\kappa,\alpha}{\mathbf{q}}}}\exp(i ({\mathbf{q}}\cdot {\mathbf{R}}_{\kappa,\alpha}(a) - \omega_m t))</div>
+<script type="math/tex; mode=display">u_{\kappa,\alpha,a} = \frac{1}{\sqrt{M_{\kappa}}} Q_{m} {\mathbf{\varepsilon}_{m{\kappa,\alpha}{\mathbf{q}}}}\exp(i ({\mathbf{q}}\cdot {\mathbf{R}}_{\kappa,\alpha}(a) - \omega_m t))</script>
+</div>
+<p>其中 <span class="arithmatex"><span class="MathJax_Preview">Q_M</span><script type="math/tex">Q_M</script></span> 是模的振幅 <span class="arithmatex"><span class="MathJax_Preview">m</span><script type="math/tex">m</script></span> 另一种表示方法如引言中所述。</p>
+<h4 id="sec:raman">拉曼活性计算</h4>
+<p>除了作为默认部分计算出的红外吸收率外， <span class="arithmatex"><span class="MathJax_Preview">\Gamma</span><script type="math/tex">\Gamma</script></span>点声子计算中，CASTEP 还能够在绝缘体系的非共振散射情况下计算拉曼活性张量。<sup id="fnref:7"><a class="footnote-ref" href="Running-phonon-calculations.html#fn:7">4</a></sup>. 该计算使用了DFPT的一种扩展形式，称为“2n+1定理”（<a href="Bibliography.html#ref-BaroniDDG01">Baroni 等人，2001年</a>; <a href="Bibliography.html#ref-Miwa2011">Miwa
+2011</a>) 该计算需要的计算量远大于单纯的声子计算，因此默认情况下不会启用。要进行拉曼活性计算，请设置</p>
+<blockquote>
+<p><code>calculate_raman : TRUE</code></p>
+</blockquote>
+<p>在 <code>.param</code> 文件，用于计算并打印拉曼原子极化率张量和模式极化率张量至 <code>.castep</code> 文件。这些数据可在建模极化单晶几何结构中的拉曼散射时提取使用。<sup id="fnref:8"><a class="footnote-ref" href="Running-phonon-calculations.html#fn:8">5</a></sup></p>
+<p>如同声学有效电荷和动力矩阵一样，原子极化张量的取值存在一个求和关系，由于数值近似的原因，该关系可能无法很好地满足。如果参数</p>
+<blockquote>
+<p><code>raman_sum_rule : TRUE</code></p>
+</blockquote>
+<p>已设置。</p>
+<p>三维平均拉曼活性（见Porezag和Pedersen（<a href="Bibliography.html#ref-PorezagP:96">Porezag 和 Pederson 1996</a>)) 是从磁化率张量计算得出，并作为通常频率输出中的一列额外打印出来，如图所示 <a href="Running-phonon-calculations.html#fig:example-gamma-out">[示例-伽马输出]</a>. 这可以用于对粉末谱进行简单的建模，例如使用 dos.pl 工具（参见章节） <a href="Plotting-and-analysis-tools.html#sec:dos-pl">[态密度-PL]</a>).</p>
+<h3 id="sec:ddos">色散关系和态密度</h3>
+<p>波矢不为零的声子在晶体固体的热物理性质以及许多固态相变的物理过程中起着重要作用。通过全布里渊区内的振动计算来验证晶体结构的机械稳定性，需要检测实频。此外，通常还需要获得色散曲线和态密度，以便与非弹性中子和X射线散射实验结果进行比较。</p>
+<p>密度泛函微扰理论的一个优势是，CASTEP可以在 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}\ne \mathbf{0}</span><script type="math/tex">{\mathbf{q}}\ne \mathbf{0}</script></span> 像在……一样容易 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}= \mathbf{0}</span><script type="math/tex">{\mathbf{q}}= \mathbf{0}</script></span> （但会因对称性降低而导致CPU时间增加）。可以通过提供布里渊区中q点的列表来直接执行此计算。 <code>.cell</code> 文件（使用其中一个块） <code>%block PHONON_KPOINT_LIST</code>，或 <code>%block PHONON_KPOINT_PATH</code> 或者关键字 <code>phonon_kpoint_mp_grid</code>）。然而，要生成一个合理的能带图或态密度，通常需要数百甚至数千个q点。此类计算所需的时间将是单点能计算的几百倍，因此是不可行的。</p>
+<p>幸运的是，有一种方法可以在远更低的计算成本下实现相同的结果。该方法利用了固体中原子间相互作用具有有限范围且迅速衰减至零这一事实。具体而言，方程中的力常数矩阵元素有如下特点： <a href="Introduction.html#eq:fcmat">[fcmat]</a> 随着减少 <span class="arithmatex"><span class="MathJax_Preview">1 / r^{5}</span><script type="math/tex">1 / r^{5}</script></span> 具有原子间距离。因此，由公式定义的动力矩阵为。 <a href="Introduction.html#eq:dmat">[dmat]</a> 及其本征值 <span class="arithmatex"><span class="MathJax_Preview">\omega^{2}({\mathbf{q}})</span><script type="math/tex">\omega^{2}({\mathbf{q}})</script></span> 随波矢平滑变化 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}</span><script type="math/tex">{\mathbf{q}}</script></span>使用傅里叶插值法，可以从一组在较粗网格上的DFPT计算结果中生成倒易空间中任意精细网格或线性路径上的动力矩阵。有关该方法的完整描述，请参见参考文献（<a href="Bibliography.html#ref-BaroniDDG01">Baroni 等人，2001年</a>; <a href="Bibliography.html#ref-GianozziGPB91">Giannozzi 等人，1991年</a>;
+<a href="Bibliography.html#ref-GonzeL97">Gonze 和 Lee，1997</a>).</p>
+<p>在极性固体的情况下会出现一个问题，即当一个原子被位移时所产生的偶极-偶极相互作用会导致一个更远距离的力常数矩阵，其衰减仅遵循 <span class="arithmatex"><span class="MathJax_Preview">1 / r^{3}</span><script type="math/tex">1 / r^{3}</script></span>. CASTEP 采用本征有效电荷和通过电场响应的DFPT计算得到的介电常数对这一项进行解析建模（参见第节） <a href="Dielectric-properties.html#sec:efield">[efield]</a> 并参考文献（<a href="Bibliography.html#ref-GonzeL97">Gonze 和 Lee，1997</a>）。因此，它只能对力常数矩阵中随……变化的部分进行傅里叶插值。 <span class="arithmatex"><span class="MathJax_Preview">1 / r^{5}</span><script type="math/tex">1 / r^{5}</script></span>，且不需要比非极性固体情况更细的网格。</p>
+<h4 id="sec:interpolation-setup">设置插值计算</h4>
+<p>在 <code>.cell</code> 文件选择粗网格点处进行DFPT计算的q点。这可以指定为一个 <code>%block PHONON_KPOINT_LIST</code> 包含不可约布里渊区中的简化点集，但通常更直接的方法是使用替代关键字</p>
+<blockquote>
+<p><code>phonon_kpoint_mp_grid</code> : <em>p q r</em><br/>
+<code>phonon_kpoint_mp_offset</code> : <code>INCLUDE_GAMMA</code></p>
+</blockquote>
+<p>以指定网格参数和偏移量<sup id="fnref:9"><a class="footnote-ref" href="Running-phonon-calculations.html#fn:9">6</a></sup>网格参数 <em>p</em>,
+<em>q</em> 并且 <em>r</em> 通常应选择以实现倒易空间的均匀采样为目标，同时考虑倒易晶格矢量的长度，并且需与模拟单元的对称性相容。或者，也可以使用最小间距指定网格，例如</p>
+<blockquote>
+<p><code>phonon_kpoint_mp_grid_spacing 0.1 1/ang</code></p>
+</blockquote>
+<p>通常，网格应选择以包含 <span class="arithmatex"><span class="MathJax_Preview">\Gamma</span><script type="math/tex">\Gamma</script></span> 点，通常能提供更好的插值收敛性（即在更小的 <em>p,q,r</em>）优于其他情况。这是与电子k点采样行为相反的情况（见参考文献（<a href="Bibliography.html#ref-ProbertP03">Probert 和 Payne，2003</a>)). 特殊关键字值 <code>phonon_kpoint_mp_offset : INCLUDE_GAMMA</code> 避免了显式计算偏移量的需要。</p>
+<p>网格参数的选择 <em>p</em>, <em>q</em> 并且 <em>r</em> 由三个因素决定：</p>
+<ul>
+<li>
+<p>对于一个三维晶体， <em>p,q,r</em> <em>应遵守晶体学对称性</em>，因此对于立方或菱方晶系，你应该设置 <span class="arithmatex"><span class="MathJax_Preview">p = q = r</span><script type="math/tex">p = q = r</script></span>在单轴晶体（如四方或六方晶体）的情况下，我们有 <span class="arithmatex"><span class="MathJax_Preview">p = q \neq r</span><script type="math/tex">p = q \neq r</script></span> （假设 rằng） <span class="arithmatex"><span class="MathJax_Preview">c</span><script type="math/tex">c</script></span> 是唯一轴时）；对于对称性较低的情况则无此约束。</p>
+</li>
+<li>
+<p>任意方向上的值限制了 <em>力常数矩阵的范围</em> 以与有限差分/超胞计算中超胞倍乘因子相同的方式（第节） <a href="Running-phonon-calculations.html#sec:supercell">[超胞]</a>）。这个值应有多大取决于化学键的性质。离子键合体系通常具有较短程的力常数矩阵，需要相对粗略的网格才能收敛。对于岩盐结构的氯化钠，其原始晶格参数为3.75 Å的情况， <span class="arithmatex"><span class="MathJax_Preview">4 \times 4 \times 4</span><script type="math/tex">4 \times 4 \times 4</script></span> 网格与收敛相当接近。这对应于将力常数矩阵在约距离处截断。 <span class="arithmatex"><span class="MathJax_Preview">7</span><script type="math/tex">7</script></span>Å (<span class="arithmatex"><span class="MathJax_Preview">\approx p \times 2 \pi / a</span><script type="math/tex">\approx p \times 2 \pi / a</script></span>另一方面，共价体系往往具有相当长程的力常数矩阵，需要更精细的网格才能实现收敛。硅就是一个很好的例子。原始晶格参数与氯化钠相似于 <span class="arithmatex"><span class="MathJax_Preview">3.81</span><script type="math/tex">3.81</script></span>Å，但直到达到某个程度时，能带曲线才完全收敛。 <span class="arithmatex"><span class="MathJax_Preview">8 \times 8 \times 8</span><script type="math/tex">8 \times 8 \times 8</script></span> 使用了网格。关于这一点的更详细分析可参见参考文献（<a href="Bibliography.html#ref-AcklandWC97">Ackland, Warren, 和 Clark 1997</a>).</p>
+</li>
+<li>
+<p>虽然网格尺寸在声子之间没有本质的物理关系。 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}</span><script type="math/tex">{\mathbf{q}}</script></span>点，并且用于电子 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{k}}</span><script type="math/tex">{\mathbf{k}}</script></span>单点采样 <sup id="fnref:10"><a class="footnote-ref" href="Running-phonon-calculations.html#fn:10">7</a></sup>，由于实施密度泛函微扰理论以及需要在同时包含的网格上生成和使用基态Kohn-Sham波函数，从而产生了一种技术联系。 <span class="arithmatex"><span class="MathJax_Preview">\{{\mathbf{k}}\}</span><script type="math/tex">\{{\mathbf{k}}\}</script></span> 并且 <span class="arithmatex"><span class="MathJax_Preview">\{{\mathbf{k}}+ {\mathbf{q}}\}</span><script type="math/tex">\{{\mathbf{k}}+ {\mathbf{q}}\}</script></span> （参见参考文献（<a href="Bibliography.html#ref-Gonze97">Gonze 1997</a>) 详见数学细节）。为获得 DFPT 计算的最佳性能和稳定性， <em>声子</em> 网格参数应为 <em>共格的</em> 与 <em>电子的</em> 网格具有精确的除数作为最简单的情况。例如，在具有hcp结构的元素金属如Mg中，电子 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{k}}</span><script type="math/tex">{\mathbf{k}}</script></span>单点采样 of <span class="arithmatex"><span class="MathJax_Preview">21 \times 21 \times 12</span><script type="math/tex">21 \times 21 \times 12</script></span> 以及一个声子 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}</span><script type="math/tex">{\mathbf{q}}</script></span>单点采样 of <span class="arithmatex"><span class="MathJax_Preview">7 \times 7 \times 6</span><script type="math/tex">7 \times 7 \times 6</script></span> 这可能是最有效的做法。这不是一个严格的要求，CASTEP 会尝试使用所指定的网格进行计算，但在某些情况下，将其中一个网格向上取整以满足可协调性标准可能会带来性能优势。</p>
+</li>
+</ul>
+<p>额外的关键字在 <code>.param</code> 文件控制插值。最重要的是</p>
+<blockquote>
+<p><code>phonon_fine_method : INTERPOLATE</code></p>
+</blockquote>
+<p>指令 CASTEP 执行 DFPT 计算后的傅里叶插值步骤。</p>
+<p>波矢插值的目标集合是通过在中添加额外的关键字或区块来设置的。 <em>.细胞</em> 文件。要么</p>
+<blockquote>
+<p><code>phonon_fine_kpoint_mp_grid</code> <em>p q r</em><br/>
+<code>phonon_fine_kpoint_mp_offset</code> <em>o<span class="arithmatex"><span class="MathJax_Preview">_1</span><script type="math/tex">_1</script></span> o<span class="arithmatex"><span class="MathJax_Preview">_2</span><script type="math/tex">_2</script></span> o<span class="arithmatex"><span class="MathJax_Preview">_3</span><script type="math/tex">_3</script></span></em></p>
+</blockquote>
+<p>或者</p>
+<blockquote>
+<p><code>phonon_fine_kpoint_mp_spacing 0.03 1/ang</code> .</p>
+</blockquote>
+<p>将对一个规则的（可能偏移的）网格进行插值。实际上，仅包含布里渊区不可约楔形区域内的点，并计算适当的权重，使得加权平均值与对布里渊区的均匀采样相同。这是计算声子态密度的常用方法。</p>
+<p>如果需要获取沿高对称方向的一组色散曲线，则需使用空单元关键词块</p>
+<blockquote>
+<p><code>%block PHONON_FINE_KPOINT_PATH</code><br/>
+<code>%endblock PHONON_FINE_KPOINT_PATH</code></p>
+</blockquote>
+<p>将内部生成一个列表的 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}</span><script type="math/tex">{\mathbf{q}}</script></span>- 点采样根据计算的对称性通过布里渊区的默认路径。或者使用一个点列表 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}</span><script type="math/tex">{\mathbf{q}}</script></span>- 显式指定路径顶点的点可输入为</p>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a href="Running-phonon-calculations.html#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>%block PHONON_FINE_KPOINT_PATH
+<a href="Running-phonon-calculations.html#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>0.0 0.0 0.0
+<a href="Running-phonon-calculations.html#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a>0.5 0.5 0.0
+<a href="Running-phonon-calculations.html#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a>0.5 0.5 0.5
+<a href="Running-phonon-calculations.html#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a>break
+<a href="Running-phonon-calculations.html#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a>0.0 0.0 0.0
+<a href="Running-phonon-calculations.html#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a>0.5 0.5 0.5
+<a href="Running-phonon-calculations.html#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a>...
+<a href="Running-phonon-calculations.html#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a>%endblock PHONON_FINE_KPOINT_PATH
+</code></pre></div>
+</blockquote>
+<p>穿越顶点之间指定方向的路径，除非存在以下情况 <code>break</code> 关键词用于路径跳跃且不包含任何中间点。路径上采样的精细程度由一个附加关键词设定。</p>
+<blockquote>
+<p><code>phonon_fine_kpoint_path_spacing : 0.03 1/ang</code> .</p>
+</blockquote>
+<p>作为一种最终选择，可以直接输入一个点的简单列表，以使用指定的采样来建模</p>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a href="Running-phonon-calculations.html#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>%block PHONON_FINE_KPOINT_LIST
+<a href="Running-phonon-calculations.html#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>0.0 0.0 0.0
+<a href="Running-phonon-calculations.html#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a>0.1 0.2 0.3
+<a href="Running-phonon-calculations.html#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a>...
+<a href="Running-phonon-calculations.html#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a>%endblock PHONON_FINE_KPOINT_LIST
+</code></pre></div>
+</blockquote>
+<p>这是用于由 Accelrys Materials Studio 生成的文件的方法。</p>
+<p>相同的关键词也被用于相关的有限差分计算方法；参见示例 <code>.cell</code> 图的文件 <a href="Running-phonon-calculations.html#fig:al-sc-cell">[al-sc-cell]</a>.</p>
+<h4 id="sec:continuation">续接</h4>
+<p>CASTEP 存储所有声子计算的结果——动力学矩阵和力常数矩阵——在二进制文件中。 <em>seedname</em><code>.check</code> 该文件在成功运行结束后生成。它可以用来修改与插值相关的某些参数值，甚至可以更改或完全替换精细声子k点集。 <em>没有</em> 是否需要重复昂贵的DFPT（或超胞）部分计算。事实上，只需进行一次力常数矩阵的计算，即可在多种采样密度下计算态密度，并获得任意平滑的色散曲线。</p>
+<p>设置续算计算很简单。只需像平常一样，在参数文件的副本中添加续算关键字即可。</p>
+<blockquote>
+<p><code>continuation</code> <em>原种子名称</em><code>.check</code></p>
+</blockquote>
+<p>并修改副本中的细声子k点采样参数 <em>seedname</em><code>.cell</code> 文件。建议您使用重命名的副本进行操作，以避免覆盖原始且重要的文件。 <em>seedname</em><code>.check</code> 文件。在新的输入文件集上运行CASTEP，与运行一个新的计算完全相同，只是结果将生成得快得多。</p>
+<p>在设置续算运行时，应注意不要更改标准声子k点集、电子k点集或任何电子结构参数，如 <code>elec_energy_tol</code>如果检测到与检查点文件中存储值的不匹配，CASTEP 将丢弃保存的动力学矩阵数据，并从头开始重新计算。</p>
+<p>续算计算也与之结合使用。 <em>检查点</em> 其中，当部分完成的计算被写入一个文件时，该文件也将在 <code>.check</code> 格式，并可用于续算中断的计算。参见章节 <a href="Running-Large-Calculations.html#sec:checkpointing">[检查点]</a> 用于描述。</p>
+<h4 id="sec:interpolation-control">插值方案的控制</h4>
+<p>由动力矩阵导出的力常数矩阵的最终表示实际上是一种周期性表示，它等价于 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}=0</span><script type="math/tex">{\mathbf{q}}=0</script></span> 动力矩阵的一个（虚构的） <span class="arithmatex"><span class="MathJax_Preview">p \times q \times r</span><script type="math/tex">p \times q \times r</script></span> 超胞。（参见章节） <a href="Running-phonon-calculations.html#sec:supercell">[超胞]</a> （有关更详细的说明）。CASTEP 必须利用离子位点对的最小像约定，确定周期动力学矩阵与非周期力常数矩阵之间的映射关系，并在实空间中引入截断方案以排除（超胞-）周期性图像。事实上，CASTEP 实现了两种不同的方案。</p>
+<p>累积量方案（<a href="Bibliography.html#ref-ParlinskiLK97">Parlinski, Li, 和 Kawazoe 1997</a>) 包含所有图像力常数，并通过适当的加权以避免对图像的重复计数。这是通过在任一方向上，若图像力常数位于虚构超胞晶格最近周期重复距离的一半范围内，则将其包含进来实现的。如果原子-原子矢量位于 <em>完全地</em> 将超胞重复的一半，使得力常数在两个位置出现，例如在两者之间 <span class="arithmatex"><span class="MathJax_Preview">\mathbf{L}</span><script type="math/tex">\mathbf{L}</script></span> 并且 <span class="arithmatex"><span class="MathJax_Preview">-\mathbf{L}</span><script type="math/tex">-\mathbf{L}</script></span>，所有处于相同距离的图像均以适当的权重因子包含在内，以保持累积力常数矩阵的对称性。（参见参考文献（<a href="Bibliography.html#ref-ParlinskiLK97">Parlinski, Li, 和 Kawazoe 1997</a>) 和 (<a href="Bibliography.html#ref-YeLWH04">叶等，2004年</a>) 以获取更详细的说明）。该方案通过指定参数文件关键字来选择</p>
+<blockquote>
+<p><code>phonon_fine_cutoff_method CUMULANT</code></p>
+</blockquote>
+<p>且事实上是CASTEP中的默认方法。</p>
+<p>CASTEP 也实现了简单的球形截断，由参数控制 <span class="arithmatex"><span class="MathJax_Preview">R_c</span><script type="math/tex">R_c</script></span> 并由参数指定</p>
+<blockquote>
+<p><code>phonon_force_constant_cutoff 10.0 ang</code></p>
+</blockquote>
+<p>该值 <span class="arithmatex"><span class="MathJax_Preview">R_c</span><script type="math/tex">R_c</script></span> 应被选择以满足 <span class="arithmatex"><span class="MathJax_Preview">2 R_c &lt; min(p L_1,q L_2,r L_3) L</span><script type="math/tex">2 R_c < min(p L_1,q L_2,r L_3) L</script></span> 其中 <span class="arithmatex"><span class="MathJax_Preview">L_n</span><script type="math/tex">L_n</script></span> 是模拟单元的晶胞边长，并 <span class="arithmatex"><span class="MathJax_Preview">p,q,r</span><script type="math/tex">p,q,r</script></span> 是声子波矢的（粗略）网格。通常最简单的方法是指定零值，此时CASTEP会自动选择最大的允许值。该方案最适合立方对称性的体材料。使用关键字选择球形方案。</p>
+<blockquote>
+<p><code>phonon_fine_cutoff_method SPHERICAL</code> .</p>
+</blockquote>
+<p>在默认方法中，可以通过半径缩放因子减小较小的截断体积。 <em>e.g.</em></p>
+<blockquote>
+<p><code>phonon_force_constant_cut_scale : 1.0</code> .</p>
+</blockquote>
+<p>这可能有助于测试IFC矩阵中长程贡献的影响。然而，该参数值偏离1时，将无法保持累积方案的优良收敛特性，通常需要比精确累积方法更大的超胞。</p>
+<h4 id="sec:asr">声学求和规则修正</h4>
+<p id="eq:asr">振动哈密顿量在系统空间均匀平移下保持不变。这一对称性是众所周知结果的来源：任何晶体都有三个声学振动模式，位于 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}=0</span><script type="math/tex">{\mathbf{q}}=0</script></span> 零频率的情况。这导致所谓的 <em>声学求和规则</em> （或 ASR）（<a href="Bibliography.html#ref-AcklandWC97">Ackland, Warren, 和 Clark 1997</a>; <a href="Bibliography.html#ref-Pick1970">Pick, Cohen 和 Martin 1970</a>) 其中包含力常数的数学表达式和 <span class="arithmatex"><span class="MathJax_Preview">\Gamma</span><script type="math/tex">\Gamma</script></span>一阶动力矩阵 <br/></p>
+<div class="arithmatex">
+<div class="MathJax_Preview">\begin{aligned}
+ \sum_{\kappa,a} {\Phi^{\kappa,\kappa^\prime}_{\alpha,\alpha^\prime}(a)}&amp;= 0\\
+ \sum_{\kappa} {D^{\kappa,\kappa^\prime}_{\alpha,\alpha^\prime}(\mathbf{q}=0)}&amp;= 0 
+\end{aligned}</div>
+<script type="math/tex; mode=display">\begin{aligned}
+ \sum_{\kappa,a} {\Phi^{\kappa,\kappa^\prime}_{\alpha,\alpha^\prime}(a)}&= 0\\
+ \sum_{\kappa} {D^{\kappa,\kappa^\prime}_{\alpha,\alpha^\prime}(\mathbf{q}=0)}&= 0 
+\end{aligned}</script>
+</div>
+<p>在平面波计算中，由于原子相对于固定的FFT网格发生平移，因而破坏了平移不变性，因此求和规则永远不会被严格满足。因此，即使在其他方面看起来已经非常收敛的计算中，有时也会观察到三个声学模式在 <span class="arithmatex"><span class="MathJax_Preview">\Gamma</span><script type="math/tex">\Gamma</script></span> 显著偏离零频率。取决于XC泛函<sup id="fnref:11"><a class="footnote-ref" href="Running-phonon-calculations.html#fn:11">8</a></sup> 这些频率可能达到或超过50 cm⁻¹。<span class="arithmatex"><span class="MathJax_Preview">^{\text{-1}}</span><script type="math/tex">^{\text{-1}}</script></span>一种解决方案就是简单地增加 CASTEP 中用于密度和势场的“细网格”FFT 网格的点数。 <code>fine_grid_scale</code><sup id="fnref:12"><a class="footnote-ref" href="Running-phonon-calculations.html#fn:12">9</a></sup>。（注意：这与 <code>grid_scale</code> （这控制了用于表示波函数的FFT网格。）然而，这样操作在计算机时间和内存消耗上可能非常昂贵。</p>
+<p>只要对称性破坏的幅度不大，就可以对计算得到的动力学或力常数矩阵进行变换，使其精确满足ASR（对称性自洽关系）。CASTEP实现了一种方案，该方案将声学模式本征矢投影出去，并将其频率调整为零，同时对光学模式频率的影响最小。该方案由参数控制（在 <code>.param</code> 文件)</p>
+<blockquote>
+<p><code>phonon_sum_rule_method : REAL / RECIP / REAL-RECIP / NONE</code></p>
+</blockquote>
+<p>其中第一个只是激活或禁用该修正项。第二个选项选择方程中ASR变体的哪一个版本。 <a href="Running-phonon-calculations.html#eq:asr">[asr]</a> 为了施加约束，可以使用实空间力常数矩阵、倒空间动力学矩阵，或两者兼有。（<code>phonon_sum_rule_method : NONE</code> 是……的同义词 <code>phonon_sum_rule : FALSE</code>). 实空间方法仅适用于插值或超胞/有限位移计算，而倒空间方法可用于任何类型的声子计算。</p>
+<p>两种变体都会使声学模式频率偏离但接近 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}=0</span><script type="math/tex">{\mathbf{q}}=0</script></span>，实空间方法隐式地，而倒易空间方法显式地，通过确定校正项 <span class="arithmatex"><span class="MathJax_Preview">{D^{\kappa,\kappa^\prime}_{\alpha,\alpha^\prime}(\mathbf{q}=0)}</span><script type="math/tex">{D^{\kappa,\kappa^\prime}_{\alpha,\alpha^\prime}(\mathbf{q}=0)}</script></span> 并将其从 <span class="arithmatex"><span class="MathJax_Preview">{D^{\kappa,\kappa^\prime}_{\alpha,\alpha^\prime}(\mathbf{q})}</span><script type="math/tex">{D^{\kappa,\kappa^\prime}_{\alpha,\alpha^\prime}(\mathbf{q})}</script></span> 如 Gonze 所建议的（<a href="Bibliography.html#ref-GonzeL97">Gonze 和 Lee，1997</a>）。这通常会导致声学模式行为，其特征与使用非常精细的FFT网格进行的高收敛计算无法区分。<sup id="fnref:13"><a class="footnote-ref" href="Running-phonon-calculations.html#fn:13">10</a></sup>.</p>
+<p>除了频率上的和规则之外，还有另一个关于Born有效电荷的规则（见第几节） <a href="Dielectric-properties.html#sec:efield">[efield]</a>)</p>
+<div class="arithmatex">
+<div class="MathJax_Preview">\sum_{\kappa} {Z^{*}_{\kappa,\beta,\alpha} }= 0</div>
+<script type="math/tex; mode=display">\sum_{\kappa} {Z^{*}_{\kappa,\beta,\alpha} }= 0</script>
+</div>
+<p>哪个由参数激活</p>
+<blockquote>
+<p><code>born_charge_sum_rule : TRUE</code></p>
+</blockquote>
+<p>CASTEP 的默认行为是不强制执行任一求和规则。如果在原始计算中未请求此功能，则可以在后续处理中通过续算运行添加，具体见章节 <a href="Running-phonon-calculations.html#sec:continuation">[续]</a>仅在检查点文件中存储原始的动力学和/或力常数矩阵 <em>没有</em> ASR 的强制执行仅在输出阶段生效。因此，该效果可以被关闭，也可以通过后处理计算进行修改，或者重新开启。</p>
+<h4 id="density-of-states">态密度</h4>
+<p id="eq:dos">声子态密度的定义需要对计算得到的频率进行积分。 <span class="arithmatex"><span class="MathJax_Preview">\omega_{i{\mathbf{q}}}</span><script type="math/tex">\omega_{i{\mathbf{q}}}</script></span> 在布里渊区范围内 <br/></p>
+<div class="arithmatex">
+<div class="MathJax_Preview">g(\omega) = \int_{\text{BZ}}d^3{\mathbf{q}}\sum_i \delta(\omega -
+\omega_{i{\mathbf{q}}})  .</div>
+<script type="math/tex; mode=display">g(\omega) = \int_{\text{BZ}}d^3{\mathbf{q}}\sum_i \delta(\omega -
+\omega_{i{\mathbf{q}}})  .</script>
+</div>
+<p id="eq:broadendos">一个简单的计算近似方法是计算 <span class="arithmatex"><span class="MathJax_Preview">\omega_{i{\mathbf{q}}}</span><script type="math/tex">\omega_{i{\mathbf{q}}}</script></span> 在一个规则的离散网格上 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}</span><script type="math/tex">{\mathbf{q}}</script></span>，将积分替换为网格上的求和，并将结果与某种峰形函数卷积 <span class="arithmatex"><span class="MathJax_Preview">h(\omega)</span><script type="math/tex">h(\omega)</script></span> 例如高斯函数 <br/></p>
+<div class="arithmatex">
+<div class="MathJax_Preview">g(\omega) \approx \int d\omega^{\prime} h(\omega - \omega^{\prime}) \sum_{{\mathbf{q}}} \sum_i \delta(\omega^{\prime} -
+\omega_{i{\mathbf{q}}})  .</div>
+<script type="math/tex; mode=display">g(\omega) \approx \int d\omega^{\prime} h(\omega - \omega^{\prime}) \sum_{{\mathbf{q}}} \sum_i \delta(\omega^{\prime} -
+\omega_{i{\mathbf{q}}})  .</script>
+</div>
+<p>在 CASTEP 工具集中的实现方式是通过在适当精细的网格上执行傅里叶插值计算来完成的。 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}</span><script type="math/tex">{\mathbf{q}}</script></span>点集，指定either <code>phonon_fine_kpoint_mp_grid</code> 或者 <code>phonon_fine_kpoint_mp_spacing</code>得到的结果 <code>.phonon</code> 文件随后可以使用该工具进行分析。 <code>dos.pl</code> 工具（见第几节） <a href="Plotting-and-analysis-tools.html#sec:dos-pl">[态密度-PL]</a>），该工具实现了方程 <a href="Running-phonon-calculations.html#eq:broadendos">[拓宽能带]</a>.</p>
+<p>然而，展宽会抹平态密度曲线中的任何尖锐特征，并无法再现理论态密度所典型的平滑曲线或尖锐峰值部分。这一问题在参考文献（<a href="Bibliography.html#ref-YatesWVS07">Yates 等人，2007年</a>) 和 (<a href="Bibliography.html#ref-Pickard97">Pickard 1997</a>). 一种更忠实的呈现方式可能是使用所谓的 <em>自适应展宽</em> Yates 等人提出的方法（<a href="Bibliography.html#ref-YatesWVS07">Yates 等人，2007年</a>) 采用的 <em>梯度</em> 对声子支分散布的展宽进行窄化或扩大，分别对应平坦或陡峭的分支。该功能通过参数关键字激活。</p>
+<blockquote>
+<p><code>phonon_calculate_dos : TRUE</code></p>
+</blockquote>
+<p>在计算的傅里叶插值阶段，计算自适应展宽的态密度，并写入一个名为的输出文件 <code>&lt;seedname&gt;.phonon_dos</code> 包含表格化的态密度，以及额外列中的按原子种类分辨的态密度。The <code>dos.pl</code> 脚本能够读取并展示 <code>.phonon_dos</code> 文件同样如... <code>.phonon</code>.</p>
+<p>范围和分辨率可以使用额外参数进行修改，例如</p>
+<blockquote>
+<p><code>phonon_dos_spacing : 0.01 THz</code><br/>
+<code>phonon_dos_limit : 10.0 THz</code></p>
+</blockquote>
+<p>金刚石声子的示例输出如图所示 <a href="Running-phonon-calculations.html#fig:c2-pdos">[c2-pdos]</a>.</p>
+<dl>
+<dt><img alt="" src="diamond-DOS.svg"/></dt>
+<dd>
+<p id="fig:c2-pdos"><strong>图3</strong> 金刚石的声子态密度，带有一个 <span class="arithmatex"><span class="MathJax_Preview">18^3</span><script type="math/tex">18^3</script></span> 细网格下高斯展宽（红色）与自适应展宽（黑色）方法的对比。在高斯展宽情况下，明显可见人为的振荡现象，且尖锐峰的峰值高度未能得到良好再现。 <br/></p>
+</dd>
+</dl>
+<h3 id="sec:fd">有限位移</h3>
+<p>除了使用DFPT方法计算力常数外，CASTEP还实现了基于在原子偏离其平衡位置一小段距离时对力进行数值微分的方案。该方法在DFPT尚未实现的情况下非常有用，而截至CASTEP 24.1版本，已包含超软赝势、Hubbard U项、精确交换和杂化泛函，以及部分新型色散修正方案。</p>
+<p>该方案有三种变体。</p>
+<h4 id="primitive-cell-finite-displacement">原胞有限位移</h4>
+<p>选择了基本的有限位移方法，通过设置参数</p>
+<blockquote>
+<p><code>phonon_method : FINITEDISPLACEMENT</code></p>
+</blockquote>
+<p>与DFPT不同，这些位移必然与模拟单元周期性相关，因此只有 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}=0</span><script type="math/tex">{\mathbf{q}}=0</script></span> 声子与这一条件相容。如同在DFPT晶格动力学情况下，声子波矢由 <code>%block PHONON_KPOINT_LIST</code>, <code>%block PHONON_KPOINT_PATH</code> 或者 <code>phonon_kpoint_mp_grid</code> 在 <code>.cell</code> 文件但仅是 <span class="arithmatex"><span class="MathJax_Preview">\Gamma</span><script type="math/tex">\Gamma</script></span> 点， <span class="arithmatex"><span class="MathJax_Preview">(0,0,0)</span><script type="math/tex">(0,0,0)</script></span> 是有意义的。CASTEP将在输出文件中打印一条警告，并忽略列表中的任何非零值。</p>
+<p id="eq:finite-diff">CASTEP 通过将每个原子移动一小段距离，然后对扰动后的构型进行自洽场（SCF）计算以评估作用在该构型上的力。在每个方向上均进行正负两种位移，从而利用数值微分中的“中心差分”方法准确求得相应的力常数。 <br/></p>
+<div class="arithmatex">
+<div class="MathJax_Preview">\frac{d^{2} E_{0}}{d u_{\kappa,\alpha}
+        d u_{\kappa^{\prime},\alpha^{\prime}}} = \frac{d F_{\kappa,\alpha}}{d u} \approx \frac{F^{+}_{\kappa,\alpha} - F^{-}_{\kappa,\alpha}}{2 u} \;.</div>
+<script type="math/tex; mode=display">\frac{d^{2} E_{0}}{d u_{\kappa,\alpha}
+        d u_{\kappa^{\prime},\alpha^{\prime}}} = \frac{d F_{\kappa,\alpha}}{d u} \approx \frac{F^{+}_{\kappa,\alpha} - F^{-}_{\kappa,\alpha}}{2 u} \;.</script>
+</div>
+<p>方程 <a href="Running-phonon-calculations.html#eq:finite-diff">[有限差分]</a> 表明，一次位移计算即可得到动力矩阵的一整行。与DFPT计算类似，仅进行最小集合的扰动，并利用空间群对称性构建完整的动力矩阵。</p>
+<p>对扰动构型的自洽场（SCF）计算非常高效，通常在 CASTEP 5.0 或更高版本中仅需几个循环。这种效率是通过以下两步实现的：首先，基于未扰动系统的基态，对扰动系统的电子密度做出一个良好的初值估计，并对所讨论伪原子的原子类密度施加位移；其次，使用未扰动状态的 Kohn-Sham 轨道作为扰动构型初始猜测来启动 SCF 计算。要充分利用这种效率，必须采用密度混合（Davidson）最小化方法，该方法通过 <code>elec_method : DM</code> 在 <code>.param</code> 文件。（由于全带方法没有初始化密度的手段）。</p>
+<p>使用的默认位移为 <span class="arithmatex"><span class="MathJax_Preview">0.01</span><script type="math/tex">0.01</script></span> bohr 这可以在必要时通过设置参数来更改，</p>
+<blockquote>
+<p><code>phonon_finite_disp : 0.02 ang</code></p>
+</blockquote>
+<p>在 <code>.param</code> 文件。除上述讨论的差异外，输入和输出格式与DFPT计算相同。</p>
+<h4 id="born-charges-permittivity-and-loto-splitting-with-fd">本征电荷、介电常数以及LO/TO分裂与FD</h4>
+<p>声子计算在原子位移响应DFPT未实现的情况下很有用，尤其适用于超软赝势（USPs）以及包含LDA+U、自旋轨道耦合（SOC）、杂化泛函的后DFT交换和相关项（见表）。 <a href="Running-phonon-calculations.html#tbl:captable">[能力表]</a>）。然而，包括红外光谱强度、LO/TO分裂以及动力学矩阵傅里叶插值有效性的性质，都依赖于布伦特有效电荷和介电常数（见第几节） <a href="Dielectric-properties.html#sec:efield">[efield]</a>)，其通过电场响应DFPT方法计算未实现。</p>
+<p>在某些情况下，可能方便读取外部计算或近似得到的布伦特电荷和介电常数值，用于计算红外谱、洛伦兹-汤普森分裂等。例如，使用DFT+U、meta-GGA或杂化方法的计算可能会采用基于PBE-DFPT和NCPs计算出的值作为合理近似，甚至可能使用不同DFT代码计算得到的值。</p>
+<p>这可以通过指定一个包含值（在此情况下）的外部文件名称来实现。 <code>BORN.DAT</code>) 在 <code>.param</code> 文件</p>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a href="Running-phonon-calculations.html#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>%block DEVEL_CODE
+<a href="Running-phonon-calculations.html#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a>PHONON:READ_EXTERNAL_BORN=BORN.DAT:ENDPHONON
+<a href="Running-phonon-calculations.html#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a>%endblock DEVEL_CODE
+</code></pre></div>
+</blockquote>
+<p>该文件应按照 Phonopy 代码的格式进行格式化（<a href="https://phonopy.github.io/phonopy/input-files.html#born-optional">https://phonopy.github.io/phonopy/input-files.html#born-optional</a>）。此类文件格式可在DFT、NCP电场响应计算的末尾生成。</p>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a href="Running-phonon-calculations.html#__codelineno-7-1" id="__codelineno-7-1" name="__codelineno-7-1"></a>%block DEVEL_CODE
+<a href="Running-phonon-calculations.html#__codelineno-7-2" id="__codelineno-7-2" name="__codelineno-7-2"></a>PHONON:WRITE_EXTERNAL_BORN=BORN.DAT:ENDPHONON
+<a href="Running-phonon-calculations.html#__codelineno-7-3" id="__codelineno-7-3" name="__codelineno-7-3"></a>%endblock DEVEL_CODE
+</code></pre></div>
+</blockquote>
+<h5 id="sec:berry-fd">本征电荷来自贝里相位极化</h5>
+<p>从 CASTEP 25.1 版本开始，将可以通过贝瑞相位极化量的有限差分数值微分来计算生效应电荷（但不计算介电常数）。该功能作为有限差分声子计算的附加功能，在进行包含 USPs 的有限差分声子计算时会自动启用。此方法适用于任何兼容的哈密顿量，包括 DFT+U、rSCAN 等 mGGAs 以及混合 XC 函数。</p>
+<h4 id="sec:ndsc">使用非对角超胞的有限位移方法</h4>
+<p>与DFPT方法类似，使用有限位移法计算声子色散关系和密度态（DOS）是通过动力矩阵的傅里叶插值实现的。首先，对完整的力常数矩阵进行近似处理。 <span class="arithmatex"><span class="MathJax_Preview">{\Phi^{\kappa,\kappa^\prime}_{\alpha,\alpha^\prime}}</span><script type="math/tex">{\Phi^{\kappa,\kappa^\prime}_{\alpha,\alpha^\prime}}</script></span> 是通过显式计算一组 <span class="arithmatex"><span class="MathJax_Preview">{D^{\kappa,\kappa^\prime}_{\alpha,\alpha^\prime}(\mathbf{q})}</span><script type="math/tex">{D^{\kappa,\kappa^\prime}_{\alpha,\alpha^\prime}(\mathbf{q})}</script></span> 与 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}</span><script type="math/tex">{\mathbf{q}}</script></span> 对一个粗网格进行采样 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}</span><script type="math/tex">{\mathbf{q}}</script></span> 并使用逆傅里叶关系式到方程 <a href="Introduction.html#eq:dmat">[dmat]</a>。然后方程 <a href="Introduction.html#eq:dmat">[dmat]</a> 用于生成所有（精细）声子波矢对应的动力矩阵。</p>
+<p>计算的每一步关键步骤是 <span class="arithmatex"><span class="MathJax_Preview">{D^{\kappa,\kappa^\prime}_{\alpha,\alpha^\prime}(\mathbf{q})}</span><script type="math/tex">{D^{\kappa,\kappa^\prime}_{\alpha,\alpha^\prime}(\mathbf{q})}</script></span> 在“粗略”的规则网格上是通过构建与每个粗网格相容的超胞列表来实现的。 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}</span><script type="math/tex">{\mathbf{q}}</script></span>点依次（因此） <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}\cdot T_{\text{SC}} = 2 n \pi</span><script type="math/tex">{\mathbf{q}}\cdot T_{\text{SC}} = 2 n \pi</script></span> 其中 <span class="arithmatex"><span class="MathJax_Preview">T_{\text{SC}}</span><script type="math/tex">T_{\text{SC}}</script></span> 是该超胞的晶格矢量）。此 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}</span><script type="math/tex">{\mathbf{q}}</script></span> 映射到一个 <span class="arithmatex"><span class="MathJax_Preview">\Gamma</span><script type="math/tex">\Gamma</script></span> 在与原胞不一致的情况下，对相应的超胞进行点计算， <span class="arithmatex"><span class="MathJax_Preview">{D^{\kappa,\kappa^\prime}_{\alpha,\alpha^\prime}(\mathbf{q})}</span><script type="math/tex">{D^{\kappa,\kappa^\prime}_{\alpha,\alpha^\prime}(\mathbf{q})}</script></span> 对于原胞在 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}</span><script type="math/tex">{\mathbf{q}}</script></span> 可使用方程提取 <a href="Introduction.html#eq:dmat">[dmat]</a>. Lloyd-Williams 和 Monserrat 已经证明了（<a href="Bibliography.html#ref-LWM15">Lloyd-Williams 和 Monserrat 2015</a>) 通过使用所谓的非对角超胞，这样的集合只需包含粗网格划分的最小公倍数（<span class="arithmatex"><span class="MathJax_Preview">p, q, r</span><script type="math/tex">p, q, r</script></span>）。因此需要进行的独特超胞计算数量远少于 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}</span><script type="math/tex">{\mathbf{q}}</script></span>网格的矢量，最重要的是其随网格的线性尺寸增加而增加，而非随网格尺寸乘积增加。</p>
+<p>通过设置参数来选择非对角超胞计算</p>
+<blockquote>
+<p><code>phonon_method : FINITEDISPLACEMENT</code><br/>
+<code>phonon_fine_method : INTERPOLATE</code>,</p>
+</blockquote>
+<p>单元格关键字</p>
+<blockquote>
+<p><code>phonon_kpoint_mp_grid : p q r</code></p>
+</blockquote>
+<p>以及其中一个规格为 <code>phonon_fine_kpoints</code> 与DFPT计算情况完全相同。当声子计算开始时，CASTEP会使用Lloyd-Williams和Monserrat提出的算法生成超胞列表（supercell）。<a href="Bibliography.html#ref-LWM15">Lloyd-Williams 和 Monserrat 2015</a>）。对于每种情况，CASTEP 会生成相应的超胞，并执行有限位移声子计算。动力矩阵 <span class="arithmatex"><span class="MathJax_Preview">{D^{\kappa,\kappa^\prime}_{\alpha,\alpha^\prime}(\mathbf{q})}</span><script type="math/tex">{D^{\kappa,\kappa^\prime}_{\alpha,\alpha^\prime}(\mathbf{q})}</script></span> 然后为每个提取 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}</span><script type="math/tex">{\mathbf{q}}</script></span> 在粗略的KPOINT网格上，计算过程完全等同于使用DFPT方法的情况。</p>
+<p>粗粒的选择 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}</span><script type="math/tex">{\mathbf{q}}</script></span>由——点采样集由 <code>phonon_kpoint_mp_grid</code> 与DFPT情况相比，需要额外考虑一个因素才能获得最佳计算性能。Lloyd Williams和Monserrat提出的超胞生成算法保证了所生成列表中最大的超胞包含 <span class="arithmatex"><span class="MathJax_Preview">N_\text{SC} = \text{LCM}  (p, q, r)</span><script type="math/tex">N_\text{SC} = \text{LCM}  (p, q, r)</script></span> 原胞的复制。例如，一个 <span class="arithmatex"><span class="MathJax_Preview">4 \times 4 \times 4</span><script type="math/tex">4 \times 4 \times 4</script></span> 对立方晶胞的采样得到 <span class="arithmatex"><span class="MathJax_Preview">N_\text{SC} = 4</span><script type="math/tex">N_\text{SC} = 4</script></span>。然而一个 <span class="arithmatex"><span class="MathJax_Preview">2 \times 3 \times 4</span><script type="math/tex">2 \times 3 \times 4</script></span> 对正交原胞的采样得到 <span class="arithmatex"><span class="MathJax_Preview">N_\text{SC} = 12</span><script type="math/tex">N_\text{SC} = 12</script></span>，4 和 3 的最小公倍数。在这种情况下，使用一个 <span class="arithmatex"><span class="MathJax_Preview">2 \times 4
+\times 4</span><script type="math/tex">2 \times 4
+\times 4</script></span> 采样，这只需要 <span class="arithmatex"><span class="MathJax_Preview">N_\text{SC} = 8</span><script type="math/tex">N_\text{SC} = 8</script></span> 对于所生成的最大超胞。</p>
+<p>同样地， <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}</span><script type="math/tex">{\mathbf{q}}</script></span>点采样，FD插值计算还需要一个额外的参数选择，即选择 <em>电子的</em> 超胞计算中的k点采样。这最方便地可通过cell关键字设置。</p>
+<blockquote>
+<p><code>supercell_kpoint_mp_spacing : 0.1 1/ang</code>.</p>
+</blockquote>
+<p>显式设置网格采样划分与 <code>supercell_kpoint_mp_grid</code> 该选择将不恰当，因为每个超胞的正确选择都可能不同，且在运行时才变得明确。默认情况下，CASTEP 会选择一种与原胞间距一致的默认间距，以期在不同超胞之间实现收敛水平的一致性。</p>
+<p>除了上述两点考虑之外，FD插值的设置与执行与DFPT完全相同。特别是求和规则、态密度以及热力学计算和插值方案的调整均完全一致。</p>
+<h4 id="sec:supercell">传统有限位移/超胞</h4>
+<p>原始单元有限位移方法的局限性 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}=0</span><script type="math/tex">{\mathbf{q}}=0</script></span> 也可能通过将该方法与超胞的使用相结合来克服。这种方法有时也被称为“直接法”。<a href="Bibliography.html#ref-KuncM82">Kunc 和 Martin 1982，第19.2节</a>) 基于力常数矩阵随原子间距的短程衰减，并假设当间距大于某个值时，力常数为零。 <span class="arithmatex"><span class="MathJax_Preview">R_c</span><script type="math/tex">R_c</script></span> 可以忽略不计，并可视为零。可以构建一个超胞以包含一个半径为的虚设球体。 <span class="arithmatex"><span class="MathJax_Preview">R_c</span><script type="math/tex">R_c</script></span> 在此之后，力常数可以被忽略。然后的 <em>动力矩阵</em> 满足超胞的条件 <span class="arithmatex"><span class="MathJax_Preview">L &gt; 2 R_{c}</span><script type="math/tex">L > 2 R_{c}</script></span> 与……相同 <em>力常数矩阵</em>, <em>i.e.</em>
+<span class="arithmatex"><span class="MathJax_Preview">{C^{\kappa,\kappa^\prime}_{\alpha,\alpha^\prime}(\mathbf{q}=0)}= {\Phi^{\kappa,\kappa^\prime}_{\alpha,\alpha^\prime}}</span><script type="math/tex">{C^{\kappa,\kappa^\prime}_{\alpha,\alpha^\prime}(\mathbf{q}=0)}= {\Phi^{\kappa,\kappa^\prime}_{\alpha,\alpha^\prime}}</script></span>因此，对力常数矩阵的完整知识，在合理近似下可由一次计算得出 <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}=0</span><script type="math/tex">{\mathbf{q}}=0</script></span> 超胞包含多个原胞的动态矩阵。由此组力常数，可利用方程计算任意声子波矢处的动态矩阵。 <a href="Introduction.html#eq:dmat">[dmat]</a> 完全如同插值计算中所使用的方式一样。</p>
+<p><strong>注意：</strong> 该方法大多已被第节中的非对角超胞/有限位移方法所取代。 <a href="Running-phonon-calculations.html#sec:ndsc">[ndsc]</a>该方法可等效地计算力常数矩阵，通常计算成本更低，因为其随单元体积的扩展具有更好的可缩放性。</p>
+<dl>
+<dt><div class="highlight"><pre><span></span><code><a href="Running-phonon-calculations.html#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a>%block LATTICE_CART
+<a href="Running-phonon-calculations.html#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a>          0     2.02475      2.02475
+<a href="Running-phonon-calculations.html#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a>    2.02475           0      2.02475
+<a href="Running-phonon-calculations.html#__codelineno-8-4" id="__codelineno-8-4" name="__codelineno-8-4"></a>    2.02475     2.02475            0
+<a href="Running-phonon-calculations.html#__codelineno-8-5" id="__codelineno-8-5" name="__codelineno-8-5"></a>%endblock LATTICE_CART
+<a href="Running-phonon-calculations.html#__codelineno-8-6" id="__codelineno-8-6" name="__codelineno-8-6"></a>
+<a href="Running-phonon-calculations.html#__codelineno-8-7" id="__codelineno-8-7" name="__codelineno-8-7"></a>%block POSITIONS_ABS
+<a href="Running-phonon-calculations.html#__codelineno-8-8" id="__codelineno-8-8" name="__codelineno-8-8"></a>Al          0       0       0
+<a href="Running-phonon-calculations.html#__codelineno-8-9" id="__codelineno-8-9" name="__codelineno-8-9"></a>%endblock POSITIONS_ABS
+<a href="Running-phonon-calculations.html#__codelineno-8-10" id="__codelineno-8-10" name="__codelineno-8-10"></a>
+<a href="Running-phonon-calculations.html#__codelineno-8-11" id="__codelineno-8-11" name="__codelineno-8-11"></a>%block SPECIES_POT
+<a href="Running-phonon-calculations.html#__codelineno-8-12" id="__codelineno-8-12" name="__codelineno-8-12"></a>Al Al_00.usp
+<a href="Running-phonon-calculations.html#__codelineno-8-13" id="__codelineno-8-13" name="__codelineno-8-13"></a>%endblock SPECIES_POT
+<a href="Running-phonon-calculations.html#__codelineno-8-14" id="__codelineno-8-14" name="__codelineno-8-14"></a>
+<a href="Running-phonon-calculations.html#__codelineno-8-15" id="__codelineno-8-15" name="__codelineno-8-15"></a>kpoint_mp_grid           14 14 14
+<a href="Running-phonon-calculations.html#__codelineno-8-16" id="__codelineno-8-16" name="__codelineno-8-16"></a>supercell_kpoint_mp_grid  2  2  2
+<a href="Running-phonon-calculations.html#__codelineno-8-17" id="__codelineno-8-17" name="__codelineno-8-17"></a>
+<a href="Running-phonon-calculations.html#__codelineno-8-18" id="__codelineno-8-18" name="__codelineno-8-18"></a>symmetry_generate
+<a href="Running-phonon-calculations.html#__codelineno-8-19" id="__codelineno-8-19" name="__codelineno-8-19"></a>
+<a href="Running-phonon-calculations.html#__codelineno-8-20" id="__codelineno-8-20" name="__codelineno-8-20"></a>%block PHONON_FINE_KPOINT_PATH
+<a href="Running-phonon-calculations.html#__codelineno-8-21" id="__codelineno-8-21" name="__codelineno-8-21"></a>0.0 0.0 0.0
+<a href="Running-phonon-calculations.html#__codelineno-8-22" id="__codelineno-8-22" name="__codelineno-8-22"></a>0.5 0.5 0.0
+<a href="Running-phonon-calculations.html#__codelineno-8-23" id="__codelineno-8-23" name="__codelineno-8-23"></a>1.0 1.0 1.0
+<a href="Running-phonon-calculations.html#__codelineno-8-24" id="__codelineno-8-24" name="__codelineno-8-24"></a>0.5 0.5 0.5
+<a href="Running-phonon-calculations.html#__codelineno-8-25" id="__codelineno-8-25" name="__codelineno-8-25"></a>0.5 0.5 0.0
+<a href="Running-phonon-calculations.html#__codelineno-8-26" id="__codelineno-8-26" name="__codelineno-8-26"></a>0.5 0.75 0.25
+<a href="Running-phonon-calculations.html#__codelineno-8-27" id="__codelineno-8-27" name="__codelineno-8-27"></a>0.5 0.5 0.5
+<a href="Running-phonon-calculations.html#__codelineno-8-28" id="__codelineno-8-28" name="__codelineno-8-28"></a>%endblock PHONON_FINE_KPOINT_PATH
+<a href="Running-phonon-calculations.html#__codelineno-8-29" id="__codelineno-8-29" name="__codelineno-8-29"></a>
+<a href="Running-phonon-calculations.html#__codelineno-8-30" id="__codelineno-8-30" name="__codelineno-8-30"></a>%block PHONON_SUPERCELL_MATRIX
+<a href="Running-phonon-calculations.html#__codelineno-8-31" id="__codelineno-8-31" name="__codelineno-8-31"></a>-3  3  3
+<a href="Running-phonon-calculations.html#__codelineno-8-32" id="__codelineno-8-32" name="__codelineno-8-32"></a> 3 -3  3
+<a href="Running-phonon-calculations.html#__codelineno-8-33" id="__codelineno-8-33" name="__codelineno-8-33"></a> 3  3 -3
+<a href="Running-phonon-calculations.html#__codelineno-8-34" id="__codelineno-8-34" name="__codelineno-8-34"></a>%endblock PHONON_SUPERCELL_MATRIX
+</code></pre></div></dt>
+<dd>
+<p id="fig:al-sc-cell"><strong>图4</strong> 铝超胞声子计算的示例单元格文件。该计算沿高对称方向得到一组色散曲线。需要注意的是，该计算在超胞尺寸上尚未完全收敛——当将超胞矩阵元素从3增加到4时，部分分支的频率出现了明显变化。 <br/></p>
+</dd>
+<dt><div class="highlight"><pre><span></span><code><a href="Running-phonon-calculations.html#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a>task                            : PHONON
+<a href="Running-phonon-calculations.html#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a>phonon_fine_method              : SUPERCELL
+<a href="Running-phonon-calculations.html#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a>phonon_calc_lo_to_splitting     : FALSE
+<a href="Running-phonon-calculations.html#__codelineno-9-4" id="__codelineno-9-4" name="__codelineno-9-4"></a>phonon_sum_rule                 : TRUE
+<a href="Running-phonon-calculations.html#__codelineno-9-5" id="__codelineno-9-5" name="__codelineno-9-5"></a>calculate_born_charges          : FALSE
+<a href="Running-phonon-calculations.html#__codelineno-9-6" id="__codelineno-9-6" name="__codelineno-9-6"></a>phonon_force_constant_ellipsoid : 1.0
+<a href="Running-phonon-calculations.html#__codelineno-9-7" id="__codelineno-9-7" name="__codelineno-9-7"></a>
+<a href="Running-phonon-calculations.html#__codelineno-9-8" id="__codelineno-9-8" name="__codelineno-9-8"></a>cut_off_energy    : 150 eV
+<a href="Running-phonon-calculations.html#__codelineno-9-9" id="__codelineno-9-9" name="__codelineno-9-9"></a>elec_method       : DM
+<a href="Running-phonon-calculations.html#__codelineno-9-10" id="__codelineno-9-10" name="__codelineno-9-10"></a>smearing_width    : 0.04 eV
+<a href="Running-phonon-calculations.html#__codelineno-9-11" id="__codelineno-9-11" name="__codelineno-9-11"></a>nextra_bands      : 4
+<a href="Running-phonon-calculations.html#__codelineno-9-12" id="__codelineno-9-12" name="__codelineno-9-12"></a>spin_polarized    : FALSE
+<a href="Running-phonon-calculations.html#__codelineno-9-13" id="__codelineno-9-13" name="__codelineno-9-13"></a>
+<a href="Running-phonon-calculations.html#__codelineno-9-14" id="__codelineno-9-14" name="__codelineno-9-14"></a>opt_strategy      : SPEED
+<a href="Running-phonon-calculations.html#__codelineno-9-15" id="__codelineno-9-15" name="__codelineno-9-15"></a>num_dump_cycles   : 0
+<a href="Running-phonon-calculations.html#__codelineno-9-16" id="__codelineno-9-16" name="__codelineno-9-16"></a>xc_functional     : LDA
+</code></pre></div></dt>
+<dd>
+<p id="fig:-sc-paramal"><strong>图5</strong> 铝超胞声子计算的示例参数文件。严格来说，关闭LO/TO分裂计算并不是必需的——CASTEP会警告该操作不可行，并自动将其关闭。对于面心立方结构的铝，明确请求非自旋极化计算是必要的，因为CASTEP默认选择自旋极化，这是由于其电子数为奇数所致。 <br/></p>
+</dd>
+</dl>
+<p>在 CASTEP 计算中，必须选择超胞并明确指定在输入文件中。它由一个矩阵定义，该矩阵乘以普通模拟单元的矢量，并以如下方式指定： <span class="arithmatex"><span class="MathJax_Preview">3\times3</span><script type="math/tex">3\times3</script></span> 矩阵在的 <code>.cell</code> 格式为的文件</p>
+<blockquote>
+<div class="highlight"><pre><span></span><code><a href="Running-phonon-calculations.html#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a>%block PHONON_SUPERCELL_MATRIX
+<a href="Running-phonon-calculations.html#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a> 4  0  0
+<a href="Running-phonon-calculations.html#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a> 0  4  0
+<a href="Running-phonon-calculations.html#__codelineno-10-4" id="__codelineno-10-4" name="__codelineno-10-4"></a> 0  0  4
+<a href="Running-phonon-calculations.html#__codelineno-10-5" id="__codelineno-10-5" name="__codelineno-10-5"></a>%endblock PHONON_SUPERCELL_MATRIX
+</code></pre></div>
+</blockquote>
+<p>这个典型例子使用对角矩阵在每个晶格矢量方向上创建了一个超胞 <strong>a</strong>, <strong>b</strong> 并且 <strong>c</strong> 因子为4。</p>
+<p>用于声子计算的超胞需要谨慎选择。</p>
+<ul>
+<li>
+<p>它必须足够大，以容纳一个半径为 <span class="arithmatex"><span class="MathJax_Preview">R_c</span><script type="math/tex">R_c</script></span>，力常数矩阵的典型范围。在简单金属中，一个值为 <span class="arithmatex"><span class="MathJax_Preview">R_c</span><script type="math/tex">R_c</script></span> 即使小至6Å也可能足够，但对于更复杂和有序的体系，则需要更大的值。<sup id="fnref:14"><a class="footnote-ref" href="Running-phonon-calculations.html#fn:14">11</a></sup>在共价半导体中，所需 <span class="arithmatex"><span class="MathJax_Preview">R_c</span><script type="math/tex">R_c</script></span> 可能为10Å或更大。</p>
+</li>
+<li>
+<p>然而，超胞可能会迅速增大，从而产生非常庞大的计算任务。例如一个 <span class="arithmatex"><span class="MathJax_Preview">4 \times 4 \times 4</span><script type="math/tex">4 \times 4 \times 4</script></span> 一个仅含两个原子的原胞超胞也包含128个原子。因此，这种方法在单处理器或台式计算机上很少可行，通常需要大量的并行计算资源。</p>
+</li>
+<li>
+<p>该 <em>形状</em> 超胞的形状通常应尽可能接近立方体，无论原胞的形状如何，以优化超胞尺寸/<span class="arithmatex"><span class="MathJax_Preview">R_c</span><script type="math/tex">R_c</script></span> 比例。这可以通过使用对角线外的超胞矩阵来实现，如图中的示例输入文件所示。 <a href="Running-phonon-calculations.html#fig:al-sc-cell">[al-sc-cell]</a> 其中，一个包含108个原子的立方超胞（cubic supercell）中<span class="arithmatex"><span class="MathJax_Preview">3 \times 4 = 12</span><script type="math/tex">3 \times 4 = 12</script></span> （晶胞）由含一个原子的铝菱方原胞生成。</p>
+</li>
+<li>
+<p>如果体系具有高度各向异性，例如表面的层状模型，则显然一个均匀的超胞并不合适，必须根据模型的具体性质来设计合适的超胞。</p>
+</li>
+</ul>
+<p>超胞计算中电子布里渊区积分采用特殊k点法，该方法在文件中指定。<code>cell</code> 文件使用一组独立但与原胞采样相关的关键词进行描述。具体而言，</p>
+<ul>
+<li>
+<p><code>%block SUPERCELL_KPOINT_LIST</code> 允许精确指定k点和权重</p>
+</li>
+<li>
+<p><code>supercell_kpoint_mp_grid_spacing d</code> 选择具有指定间距的Monkhorst-Pack网格。</p>
+</li>
+<li>
+<p><code>supercell_kpoint_mp_grid p q r</code> （并可选地） <code>supercell_kpoint_mp_offset</code> ) 可以精确指定一个 Monkhorst-Pack 网格。</p>
+</li>
+<li>
+<p>最后，如果未给出超胞k点关键字或块，则会选取一个网格，以产生与原胞计算相似的采样密度。</p>
+</li>
+</ul>
+<p>一旦使用超胞计算出力常数矩阵后，晶格动力学的其余部分将与傅里叶插值计算的情况完全相同。控制插值方案和截断半径、精细声子k点集以及声学求和规则实施的关键词，其工作方式也完全一致。详见第节 <a href="Running-phonon-calculations.html#sec:interpolation-setup">[插值设置]</a> 详情请参见。</p>
+<h3 id="sec:convergence">收敛性</h3>
+<p>声子和介电响应计算除了地态计算中遇到的问题外，还会引发一系列收敛性问题，因此需要系统且逐步的方法来获得良好收敛的结果。CASTEP 通过根据具体任务设定许多收敛参数的默认值，这些默认值融合了大量计算经验，从而帮助用户。因此，除非已知特定的收敛测试结果，否则最好不显式指定收敛参数——否则一个经过验证的良好默认值可能会被未经测试的数值所覆盖。（图示输入示例） <a href="Running-phonon-calculations.html#fig:example-gamma">[示例-伽马]</a> 不包含声子特定的收敛参数。</p>
+<p>此前已强调（第几节） <a href="Introduction.html#sec:geometry">[几何结构]</a>）表明，一个充分收敛的几何结构优化是声子计算的前提。反过来，这要求平面波截断能、自洽场（SCF）收敛以及电子k点采样达到相当高的收敛水平。通常，声子计算会在一个 <code>basis_precision : FINE</code> 平面波截断能级，（每个文件的标题） <code>.usp</code> 或者 <code>.recpot</code> 赝势文件包含以电子伏特（eV）为单位的转换。DFPT 电场响应计算可能需要比基态计算更精细的电子 k 点采样，因此该效应的 <code>kpoint_mp_grid</code> 应测试介电常数。</p>
+<h4 id="convergence-of-dfpt-solver">DFPT求解器的收敛性</h4>
+<p>声子或E场计算的第二阶段是变分DFPT求解器，存在一系列相关参数用于控制收敛性。参数</p>
+<blockquote>
+<p><code>phonon_energy_tol 1.0e-5 eV/ang**2</code></p>
+</blockquote>
+<p>并且</p>
+<blockquote>
+<p><code>efield_energy_tol 1.0e-5 ang**3</code></p>
+</blockquote>
+<p>控制DFPT自洽循环的退出准则。上述默认值通常足以满足频率收敛到 <span class="arithmatex"><span class="MathJax_Preview">&lt; 1 \text{cm}^{-1}</span><script type="math/tex">< 1 \text{cm}^{-1}</script></span> 以及介电常数保留到两位或三位小数，通常无需更改。</p>
+<p>然而，收敛结果不仅取决于DFPT SCF计算，而且更强烈地依赖于收敛程度的高低。 <em>基态</em> 电子密度和波函数。这些在DFPT方程中既直接出现，也作为基态与一阶响应轨道之间正交性条件的后果而出现（<a href="Bibliography.html#ref-Refson2006">Refson, Tulip 和 Clark 2006</a>; <a href="Bibliography.html#ref-GonzeL97">Gonze 和 Lee，1997</a>).</p>
+<p>为了生成足够准确的基态波函数，该值需满足 <code>elec_energy_tol</code> 应该远低于SCF或几何优化计算所需值。CASTEP设定的默认值约为 <code>phonon_energy_tol</code> 平方，并且依赖这一点是明智的。 <em>不是</em> 设置 <code>elec_energy_tol</code> 在声子计算中明确地进行。 <sup id="fnref:15"><a class="footnote-ref" href="Running-phonon-calculations.html#fn:15">12</a></sup></p>
+<h4 id="convergence-of-finite-displacement-forces">有限位移力的收敛性</h4>
+<p>选择有限位移声子计算（无论是原始超胞模式还是超胞模式）的“基态”收敛参数的标准，自然与DFPT计算所遵循的标准几乎相同。在这种情况下，并不需要额外的自洽电子计算；取而代之的是，在位移几何构型下进行一系列额外的基态计算。</p>
+<p>有限位移计算需要非常收敛的 <em>力</em> 将在基态SCF计算中进行计算。这是因为二阶导数的数值求解依赖于扰动构型之间（较小）力的差值（方程） <a href="Running-phonon-calculations.html#eq:finite-diff">[有限差分]</a>）。显然，数值导数的相对精度低于自变量（力），因此力必须被计算到相当高的精度。与基态 <em>能量</em>，这在轨道上是变分的，但力不是，且力的误差与轨道误差成线性关系。其准确性主要由另一个参数控制</p>
+<blockquote>
+<p><code>elec_energy_tol</code></p>
+</blockquote>
+<p>这又默认由值设定 <code>phonon_energy_tol</code><span class="arithmatex"><span class="MathJax_Preview">^2</span><script type="math/tex">^2</script></span>.</p>
+<p>通常使用默认值就足够了。 <code>elec_energy_tol</code> 被选为声子计算中的默认设置。然而，也存在另一种方法 <em>直接地</em> 通过设置参数实现所需的力容差</p>
+<blockquote>
+<p><code>elec_force_tol 1e-3 eV/ang</code> .</p>
+</blockquote>
+<p>这默认情况下不会被使用，因为它会为SCF计算增加一些开销，导致运行时间变长。然而它确实保证了力真正收敛到所需精度，而不同于设置 <code>elec_energy_tol</code>.</p>
+<h4 id="convergence-of-interpolation-and-supercell">插值与超胞的收敛性</h4>
+<p>傅里叶插值和超胞计算又增加了一个必须满足的标准，以获得良好收敛的结果——力常数矩阵在实空间中的范围。各节 <a href="Running-phonon-calculations.html#sec:interpolation-setup">[插值设置]</a> 并且 <a href="Running-phonon-calculations.html#sec:supercell">[超胞]</a> 讨论一些适用于此类计算的标准准则。</p>
+<p>不幸的是，对于FD/超胞计算而言，对超胞尺寸进行收敛性测试可能极为昂贵，因为随着待测线性尺寸的增大，体积和原子数量会以该尺寸的立方增长，从而导致CPU时间以六次方或更高次方增长！目前尚无简便的解决方案，因此读者应警惕：文献中发表的FD/超胞声子计算结果，并不能必然意味着其已完全收敛！</p>
+<p>然而，通过使用最大的可行超胞进行计算，可能会取得一些进展。如果</p>
+<blockquote>
+<p><code>phonon_fine_cutoff_method : SPHERICAL</code></p>
+</blockquote>
+<p>若选择该项，则可以使用参数来调整截止半径</p>
+<blockquote>
+<p><code>phonon_force_constant_CUTOFF</code></p>
+</blockquote>
+<p>低于最大盒子尺寸一半的最大值。这些测试可以使用“延续”方法（第几节）进行。 <a href="Running-phonon-calculations.html#sec:continuation">[续]</a>) 或“phonons”工具（第几节） <a href="Plotting-and-analysis-tools.html#sec:phonons-tool">[声子工具]</a>) 而无需重复昂贵的超胞计算。</p>
+<p>如果选择了球面截断法，将自动执行另一项收敛性测试。通过球面截断法插值得到的频率与在超胞波矢上进行“精确”插值的结果进行比较。结果会被写入到文件中。 <code>.castep</code> 文件。这提供了插值误差的定量度量。</p>
+<p>一种类似的截断尺度测试可能适用于 <code>phonon_fine_cutoff_method : DEFAULT</code> 情况，尽管它要少得多。参数</p>
+<blockquote>
+<p><code>phonon_force_constant_cut_scale 0.9</code></p>
+</blockquote>
+<p>将截断范围按指定因子进行缩放。然而，默认值1.0在包含恰好为超胞威格纳-赛茨单元一半的常数项时具有特殊意义。因此，该参数的收敛性并不平滑，在此参数下，0.95可能未充分收敛，而1.0则可能已达到非常好的收敛状态。（这也是其相较于球形截断方案具有更优收敛性能的原因。）</p>
+<div class="footnote">
+<hr/>
+<ol>
+<li id="fn:4">
+<p>In general phonon wavevectors <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}</span><script type="math/tex">{\mathbf{q}}</script></span> are specified using
+one of the variants of the <code>phonon_kpoint_*</code> cell keywords for
+lists, grids or paths. The example given uses a list of length 1 to
+specify a single point. <a class="footnote-backref" href="Running-phonon-calculations.html#fnref:4" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:5">
+<p>This example will use the DFPT method which is the default if
+<code>phonon_method</code> is not present. <a class="footnote-backref" href="Running-phonon-calculations.html#fnref:5" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+<li id="fn:6">
+<p>Further optional output writing to <code>.castep</code> of the dynamical
+matrixes and force constant matrices is enabled at any iprint level
+by the parameters <code>phonon_write_dynamical</code> and
+<code>phonon_write_force_constants</code> respectively. <a class="footnote-backref" href="Running-phonon-calculations.html#fnref:6" title="Jump back to footnote 3 in the text">↩</a></p>
+</li>
+<li id="fn:7">
+<p>The Placzek theory applies to the case of insulators only, and no
+general formulation to compute the activity for Raman scattering of
+conducting systems is available <a class="footnote-backref" href="Running-phonon-calculations.html#fnref:7" title="Jump back to footnote 4 in the text">↩</a></p>
+</li>
+<li id="fn:8">
+<p>If the parameter <code>raman_method : FINITEDISPLACEMENT</code> is set the
+calculation uses an older, finite-difference implementation (see
+section <a href="Running-phonon-calculations.html#sec:fd">[fd]</a>) to compute the mode displacement
+derivatives of the polarizability tensor
+(section <a href="Dielectric-properties.html#sec:efield">[efield]</a>) using the approach of
+Porezag and Pedersen (<a href="Bibliography.html#ref-PorezagP:96">Porezag and Pederson
+1996</a>). The first stage is to perform a full
+phonon calculation at <span class="arithmatex"><span class="MathJax_Preview">{\mathbf{q}}=0</span><script type="math/tex">{\mathbf{q}}=0</script></span>, to determine the mode
+eigenvectors and identify the Raman-active modes. Then CASTEP loops
+over the active modes only computing the Raman tensor, activity and
+depolarization for each. This method is deprecated as obsolete and
+computationally expensive. <a class="footnote-backref" href="Running-phonon-calculations.html#fnref:8" title="Jump back to footnote 5 in the text">↩</a></p>
+</li>
+<li id="fn:9">
+<p>The offset may be specified as three fractions of the grid
+spacing, so <span class="arithmatex"><span class="MathJax_Preview">1/2p \; 1/2q \; 1/2r</span><script type="math/tex">1/2p \; 1/2q \; 1/2r</script></span> shifts the grid exactly half a
+subdivision in each of the three directions. As of release 24.1 the
+<code>INCLUDE_GAMMA</code> keyword will automate this calculation and in fact
+is the default so that omitting <code>phonon_kpoint_mp_offset</code> entirely
+will do the right thing. <a class="footnote-backref" href="Running-phonon-calculations.html#fnref:9" title="Jump back to footnote 6 in the text">↩</a></p>
+</li>
+<li id="fn:10">
+<p>The latter is governed by the effective range of electronic
+interactions which bears no relationship to the elastic range of the
+atomic displacements as required for the force constants. <a class="footnote-backref" href="Running-phonon-calculations.html#fnref:10" title="Jump back to footnote 7 in the text">↩</a></p>
+</li>
+<li id="fn:11">
+<p>The effect is usually small for LDA, intermediate for PBE and
+largest for PW91, as the gradient terms are most sensitive to the
+ASR violation. <a class="footnote-backref" href="Running-phonon-calculations.html#fnref:11" title="Jump back to footnote 8 in the text">↩</a></p>
+</li>
+<li id="fn:12">
+<p>(or <code>fine_gmax</code> or <code>fine_cut_off_energy</code> <a class="footnote-backref" href="Running-phonon-calculations.html#fnref:12" title="Jump back to footnote 9 in the text">↩</a></p>
+</li>
+<li id="fn:13">
+<p>There is one known case where the reciprocal-space ASR correction
+fails to give the correct behaviour. Two-dimensional planar or
+layered systems with weak inter-layer bonding such as graphene or
+graphite exhibit a quadratic behaviour of an acoustic mode near
+<span class="arithmatex"><span class="MathJax_Preview">\Gamma</span><script type="math/tex">\Gamma</script></span>. The reciprocal space scheme fails to reproduce the
+correct, quadratic behaviour and linearises the dispersion. The
+realspace method generates correct behaviour in these cases. <a class="footnote-backref" href="Running-phonon-calculations.html#fnref:13" title="Jump back to footnote 10 in the text">↩</a></p>
+</li>
+<li id="fn:14">
+<p>A non-negligible force constant at longer range may also occur in
+a metallic system in the presence of a Kohn anomaly. <a class="footnote-backref" href="Running-phonon-calculations.html#fnref:14" title="Jump back to footnote 11 in the text">↩</a></p>
+</li>
+<li id="fn:15">
+<p>Specifically, the error in the second-order energy or force
+constants is variational, and therefore depends <em>quadratically</em> on
+the error in the DFPT first-order response orbitals. However it is
+<em>non-variational</em> and <em>linear</em> with respect to the error in the
+ground-state orbitals. The practical consequence is that there is an
+error in DFPT results which varies as the <em>square root</em> of the
+ground-state convergence parameter <code>elec_energy_tol</code> which therefore
+must be very small for good accuracy. A heuristic rule of thumb is
+that <code>elec_energy_tol</code> <span class="arithmatex"><span class="MathJax_Preview">\approx</span><script type="math/tex">\approx</script></span> <code>phonon_energy_tol</code><span class="arithmatex"><span class="MathJax_Preview">^2</span><script type="math/tex">^2</script></span> is
+necessary to converge the second order energy to the value of
+<code>phonon_energy_tol</code>. <a class="footnote-backref" href="Running-phonon-calculations.html#fnref:15" title="Jump back to footnote 12 in the text">↩</a></p>
+</li>
+</ol>
+</div>
+</article>
+</div>
+
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright"> 原版采用 <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+
+
+
+<script src="../../../assets/zh-search-data.js"></script><script data-root="../../../" src="../../../assets/zh-site.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["\\[","\\]"]],processEscapes:true},showMathMenu:false,messageStyle:"none"});</script><script src="../../../assets/mathjax/MathJax.js?config=TeX-MML-AM_CHTML"></script></body>
+</html>
